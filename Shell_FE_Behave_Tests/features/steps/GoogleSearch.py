@@ -8,8 +8,8 @@ from pprint import pprint
 #driver = SeleniumBase.browser_initialization()
 
 
-@Given('user navigates to "{text}"')
-def url_navigation(context, text):
-  #  driver.get(text)
-    pprint(sys.path)
+#@Given('user navigates to "{text}"')
+#def url_navigation(context, text):
+ #   driver.get(text)
+  #  pprint(sys.path)
    # driver.quit()

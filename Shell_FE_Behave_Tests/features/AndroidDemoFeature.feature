@@ -1,7 +1,8 @@
 Feature: Android Demo
-  Scenario:
-    Given I am launching the mobile app
-   # Then   I test views
-   # Then
+  Scenario: Test light theme controls in views
+    Given I have launched the apidemos app
+    When  I test views
+    Then  I verify checkbox and radio buttons
+
 
 

@@ -1,10 +1,13 @@
 import os
+import time
+
 from configparser import ConfigParser
 from appium import webdriver
 
 
 
 class AppiumBase:
+
     # region Class Variable Declarations
     __config = None
     __platformName = None
@@ -18,7 +21,7 @@ class AppiumBase:
     current_working_directory = os.path.dirname(os.getcwd())
     configfile = current_working_directory + '\\Shell_FE_Behave_Tests\\config.ini'
 
-    #end region
+    # endregion
 
     @staticmethod
     def read_config():
@@ -38,21 +41,29 @@ class AppiumBase:
         AppiumBase.__remoteURL = AppiumBase.__config['nativeApp']['remoteURL']
 
     @staticmethod
-    def LaunchApp():
-        print(AppiumBase.current_working_directory)
-        print(AppiumBase.configfile)
-        print(AppiumBase.__platformName)
-        print(AppiumBase.__platformVersion)
-        print(AppiumBase.__deviceName)
-        print(AppiumBase.__app)
-        print(AppiumBase.__appPackage)
-        #desired_caps = {}
-        #desired_caps['platformName'] = AppiumBase.__platformName
-        #desired_caps['platformVersion'] = AppiumBase.__platformVersion
-        #desired_caps['deviceName'] = AppiumBase.__deviceName
-        #desired_caps['app'] =AppiumBase.__app
-        #desired_caps['appPackage'] = AppiumBase.__appPackage
-        #desired_caps['appActivity'] = AppiumBase.__appActivity
+    def launch_app():
 
-       # driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub",desired_caps)
-        #driver.find_element_by_accessibility_id('Text').click()
+        desired_caps = {}
+        desired_caps['platformName'] = AppiumBase.__platformName
+        desired_caps['platformVersion'] = AppiumBase.__platformVersion
+        desired_caps['deviceName'] = AppiumBase.__deviceName
+        desired_caps['app'] = AppiumBase.__app
+        desired_caps['appPackage'] = AppiumBase.__appPackage
+        desired_caps['appActivity'] = AppiumBase.__appActivity
+
+        AppiumBase.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub",desired_caps)
+        time.sleep(5)
+        return AppiumBase.driver
+
+
+    @staticmethod
+    def click_by_accessibility_id(self,id):
+        element = AppiumBase.driver.find_element_by_accessibility_id(id)
+        element.click()
+
+
+
+
+
+
+
