@@ -22,9 +22,6 @@ class SeleniumBase:
 
     # endregion
 
-    # def __init__(self):
-    #     print("Constructor")
-
     # region Reading data from Configuration files and initializing values to Class variables
     @staticmethod
     def read_config():

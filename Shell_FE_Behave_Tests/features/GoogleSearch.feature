@@ -1,6 +1,6 @@
-Feature: Google search functionality
+Feature: Google search
 
   Scenario: Validate the Google search functionality
     Given user navigates to Google home page
-#    When user types "Hey Google"
-#    And user clicks on the Search button
+    When user types text
+    And user clicks on the Search button
