@@ -1,6 +1,7 @@
 from behave import *
 from Shell_FE_Appium_Core.AppiumBase import AppiumBase
 from appium import webdriver
+import logging
 
 
 def before_all(context):
@@ -10,5 +11,6 @@ def before_all(context):
 
 
 def after_all(context):
-    context.driver.quit()
+    AppiumBase.close_driver()
+
 

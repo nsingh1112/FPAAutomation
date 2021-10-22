@@ -1,8 +1,10 @@
+import logging
 import os
 import time
 
 from configparser import ConfigParser
 from appium import webdriver
+from appium.webdriver.appium_service import AppiumService
 
 
 
@@ -18,11 +20,11 @@ class AppiumBase:
     __appActivity = None
     __remoteURL = None
     driver = None
+    appiumService = AppiumService()
     current_working_directory = os.path.dirname(os.getcwd())
     configfile = current_working_directory + '\\Shell_FE_Behave_Tests\\config.ini'
 
     # endregion
-
     @staticmethod
     def read_config():
         configuration = ConfigParser()
@@ -56,10 +58,19 @@ class AppiumBase:
         return AppiumBase.driver
 
 
-    @staticmethod
-    def click_by_accessibility_id(self,id):
-        element = AppiumBase.driver.find_element_by_accessibility_id(id)
+    def click_by_accessibility_id(self,element_id):
+        element = AppiumBase.driver.find_element_by_accessibility_id(element_id)
         element.click()
+
+    def click_by_id(self,element_id):
+        element = AppiumBase.driver.find_element_by_id(element_id)
+        element.click()
+
+    def close_driver(self):
+        AppiumBase.driver.quit()
+
+
+
 
 
 
