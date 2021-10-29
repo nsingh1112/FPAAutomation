@@ -7,9 +7,7 @@ from appium import webdriver
 from appium.webdriver.appium_service import AppiumService
 
 
-
 class AppiumBase:
-
     # region Class Variable Declarations
     __config = None
     __platformName = None
@@ -44,7 +42,6 @@ class AppiumBase:
 
     @staticmethod
     def launch_app():
-
         desired_caps = {}
         desired_caps['platformName'] = AppiumBase.__platformName
         desired_caps['platformVersion'] = AppiumBase.__platformVersion
@@ -53,30 +50,24 @@ class AppiumBase:
         desired_caps['appPackage'] = AppiumBase.__appPackage
         desired_caps['appActivity'] = AppiumBase.__appActivity
 
-        AppiumBase.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub",desired_caps)
-        time.sleep(5)
+        AppiumBase.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", desired_caps)
         return AppiumBase.driver
 
+    @staticmethod
+    def is_App_installed():
+        app_installed = AppiumBase.driver.is_app_installed(AppiumBase.__app)
+        print(app_installed)
 
-    def click_by_accessibility_id(self,element_id):
+    @staticmethod
+    def click_by_accessibility_id(element_id):
         element = AppiumBase.driver.find_element_by_accessibility_id(element_id)
         element.click()
 
-    def click_by_id(self,element_id):
+    @staticmethod
+    def click_by_id(element_id):
         element = AppiumBase.driver.find_element_by_id(element_id)
         element.click()
 
-    def close_driver(self):
+    @staticmethod
+    def close_driver():
         AppiumBase.driver.quit()
-
-
-
-
-
-
-
-
-
-
-
-
