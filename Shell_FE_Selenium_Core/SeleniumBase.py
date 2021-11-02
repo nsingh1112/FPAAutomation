@@ -70,9 +70,9 @@ class SeleniumBase:
         else:
             print("Invalid browser!!")
             raise Exception("Invalid Browser name passed. Aborting the UI tests!!")
-            # Throw an exception
             # Include logging
         SeleniumBase.driver.maximize_window()
+        SeleniumBase.driver.delete_all_cookies()
         return SeleniumBase.driver
 
     @staticmethod
