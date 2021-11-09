@@ -11,9 +11,6 @@ class BrowserUtilities:
     current_working_directory = os.path.dirname(os.getcwd())
     screenshots = current_working_directory + "\\Shell_FE_Behave_Tests\\TestResults\\Screenshots\\"
 
-    def __init__(self):
-        print("Constructor")
-
     @staticmethod
     def navigate_to_url(url):
         """Navigates to the url specified.

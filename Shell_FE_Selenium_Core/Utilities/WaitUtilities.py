@@ -4,9 +4,14 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
 
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
+from Shell_FE_Selenium_Core.Utilities.LoggingUtilities import LoggingUtilities
 
 
 class WaitUtilities:
+    """WaitUtilities class contains reusable methods for common waits performed."""
+
+    logobj = LoggingUtilities()
+    log = logobj.logger()
 
     @staticmethod
     def wait_for_element_to_be_visible(by_locator, timeout=10):
@@ -24,6 +29,7 @@ class WaitUtilities:
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.visibility_of_element_located(by_locator))
         except ElementNotVisibleException as err:
+            WaitUtilities.log.error("Element {0} is not visible. Exception: {1}".format(by_locator, err))
             print("Element {0} is not visible. Exception: {1}".format(by_locator, err))
 
     @staticmethod
@@ -42,6 +48,7 @@ class WaitUtilities:
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.presence_of_element_located(by_locator))
         except Exception as err:
+            WaitUtilities.log.error("Element {0} is not present. Exception: {1}".format(by_locator, err))
             print("Element {0} is not present. Exception: {1}".format(by_locator, err))
 
     @staticmethod
@@ -60,6 +67,7 @@ class WaitUtilities:
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.element_to_be_clickable(by_locator))
         except Exception as err:
+            WaitUtilities.log.error("Element {0} is not clickable. Exception: {1}".format(by_locator, err))
             print("Element {0} is not clickable. Exception: {1}".format(by_locator, err))
 
     @staticmethod
@@ -78,6 +86,7 @@ class WaitUtilities:
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.element_to_be_selected(web_element))
         except ElementNotSelectableException as err:
+            WaitUtilities.log.error("Element {0} is not selectable. Exception: {1}".format(web_element, err))
             print("Element {0} is not selectable. Exception: {1}".format(web_element, err))
 
     @staticmethod
@@ -96,6 +105,7 @@ class WaitUtilities:
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.invisibility_of_element_located(by_locator))
         except Exception as err:
+            WaitUtilities.log.error("Element {0} is visible. Exception: {1}".format(by_locator, err))
             print("Element {0} is visible. Exception: {1}".format(by_locator, err))
 
     @staticmethod
@@ -114,6 +124,7 @@ class WaitUtilities:
         if WebDriverWait(SeleniumBase.driver, timeout).until(ec.staleness_of(web_element)):
             return True
         else:
+            WaitUtilities.log.error("Element {0} is attached to DOM. Element is not stale!!".format(web_element))
             raise Exception("Element {0} is attached to DOM. Element is not stale!!".format(web_element))
 
     @staticmethod
@@ -134,6 +145,8 @@ class WaitUtilities:
             if WebDriverWait(SeleniumBase.driver, timeout).until(ec.staleness_of(web_element)):
                 WebDriverWait(SeleniumBase.driver, timeout).until(ec.visibility_of_element_located(by_locator))
         except StaleElementReferenceException as err:
+            WaitUtilities.log.error(
+                "Element {0} is not attached to DOM. Element is stale!! Exception: {1}".format(by_locator, err))
             print("Element {0} is not attached to DOM. Element is stale!! Exception: {1}".format(by_locator, err))
 
     @staticmethod
@@ -152,6 +165,8 @@ class WaitUtilities:
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.title_contains(expected_value))
         except AssertionError as err:
+            WaitUtilities.log.error(
+                "Title does not contain the value: {0}. Assertion failed!! Exception:{1}".format(expected_value, err))
             print("Title does not contain the value: {0}. Assertion failed!! Exception:{1}".format(expected_value, err))
 
     @staticmethod
@@ -170,6 +185,8 @@ class WaitUtilities:
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.title_is(expected_value))
         except AssertionError as err:
+            WaitUtilities.log.error(
+                "Title does not match the value: {0}. Assertion failed!! Exception: {1}".format(expected_value, err))
             print("Title does not match the value: {0}. Assertion failed!! Exception: {1}".format(expected_value, err))
 
     @staticmethod
@@ -188,6 +205,8 @@ class WaitUtilities:
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.url_contains(expected_value))
         except AssertionError as err:
+            WaitUtilities.log.error(
+                "Url does not contain the value: {0}. Assertion failed!! Exception: {1}".format(expected_value, err))
             print("Url does not contain the value: {0}. Assertion failed!! Exception: {1}".format(expected_value, err))
 
     @staticmethod
@@ -206,6 +225,8 @@ class WaitUtilities:
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.url_to_be(expected_value))
         except AssertionError as err:
+            WaitUtilities.log.error(
+                "Url does not match the value: {0}. Assertion failed!! Exception: {1}".format(expected_value, err))
             print("Url does not match the value: {0}. Assertion failed!! Exception: {1}".format(expected_value, err))
 
     @staticmethod
@@ -226,6 +247,8 @@ class WaitUtilities:
             WebDriverWait(SeleniumBase.driver, timeout).until(
                 ec.text_to_be_present_in_element(by_locator, expected_text))
         except Exception as err:
+            WaitUtilities.log.error(
+                "Text {0} not present in element {1}. Exception: {2}".format(expected_text, by_locator, err))
             print("Text {0} not present in element {1}. Exception: {2}".format(expected_text, by_locator, err))
 
     @staticmethod
@@ -246,6 +269,8 @@ class WaitUtilities:
             WebDriverWait(SeleniumBase.driver, timeout).until(
                 ec.text_to_be_present_in_element_value(by_locator, expected_text))
         except Exception as err:
+            WaitUtilities.log.error(
+                "Text {0} not present in element {1}. Exception: {2}".format(expected_text, by_locator, err))
             print("Text {0} not present in element {1}. Exception: {2}".format(expected_text, by_locator, err))
 
     @staticmethod
@@ -266,6 +291,8 @@ class WaitUtilities:
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.number_of_windows_to_be(expected_value))
         except AssertionError as err:
+            WaitUtilities.log.error(
+                "Number of windows available does not match the expected value: {0}".format(expected_value))
             print("Number of windows available does not match the expected value: {0}".format(expected_value))
 
     @staticmethod
@@ -281,6 +308,7 @@ class WaitUtilities:
         if WebDriverWait(SeleniumBase.driver, timeout).until(ec.alert_is_present()):
             return True
         else:
+            WaitUtilities.log.error("Alert is not displayed!!")
             raise Exception("Alert is not displayed!!")
 
     @staticmethod
@@ -299,4 +327,5 @@ class WaitUtilities:
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.frame_to_be_available_and_switch_to_it(by_locator))
         except NoSuchFrameException as err:
+            WaitUtilities.log.error("Frame {0} is not available".format(by_locator))
             print("Frame {0} is not available".format(by_locator))

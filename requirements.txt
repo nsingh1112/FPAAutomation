@@ -63,3 +63,5 @@ virtualenv==20.8.1
 wcwidth==0.2.5
 webdriver-manager==3.4.2
 wrapt==1.12.1
+
+openpyxl~=3.0.9

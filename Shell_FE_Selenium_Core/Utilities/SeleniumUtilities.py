@@ -8,9 +8,6 @@ from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 class SeleniumUtilities:
     """SeleniumUtilities class contains reusable methods for common Selenium user actions"""
 
-    def __init__(self):
-        print("Constructor")
-
     # region Reusable methods for performing common user actions in Selenium
     @staticmethod
     def click_element(web_element):

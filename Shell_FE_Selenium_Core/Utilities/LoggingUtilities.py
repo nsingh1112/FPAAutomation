@@ -10,6 +10,9 @@ class LoggingUtilities:
     def logger(self, filename="logfile.log"):
         """Creates logger instance with predefined format for logs.
 
+        :Args:
+            - filename - Filename for the log file. Has a default value "logfile.log".
+
         Returns:
             Logger instance
         """
