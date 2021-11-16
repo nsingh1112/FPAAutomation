@@ -40,7 +40,7 @@ class BrowserUtilities:
     @staticmethod
     def get_current_url():
         """Returns the current url."""
-        return SeleniumBase.driver.current_url()
+        return SeleniumBase.driver.current_url
 
     @staticmethod
     def get_title():
@@ -132,13 +132,13 @@ class BrowserUtilities:
         """Takes screenshot of the web element and saves it in the Screenshots folder under TestResults."""
         if web_element is None:
             raise TypeError("Empty or invalid argument passed!!")
-        filename = web_element + str(datetime.timestamp(datetime.now())) + ".png"
+        filename = "Element" + str(datetime.timestamp(datetime.now())) + ".png"
         web_element.screenshot(BrowserUtilities.screenshots + filename)
 
     @staticmethod
     def take_screenshot():
         """Takes screenshot of the web page and saves it in the Screenshots folder under TestResults."""
-        filename = str(datetime.timestamp(datetime.now())) + ".png"
+        filename = "Screenshot" + str(datetime.timestamp(datetime.now())) + ".png"
         SeleniumBase.driver.save_screenshot(BrowserUtilities.screenshots + filename)
 
     @staticmethod

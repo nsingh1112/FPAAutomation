@@ -1,3 +1,5 @@
+import traceback
+
 from selenium.common.exceptions import ElementNotVisibleException, ElementNotSelectableException, \
     StaleElementReferenceException, NoSuchFrameException
 from selenium.webdriver.support import expected_conditions as ec
@@ -20,17 +22,14 @@ class WaitUtilities:
         :Args:
             - by_locator - The locator of the element to be checked.
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
-
-        :Raises:
-            An ElementNotVisibleException if element is not visible within the specified time.
         """
         if by_locator is None:
             raise TypeError("Empty or invalid locator passed!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.visibility_of_element_located(by_locator))
-        except ElementNotVisibleException as err:
-            WaitUtilities.log.error("Element {0} is not visible. Exception: {1}".format(by_locator, err))
-            print("Element {0} is not visible. Exception: {1}".format(by_locator, err))
+        except Exception as err:
+            WaitUtilities.log.error(
+                "Element {0} is not visible within the specified time. Exception: {1}".format(by_locator, err.__class__.__name__))
 
     @staticmethod
     def wait_for_element_to_be_present(by_locator, timeout=10):
@@ -39,17 +38,15 @@ class WaitUtilities:
         :Args:
             - by_locator - The locator of the element to be checked.
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
-
-        :Raises:
-            An Exception if element is not loaded in DOM within the specified time.
         """
         if by_locator is None:
             raise TypeError("Empty or invalid locator passed!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.presence_of_element_located(by_locator))
         except Exception as err:
-            WaitUtilities.log.error("Element {0} is not present. Exception: {1}".format(by_locator, err))
-            print("Element {0} is not present. Exception: {1}".format(by_locator, err))
+            WaitUtilities.log.error(
+                "Element {0} is not present. Unable to find the element within the specified time. Exception: {1}".format(
+                    by_locator, err.__class__.__name__))
 
     @staticmethod
     def wait_for_element_to_be_clickable(by_locator, timeout=10):
@@ -58,17 +55,15 @@ class WaitUtilities:
         :Args:
             - by_locator - The locator of the element to be checked.
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
-
-        :Raises:
-            An Exception if element is not enabled within the specified time.
         """
         if by_locator is None:
             raise TypeError("Empty or invalid locator passed!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.element_to_be_clickable(by_locator))
         except Exception as err:
-            WaitUtilities.log.error("Element {0} is not clickable. Exception: {1}".format(by_locator, err))
-            print("Element {0} is not clickable. Exception: {1}".format(by_locator, err))
+            WaitUtilities.log.error(
+                "Element {0} is not clickable. Unable to click / find the element within the specified time. Exception: {1}".format(
+                    by_locator, err.__class__.__name__))
 
     @staticmethod
     def wait_for_element_to_be_selected(web_element, timeout=10):
@@ -77,17 +72,15 @@ class WaitUtilities:
         :Args:
             - by_locator - The locator of the element to be checked.
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
-
-        :Raises:
-            An ElementNotSelectableException if element is not selected within the specified time.
         """
         if web_element is None:
             raise TypeError("Empty or invalid locator passed!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.element_to_be_selected(web_element))
-        except ElementNotSelectableException as err:
-            WaitUtilities.log.error("Element {0} is not selectable. Exception: {1}".format(web_element, err))
-            print("Element {0} is not selectable. Exception: {1}".format(web_element, err))
+        except Exception as err:
+            WaitUtilities.log.error(
+                "Element was not in selected state {0} within the specified time. Exception: {1}".format(web_element,
+                                                                                                         err.__class__.__name__))
 
     @staticmethod
     def wait_for_element_to_be_invisible(by_locator, timeout=10):
@@ -96,17 +89,13 @@ class WaitUtilities:
         :Args:
             - by_locator - The locator of the element to be checked.
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
-
-        :Raises:
-            An Exception if element is not invisible within the specified time.
         """
         if by_locator is None:
             raise TypeError("Empty or invalid locator passed!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.invisibility_of_element_located(by_locator))
         except Exception as err:
-            WaitUtilities.log.error("Element {0} is visible. Exception: {1}".format(by_locator, err))
-            print("Element {0} is visible. Exception: {1}".format(by_locator, err))
+            WaitUtilities.log.error("Element {0} is visible. Exception: {1}".format(by_locator, err.__class__.__name__))
 
     @staticmethod
     def wait_for_element_to_be_stale(web_element, timeout=10):
@@ -115,9 +104,6 @@ class WaitUtilities:
         :Args:
             - web_element - The element to be checked for staleness.
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
-
-        :Raises:
-            An Exception if element is not stale within the specified time.
         """
         if web_element is None:
             raise TypeError("Empty or invalid locator passed!!")
@@ -135,9 +121,6 @@ class WaitUtilities:
             - web_element - The element to be checked for staleness.
             - by_locator - The locator of the element to be checked for visibility.
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
-
-        :Raises:
-            An StaleElementReferenceException if element is still stale invisible after the specified time.
         """
         if web_element is None or by_locator is None:
             raise TypeError("Empty or invalid locator passed!!")
@@ -146,88 +129,72 @@ class WaitUtilities:
                 WebDriverWait(SeleniumBase.driver, timeout).until(ec.visibility_of_element_located(by_locator))
         except StaleElementReferenceException as err:
             WaitUtilities.log.error(
-                "Element {0} is not attached to DOM. Element is stale!! Exception: {1}".format(by_locator, err))
-            print("Element {0} is not attached to DOM. Element is stale!! Exception: {1}".format(by_locator, err))
+                "Element {0} is not attached to DOM. Element is stale!! Exception: {1}".format(by_locator,
+                                                                                               err.__class__.__name__))
 
     @staticmethod
-    def wait_for_title_to_contain_value_and_assert(expected_value, timeout=10):
+    def wait_for_title_to_contain_value(expected_value, timeout=10):
         """Waits for the title to contain the expected value.
 
         :Args:
             - expected_value - Expected value to be contained in title.
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
-
-        :Raises:
-            An AssertionError if the title does not contain the expected value.
         """
         if expected_value is None:
             raise ValueError("Empty or invalid Title passed as argument!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.title_contains(expected_value))
-        except AssertionError as err:
+        except Exception as err:
             WaitUtilities.log.error(
-                "Title does not contain the value: {0}. Assertion failed!! Exception:{1}".format(expected_value, err))
-            print("Title does not contain the value: {0}. Assertion failed!! Exception:{1}".format(expected_value, err))
+                "Title does not contain the value: {0} in the expected time.".format(expected_value))
 
     @staticmethod
-    def wait_for_title_to_match_value_and_assert(expected_value, timeout=10):
+    def wait_for_title_to_match_value(expected_value, timeout=10):
         """Waits for the title to match the expected value.
 
         :Args:
             - expected_value - Expected value to be matched against title.
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
-
-        :Raises:
-            An AssertionError if the title does not match the expected value.
         """
         if expected_value is None:
             raise ValueError("Empty or invalid Title passed as argument!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.title_is(expected_value))
-        except AssertionError as err:
+        except Exception as err:
             WaitUtilities.log.error(
-                "Title does not match the value: {0}. Assertion failed!! Exception: {1}".format(expected_value, err))
-            print("Title does not match the value: {0}. Assertion failed!! Exception: {1}".format(expected_value, err))
+                "Title does not match the value: {0} within the specified time.".format(expected_value))
 
     @staticmethod
-    def wait_for_url_to_contain_value_and_assert(expected_value, timeout=10):
+    def wait_for_url_to_contain_value(expected_value, timeout=10):
         """Waits for the url to contain the expected value.
 
         :Args:
             - expected_value - Expected value to be contained in url.
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
-
-        :Raises:
-            An AssertionError if the url does not contain the expected value.
         """
         if expected_value is None:
             raise ValueError("Empty or invalid Title passed as argument!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.url_contains(expected_value))
-        except AssertionError as err:
+        except Exception as err:
             WaitUtilities.log.error(
-                "Url does not contain the value: {0}. Assertion failed!! Exception: {1}".format(expected_value, err))
-            print("Url does not contain the value: {0}. Assertion failed!! Exception: {1}".format(expected_value, err))
+                "Url does not contain the value: {0} in the expected time.".format(expected_value))
 
     @staticmethod
-    def wait_for_url_to_match_value_and_assert(expected_value, timeout=10):
+    def wait_for_url_to_match_value(expected_value, timeout=10):
         """Waits for the url to match the expected value.
 
         :Args:
             - expected_value - Expected value to be matched against url.
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
-
-        :Raises:
-            An AssertionError if the url does not match the expected value.
         """
         if expected_value is None:
             raise ValueError("Empty or invalid Title passed as argument!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.url_to_be(expected_value))
-        except AssertionError as err:
+        except Exception as err:
             WaitUtilities.log.error(
-                "Url does not match the value: {0}. Assertion failed!! Exception: {1}".format(expected_value, err))
-            print("Url does not match the value: {0}. Assertion failed!! Exception: {1}".format(expected_value, err))
+                "Url does not match the value: {0} in the expected time.".format(expected_value))
 
     @staticmethod
     def wait_for_text_to_be_present(by_locator, expected_text, timeout=10):
@@ -237,9 +204,6 @@ class WaitUtilities:
             - by_locator - The locator of the element to be checked.
             - expected_text - Value to be matched in element's text.
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
-
-        :Raises:
-            An Exception if text is not present in element within the specified time.
         """
         if by_locator is None or expected_text is None:
             raise TypeError("Empty or invalid argument passed!!")
@@ -248,8 +212,7 @@ class WaitUtilities:
                 ec.text_to_be_present_in_element(by_locator, expected_text))
         except Exception as err:
             WaitUtilities.log.error(
-                "Text {0} not present in element {1}. Exception: {2}".format(expected_text, by_locator, err))
-            print("Text {0} not present in element {1}. Exception: {2}".format(expected_text, by_locator, err))
+                "Text {0} not present in element {1} within the expected time.".format(expected_text, by_locator))
 
     @staticmethod
     def wait_for_value_to_be_present(by_locator, expected_text, timeout=10):
@@ -259,9 +222,6 @@ class WaitUtilities:
             - by_locator - The locator of the element to be checked.
             - expected_text - Value to be matched in element's value attribute.
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
-
-        :Raises:
-            An Exception if text is not present in element's value attribute within the specified time.
         """
         if by_locator is None or expected_text is None:
             raise TypeError("Empty or invalid argument passed!!")
@@ -270,8 +230,7 @@ class WaitUtilities:
                 ec.text_to_be_present_in_element_value(by_locator, expected_text))
         except Exception as err:
             WaitUtilities.log.error(
-                "Text {0} not present in element {1}. Exception: {2}".format(expected_text, by_locator, err))
-            print("Text {0} not present in element {1}. Exception: {2}".format(expected_text, by_locator, err))
+                "Value {0} not present in element {1} within the expected time.".format(expected_text, by_locator))
 
     @staticmethod
     def wait_for_number_of_windows_to_match(expected_value, timeout=10):
@@ -280,9 +239,6 @@ class WaitUtilities:
         :Args:
             - expected_value - Expected number of windows.
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
-
-        :Raises:
-            An AssertionError if the number of windows does not match the expected value.
         """
         if expected_value is None:
             raise TypeError("Empty or invalid value passed!!")
@@ -290,10 +246,10 @@ class WaitUtilities:
             raise ValueError("Number of windows value should be a number")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.number_of_windows_to_be(expected_value))
-        except AssertionError as err:
+        except Exception as err:
             WaitUtilities.log.error(
-                "Number of windows available does not match the expected value: {0}".format(expected_value))
-            print("Number of windows available does not match the expected value: {0}".format(expected_value))
+                "Number of windows available does not match the expected value: {0} within the expected time".format(
+                    expected_value))
 
     @staticmethod
     def wait_for_alert_to_be_present(timeout=10):
@@ -301,15 +257,11 @@ class WaitUtilities:
 
         :Args:
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
-
-        :Raises:
-            An Exception if alert is not present within specified time.
         """
-        if WebDriverWait(SeleniumBase.driver, timeout).until(ec.alert_is_present()):
-            return True
-        else:
-            WaitUtilities.log.error("Alert is not displayed!!")
-            raise Exception("Alert is not displayed!!")
+        try:
+            WebDriverWait(SeleniumBase.driver, timeout).until(ec.alert_is_present())
+        except Exception as err:
+            WaitUtilities.log.error("Alert is not displayed within the expected time!!")
 
     @staticmethod
     def wait_for_frame_and_switch(by_locator, timeout=10):
@@ -318,14 +270,10 @@ class WaitUtilities:
         :Args:
             - by_locator - The locator of the element to be checked.
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
-
-        :Raises:
-            An NoSuchFrameException if frame is not available within the specified time.
         """
         if by_locator is None:
             raise TypeError("Empty or invalid locator passed!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.frame_to_be_available_and_switch_to_it(by_locator))
-        except NoSuchFrameException as err:
-            WaitUtilities.log.error("Frame {0} is not available".format(by_locator))
-            print("Frame {0} is not available".format(by_locator))
+        except Exception as err:
+            WaitUtilities.log.error("Frame {0} is not available within the specified time.".format(by_locator))

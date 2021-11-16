@@ -1,5 +1,6 @@
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.select import Select
 
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
@@ -24,9 +25,9 @@ class SeleniumUtilities:
     def send_text(web_element, text):
         """Passes the value to the text field.
 
-        :Args:
-            - web_element - The web element where value needs to be passed.
-            - text - The value to be passed to text field. Value would be converted to string and passed.
+            Args:
+                - web_element - The web element where value needs to be passed.
+                - text - The value to be passed to text field. Value would be converted to string and passed.
         """
         if web_element is None:
             raise TypeError("Empty or invalid Web element passed!!")
@@ -130,7 +131,19 @@ class SeleniumUtilities:
         if web_element is None:
             raise TypeError("Empty or invalid Web element passed!!")
         select = Select(web_element)
-        return select.first_selected_option()
+        return select.first_selected_option
+
+    @staticmethod
+    def get_selected_element_text_from_dropdown(web_element):
+        """Retrieves the selected element from dropdown.
+
+        :Args:
+            - web_element - The web element of the dropdown to be interacted with.
+        """
+        if web_element is None:
+            raise TypeError("Empty or invalid Web element passed!!")
+        select = Select(web_element)
+        return select.first_selected_option.text
 
     @staticmethod
     def select_checkbox(web_element):
@@ -145,7 +158,7 @@ class SeleniumUtilities:
             SeleniumUtilities.click_element(web_element)
 
     @staticmethod
-    def deselect_checkbox(web_element):
+    def unselect_checkbox(web_element):
         """Unselects the checkbox if it is already checked.
 
         :Args:
@@ -203,6 +216,19 @@ class SeleniumUtilities:
         if isinstance(attr, str) is False:
             raise ValueError("Attribute should be a string value!!")
         return web_element.get_attribute(attr)
+
+    @staticmethod
+    def get_css(web_element, css_property):
+        """Retrieves the required attribute's value of element.
+
+        :Args:
+            - web_element - The web element of the field whose attribute value needs to be retrieved.
+        """
+        if web_element is None or css_property is None:
+            raise TypeError("Empty or invalid argument passed!!")
+        if isinstance(css_property, str) is False:
+            raise ValueError("Attribute should be a string value!!")
+        return web_element.value_of_css_property(css_property)
 
     # endregion
 
@@ -307,7 +333,7 @@ class SeleniumUtilities:
             raise TypeError("Empty or invalid Web element passed!!")
         action = ActionChains(SeleniumBase.driver)
         action.move_to_element(web_element).click(web_element).key_down(Keys.CONTROL).send_keys('A').key_up(
-            Keys.CONTROL).key_down(Keys.DELETE).pause(1000).key_up(Keys.DELETE).perform()
+            Keys.CONTROL).key_down(Keys.DELETE).key_up(Keys.DELETE).perform()
 
     @staticmethod
     def copy_value_from_textbox(web_element):
@@ -377,8 +403,7 @@ class SeleniumUtilities:
         if web_element is None or text is None:
             raise TypeError("Empty or invalid argument passed!!")
         text_input = str(text)
-        SeleniumBase.driver.execute_script("arguments[0].value='text_input';", web_element)
-        # SeleniumBase.driver.execute_script("arguments[0].value=arguments[1];", web_element, text_input)
+        SeleniumBase.driver.execute_script("arguments[0].value=arguments[1];", web_element, text_input)
         # SeleniumBase.driver.execute_script("arguments[0].setAttribute('value', arguments[1]);", web_element, text_input)
 
     @staticmethod
@@ -390,7 +415,7 @@ class SeleniumUtilities:
         """
         if web_element is None:
             raise TypeError("Empty or invalid Web element passed!!")
-        SeleniumBase.driver.execute_script("return arguments[0].innerText;", web_element)
+        return SeleniumBase.driver.execute_script("return arguments[0].innerText;", web_element)
 
     @staticmethod
     def get_value_using_javascript_executor(web_element):
@@ -401,7 +426,7 @@ class SeleniumUtilities:
         """
         if web_element is None:
             raise TypeError("Empty or invalid Web element passed!!")
-        SeleniumBase.driver.execute_script("return arguments[0].value;", web_element)
+        return SeleniumBase.driver.execute_script("return arguments[0].value;", web_element)
 
     @staticmethod
     def get_attribute_using_javascript_executor(web_element, attr):
@@ -413,7 +438,7 @@ class SeleniumUtilities:
         """
         if web_element is None:
             raise TypeError("Empty or invalid Web element passed!!")
-        SeleniumBase.driver.execute_script("return arguments[0].getAttribute(arguments[1]);", web_element, attr)
+        return SeleniumBase.driver.execute_script("return arguments[0].getAttribute(arguments[1]);", web_element, attr)
 
     @staticmethod
     def update_attribute_using_javascript_executor(web_element, attribute, new_value):
@@ -427,7 +452,8 @@ class SeleniumUtilities:
         if web_element is None:
             raise TypeError("Empty or invalid Web element passed!!")
         # SeleniumBase.driver.execute_script("arguments[0].setAttribute(attribute, new_value);", web_element)
-        SeleniumBase.driver.execute_script("arguments[0].setAttribute(arguments[1], arguments[2]);", web_element)
+        # SeleniumBase.driver.execute_script("arguments[0].setAttribute(arguments[1], arguments[2]);", web_element,
+        #                                    attribute, new_value)
         SeleniumBase.driver.execute_script("arguments[0]." + attribute + "=arguments[1];", web_element, new_value)
 
     @staticmethod

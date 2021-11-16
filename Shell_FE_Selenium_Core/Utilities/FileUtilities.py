@@ -22,19 +22,21 @@ class FileUtilities:
         work_sheet = work_book[sheet_name]
         max_row = work_sheet.max_row
         max_col = work_sheet.max_column
+        row_name_available = False
         for x in range(1, max_row + 1):
             if work_sheet.cell(row=x, column=1).value == row_name:
+                row_name_available = True
                 for y in range(2, max_col + 1):
                     dictionary_values[work_sheet.cell(row=1, column=y).value] = work_sheet.cell(row=x, column=y).value
-            else:
-                FileUtilities.log.error("The row {0} is not available in the work sheet.".format(row_name))
-                raise Exception("The row {0} is not available in the work sheet.".format(row_name))
+        if row_name_available is not True:
+            FileUtilities.log.error("The row {0} is not available in the work sheet.".format(row_name))
+            raise Exception("The row {0} is not available in the work sheet.".format(row_name))
         return dictionary_values
 
     @staticmethod
     def read_cell_value_from_excel(file_name, sheet_name, cell_name):
         """Reads the data present in excel based on cell name and returns the single cell value."""
-        work_book = openpyxl.load_workbook(file_name)
+        work_book = openpyxl.load_workbook(FileUtilities.test_data + file_name)
         work_sheet = work_book[sheet_name]
         return work_sheet[cell_name].value
 
@@ -62,10 +64,11 @@ class FileUtilities:
 
     @staticmethod
     def write_into_json(dict_name, file_name):
-        """Converts the dictionary into a Json file."""
+        """Converts the dictionary into a Json file. If no file available with the name then
+        new file will be created else the file would be overwritten. """
         try:
             with open(FileUtilities.test_data + file_name, 'w') as json_file:
-                json.dump(dict_name, file_name, indent=2)
+                json.dump(dict_name, json_file, indent=2)
                 print("File created with contents. Filename: {0}.".format(file_name))
         except TypeError as terr:
             print(
@@ -105,17 +108,22 @@ class FileUtilities:
         work_sheet = work_book[sheet_name]
         max_row = work_sheet.max_row
         max_col = work_sheet.max_column
+        row_name_available = False
         for x in range(1, max_row + 1):
             if work_sheet.cell(row=x, column=1).value == row_name:
+                row_name_available = True
                 for y in range(2, max_col + 1):
                     work_sheet.cell(row=x, column=y).value = dict_name[work_sheet.cell(row=1, column=y).value]
-            else:
-                FileUtilities.log.error("The row {0} is not available in the work sheet.".format(row_name))
-                raise Exception("The row {0} is not available in the work sheet.".format(row_name))
+        if row_name_available is not True:
+            FileUtilities.log.error("The row {0} is not available in the work sheet.".format(row_name))
+            raise Exception("The row {0} is not available in the work sheet.".format(row_name))
         work_book.save(FileUtilities.test_data + file_name)
 
     @staticmethod
     def write_into_new_excel_file(dict_name, file_name, sheet_name):
+        """Writes data from dictionary into a new Excel based on the sheet name and row name.
+        If file exists, the file contents would be overwritten.
+        """
         work_book = openpyxl.Workbook()
         sheet = work_book.active
         sheet.title = sheet_name
@@ -125,4 +133,12 @@ class FileUtilities:
             sheet.cell(row=1, column=index).value = key
             sheet.cell(row=2, column=index).value = dict_name[key]
             index += 1
+        work_book.save(FileUtilities.test_data + file_name)
+
+    @staticmethod
+    def write_into_excel_via_cell_name(file_name, sheet_name, cell_name, value):
+        """Writes the parameterized value into the specified cell name."""
+        work_book = openpyxl.load_workbook(FileUtilities.test_data + file_name)
+        work_sheet = work_book[sheet_name]
+        work_sheet[cell_name].value = value
         work_book.save(FileUtilities.test_data + file_name)
