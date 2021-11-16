@@ -23,13 +23,17 @@ class WaitUtilities:
             element = wait.until(lambda x: x.find_element_by_id(locator_value))
             return element
 
+        elif locator_type == "accessibility_id":
+            element = wait.until(lambda x: x.find_element_by_accessibility_id(locator_value))
+            return element
+
         elif locator_type == "class":
             element = wait.until(lambda x: x.find_element_by_class_name(locator_value))
             return element
 
         elif locator_type == "des":
             element = wait.until(
-                lambda x: x.find_element_by_android_uiautomator('UiSelector().description("%s")' % locator_value))
+               lambda x: x.find_element_by_android_uiautomator('UiSelector().description("%s")' % locator_value))
             return element
 
         elif locator_type == "index":
@@ -38,7 +42,8 @@ class WaitUtilities:
             return element
 
         elif locator_type == "text":
-            element = wait.until(lambda x: x.find_element_by_android_uiautomator('text("%s")' % locator_value))
+            element = wait.until(
+                lambda x: x.find_element_by_android_uiautomator('text("%s")' % locator_value))
             return element
 
         elif locator_type == "xpath":

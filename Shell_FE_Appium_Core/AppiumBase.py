@@ -56,7 +56,6 @@ class AppiumBase:
     @staticmethod
     def is_App_installed():
         app_installed = AppiumBase.driver.is_app_installed(AppiumBase.__app)
-        print(app_installed)
 
     @staticmethod
     def click_by_accessibility_id(element_id):
