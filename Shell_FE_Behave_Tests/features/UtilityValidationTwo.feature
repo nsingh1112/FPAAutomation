@@ -1,4 +1,5 @@
 Feature: Utilities validation Academy site- Feature Two
+  @Scenario3
   Scenario: Validate the working of Browser Utilities
     Given user navigates to Academy site
     When user navigates back
@@ -12,6 +13,7 @@ Feature: Utilities validation Academy site- Feature Two
     When user refreshes the page
     Then user waits for the value "option1" to be present in the page
 
+  @Scenario4
   Scenario: Validate child window, alert and frame handling
     Given user navigates to Academy site
 #    When user clicks on the Hide button

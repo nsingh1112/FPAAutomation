@@ -1,6 +1,6 @@
 @Utilities
 Feature: Utilities validation tutorials point - Feature One
-
+  @Scenario1
   Scenario: Validate the working of methods related to text boxes
     Given user navigates to the TutorialsPoint site
     When user enters "Henry" in First name
@@ -20,6 +20,7 @@ Feature: Utilities validation tutorials point - Feature One
     When user prints the color of the Firstname label
     Then user validates the "Years of Experience" label using JSExecutor
 
+  @Scenario2
   Scenario: Validate the working of methods related to Radio buttons, checkboxes and dropdowns
     Given user navigates to the TutorialsPoint site
     When user selects the Male radiobutton
