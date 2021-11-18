@@ -1,5 +1,5 @@
-Feature: Utilities validation tutorials point - Feature One
-#  Scenario: Validate the working of Browser Utilities
+Feature: Utilities validation Academy site- Feature Two
+  Scenario: Validate the working of Browser Utilities
     Given user navigates to Academy site
     When user navigates back
     Then user validates the title equality using Wait utilities

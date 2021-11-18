@@ -136,15 +136,20 @@ class BrowserUtilities:
         web_element.screenshot(BrowserUtilities.screenshots + filename)
 
     @staticmethod
-    def take_screenshot():
+    def take_screenshot(file_name="Screenshot"):
         """Takes screenshot of the web page and saves it in the Screenshots folder under TestResults."""
-        filename = "Screenshot" + str(datetime.timestamp(datetime.now())) + ".png"
+        filename = file_name + str(datetime.timestamp(datetime.now())) + ".png"
         SeleniumBase.driver.save_screenshot(BrowserUtilities.screenshots + filename)
 
     @staticmethod
     def take_screenshot_base64():
         """Takes screenshot of the web page as base 64."""
         SeleniumBase.driver.get_screenshot_as_base64()
+
+    @staticmethod
+    def take_png_screenshot():
+        """Takes screenshot of the web page as PNG."""
+        SeleniumBase.driver.get_screenshot_as_png()
 
     @staticmethod
     def resize_browser(width, height):
