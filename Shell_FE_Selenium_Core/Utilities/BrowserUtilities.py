@@ -4,12 +4,15 @@ from selenium.webdriver.common.alert import Alert
 from datetime import datetime
 
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
+from Shell_FE_Selenium_Core.Utilities.LoggingUtilities import LoggingUtilities
 
 
 class BrowserUtilities:
     """BrowserUtilities class contains reusable methods for common browser related actions"""
     current_working_directory = os.path.dirname(os.getcwd())
     screenshots = current_working_directory + "\\Shell_FE_Behave_Tests\\TestResults\\Screenshots\\"
+    logobj = LoggingUtilities()
+    log = logobj.logger()
 
     @staticmethod
     def navigate_to_url(url):
@@ -19,8 +22,10 @@ class BrowserUtilities:
             - url - The url to be navigated to.
         """
         if url is None:
+            BrowserUtilities.log.error("Invalid or empty URL!!")
             raise Exception("Invalid or empty URL!!")
         SeleniumBase.driver.get(url)
+        BrowserUtilities.log.info("Navigated to the URL: {0}.".format(url))
 
     @staticmethod
     def navigate_back():
@@ -36,6 +41,7 @@ class BrowserUtilities:
     def refresh_page():
         """Refreshes the web page."""
         SeleniumBase.driver.refresh()
+        BrowserUtilities.log.info("Page has been refreshed.")
 
     @staticmethod
     def get_current_url():
@@ -52,17 +58,20 @@ class BrowserUtilities:
         """Switches to the immediate child window."""
         child_window = SeleniumBase.driver.window_handles[1]
         SeleniumBase.driver.switch_to.window(child_window)
+        BrowserUtilities.log.info("Switched to the child window: {0}.".format(child_window))
 
     @staticmethod
     def close_window():
         """Closes the driver instance (i.e.) the current browser tab / window."""
         SeleniumBase.driver.close()
+        BrowserUtilities.log.info("Browser window has been closed.")
 
     @staticmethod
     def switch_to_parent_window():
         """Switches to the parent window."""
         parent_window = SeleniumBase.driver.window_handles[0]
         SeleniumBase.driver.switch_to.window(parent_window)
+        BrowserUtilities.log.info("Switched to the parent window: {0}.".format(parent_window))
 
     @staticmethod
     def switch_to_window_by_title(expected_title):
@@ -72,19 +81,25 @@ class BrowserUtilities:
             - expected_title - The title of the window to be matched.
         """
         if expected_title is None:
+            BrowserUtilities.log.error("Empty argument passed to method switch_to_window_by_title(expected_title).")
             raise TypeError("Empty argument passed!!")
         if isinstance(expected_title, str) is False:
+            BrowserUtilities.log.error("String value should be passed to method switch_to_window_by_title(expected_title).")
             raise ValueError("Title should be a string value!!")
         parent_window = SeleniumBase.driver.current_window_handle
         window_handles = SeleniumBase.driver.window_handles
+        if window_handles == 1:
+            BrowserUtilities.log.error("No child windows opened. Number of windows available is {0}.".format(window_handles))
         flag = False
         for window_handle in window_handles:
             SeleniumBase.driver.switch_to.window(window_handle)
             if SeleniumBase.driver.title == expected_title:
                 flag = True
+                BrowserUtilities.log.info("Switched to child window with the title: {1}.".format(expected_title))
                 break
         if not flag:
             SeleniumBase.driver.switch_to.window(parent_window)
+            BrowserUtilities.log.warning("Could not find child window with the title {0}. Switched to Parent window {1}.".format(expected_title, parent_window))
 
     @staticmethod
     def switch_to_iframe(frame_value):
@@ -94,6 +109,7 @@ class BrowserUtilities:
             - frame_value - The value of frame (i.e.) frame name / index / locator.
         """
         if frame_value is None:
+            BrowserUtilities.log.error("Empty or invalid argument passed in the method switch_to_iframe(rame_value).")
             raise TypeError("Empty or invalid argument passed!!")
         SeleniumBase.driver.switch_to.frame(frame_value)
 
@@ -102,12 +118,14 @@ class BrowserUtilities:
         """Accepts the alert."""
         alert = Alert(SeleniumBase.driver)
         alert.accept()
+        BrowserUtilities.log.info("Accepted the alert.")
 
     @staticmethod
     def dismiss_alert():
         """Dismisses the alert."""
         alert = Alert(SeleniumBase.driver)
         alert.dismiss()
+        BrowserUtilities.log.info("Dismissed the alert.")
 
     @staticmethod
     def send_text_alert(text):
@@ -117,9 +135,11 @@ class BrowserUtilities:
             - text - The text to be sent to the alert window.
         """
         if text is None:
+            BrowserUtilities.log.error("Empty argument passed in the method send_text_alert(text).")
             raise TypeError("Empty argument passed!!")
         alert = Alert(SeleniumBase.driver)
         alert.send_keys(str(text))
+        BrowserUtilities.log.info("Sent the value {0} to the alert.".format(text))
 
     @staticmethod
     def get_alert_text():
@@ -131,15 +151,18 @@ class BrowserUtilities:
     def take_screenshot_of_element(web_element):
         """Takes screenshot of the web element and saves it in the Screenshots folder under TestResults."""
         if web_element is None:
+            BrowserUtilities.log.error("Empty or invalid argument passed to the method take_screenshot_of_element(web_element)")
             raise TypeError("Empty or invalid argument passed!!")
         filename = "Element" + str(datetime.timestamp(datetime.now())) + ".png"
         web_element.screenshot(BrowserUtilities.screenshots + filename)
+        BrowserUtilities.log.info("Took screenshot and saved as {0} in Screenshots folder.".format(filename))
 
     @staticmethod
     def take_screenshot(file_name="Screenshot"):
         """Takes screenshot of the web page and saves it in the Screenshots folder under TestResults."""
         filename = file_name + str(datetime.timestamp(datetime.now())) + ".png"
         SeleniumBase.driver.save_screenshot(BrowserUtilities.screenshots + filename)
+        BrowserUtilities.log.info("Took screenshot and saved as {0} in Screenshots folder.".format(filename))
 
     @staticmethod
     def take_screenshot_base64():
@@ -160,5 +183,7 @@ class BrowserUtilities:
             - height - The height of the browser to be set.
         """
         if isinstance(width, int) is False or isinstance(height, int) is False:
+            BrowserUtilities.log.error("Width and Height passed to the method resize_browser(width, height) should be a number!!")
             raise ValueError("Width and Height should be a number!!")
         SeleniumBase.driver.set_window_size(width, height)
+        BrowserUtilities.log.info("Browser size has been resized.")

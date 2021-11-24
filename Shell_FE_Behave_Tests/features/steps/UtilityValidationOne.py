@@ -1,3 +1,5 @@
+import time
+
 from behave import *
 import SharedVariables
 from Shell_FE_Behave_Tests.PageObjects.BusinessFunctions.TutorialsPointFunctions import TutorialsPointFunctions
@@ -12,6 +14,7 @@ def step_impl(context):
     print("URL BEFORE ASSIGNING: " + SharedVariables.expected_url)
     context.tutorialFunctions = TutorialsPointFunctions()
     context.tutorialFunctions.access_tutorialspoint(SeleniumBase.url)
+    time.sleep(5)
     SharedVariables.expected_title = BrowserUtilities.get_title()
     SharedVariables.expected_url = BrowserUtilities.get_current_url()
     print("TITLE AFTER ASSIGNING: " + SharedVariables.expected_title)
@@ -26,7 +29,7 @@ def step_impl(context, text):
 @When('user enters "{text}" in Last name')
 def step_impl(context, text):
     context.tutorialFunctions.enter_last_name(text)
-
+    time.sleep(10)
 
 @Then('user validates the "{text}" label in First name textbox')
 def step_impl(context, text):

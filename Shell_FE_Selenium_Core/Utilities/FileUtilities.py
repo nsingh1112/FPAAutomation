@@ -31,6 +31,7 @@ class FileUtilities:
         if row_name_available is not True:
             FileUtilities.log.error("The row {0} is not available in the work sheet.".format(row_name))
             raise Exception("The row {0} is not available in the work sheet.".format(row_name))
+        FileUtilities.log.info("The data from excel sheet with row {0} has been converted into dictionary.".format(row_name))
         return dictionary_values
 
     @staticmethod
@@ -38,6 +39,8 @@ class FileUtilities:
         """Reads the data present in excel based on cell name and returns the single cell value."""
         work_book = openpyxl.load_workbook(FileUtilities.test_data + file_name)
         work_sheet = work_book[sheet_name]
+        FileUtilities.log.info(
+            "The value from excel sheet with cell {0} has been returned.".format(cell_name))
         return work_sheet[cell_name].value
 
     @staticmethod
@@ -46,20 +49,21 @@ class FileUtilities:
         try:
             with open(FileUtilities.test_data + file_name, 'r') as json_file:
                 dictionary_values = json.load(json_file)
+                FileUtilities.log.info("The data from json file {0} has been converted into dictionary.".format(file_name))
                 return dictionary_values
         except FileNotFoundError as f_err:
             FileUtilities.log.error("Unable to locate Json file {0}. Exception {1}".format(file_name, f_err))
-            print("Unable to locate Json file {0}. Exception {1}".format(file_name, f_err))
         except Exception as err:
             FileUtilities.log.error("Unable to load Json file {0}. Exception {1}".format(file_name, err))
-            print("Unable to load Json file {0}. Exception {1}".format(file_name, err))
 
     @staticmethod
     def read_json_string_as_dictionary(json_string):
         """Reads the data present in a json string and returns a dictionary of the values."""
         if isinstance(json_string, str) is False:
+            FileUtilities.log.error("Only a string value should be passed to the method read_json_string_as_dictionary(json_string).")
             raise ValueError("Attribute should be a string value!!")
         dictionary_values = json.loads(json_string)
+        FileUtilities.log.info("The json string {0} has been converted into dictionary.".format(json_string))
         return dictionary_values
 
     @staticmethod
@@ -69,17 +73,13 @@ class FileUtilities:
         try:
             with open(FileUtilities.test_data + file_name, 'w') as json_file:
                 json.dump(dict_name, json_file, indent=2)
-                print("File created with contents. Filename: {0}.".format(file_name))
+                FileUtilities.log.info("File created with contents. Filename: {0}.".format(file_name))
         except TypeError as terr:
-            print(
-                "Key that does not belong to a basic (i.e.) int / float / string / bool / None type is present. Exception: {0}".format(
-                    terr))
             FileUtilities.log.error(
                 "Key that does not belong to a basic (i.e.) int / float / string / bool / None type is present. Exception: {0}".format(
                     terr))
         except Exception as err:
             FileUtilities.log.error("Unable to write into json file. Exception: {0}.".format(err))
-            print("Unable to write into json file. Exception: {0}.".format(err))
 
     @staticmethod
     def convert_dictionary_to_json_string(dict_name):
@@ -87,17 +87,14 @@ class FileUtilities:
         json_string = ""
         try:
             json_string = json.dumps(dict_name, indent=2)
+            FileUtilities.log.info("Converted the dictionary {0} to a json string.".format(dict_name))
             return json_string
         except TypeError as terr:
-            print(
-                "Key that does not belong to a basic (i.e.) int / float / string / bool / None type is present. Exception: {0}".format(
-                    terr))
             FileUtilities.log.error(
                 "Key that does not belong to a basic (i.e.) int / float / string / bool / None type is present. Exception: {0}".format(
                     terr))
         except Exception as err:
             FileUtilities.log.error("Unable to convert dictionary to Json string. Exception: {0}".format(err))
-            print("Unable to convert dictionary to Json string. Exception: {0}".format(err))
 
     @staticmethod
     def write_into_existing_excel_file(dict_name, file_name, sheet_name, row_name):
@@ -118,6 +115,7 @@ class FileUtilities:
             FileUtilities.log.error("The row {0} is not available in the work sheet.".format(row_name))
             raise Exception("The row {0} is not available in the work sheet.".format(row_name))
         work_book.save(FileUtilities.test_data + file_name)
+        FileUtilities.log.info("Updated the excel file {0} with the contents from dictionary {1}.".format(file_name, dict_name))
 
     @staticmethod
     def write_into_new_excel_file(dict_name, file_name, sheet_name):
@@ -134,6 +132,7 @@ class FileUtilities:
             sheet.cell(row=2, column=index).value = dict_name[key]
             index += 1
         work_book.save(FileUtilities.test_data + file_name)
+        FileUtilities.log.info("Wrote the contents of dictionary {0} into the excel file {1}".format(dict_name, file_name))
 
     @staticmethod
     def write_into_excel_via_cell_name(file_name, sheet_name, cell_name, value):
@@ -142,3 +141,4 @@ class FileUtilities:
         work_sheet = work_book[sheet_name]
         work_sheet[cell_name].value = value
         work_book.save(FileUtilities.test_data + file_name)
+        FileUtilities.log.info("Wrote the value {0} into the file {1}".format(value, file_name))

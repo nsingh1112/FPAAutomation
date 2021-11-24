@@ -1,2 +1,0 @@
-2021-11-18 15:52:39,923 :ERROR :WaitUtilities :Element was not in selected state <selenium.webdriver.remote.webelement.WebElement (session="0950d2a872b0a2aa64110e1cabec6813", element="34cbcbd8-5be7-4350-b9d4-a9aa90b39a14")> within the specified time. Exception: TimeoutException
-2021-11-18 15:53:30,613 :ERROR :WaitUtilities :Alert is not displayed within the expected time!!

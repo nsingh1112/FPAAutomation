@@ -24,6 +24,7 @@ class WaitUtilities:
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
         """
         if by_locator is None:
+            WaitUtilities.log.error("Empty or invalid locator passed to the method: wait_for_element_to_be_visible(by_locator, timeout=10).")
             raise TypeError("Empty or invalid locator passed!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.visibility_of_element_located(by_locator))
@@ -40,6 +41,8 @@ class WaitUtilities:
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
         """
         if by_locator is None:
+            WaitUtilities.log.error(
+                "Empty or invalid locator passed to the method: wait_for_element_to_be_present(by_locator, timeout=10).")
             raise TypeError("Empty or invalid locator passed!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.presence_of_element_located(by_locator))
@@ -57,6 +60,8 @@ class WaitUtilities:
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
         """
         if by_locator is None:
+            WaitUtilities.log.error(
+                "Empty or invalid locator passed to the method: wait_for_element_to_be_clickable(by_locator, timeout=10).")
             raise TypeError("Empty or invalid locator passed!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.element_to_be_clickable(by_locator))
@@ -74,13 +79,14 @@ class WaitUtilities:
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
         """
         if web_element is None:
+            WaitUtilities.log.error(
+                "Empty or invalid locator passed to the method: wait_for_element_to_be_selected(by_locator, timeout=10).")
             raise TypeError("Empty or invalid locator passed!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.element_to_be_selected(web_element))
         except Exception as err:
             WaitUtilities.log.error(
-                "Element was not in selected state {0} within the specified time. Exception: {1}".format(web_element,
-                                                                                                         err.__class__.__name__))
+                "Element was not in selected state within the specified time. Exception: {0}".format(err.__class__.__name__))
 
     @staticmethod
     def wait_for_element_to_be_invisible(by_locator, timeout=10):
@@ -91,6 +97,8 @@ class WaitUtilities:
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
         """
         if by_locator is None:
+            WaitUtilities.log.error(
+                "Empty or invalid locator passed to the method: wait_for_element_to_be_invisible(by_locator, timeout=10).")
             raise TypeError("Empty or invalid locator passed!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.invisibility_of_element_located(by_locator))
@@ -106,12 +114,14 @@ class WaitUtilities:
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
         """
         if web_element is None:
+            WaitUtilities.log.error(
+                "Empty or invalid locator passed to the method: wait_for_element_to_be_stale(web_element, timeout=10).")
             raise TypeError("Empty or invalid locator passed!!")
         if WebDriverWait(SeleniumBase.driver, timeout).until(ec.staleness_of(web_element)):
             return True
         else:
             WaitUtilities.log.error("Element {0} is attached to DOM. Element is not stale!!".format(web_element))
-            raise Exception("Element {0} is attached to DOM. Element is not stale!!".format(web_element))
+            # raise Exception("Element {0} is attached to DOM. Element is not stale!!".format(web_element))
 
     @staticmethod
     def wait_for_element_to_be_stale_and_handle_it(web_element, by_locator, timeout=10):
@@ -123,6 +133,8 @@ class WaitUtilities:
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
         """
         if web_element is None or by_locator is None:
+            WaitUtilities.log.error(
+                "Empty or invalid locator passed to the method: wait_for_element_to_be_stale_and_handle_it(web_element, timeout=10).")
             raise TypeError("Empty or invalid locator passed!!")
         try:
             if WebDriverWait(SeleniumBase.driver, timeout).until(ec.staleness_of(web_element)):
@@ -141,6 +153,8 @@ class WaitUtilities:
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
         """
         if expected_value is None:
+            WaitUtilities.log.error(
+                "Empty or invalid title passed as argument to the method: wait_for_title_to_contain_value(expected_value, timeout=10).")
             raise ValueError("Empty or invalid Title passed as argument!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.title_contains(expected_value))
@@ -157,6 +171,8 @@ class WaitUtilities:
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
         """
         if expected_value is None:
+            WaitUtilities.log.error(
+                "Empty or invalid title passed as argument to the method: wait_for_title_to_match_value(expected_value, timeout=10).")
             raise ValueError("Empty or invalid Title passed as argument!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.title_is(expected_value))
@@ -173,7 +189,9 @@ class WaitUtilities:
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
         """
         if expected_value is None:
-            raise ValueError("Empty or invalid Title passed as argument!!")
+            WaitUtilities.log.error(
+                "Empty or invalid url passed as argument to the method: wait_for_url_to_contain_value(expected_value, timeout=10).")
+            raise ValueError("Empty or invalid value passed as argument!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.url_contains(expected_value))
         except Exception as err:
@@ -189,6 +207,8 @@ class WaitUtilities:
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
         """
         if expected_value is None:
+            WaitUtilities.log.error(
+                "Empty or invalid url passed as argument to the method: wait_for_url_to_match_value(expected_value, timeout=10).")
             raise ValueError("Empty or invalid Title passed as argument!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.url_to_be(expected_value))
@@ -206,6 +226,8 @@ class WaitUtilities:
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
         """
         if by_locator is None or expected_text is None:
+            WaitUtilities.log.error(
+                "Empty or invalid value passed as argument to the method: wait_for_text_to_be_present(by_locator, expected_text, timeout=10).")
             raise TypeError("Empty or invalid argument passed!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(
@@ -224,6 +246,8 @@ class WaitUtilities:
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
         """
         if by_locator is None or expected_text is None:
+            WaitUtilities.log.error(
+                "Empty or invalid value passed as argument to the method: wait_for_value_to_be_present(by_locator, expected_text, timeout=10).")
             raise TypeError("Empty or invalid argument passed!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(
@@ -241,8 +265,12 @@ class WaitUtilities:
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
         """
         if expected_value is None:
+            WaitUtilities.log.error(
+                "Empty or invalid value passed as argument to the method: wait_for_number_of_windows_to_match(expected_value, timeout=10).")
             raise TypeError("Empty or invalid value passed!!")
         if isinstance(expected_value, int) is False:
+            WaitUtilities.log.error(
+                "Invalid argument passed to the method: wait_for_number_of_windows_to_match(expected_value, timeout=10). Argument should be an int.")
             raise ValueError("Number of windows value should be a number")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.number_of_windows_to_be(expected_value))
@@ -272,6 +300,8 @@ class WaitUtilities:
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
         """
         if by_locator is None:
+            WaitUtilities.log.error(
+                "Empty or invalid locator passed as argument to the method: wait_for_frame_and_switch(by_locator, timeout=10).")
             raise TypeError("Empty or invalid locator passed!!")
         try:
             WebDriverWait(SeleniumBase.driver, timeout).until(ec.frame_to_be_available_and_switch_to_it(by_locator))

@@ -1,6 +1,8 @@
 import os
 from configparser import ConfigParser
 from selenium import webdriver
+from selenium.webdriver import DesiredCapabilities
+from msedge.selenium_tools import Edge, EdgeOptions
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import IEDriverManager, EdgeChromiumDriverManager
@@ -13,7 +15,15 @@ class SeleniumBase:
     __browser = None
     __environment = None
     __headless = None
+    __incognito = None
+    __acceptcerts = None
+    __extensions = None
+    __notifications = None
+    __insecure_content = None
+    __disable_popup = None
     __webdrivermanager = None
+    __implicitwait = None
+    __opts = None
     driver = None
     url = None
     current_working_directory = os.path.dirname(os.getcwd())
@@ -42,6 +52,14 @@ class SeleniumBase:
         SeleniumBase.__browser = SeleniumBase.__config['browser']['browser_name']
         SeleniumBase.__webdrivermanager = SeleniumBase.__config.getboolean('browser', 'webdriver_manager')
         SeleniumBase.url = SeleniumBase.__config['application']['qa_url']
+        SeleniumBase.__headless = SeleniumBase.__config.getboolean('browser-options', 'headless')
+        SeleniumBase.__incognito = SeleniumBase.__config.getboolean('browser-options', 'incognito')
+        SeleniumBase.__acceptcerts = SeleniumBase.__config.getboolean('browser-options', 'accept_cert')
+        SeleniumBase.__extensions = SeleniumBase.__config.getboolean('browser-options', 'disable_extensions')
+        SeleniumBase.__notifications = SeleniumBase.__config.getboolean('browser-options', 'disable_notifications')
+        SeleniumBase.__insecure_content = SeleniumBase.__config.getboolean('browser-options', 'allow_insecure_content')
+        SeleniumBase.__disable_popup = SeleniumBase.__config.getboolean('browser-options', 'disable_popup')
+        SeleniumBase.__implicitwait = SeleniumBase.__config['timeout']['implicit_wait']
 
     # endregion
 
@@ -73,6 +91,7 @@ class SeleniumBase:
             # Include logging
         SeleniumBase.driver.maximize_window()
         SeleniumBase.driver.delete_all_cookies()
+        SeleniumBase.driver.implicitly_wait(int(SeleniumBase.__implicitwait))
         return SeleniumBase.driver
 
     @staticmethod
@@ -83,12 +102,16 @@ class SeleniumBase:
         Returns:
             ChromeDriver instance
         """
+        SeleniumBase.__opts = webdriver.ChromeOptions()
+        # capability = DesiredCapabilities.CHROME.copy()
+        SeleniumBase.set_options(SeleniumBase.__opts)
+
         if SeleniumBase.__webdrivermanager:
-            driver = webdriver.Chrome(ChromeDriverManager().install())
+            driver = webdriver.Chrome(ChromeDriverManager().install(), options=SeleniumBase.__opts)
             return driver
         else:
             chromedrivername = "chromedriver.exe"
-            driver = webdriver.Chrome(executable_path=SeleniumBase.__webdriver_executables + chromedrivername)
+            driver = webdriver.Chrome(executable_path=SeleniumBase.__webdriver_executables + chromedrivername, options= SeleniumBase.__opts)
             return driver
 
     @staticmethod
@@ -99,19 +122,16 @@ class SeleniumBase:
             Returns:
                 FirefoxDriver instance
         """
-        driver = webdriver.Firefox(executable_path=GeckoDriverManager.install())
-        return driver
+        SeleniumBase.__opts = webdriver.FirefoxOptions()
+        SeleniumBase.set_options(SeleniumBase.__opts)
 
-    @staticmethod
-    def __ie_initialization():
-        """Initializes driver to IEDriver. Based on value in Config.INI file IEDriver Manager or
-        WebDriver binary would be used.
-
-            Returns:
-                IEDriver instance
-        """
-        driver = webdriver.ie(IEDriverManager.install())
-        return driver
+        if SeleniumBase.__webdrivermanager:
+            driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=SeleniumBase.__opts)
+            return driver
+        else:
+            geckodrivername = "geckodriver.exe"
+            driver = webdriver.Firefox(executable_path=SeleniumBase.__webdriver_executables + geckodrivername, options=SeleniumBase.__opts)
+            return driver
 
     @staticmethod
     def __edge_initialization():
@@ -119,10 +139,45 @@ class SeleniumBase:
         WebDriver binary would be used.
 
             Returns:
-                Chromedriver instance
+                Edgedriver instance
         """
-        driver = webdriver.Edge(EdgeChromiumDriverManager.install())
-        return driver
+        SeleniumBase.__opts = EdgeOptions()
+        SeleniumBase.__opts.use_chromium = True
+        SeleniumBase.set_options(SeleniumBase.__opts)
+
+        if SeleniumBase.__webdrivermanager:
+            driver = Edge(EdgeChromiumDriverManager().install(), options=SeleniumBase.__opts)
+            return driver
+        else:
+            edgedrivername = "msedgedriver.exe"
+            # driver = webdriver.Edge(executable_path=SeleniumBase.__webdriver_executables + edgedrivername)
+            driver = Edge(executable_path=SeleniumBase.__webdriver_executables + edgedrivername, options=SeleniumBase.__opts)
+            return driver
+
+    @staticmethod
+    def set_options(browser_options):
+        opts = browser_options
+        opts.headless = SeleniumBase.__headless
+        opts.set_capability("acceptInsecureCerts", SeleniumBase.__acceptcerts)
+        opts.set_capability("acceptSslCerts", True)
+        if SeleniumBase.__incognito:
+            if str(SeleniumBase.__browser).upper() == "CHROME":
+                opts.add_argument("--incognito")
+            if str(SeleniumBase.__browser).upper() == "EDGE":
+                opts.add_argument("-inprivate")
+            if str(SeleniumBase.__browser).upper() == "FIREFOX":
+                opts.add_argument("-private")
+        # if SeleniumBase.__acceptcerts:
+        #     opts.add_argument("--ignore-certificate-errors")
+        if SeleniumBase.__extensions:
+            opts.add_argument("--disable-extensions")
+        if SeleniumBase.__notifications:
+            opts.add_argument("--disable-notifications")
+        if SeleniumBase.__insecure_content:
+            opts.add_argument("--allow-running-insecure-content")
+            opts.add_argument("--ignore-certificate-errors")
+        if SeleniumBase.__disable_popup:
+            opts.add_argument("--disable-popup-blocking")
 
     @staticmethod
     def dispose():
