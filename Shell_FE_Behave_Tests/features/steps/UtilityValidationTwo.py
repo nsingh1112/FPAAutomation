@@ -2,7 +2,7 @@ import time
 
 from behave import Given, When, Then
 import SharedVariables
-from Shell_FE_Behave_Tests.PageObjects.BusinessFunctions.AcademyFunctions import AcademyFunctions
+from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.AcademyFunctions import AcademyFunctions
 from Shell_FE_Selenium_Core.Utilities.AssertionUtilities import AssertionUtilities
 from Shell_FE_Selenium_Core.Utilities.BrowserUtilities import BrowserUtilities
 from Shell_FE_Selenium_Core.Utilities.SeleniumUtilities import SeleniumUtilities

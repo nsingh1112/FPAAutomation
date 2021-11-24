@@ -2,7 +2,7 @@ import time
 
 from behave import *
 import SharedVariables
-from Shell_FE_Behave_Tests.PageObjects.BusinessFunctions.TutorialsPointFunctions import TutorialsPointFunctions
+from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.TutorialsPointFunctions import TutorialsPointFunctions
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 from Shell_FE_Selenium_Core.Utilities.AssertionUtilities import AssertionUtilities
 from Shell_FE_Selenium_Core.Utilities.BrowserUtilities import BrowserUtilities

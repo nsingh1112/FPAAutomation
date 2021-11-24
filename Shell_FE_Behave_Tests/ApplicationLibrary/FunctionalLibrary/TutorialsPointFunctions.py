@@ -1,4 +1,4 @@
-from Shell_FE_Behave_Tests.PageObjects.ObjectRepository.TutorialsPointObjects import TutorialsPointObjects
+from Shell_FE_Behave_Tests.ApplicationLibrary.ControlLibrary.TutorialsPointObjects import TutorialsPointObjects
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 from Shell_FE_Selenium_Core.Utilities.BrowserUtilities import BrowserUtilities
 from Shell_FE_Selenium_Core.Utilities.SeleniumUtilities import SeleniumUtilities
