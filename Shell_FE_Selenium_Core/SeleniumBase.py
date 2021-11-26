@@ -51,7 +51,17 @@ class SeleniumBase:
         SeleniumBase.__config = SeleniumBase.read_config()
         SeleniumBase.__browser = SeleniumBase.__config['browser']['browser_name']
         SeleniumBase.__webdrivermanager = SeleniumBase.__config.getboolean('browser', 'webdriver_manager')
-        SeleniumBase.url = SeleniumBase.__config['application']['qa_url']
+        environment = SeleniumBase.__config['application']['environment']
+        if environment == "dev":
+            SeleniumBase.url = SeleniumBase.__config['application']['dev_url']
+        elif environment == "qa":
+            SeleniumBase.url = SeleniumBase.__config['application']['qa_url']
+        elif environment == "stage":
+            SeleniumBase.url = SeleniumBase.__config['application']['stage_url']
+        elif environment == "prod":
+            SeleniumBase.url = SeleniumBase.__config['application']['prod_url']
+        else:
+            print("Invalid environment name provided in INI file. Environment: {0}.".format(environment))
         SeleniumBase.__headless = SeleniumBase.__config.getboolean('browser-options', 'headless')
         SeleniumBase.__incognito = SeleniumBase.__config.getboolean('browser-options', 'incognito')
         SeleniumBase.__acceptcerts = SeleniumBase.__config.getboolean('browser-options', 'accept_cert')

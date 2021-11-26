@@ -10,10 +10,6 @@ from Shell_FE_Selenium_Core.Utilities.BrowserUtilities import BrowserUtilities
 def before_all(context):
     SeleniumBase.read_config()
     SeleniumBase.initialize_values()
-    # allure_json_folder = os.path.dirname(os.getcwd()) + '\\Shell_FE_Behave_Tests\\TestResults\\AllureJson\\*'
-    # allure_files = glob.glob(allure_json_folder)
-    # for file in allure_files:
-    #     os.remove(file)
     SeleniumBase.browser_initialization()
 
 
