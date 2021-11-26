@@ -95,7 +95,7 @@ class BrowserUtilities:
             SeleniumBase.driver.switch_to.window(window_handle)
             if SeleniumBase.driver.title == expected_title:
                 flag = True
-                BrowserUtilities.log.info("Switched to child window with the title: {1}.".format(expected_title))
+                BrowserUtilities.log.info("Switched to child window with the title: {0}.".format(expected_title))
                 break
         if not flag:
             SeleniumBase.driver.switch_to.window(parent_window)
