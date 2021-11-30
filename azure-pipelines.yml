@@ -4,7 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 trigger:
-- SeleniumCore_Stage
+# - SeleniumCore_Stage
+- master
 
 pool:
   vmImage: ubuntu-latest
@@ -23,12 +24,19 @@ steps:
 
 - script: |
     python -m pip install --upgrade pip
-    python -m pip install --upgrade setuptools wheel
+    # python -m pip install --upgrade setuptools wheel
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
 - script: |
     python setup.py sdist bdist_wheel
     displayName: 'Artifact creation'
+
+- task: TwineAuthenticate@1
+  inputs:
+    artifactFeed: ShellFESeleniumPythonCore_Alpha
+
+-script: |
+  twine upload -r "ShellFESeleniumPythonCore_Alpha" --config.file $(PYPIRC_PATH) dist/*
 
 
