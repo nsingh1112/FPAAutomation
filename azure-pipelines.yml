@@ -30,13 +30,17 @@ steps:
 
 - script: |
     python setup.py sdist bdist_wheel
-    displayName: 'Artifact creation'
+  displayName: 'Artifact creation'
 
 - task: TwineAuthenticate@1
   inputs:
     artifactFeed: ShellFESeleniumPythonCore_Alpha
 
--script: |
+- script: |
+    pip install twine
+  displayName: 'Install Twine'
+
+- script: |
   twine upload -r "ShellFESeleniumPythonCore_Alpha" --config.file $(PYPIRC_PATH) dist/*
 
 
