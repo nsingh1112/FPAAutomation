@@ -41,4 +41,4 @@ steps:
   displayName: 'Install Twine'
 
 - script: |
-    twine upload -r "ShellFESeleniumPythonCore_Alpha" --config-file $(PYPIRC_PATH) dist/*
+    twine upload -r ShellFESeleniumPythonCore_Alpha --config-file $(PYPIRC_PATH) dist/*
