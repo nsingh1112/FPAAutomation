@@ -2,8 +2,8 @@ import setuptools
 from setuptools import setup
 from setuptools import find_packages
 
-with open('README.md') as f:
-    long_description = f.read()
+# with open('README.md') as f:
+#     long_description = f.read()
 
 setuptools.setup(
     name="Shell_FE_Selenium_Core",
@@ -11,7 +11,7 @@ setuptools.setup(
     author="Praveen Kumar Appusamy",
     author_email="praveen.kumara@shell.com",
     description="Selenium Core package to be used along with the Shell FE Behave framework for UI automation.",
-    long_description=long_description,
+    # long_description=long_description,
     long_description_content_type='text/markdown',
     license="Proprietary",
     classifiers=[
