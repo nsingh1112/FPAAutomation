@@ -29,7 +29,6 @@ steps:
   displayName: 'Install dependencies'
 
 - script: |
-#    python Shell_FE_Python_Automation/setup.py sdist bdist_wheel
     python -m build
   displayName: 'Artifact creation'
 
