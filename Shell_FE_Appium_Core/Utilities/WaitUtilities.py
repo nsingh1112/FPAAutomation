@@ -1,21 +1,24 @@
 from selenium.common.exceptions import ElementNotVisibleException, ElementNotSelectableException, NoSuchElementException
 from selenium.webdriver.support.wait import WebDriverWait
 
+from Shell_FE_Appium_Core.AppiumBase import AppiumBase
 
-class WaitUtilities:
 
-    def __init__(self, driver):
-        self.driver = driver
+class WaitUtilities():
 
-    def implicit_wait(self, timeout):
-        self.driver.implicitly_wait(timeout)
+    #def __init__(self, driver):
+        #self.driver = driver
 
-    def wait_for_element(self, locator_type, locator_value):
+    @staticmethod
+    def implicit_wait(self,timeout):
+        AppiumBase.driver.implicitly_wait(timeout)
+
+    def wait_for_element(locator_type, locator_value):
 
         locator_type = locator_type.lower()
         element = None
 
-        wait = WebDriverWait(self.driver, 25, poll_frequency=1,
+        wait = WebDriverWait(AppiumBase.driver, 25, poll_frequency=1,
                              ignored_exceptions=[ElementNotVisibleException, ElementNotSelectableException,
                                                  NoSuchElementException])
 

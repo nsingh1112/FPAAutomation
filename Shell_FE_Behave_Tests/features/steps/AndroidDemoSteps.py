@@ -7,38 +7,31 @@ from Shell_FE_Appium_Core.Utilities.WaitUtilities import WaitUtilities
 from Shell_FE_Appium_Core.Utilities.AndroidUtilities import AndroidUtlities
 from Shell_FE_Appium_Core.Utilities.AssertUtilities import AssertUtilities
 
-AppiumBase.read_config()
-AppiumBase.read_values()
-driver = AppiumBase.launch_app()
-wait_utilities = WaitUtilities(driver)
-android_utilities = AndroidUtlities(driver)
-assert_utilities = AssertUtilities(driver)
+# AppiumBase.read_config()
+# AppiumBase.read_values('nativeApp')
+# AppiumBase.startAppiumServer()
+# AppiumBase.stopAppiumServer()
+# driver = AppiumBase.launch_app()
+# wait_utilities = WaitUtilities(driver)
+# android_utilities = AndroidUtlities(driver)
+# assert_utilities = AssertUtilities(driver)
+from Shell_FE_MobilityLibrary.FunctionLibrary.ShellAndriodDemoFunctions import ShellApiDemos
 
 
 @given('I have launched the apidemos app')
 def open_views(context):
-    wait_utilities.wait_for_element('accessibility_id', 'Views')
-    android_utilities.take_Screenshot("screenshot1")
-    text = android_utilities.get_text('Views')
-    newList = ['test', 'game','Views']
-    assert_utilities.assertEquals(text,'Views')
-    assert_utilities.assertValueInList(text,newList)
-    android_utilities.click('accessibility_id', 'Views')
-    #wait_utilities.wait_for_element('text', 'Controls')
+    context.api_Demos_functions = ShellApiDemos()
+    context.api_Demos_functions.click_Views()
 
 
 @when('I test views')
 def open_views(context):
-    android_utilities.isDisplayed('text', 'Controls')
-    android_utilities.click('accessibility_id', 'Controls')
-    wait_utilities.implicit_wait(10)
+    context.api_Demos_functions.click_Controls()
 
 
 @then('I verify checkbox and radio buttons')
 def verify_check_box(context):
-    android_utilities.click('accessibility_id', '1. Light Theme')
-    wait_utilities.wait_for_element('text', 'Checkbox 1')
-    android_utilities.click('accessibility_id', 'Checkbox 1')
+    context.api_Demos_functions.click_CheckBox()
 
 
 @when('I Click on Views')

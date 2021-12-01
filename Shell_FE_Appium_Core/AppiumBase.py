@@ -2,12 +2,14 @@ import logging
 import os
 import time
 
+from appium.webdriver.appium_service import AppiumService
 from configparser import ConfigParser
 from appium import webdriver
-from appium.webdriver.appium_service import AppiumService
 
 
 class AppiumBase:
+    def __init__(self, driver):
+        self.driver = driver
     # region Class Variable Declarations
     __config = None
     __platformName = None
@@ -18,9 +20,9 @@ class AppiumBase:
     __appActivity = None
     __remoteURL = None
     driver = None
-    appiumService = AppiumService()
     current_working_directory = os.path.dirname(os.getcwd())
     configfile = current_working_directory + '\\Shell_FE_Behave_Tests\\config.ini'
+    appium_Service = AppiumService()
 
     # endregion
     @staticmethod
@@ -30,27 +32,32 @@ class AppiumBase:
         return configuration
 
     @staticmethod
-    def read_values():
+    def startAppiumServer():
+        AppiumBase.appium_Service.start()
+        print("Status of APPIUM Server :", AppiumBase.appium_Service.is_running)
+
+    @staticmethod
+    def stopAppiumServer():
+        AppiumBase.appium_Service.stop()
+
+    @staticmethod
+    def read_values(sectionValue):
         AppiumBase.__config = AppiumBase.read_config()
-        AppiumBase.__platformName = AppiumBase.__config['nativeApp']['platformName']
-        AppiumBase.__platformVersion = AppiumBase.__config['nativeApp']['platformVersion']
-        AppiumBase.__deviceName = AppiumBase.__config['nativeApp']['deviceName']
-        AppiumBase.__app = AppiumBase.__config['nativeApp']['appPath']
-        AppiumBase.__appPackage = AppiumBase.__config['nativeApp']['appPackage']
-        AppiumBase.__appActivity = AppiumBase.__config['nativeApp']['appActivity']
-        AppiumBase.__remoteURL = AppiumBase.__config['nativeApp']['remoteURL']
+        AppiumBase.__platformName = AppiumBase.__config[sectionValue]['platformName']
+        AppiumBase.__platformVersion = AppiumBase.__config[sectionValue]['platformVersion']
+        AppiumBase.__deviceName = AppiumBase.__config[sectionValue]['deviceName']
+        AppiumBase.__app = AppiumBase.__config[sectionValue]['appPath']
+        AppiumBase.__appPackage = AppiumBase.__config[sectionValue]['appPackage']
+        AppiumBase.__appActivity = AppiumBase.__config[sectionValue]['appActivity']
+        AppiumBase.__remoteURL = AppiumBase.__config[sectionValue]['remoteURL']
 
     @staticmethod
     def launch_app():
-        desired_caps = {}
-        desired_caps['platformName'] = AppiumBase.__platformName
-        desired_caps['platformVersion'] = AppiumBase.__platformVersion
-        desired_caps['deviceName'] = AppiumBase.__deviceName
-        desired_caps['app'] = AppiumBase.__app
-        desired_caps['appPackage'] = AppiumBase.__appPackage
-        desired_caps['appActivity'] = AppiumBase.__appActivity
+        desired_caps = {'platformName': AppiumBase.__platformName, 'platformVersion': AppiumBase.__platformVersion,
+                        'deviceName': AppiumBase.__deviceName, 'app': AppiumBase.__app,
+                        'appPackage': AppiumBase.__appPackage, 'appActivity': AppiumBase.__appActivity}
 
-        AppiumBase.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", desired_caps)
+        AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_caps)
         return AppiumBase.driver
 
     @staticmethod

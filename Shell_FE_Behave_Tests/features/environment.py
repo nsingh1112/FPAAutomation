@@ -7,12 +7,19 @@ import logging
 
 
 def before_all(context):
-    AppiumBase.is_App_installed()
-   # AppiumBase.read_config()
-   # AppiumBase.read_values()
+
+    #AppiumBase.startAppiumServer()
+    #AppiumBase.is_App_installed()
+    AppiumBase.read_config()
+    AppiumBase.read_values('nativeApp')
+    context.driver = AppiumBase.launch_app()
+
+
 
 
 def after_all(context):
     AppiumBase.close_driver()
+    #AppiumBase.stopAppiumServer()
+    #AppiumBase.stopAppiumServer()
 
 
