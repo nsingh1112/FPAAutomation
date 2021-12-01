@@ -19,7 +19,7 @@ setuptools.setup(
         'Programming Language :: Python :: 3.9',
         'Operating System :: OS Independent'
     ],
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(exclude=["Shell_FE_Behave_Tests"]),
     # install_requires=[
     #     'selenium',
     #     'webdriver-manager',
