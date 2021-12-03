@@ -1,10 +1,6 @@
 import time
 
 from behave import *
-from Shell_FE_Appium_Core.AppiumBase import AppiumBase
-from Shell_FE_Appium_Core.Utilities.WaitUtilities import WaitUtilities
-from Shell_FE_Appium_Core.Utilities.AndroidUtilities import AndroidUtlities
-from Shell_FE_Appium_Core.Utilities.AssertUtilities import AssertUtilities
 
 # AppiumBase.read_config()
 # AppiumBase.read_values()
@@ -14,7 +10,7 @@ from Shell_FE_Appium_Core.Utilities.AssertUtilities import AssertUtilities
 # wait_utilities = WaitUtilities(driver)
 # android_utilities = AndroidUtlities(driver)
 # assert_utilities = AssertUtilities(driver)
-from Shell_FE_MobilityLibrary.FunctionLibrary.ChromeAppDemoFunctions import HybridAppFunctions
+from Shell_FE_Behave_Tests.MobileApplicationLibrary.FunctionLibrary.ChromeAppDemoFunctions import HybridAppFunctions
 
 
 @given('I launched the mobile native chrome app')

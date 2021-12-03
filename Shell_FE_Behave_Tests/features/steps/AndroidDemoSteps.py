@@ -1,5 +1,5 @@
 from behave import *
-from Shell_FE_MobilityLibrary.FunctionLibrary.ApiDemoAppFunctions import ShellApiDemos
+from Shell_FE_Behave_Tests.MobileApplicationLibrary.FunctionLibrary.ApiDemoAppFunctions import ShellApiDemos
 
 
 @given('I have launched the apidemos app')

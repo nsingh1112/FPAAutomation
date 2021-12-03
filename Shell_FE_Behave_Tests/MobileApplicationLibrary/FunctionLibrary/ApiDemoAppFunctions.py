@@ -1,6 +1,5 @@
-from Shell_FE_Appium_Core import AppiumBase
 from Shell_FE_Appium_Core.Utilities.LoggingUtilities import LoggingUtilities
-from Shell_FE_MobilityLibrary.ControlLibrary.ApiDemoAppControls import ApiDemoAppControls
+from Shell_FE_Behave_Tests.MobileApplicationLibrary.ControlLibrary.ApiDemoAppControls import ApiDemoAppControls
 from Shell_FE_Appium_Core.Utilities.WaitUtilities import WaitUtilities
 from Shell_FE_Appium_Core.Utilities.AssertUtilities import AssertUtilities
 from Shell_FE_Appium_Core.Utilities.AndroidUtilities import AndroidUtlities

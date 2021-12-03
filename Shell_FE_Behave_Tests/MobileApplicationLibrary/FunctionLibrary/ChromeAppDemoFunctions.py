@@ -1,8 +1,6 @@
-import time
-
 from Shell_FE_Appium_Core.Utilities.AndroidUtilities import AndroidUtlities
 from Shell_FE_Appium_Core.Utilities.WaitUtilities import WaitUtilities
-from Shell_FE_MobilityLibrary.ControlLibrary.ChromeAppDemoControls import HybridAppControls
+from Shell_FE_Behave_Tests.MobileApplicationLibrary.ControlLibrary.ChromeAppDemoControls import HybridAppControls
 
 
 class HybridAppFunctions:
