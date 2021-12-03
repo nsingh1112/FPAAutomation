@@ -1,0 +1,4 @@
+Copyright (C) 2021 Shell India.
+This Python package Shell_FE_Appium_Core is permitted to be used within Shell for business purposes alone.
+Changing the source code without permission from Functional Excellence team, uploading it to any external
+sources outside Shell and usage outside of Shell is strictly prohibited.
