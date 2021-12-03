@@ -1,21 +1,5 @@
-import sys
-import time
-
 from behave import *
-from Shell_FE_Appium_Core.AppiumBase import AppiumBase
-from Shell_FE_Appium_Core.Utilities.WaitUtilities import WaitUtilities
-from Shell_FE_Appium_Core.Utilities.AndroidUtilities import AndroidUtlities
-from Shell_FE_Appium_Core.Utilities.AssertUtilities import AssertUtilities
-
-# AppiumBase.read_config()
-# AppiumBase.read_values('nativeApp')
-# AppiumBase.startAppiumServer()
-# AppiumBase.stopAppiumServer()
-# driver = AppiumBase.launch_app()
-# wait_utilities = WaitUtilities(driver)
-# android_utilities = AndroidUtlities(driver)
-# assert_utilities = AssertUtilities(driver)
-from Shell_FE_MobilityLibrary.FunctionLibrary.ShellAndriodDemoFunctions import ShellApiDemos
+from Shell_FE_MobilityLibrary.FunctionLibrary.ApiDemoAppFunctions import ShellApiDemos
 
 
 @given('I have launched the apidemos app')
