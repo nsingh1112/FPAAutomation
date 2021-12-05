@@ -1,7 +1,7 @@
 import inspect
 import logging
 import os
-from datetime import datetime
+import time
 
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 
@@ -9,7 +9,7 @@ from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 class LoggingUtilities:
     logFolder = os.path.dirname(os.getcwd()) + '\\Shell_FE_Behave_Tests\\TestResults\\Logs\\'
 
-    def logger(self, filename="logfile"+str(datetime.timestamp(datetime.now())).split(".")[1]+".log"):
+    def logger(self, filename="logfile"+str(time.strftime("%d_%m_%H_%S")).replace("_", "")+".log"):
         """Creates logger instance with predefined format for logs.
 
         :Args:

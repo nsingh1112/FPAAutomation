@@ -1,7 +1,7 @@
 import os
 
 from selenium.webdriver.common.alert import Alert
-from datetime import datetime
+import time
 
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 from Shell_FE_Selenium_Core.Utilities.LoggingUtilities import LoggingUtilities
@@ -153,14 +153,14 @@ class BrowserUtilities:
         if web_element is None:
             BrowserUtilities.log.error("Empty or invalid argument passed to the method take_screenshot_of_element(web_element)")
             raise TypeError("Empty or invalid argument passed!!")
-        filename = "Element" + str(datetime.timestamp(datetime.now())) + ".png"
+        filename = "Element" + str(time.strftime("%d_%m_%H_%S")).replace("_", "") + ".png"
         web_element.screenshot(BrowserUtilities.screenshots + filename)
         BrowserUtilities.log.info("Took screenshot and saved as {0} in Screenshots folder.".format(filename))
 
     @staticmethod
     def take_screenshot(file_name="Screenshot"):
         """Takes screenshot of the web page and saves it in the Screenshots folder under TestResults."""
-        filename = file_name + str(datetime.timestamp(datetime.now())) + ".png"
+        filename = file_name + str(time.strftime("%d_%m_%H_%S")).replace("_", "") + ".png"
         SeleniumBase.driver.save_screenshot(BrowserUtilities.screenshots + filename)
         BrowserUtilities.log.info("Took screenshot and saved as {0} in Screenshots folder.".format(filename))
 

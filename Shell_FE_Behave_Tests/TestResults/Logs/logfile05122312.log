@@ -1,0 +1,4 @@
+2021-12-05 23:02:42,928 :INFO :BrowserUtilities :Navigated to the URL: https://hub.shell.com/.
+2021-12-05 23:02:53,522 :ERROR :WaitUtilities :Element ('css selector', '#searchbox1') is not visible within the specified time. Exception: TimeoutException
+2021-12-05 23:03:04,051 :ERROR :WaitUtilities :Element ('css selector', '#searchbox1') is not clickable. Unable to click / find the element within the specified time. Exception: TimeoutException
+2021-12-05 23:03:15,112 :INFO :BrowserUtilities :Took screenshot and saved as Test_Shell_Hub_page05122314.png in Screenshots folder.
