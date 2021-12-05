@@ -1,3 +1,7 @@
+from appium.webdriver.common.mobileby import MobileBy
+#from selenium.webdriver.common.by import By
+
+
 class HybridAppControls:
 
     accept_Terms = "com.android.chrome:id/terms_accept" #id
@@ -11,8 +15,12 @@ class HybridAppControls:
     search_By_name = "q"
     search_by_id = "REsRA"
 
+
+
     id = "id"
     xpath = "xpath"
     name = "name"
+
+
 
 

@@ -32,24 +32,24 @@ class AppiumBase:
         return configuration
 
     @staticmethod
-    def startAppiumServer():
+    def start_appium_server():
         AppiumBase.appium_Service.start()
         print("Status of APPIUM Server :", AppiumBase.appium_Service.is_running)
 
     @staticmethod
-    def stopAppiumServer():
+    def stop_appium_server():
         AppiumBase.appium_Service.stop()
 
     @staticmethod
-    def read_values(sectionValue):
+    def read_values(section_value):
         AppiumBase.__config = AppiumBase.read_config()
-        AppiumBase.__platformName = AppiumBase.__config[sectionValue]['platformName']
-        AppiumBase.__platformVersion = AppiumBase.__config[sectionValue]['platformVersion']
-        AppiumBase.__deviceName = AppiumBase.__config[sectionValue]['deviceName']
-        AppiumBase.__app = AppiumBase.__config[sectionValue]['appPath']
-        AppiumBase.__appPackage = AppiumBase.__config[sectionValue]['appPackage']
-        AppiumBase.__appActivity = AppiumBase.__config[sectionValue]['appActivity']
-        AppiumBase.__remoteURL = AppiumBase.__config[sectionValue]['remoteURL']
+        AppiumBase.__platformName = AppiumBase.__config[section_value]['platformName']
+        AppiumBase.__platformVersion = AppiumBase.__config[section_value]['platformVersion']
+        AppiumBase.__deviceName = AppiumBase.__config[section_value]['deviceName']
+        AppiumBase.__app = AppiumBase.__config[section_value]['appPath']
+        AppiumBase.__appPackage = AppiumBase.__config[section_value]['appPackage']
+        AppiumBase.__appActivity = AppiumBase.__config[section_value]['appActivity']
+        AppiumBase.__remoteURL = AppiumBase.__config[section_value]['remoteURL']
 
     @staticmethod
     def launch_app():

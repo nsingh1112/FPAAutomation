@@ -4,15 +4,13 @@ from selenium.webdriver.support.wait import WebDriverWait
 from Shell_FE_Appium_Core.AppiumBase import AppiumBase
 
 
-class WaitUtilities():
-
-    #def __init__(self, driver):
-        #self.driver = driver
+class WaitUtilities:
 
     @staticmethod
-    def implicit_wait(self,timeout):
+    def implicit_wait(timeout):
         AppiumBase.driver.implicitly_wait(timeout)
 
+    @staticmethod
     def wait_for_element(locator_type, locator_value):
 
         locator_type = locator_type.lower()

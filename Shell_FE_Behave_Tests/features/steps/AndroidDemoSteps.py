@@ -5,17 +5,17 @@ from Shell_FE_Behave_Tests.MobileApplicationLibrary.FunctionLibrary.ApiDemoAppFu
 @given('I have launched the apidemos app')
 def open_views(context):
     context.api_Demos_functions = ShellApiDemos()
-    context.api_Demos_functions.click_Views()
+    context.api_Demos_functions.click_views()
 
 
 @when('I test views')
 def open_views(context):
-    context.api_Demos_functions.click_Controls()
+    context.api_Demos_functions.click_controls()
 
 
 @then('I verify checkbox and radio buttons')
 def verify_check_box(context):
-    context.api_Demos_functions.click_CheckBox()
+    context.api_Demos_functions.click_checkbox()
 
 
 @when('I Click on Views')

@@ -1,7 +1,7 @@
 from Shell_FE_Appium_Core.AppiumBase import AppiumBase
 from allure_commons.types import AttachmentType
 import allure
-from Shell_FE_Appium_Core.Utilities import AndroidUtilities
+from Shell_FE_Appium_Core.Utilities.AndroidUtilities import AndroidUtilities
 
 
 def before_all(context):
