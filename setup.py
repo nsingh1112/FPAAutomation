@@ -20,11 +20,11 @@ setuptools.setup(
         'Operating System :: OS Independent'
     ],
     packages=setuptools.find_packages(exclude=["Shell_FE_Behave_Tests"]),
-    # install_requires=[
-    #     'selenium',
-    #     'webdriver-manager',
-    #     'msedge-selenium-tools',
-    #     'openpyxl'
-    # ],
+    install_requires=[
+        'selenium',
+        'webdriver-manager',
+        'msedge-selenium-tools',
+        'openpyxl'
+    ],
     python_requires='>=3.9'
 )
