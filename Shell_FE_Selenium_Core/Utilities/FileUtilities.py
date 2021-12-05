@@ -1,3 +1,4 @@
+import csv
 import os
 
 import openpyxl
@@ -69,7 +70,7 @@ class FileUtilities:
     @staticmethod
     def write_into_json(dict_name, file_name):
         """Converts the dictionary into a Json file. If no file available with the name then
-        new file will be created else the file would be overwritten. """
+        new file will be created else the file would be overwritten."""
         try:
             with open(FileUtilities.test_data + file_name, 'w') as json_file:
                 json.dump(dict_name, json_file, indent=2)
@@ -142,3 +143,47 @@ class FileUtilities:
         work_sheet[cell_name].value = value
         work_book.save(FileUtilities.test_data + file_name)
         FileUtilities.log.info("Wrote the value {0} into the file {1}".format(value, file_name))
+
+    @staticmethod
+    def read_csv_by_row_name(file_name, row_header, row_name):
+        """Reads the contents of a csv file and retrieves values as dictionary based on row name"""
+        dictionary_csv = dict()
+        try:
+            with open(FileUtilities.test_data + file_name, 'r') as csv_file:
+                csv_json = csv.DictReader(csv_file)
+                row_name_available = False
+                for row in csv_json:
+                    if row[row_header] == row_name:
+                        dictionary_csv = row
+                        row_name_available = True
+                        FileUtilities.log.info(
+                            "The data from csv file {0} has been converted into dictionary.".format(file_name))
+                        break
+                if row_name_available is True:
+                    del dictionary_csv[row_header]
+                if row_name_available is False:
+                    FileUtilities.log.warning(
+                        "The row with row name {0} is not present in the csv file {1}.".format(row_name, file_name))
+            return dictionary_csv
+        except FileNotFoundError as f_err:
+            FileUtilities.log.error("Unable to locate CSV file {0}. Exception {1}".format(file_name, f_err))
+        except Exception as err:
+            FileUtilities.log.error("Unable to parse CSV file {0}. Exception {1}".format(file_name, err))
+
+    # @staticmethod
+    # def write_into_new_csv_file(dict_name, file_name):
+    #     """Writes data from dictionary into a new Excel based on the sheet name and row name.
+    #     If file exists, the file contents would be overwritten.
+    #     """
+    #     try:
+    #         with open(FileUtilities.test_data + file_name, 'w') as csv_file:
+    #             csv_writer = csv.DictWriter(csv_file, dict_name.keys())
+    #             csv_writer.writeheader()
+    #             csv_writer.writerow(dict_name)
+    #
+    #     except TypeError as terr:
+    #         FileUtilities.log.error(
+    #             "Key that does not belong to a basic (i.e.) int / float / string / bool / None type is present. Exception: {0}".format(
+    #                 terr))
+    #     except Exception as err:
+    #         FileUtilities.log.error("Unable to write into json file. Exception: {0}.".format(err))
