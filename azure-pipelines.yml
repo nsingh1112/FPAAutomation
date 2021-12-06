@@ -37,7 +37,7 @@ steps:
   inputs:
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/TESTS-*.xml'
-    searchFolder: '$(System.DefaultWorkingDirectory)//XMLReports'
+    # searchFolder: '$(System.DefaultWorkingDirectory)//XMLReports'
     testRunTitle: 'Behave tests'
 
 - script: |
