@@ -29,7 +29,7 @@ steps:
   displayName: 'Install dependencies'
 
 - script: |
-    # cd Shell_FE_Behave_Tests
+    cd Shell_FE_Behave_Tests
     behave --no-capture
   displayName: 'Run Behave tests'
 
