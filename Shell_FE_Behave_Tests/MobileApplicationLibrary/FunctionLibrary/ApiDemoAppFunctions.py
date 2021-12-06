@@ -15,18 +15,17 @@ class ShellApiDemos:
 
     def click_views(self):
         WaitUtilities.wait_for_element(self.apiDemosControls.accessibility, self.apiDemosControls.views)
-        text = AndroidUtilities.get_text(self.apiDemosControls.views)
+        text = AndroidUtilities.get_text(self.apiDemosControls.get_view_tab())
         AssertUtilities.assert_equals(text, self.apiDemosControls.views)
-        AndroidUtilities.click_by_mobileBy(self.apiDemosControls.open_view_tab())
-        #AndroidUtilities.click(self.apiDemosControls.accessibility, self.apiDemosControls.views)
-        AndroidUtilities.take_screenshot('Test')
+        AndroidUtilities.click_element(self.apiDemosControls.get_view_tab())
+        AndroidUtilities.take_screenshot('Test_confirm')
         ShellApiDemos.log_file.info("Element clicked")
 
     def click_controls(self):
-        AndroidUtilities.is_element_displayed(self.apiDemosControls.accessibility, self.apiDemosControls.controls)
-        AndroidUtilities.click(self.apiDemosControls.accessibility, self.apiDemosControls.controls)
+        AndroidUtilities.is_element_displayed(self.apiDemosControls.get_controls_view())
+        AndroidUtilities.click_element(self.apiDemosControls.get_controls_view())
 
     def click_checkbox(self):
-        AndroidUtilities.click(self.apiDemosControls.accessibility, self.apiDemosControls.light_Theme)
-        WaitUtilities.wait_for_element(self.apiDemosControls.accessibility, self.apiDemosControls.check_Box)
-        AndroidUtilities.click(self.apiDemosControls.accessibility, self.apiDemosControls.check_Box)
+        AndroidUtilities.click_element(self.apiDemosControls.get_light_theme())
+        WaitUtilities.wait_for_element(self.apiDemosControls.accessibility,self.apiDemosControls.check_Box)
+        AndroidUtilities.click_element(self.apiDemosControls.get_checkbox())
