@@ -33,6 +33,13 @@ steps:
     behave --no-capture --junit --format pretty --junit-directory TestResults/XMLReports
   displayName: 'Run Behave Tests'
 
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/TESTS-*.xml'
+    searchFolder: '$(System.DefaultWorkingDirectory)//XMLReports'
+    testRunTitle: 'Behave tests'
+
 - script: |
     python -m build
   displayName: 'Artifact creation'
