@@ -42,7 +42,6 @@ class SeleniumBase:
         """
         configuration = ConfigParser()
         configuration.read(SeleniumBase.configfile)
-        print("READ CONFIG DONE")
         return configuration
 
     @staticmethod
@@ -50,8 +49,6 @@ class SeleniumBase:
         """Assigns respective values to class variables from Config.INI file.
         """
         SeleniumBase.__config = SeleniumBase.read_config()
-        print("READ CONFIG AND ASSIGNED TO CONFIG VARIABLE.")
-        print("BROWSER NAME: " + SeleniumBase.__config['browser']['browser_name'])
         SeleniumBase.__browser = SeleniumBase.__config['browser']['browser_name']
         SeleniumBase.__webdrivermanager = SeleniumBase.__config.getboolean('browser', 'webdriver_manager')
         environment = SeleniumBase.__config['application']['environment']

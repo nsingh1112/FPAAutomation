@@ -30,7 +30,7 @@ steps:
 
 - script: |
     cd Shell_FE_Behave_Tests
-    behave --no-capture
+    behave --no-capture --junit --format pretty --junit-directory TestResults/XMLReports
   displayName: 'Run Behave Tests'
 
 - script: |
