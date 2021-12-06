@@ -49,8 +49,8 @@ class SeleniumBase:
         """Assigns respective values to class variables from Config.INI file.
         """
         SeleniumBase.__config = SeleniumBase.read_config()
-        SeleniumBase.__browser = SeleniumBase.__config['browsern']['browser_name']
-        SeleniumBase.__webdrivermanager = SeleniumBase.__config.getboolean('browsern', 'webdriver_manager')
+        # SeleniumBase.__browser = SeleniumBase.__config['browser']['browser_name']
+        # SeleniumBase.__webdrivermanager = SeleniumBase.__config.getboolean('browser', 'webdriver_manager')
         environment = SeleniumBase.__config['application']['environment']
         if environment == "dev":
             SeleniumBase.url = SeleniumBase.__config['application']['dev_url']
