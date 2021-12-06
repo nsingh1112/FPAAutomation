@@ -28,9 +28,12 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-- script: |
-    cd Shell_FE_Behave_Tests
-    behave --no-capture
+# - script: |
+- task: CmdLine@2
+  inputs:
+    script: 'behave --no-capture'
+    workingDirectory: 'Shell_FE_Behave_Tests'
+    # behave --no-capture
   displayName: 'Run Behave tests'
 
 - script: |
