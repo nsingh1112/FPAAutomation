@@ -8,8 +8,7 @@ from appium import webdriver
 
 
 class AppiumBase:
-    def __init__(self, driver):
-        self.driver = driver
+
     # region Class Variable Declarations
     __config = None
     __platformName = None

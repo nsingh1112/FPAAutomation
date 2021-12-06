@@ -1,5 +1,6 @@
 from selenium.common.exceptions import ElementNotVisibleException, ElementNotSelectableException, NoSuchElementException
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 from Shell_FE_Appium_Core.AppiumBase import AppiumBase
 
@@ -9,6 +10,12 @@ class WaitUtilities:
     @staticmethod
     def implicit_wait(timeout):
         AppiumBase.driver.implicitly_wait(timeout)
+
+    # @staticmethod
+    # def wait_for_element(time):
+    #     wait = WebDriverWait(AppiumBase.driver, 20)
+    #     currently_waiting_for = wait.until(
+    #         EC.element_to_be_clickable((By.XPATH, '//UIAApplication[1]/UIAWindow[1]/UIAButton[@text="example text"]')))
 
     @staticmethod
     def wait_for_element(locator_type, locator_value):
