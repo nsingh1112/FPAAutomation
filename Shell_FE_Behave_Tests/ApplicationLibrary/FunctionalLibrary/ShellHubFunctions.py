@@ -14,6 +14,7 @@ class ShellHubFunctions:
         BrowserUtilities.navigate_to_url(SeleniumBase.url)
 
     def validate_url_equality(self, url):
+        BrowserUtilities.refresh_page()
         WaitUtilities.wait_for_url_to_match_value(url)
         return BrowserUtilities.get_current_url()
 

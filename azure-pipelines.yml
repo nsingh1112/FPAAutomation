@@ -25,14 +25,14 @@ steps:
 - script: |
     python -m pip install --upgrade pip
     python -m pip install --upgrade build setuptools wheel
-#    pip install -r requirements.txt
+    pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-#- script: |
-#    cd Shell_FE_Behave_Tests
-#    behave --no-capture --junit --format pretty --junit-directory TestResults/XMLReports
-#  displayName: 'Run Behave Tests'
-#
+- script: |
+    cd Shell_FE_Behave_Tests
+    behave --no-capture --junit --format pretty --junit-directory TestResults/XMLReports
+  displayName: 'Run Behave Tests'
+
 #- task: PublishTestResults@2
 #  inputs:
 #    testResultsFormat: 'JUnit'
