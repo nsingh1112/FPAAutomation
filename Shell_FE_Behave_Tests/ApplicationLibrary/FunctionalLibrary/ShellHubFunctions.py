@@ -1,3 +1,5 @@
+import time
+
 from Shell_FE_Behave_Tests.ApplicationLibrary.ControlLibrary.ShellHubControls import ShellHubControls
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 from Shell_FE_Selenium_Core.Utilities.BrowserUtilities import BrowserUtilities
@@ -19,6 +21,8 @@ class ShellHubFunctions:
         return BrowserUtilities.get_current_url()
 
     def search_value(self, value):
+        BrowserUtilities.refresh_page()
+        time.sleep(5)
         WaitUtilities.wait_for_element_to_be_visible(self.shellHubControls.search_box)
         WaitUtilities.wait_for_element_to_be_clickable(self.shellHubControls.search_box)
         SeleniumUtilities.send_text(self.shellHubControls.get_search_box(), value)
