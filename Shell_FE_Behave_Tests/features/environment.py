@@ -40,7 +40,7 @@ def after_step(context, step):
 def after_scenario(context, scenario):
     if scenario.status == "failed":
         # For UI automation
-        if "Web" in context.feature.tags:
+        if "web" in context.feature.tags:
             allure.attach(SeleniumBase.driver.get_screenshot_as_png(), name="screenshot",
                           attachment_type=AttachmentType.PNG)
         # For Mobile automation
