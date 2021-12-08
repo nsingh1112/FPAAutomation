@@ -122,9 +122,12 @@ class SeleniumBase:
             driver = webdriver.Chrome(ChromeDriverManager().install(), options=SeleniumBase.__opts)
             return driver
         else:
-            chromedrivername = "chromedriver.exe"
-            driver = webdriver.Chrome(executable_path=SeleniumBase.__webdriver_executables + chromedrivername, options= SeleniumBase.__opts)
-            return driver
+            try:
+                chromedrivername = "chromedriver.exe"
+                driver = webdriver.Chrome(executable_path=SeleniumBase.__webdriver_executables + chromedrivername, options= SeleniumBase.__opts)
+                return driver
+            except Exception as err:
+                raise Exception("Chrome driver binary with the name {0} is not present in the folder WebDriverExecutables.".format(chromedrivername))
 
     @staticmethod
     def __firefox_initialization():
@@ -141,9 +144,12 @@ class SeleniumBase:
             driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=SeleniumBase.__opts)
             return driver
         else:
-            geckodrivername = "geckodriver.exe"
-            driver = webdriver.Firefox(executable_path=SeleniumBase.__webdriver_executables + geckodrivername, options=SeleniumBase.__opts)
-            return driver
+            try:
+                geckodrivername = "geckodriver.exe"
+                driver = webdriver.Firefox(executable_path=SeleniumBase.__webdriver_executables + geckodrivername, options=SeleniumBase.__opts)
+                return driver
+            except Exception as err:
+                raise Exception("Gecko driver binary with the name {0} is not present in the folder WebDriverExecutables.".format(geckodrivername))
 
     @staticmethod
     def __edge_initialization():
@@ -161,10 +167,13 @@ class SeleniumBase:
             driver = Edge(EdgeChromiumDriverManager().install(), options=SeleniumBase.__opts)
             return driver
         else:
-            edgedrivername = "msedgedriver.exe"
-            # driver = webdriver.Edge(executable_path=SeleniumBase.__webdriver_executables + edgedrivername)
-            driver = Edge(executable_path=SeleniumBase.__webdriver_executables + edgedrivername, options=SeleniumBase.__opts)
-            return driver
+            try:
+                edgedrivername = "msedgedriver.exe"
+                # driver = webdriver.Edge(executable_path=SeleniumBase.__webdriver_executables + edgedrivername)
+                driver = Edge(executable_path=SeleniumBase.__webdriver_executables + edgedrivername, options=SeleniumBase.__opts)
+                return driver
+            except Exception as err:
+                raise Exception("Edge driver binary with the name {0} is not present in the folder WebDriverExecutables.".format(edgedrivername))
 
     @staticmethod
     def __safari_initialization():
