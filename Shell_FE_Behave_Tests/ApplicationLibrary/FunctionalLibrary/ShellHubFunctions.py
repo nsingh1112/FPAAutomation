@@ -18,6 +18,7 @@ class ShellHubFunctions:
         return BrowserUtilities.get_current_url()
 
     def search_value(self, value):
+        BrowserUtilities.refresh_page()
         WaitUtilities.wait_for_element_to_be_visible(self.shellHubControls.search_box)
         WaitUtilities.wait_for_element_to_be_clickable(self.shellHubControls.search_box)
         SeleniumUtilities.send_text(self.shellHubControls.get_search_box(), value)
@@ -52,6 +53,6 @@ class ShellHubFunctions:
         SeleniumUtilities.click_element_by_actions(self.shellHubControls.get_log_out())
 
     def check_select_account(self):
-        WaitUtilities.wait_for_element_to_be_visible(self.shellHubControls.pick_account, 20)
+        WaitUtilities.wait_for_element_to_be_visible(self.shellHubControls.pick_account, 30)
         is_displayed = SeleniumUtilities.is_element_displayed(self.shellHubControls.get_pick_account())
         return is_displayed
