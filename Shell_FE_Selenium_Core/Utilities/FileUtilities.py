@@ -169,21 +169,3 @@ class FileUtilities:
             FileUtilities.log.error("Unable to locate CSV file {0}. Exception {1}".format(file_name, f_err))
         except Exception as err:
             FileUtilities.log.error("Unable to parse CSV file {0}. Exception {1}".format(file_name, err))
-
-    # @staticmethod
-    # def write_into_new_csv_file(dict_name, file_name):
-    #     """Writes data from dictionary into a new Excel based on the sheet name and row name.
-    #     If file exists, the file contents would be overwritten.
-    #     """
-    #     try:
-    #         with open(FileUtilities.test_data + file_name, 'w') as csv_file:
-    #             csv_writer = csv.DictWriter(csv_file, dict_name.keys())
-    #             csv_writer.writeheader()
-    #             csv_writer.writerow(dict_name)
-    #
-    #     except TypeError as terr:
-    #         FileUtilities.log.error(
-    #             "Key that does not belong to a basic (i.e.) int / float / string / bool / None type is present. Exception: {0}".format(
-    #                 terr))
-    #     except Exception as err:
-    #         FileUtilities.log.error("Unable to write into json file. Exception: {0}.".format(err))
