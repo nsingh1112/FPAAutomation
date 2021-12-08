@@ -95,6 +95,8 @@ class SeleniumBase:
             SeleniumBase.driver = SeleniumBase.__ie_initialization()
         elif browsername == "EDGE":
             SeleniumBase.driver = SeleniumBase.__edge_initialization()
+        elif browsername == "SAFARI":
+            SeleniumBase.driver = SeleniumBase.__safari_initialization()
         else:
             print("Invalid browser!!")
             raise Exception("Invalid Browser name passed. Aborting the UI tests!!")
@@ -163,6 +165,15 @@ class SeleniumBase:
             # driver = webdriver.Edge(executable_path=SeleniumBase.__webdriver_executables + edgedrivername)
             driver = Edge(executable_path=SeleniumBase.__webdriver_executables + edgedrivername, options=SeleniumBase.__opts)
             return driver
+
+    @staticmethod
+    def __safari_initialization():
+        """Initializes driver to Safari driver.
+            Returns:
+                  Safari driver instance
+        """
+        driver = webdriver.Safari()
+        return driver
 
     @staticmethod
     def set_options(browser_options):
