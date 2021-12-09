@@ -14,18 +14,36 @@ class ShellApiDemos:
         self.apiDemosControls = ApiDemoAppControls(AppiumBase.driver)
 
     def click_views(self):
-        WaitUtilities.wait_for_element(self.apiDemosControls.accessibility, self.apiDemosControls.views)
+        WaitUtilities.wait_element_to_be_visible(self.apiDemosControls.view_tab)
         text = AndroidUtilities.get_text(self.apiDemosControls.get_view_tab())
         AssertUtilities.assert_equals(text, self.apiDemosControls.views)
-        AndroidUtilities.click_element(self.apiDemosControls.get_view_tab())
+        AndroidUtilities.tap_element(self.apiDemosControls.get_view_tab())
+        # AndroidUtilities.click_element(self.apiDemosControls.get_view_tab())
         AndroidUtilities.take_screenshot('Test_confirm')
         ShellApiDemos.log_file.info("Element clicked")
 
     def click_controls(self):
+        WaitUtilities.wait_for_element_using_scroll_view("Controls")
+        WaitUtilities.wait_for_element_to_be_clickable(self.apiDemosControls.control_tab)
         AndroidUtilities.is_element_displayed(self.apiDemosControls.get_controls_view())
         AndroidUtilities.click_element(self.apiDemosControls.get_controls_view())
 
     def click_checkbox(self):
+        WaitUtilities.wait_element_to_be_visible(self.apiDemosControls.light_theme_tab)
         AndroidUtilities.click_element(self.apiDemosControls.get_light_theme())
-        WaitUtilities.wait_for_element(self.apiDemosControls.accessibility,self.apiDemosControls.check_Box)
+        WaitUtilities.wait_for_value_to_be_present(self.apiDemosControls.check_box, "Checkbox 1")
         AndroidUtilities.click_element(self.apiDemosControls.get_checkbox())
+
+    def check_back_button(self):
+        AndroidUtilities.click_back_button()
+        WaitUtilities.wait_element_to_be_visible(self.apiDemosControls.light_theme_tab)
+        AndroidUtilities.click_back_button()
+        WaitUtilities.wait_element_to_be_visible(self.apiDemosControls.control_tab)
+
+    def check_scroll(self):
+        # WaitUtilities.wait_for_element_using_scroll_view("TextSwitcher")
+        AndroidUtilities.scroll_to_text("TextSwitcher")
+
+    def check_tap(self):
+        WaitUtilities.wait_element_to_be_visible(self.apiDemosControls.next_btn)
+        AndroidUtilities.tap_element(self.apiDemosControls.get_next_btn())

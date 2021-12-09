@@ -1,18 +1,18 @@
 import os
 import sys
 
+sys.path.insert(0, os.path.dirname(os.getcwd()))
 from Shell_FE_Appium_Core.AppiumBase import AppiumBase
 from allure_commons.types import AttachmentType
 import allure
 from Shell_FE_Appium_Core.Utilities.AndroidUtilities import AndroidUtilities
 
-sys.path.insert(0, os.path.dirname(os.getcwd()))
 
 def before_all(context):
     # AppiumBase.startAppiumServer()
     # AppiumBase.is_App_installed()
     AppiumBase.read_config()
-    AppiumBase.read_values('HybridApp')
+    AppiumBase.read_values('nativeApp')
     context.driver = AppiumBase.launch_app()
 
 

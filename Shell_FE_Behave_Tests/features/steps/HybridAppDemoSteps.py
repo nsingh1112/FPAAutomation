@@ -30,10 +30,11 @@ def switching_view(context):
 
 @then('I replace the search text')
 def replace_text(context):
-    # context.feature.hybridApp_demo.remove_text()
-    # time.sleep(10)
-    # context.feature.hybridApp_demo.replace_value("Appium python Testing")
-    # time.sleep(10)
+    context.feature.hybridApp_demo.remove_text()
+    time.sleep(10)
+    context.feature.hybridApp_demo.replace_value("Appium python Testing")
+    time.sleep(10)
     context.feature.hybridApp_demo.switching_view("NATIVE_APP")
+    context.feature.hybridApp_demo.higlight_view()
     context.feature.hybridApp_demo.click_search_url()
     context.feature.hybridApp_demo.send_value("New Test automation Tool")

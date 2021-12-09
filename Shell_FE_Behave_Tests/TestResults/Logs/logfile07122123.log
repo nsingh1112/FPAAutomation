@@ -1,0 +1,10 @@
+2021-12-07 21:12:36,804 :INFO :AndroidUtilities :Clicked on the element.
+2021-12-07 21:12:42,971 :INFO :AndroidUtilities :Clicked on the element.
+2021-12-07 21:12:43,087 :INFO :AndroidUtilities :Clicked on the element.
+2021-12-07 21:12:45,612 :INFO :AndroidUtilities :Send text Python Automation Testing to the element.
+2021-12-07 21:12:46,733 :INFO :AndroidUtilities :key has been pressed
+2021-12-07 21:12:46,745 :INFO :AndroidUtilities :Current context of the is NATIVE_APP.
+2021-12-07 21:12:50,089 :INFO :AndroidUtilities :Current context of the is WEBVIEW_chrome.
+2021-12-07 21:12:52,579 :INFO :AndroidUtilities :Clicked on the element.
+2021-12-07 21:12:52,720 :INFO :AndroidUtilities :Send text New Test automation Tool to the element.
+2021-12-07 21:12:54,139 :INFO :AndroidUtilities :key has been pressed

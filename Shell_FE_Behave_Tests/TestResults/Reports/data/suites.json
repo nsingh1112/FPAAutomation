@@ -2,72 +2,95 @@
   "uid" : "98d3104e051c652961429bf95fa0b5d6",
   "name" : "suites",
   "children" : [ {
-    "name" : "Validate the working of methods related to text boxes",
-    "uid" : "9bb4a0909385d0a7",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "failed",
-    "time" : {
-      "start" : 1637230943561,
-      "stop" : 1637230947811,
-      "duration" : 4250
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ ]
-  }, {
-    "name" : "Validate the working of methods related to Radio buttons, checkboxes and dropdowns",
-    "uid" : "ce48c2864cf929c1",
+    "name" : "Test light theme controls in views",
+    "uid" : "3d4e7332a61f58d2",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1637230947814,
-      "stop" : 1637230962292,
-      "duration" : 14478
+      "start" : 1638957822068,
+      "stop" : 1638957840594,
+      "duration" : 18526
     },
     "flaky" : false,
     "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
     "parameters" : [ ]
   }, {
-    "name" : "Validate the working of Browser Utilities",
-    "uid" : "f89617fbebe5e4fe",
+    "name" : "Test Popups",
+    "uid" : "e25a3b647f54176f",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1637230962297,
-      "stop" : 1637230981690,
-      "duration" : 19393
+      "start" : 1638957840596,
+      "stop" : 1638957840598,
+      "duration" : 2
     },
     "flaky" : false,
     "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
     "parameters" : [ ]
   }, {
-    "name" : "Validate child window, alert and frame handling",
-    "uid" : "3f1c52b3b1168637",
+    "name" : "Test Lists and ExpandableLists",
+    "uid" : "de842b16a88d82f2",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1637230981694,
-      "stop" : 1637231022298,
-      "duration" : 40604
+      "start" : 1638957840600,
+      "stop" : 1638957840603,
+      "duration" : 3
     },
     "flaky" : false,
     "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Test Drag and Drop",
+    "uid" : "2db83a5f1358df59",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1638957840605,
+      "stop" : 1638957840607,
+      "duration" : 2
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Test Alerts",
+    "uid" : "40fe9e87a9e4dbc6",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1638957840609,
+      "stop" : 1638957840611,
+      "duration" : 2
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Test Date Widgets",
+    "uid" : "e43c0d530c4234d7",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1638957840613,
+      "stop" : 1638957840616,
+      "duration" : 3
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Test Gallery",
+    "uid" : "34e0492ba0edb186",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1638957840618,
+      "stop" : 1638957840620,
+      "duration" : 2
+    },
+    "flaky" : false,
+    "newFailed" : false,
     "parameters" : [ ]
   } ]
 }

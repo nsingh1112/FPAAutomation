@@ -1,0 +1,6 @@
+2021-12-07 23:54:22,354 :INFO :AndroidUtilities :Clicked on the element.
+2021-12-07 23:54:25,429 :INFO :AndroidUtilities :Took screenshot and saved as Test_confirm_07122322.png in screenshots folder.
+2021-12-07 23:54:25,429 :INFO :ShellApiDemos :Element clicked
+2021-12-07 23:54:25,570 :INFO :AndroidUtilities :Element displayed Successfully
+2021-12-07 23:54:26,397 :INFO :AndroidUtilities :Clicked on the element.
+2021-12-07 23:54:31,151 :INFO :AndroidUtilities :Took screenshot and saved as Test_light_theme_controls_in_views_07122328.png in screenshots folder.

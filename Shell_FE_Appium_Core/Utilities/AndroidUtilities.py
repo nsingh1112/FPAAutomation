@@ -2,6 +2,7 @@ import os
 import time
 
 from appium.webdriver import webelement
+from appium.webdriver.common.touch_action import TouchAction
 from selenium.common.exceptions import ElementNotVisibleException, ElementNotSelectableException, NoSuchElementException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
@@ -12,6 +13,7 @@ from Shell_FE_Appium_Core.Utilities.WaitUtilities import WaitUtilities
 
 
 class AndroidUtilities:
+    """AndroidUtilities class contains reusable methods for common Android functions used."""
     current_working_directory = os.path.dirname(os.getcwd())
     screenshots = current_working_directory + "\\Shell_FE_Behave_Tests\\TestResults\\Screenshots\\"
     logobj = LoggingUtilities()
@@ -56,6 +58,15 @@ class AndroidUtilities:
             raise TypeError("Empty or invalid element passed!!")
         element.clear()
         AndroidUtilities.log.info("Cleared the field")
+    @staticmethod
+    def tap_element(element,count=1):
+        """Tap on the element
+        :args:
+             - element - Locator of the element to be tapped
+             -count:optional - number of times the element has to be tapped
+        """
+        actions = TouchAction(AppiumBase.driver)
+        actions.tap(element,count).perform()
 
     @staticmethod
     def is_element_displayed(element):
@@ -168,13 +179,39 @@ class AndroidUtilities:
 
     @staticmethod
     def press_keycode(key_value):
-        """Press the mobil key for the corresponding value
+        """Press the mobile key for the corresponding value
            :args:
                -key_value - Pass the integer value to be pressed
         """
         element = AppiumBase.driver.press_keycode(key_value)
         AndroidUtilities.log.info("key has been pressed")
         return element
+
+    @staticmethod
+    def scroll_to_text(text_of_the_element):
+        """Scroll to the element using text
+           :args:
+                - text_of_the_element - text of the element to be scrolled
+        """
+        AppiumBase.driver.find_element_by_android_uiautomator(
+            'new UiScrollable(new UiSelector().instance(0)).scrollIntoView(text("{0}"))'.format(text_of_the_element)).click()
+
+    @staticmethod
+    def swipe(start_x, start_y, end_x, end_y, duration=None):
+        """Swipe up,down,right,left in the application as per the co-ordinates
+           :args:
+               - start_x - x-coordinate at which to start
+               - start_y - y-coordinate at which to start
+               - end_x - x-coordinate at which to stop
+               - end_y - y-coordinate at which to stop
+               - duration - (optional) time to take the swipe, in ms.
+        """
+        AppiumBase.driver.swipe(start_x, start_y, end_x, end_y, duration)
+
+    @staticmethod
+    def click_back_button():
+        """Press the mobile application back button"""
+        AppiumBase.driver.back()
 
     @staticmethod
     def switch_context(switch_view):
@@ -185,10 +222,39 @@ class AndroidUtilities:
         AppiumBase.driver.switch_to.context(switch_view)
 
     @staticmethod
-    def switch_context_in_list(context_value):
-        """Switches to the context in list"""
-        contexts = AndroidUtilities.get_app_contexts()
-        AppiumBase.driver.switch_to.context[context_value]
-        # for context in contexts:
-        #     AppiumBase.driver.switch_to.context[context]
+    def highlight_field(element):
+        """Helps to highlight the field before the any actions
+           :args:
+                -element - pass the element to get highlighted
+        """
+        if element is None:
+            AndroidUtilities.log.error(
+                "Empty or invalid Web element passed as argument to the method: get_attribute(element,attribute)")
+            raise TypeError("Empty or invalid element passed!!")
+        AppiumBase.driver.execute_script("arguments[0].setAttribute('style','background: yellow; border: 2px solid red;')",element)
 
+    @staticmethod
+    def get_window_size():
+        """Returns the size of the window"""
+        return AppiumBase.driver.get_window_size()
+
+    @staticmethod
+    def get_current_window_size(current_window):
+        """Returns the size of the specified window
+           :args:
+                - current_window- pass the window name to get the widow_size
+        """
+        return AppiumBase.driver.get_window_size(current_window)
+
+    @staticmethod
+    def navigate_to_url(url):
+        """Navigates to the url specified.
+
+        :Args:
+            - url - The url to be navigated to.
+        """
+        if url is None:
+            AndroidUtilities.log.error("Invalid or empty URL!!")
+            raise Exception("Invalid or empty URL!!")
+        AppiumBase.driver.get(url)
+        AndroidUtilities.log.info("Navigated to the URL: {0}.".format(url))

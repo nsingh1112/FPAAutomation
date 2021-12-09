@@ -1,0 +1,10 @@
+2021-12-08 14:00:35,278 :INFO :AndroidUtilities :Clicked on the element.
+2021-12-08 14:00:35,968 :INFO :AndroidUtilities :Took screenshot and saved as Test_confirm_08121435.png in screenshots folder.
+2021-12-08 14:00:35,968 :INFO :ShellApiDemos :Element clicked
+2021-12-08 14:00:35,995 :ERROR :WaitUtilities :Element ('accessibility id', 'Controls') is not visible within the specified time. Exception: InvalidArgumentException
+2021-12-08 14:00:36,088 :INFO :AndroidUtilities :Element displayed Successfully
+2021-12-08 14:00:37,492 :INFO :AndroidUtilities :Clicked on the element.
+2021-12-08 14:00:37,524 :ERROR :WaitUtilities :Element ('accessibility id', '1. Light Theme') is not visible within the specified time. Exception: InvalidArgumentException
+2021-12-08 14:00:38,814 :INFO :AndroidUtilities :Clicked on the element.
+2021-12-08 14:00:38,839 :ERROR :WaitUtilities :Element ('accessibility id', 'Checkbox 1') is not visible within the specified time. Exception: InvalidArgumentException
+2021-12-08 14:00:38,955 :INFO :AndroidUtilities :Clicked on the element.
