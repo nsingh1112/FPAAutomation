@@ -9,7 +9,7 @@ from Shell_FE_Appium_Core.Utilities.AndroidUtilities import AndroidUtilities
 
 
 def before_all(context):
-    # AppiumBase.startAppiumServer()
+    AppiumBase.start_appium_server()
     # AppiumBase.is_App_installed()
     AppiumBase.read_config()
     AppiumBase.read_values('nativeApp')
@@ -31,4 +31,4 @@ def after_scenario(context, scenario):
 def after_all(context):
     AppiumBase.close_driver()
     # AppiumBase.stopAppiumServer()
-    # AppiumBase.stopAppiumServer()
+

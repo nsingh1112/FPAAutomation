@@ -16,7 +16,7 @@ class ShellApiDemos:
     def click_views(self):
         WaitUtilities.wait_element_to_be_visible(self.apiDemosControls.view_tab)
         text = AndroidUtilities.get_text(self.apiDemosControls.get_view_tab())
-        AssertUtilities.assert_equals(text, self.apiDemosControls.views)
+        AssertUtilities.assert_equals(text, self.apiDemosControls.view_tab)
         AndroidUtilities.tap_element(self.apiDemosControls.get_view_tab())
         # AndroidUtilities.click_element(self.apiDemosControls.get_view_tab())
         AndroidUtilities.take_screenshot('Test_confirm')
@@ -41,7 +41,6 @@ class ShellApiDemos:
         WaitUtilities.wait_element_to_be_visible(self.apiDemosControls.control_tab)
 
     def check_scroll(self):
-        # WaitUtilities.wait_for_element_using_scroll_view("TextSwitcher")
         AndroidUtilities.scroll_to_text("TextSwitcher")
 
     def check_tap(self):

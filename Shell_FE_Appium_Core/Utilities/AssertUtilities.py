@@ -1,7 +1,3 @@
-import unittest
-
-from Shell_FE_Appium_Core.AppiumBase import AppiumBase
-
 
 class AssertUtilities:
     """AssertionUtilities class contains reusable methods for common assertions used."""

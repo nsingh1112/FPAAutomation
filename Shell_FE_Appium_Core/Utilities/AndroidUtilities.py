@@ -1,15 +1,8 @@
 import os
 import time
-
-from appium.webdriver import webelement
 from appium.webdriver.common.touch_action import TouchAction
-from selenium.common.exceptions import ElementNotVisibleException, ElementNotSelectableException, NoSuchElementException
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.common.by import By
-
 from Shell_FE_Appium_Core.AppiumBase import AppiumBase
 from Shell_FE_Appium_Core.Utilities.LoggingUtilities import LoggingUtilities
-from Shell_FE_Appium_Core.Utilities.WaitUtilities import WaitUtilities
 
 
 class AndroidUtilities:
@@ -58,15 +51,16 @@ class AndroidUtilities:
             raise TypeError("Empty or invalid element passed!!")
         element.clear()
         AndroidUtilities.log.info("Cleared the field")
+
     @staticmethod
-    def tap_element(element,count=1):
+    def tap_element(element, count=1):
         """Tap on the element
         :args:
              - element - Locator of the element to be tapped
              -count:optional - number of times the element has to be tapped
         """
         actions = TouchAction(AppiumBase.driver)
-        actions.tap(element,count).perform()
+        actions.tap(element, count).perform()
 
     @staticmethod
     def is_element_displayed(element):
@@ -194,7 +188,8 @@ class AndroidUtilities:
                 - text_of_the_element - text of the element to be scrolled
         """
         AppiumBase.driver.find_element_by_android_uiautomator(
-            'new UiScrollable(new UiSelector().instance(0)).scrollIntoView(text("{0}"))'.format(text_of_the_element)).click()
+            'new UiScrollable(new UiSelector().instance(0)).scrollIntoView(text("{0}"))'.format(
+                text_of_the_element)).click()
 
     @staticmethod
     def swipe(start_x, start_y, end_x, end_y, duration=None):
@@ -231,7 +226,8 @@ class AndroidUtilities:
             AndroidUtilities.log.error(
                 "Empty or invalid Web element passed as argument to the method: get_attribute(element,attribute)")
             raise TypeError("Empty or invalid element passed!!")
-        AppiumBase.driver.execute_script("arguments[0].setAttribute('style','background: yellow; border: 2px solid red;')",element)
+        AppiumBase.driver.execute_script(
+            "arguments[0].setAttribute('style','background: yellow; border: 2px solid red;')", element)
 
     @staticmethod
     def get_window_size():

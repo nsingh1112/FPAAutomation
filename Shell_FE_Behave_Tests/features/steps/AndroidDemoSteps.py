@@ -1,5 +1,3 @@
-import time
-
 from behave import *
 from Shell_FE_Behave_Tests.MobileApplicationLibrary.FunctionLibrary.ApiDemoAppFunctions import ShellApiDemos
 

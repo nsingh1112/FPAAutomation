@@ -1,7 +1,4 @@
-import logging
 import os
-import time
-
 from appium.webdriver.appium_service import AppiumService
 from configparser import ConfigParser
 from appium import webdriver
@@ -39,6 +36,7 @@ class AppiumBase:
     @staticmethod
     def start_appium_server():
         """Starts the Appium Server"""
+        # os.system("start /B start cmd.exe @cmd /k appium")
         AppiumBase.appium_Service.start()
         print("Status of APPIUM Server :", AppiumBase.appium_Service.is_running)
 

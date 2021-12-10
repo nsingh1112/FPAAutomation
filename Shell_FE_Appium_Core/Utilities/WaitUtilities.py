@@ -44,8 +44,9 @@ class WaitUtilities:
             WaitUtilities.log.error(
                 "Element {0} is not visible within the specified time. Exception: {1}".format(text_to_wait,
                                                                                               err.__class__.__name__))
+
     @staticmethod
-    def wait_for_element_using_scroll_view(text_of_value,timeout=10):
+    def wait_for_element_using_scroll_view(text_of_value, timeout=10):
         """Wait untill it scrolls to the element
            :args:
                 - text_of_value - text of the element to be checked
@@ -55,11 +56,13 @@ class WaitUtilities:
                 "Empty or invalid locator passed to the method: wait_for_element_by_index(locator, timeout=10).")
             raise TypeError("Empty or invalid locator passed!!")
         try:
-            WebDriverWait(AppiumBase.driver, timeout).until(lambda  x: x.find_element_by_android_uiautomator('new UiScrollable(new UiSelector().instance(0)).scrollIntoView(text("{0}"))'.format(text_of_value)))
+            WebDriverWait(AppiumBase.driver, timeout).until(lambda x: x.find_element_by_android_uiautomator(
+                'new UiScrollable(new UiSelector().instance(0)).scrollIntoView(text("{0}"))'.format(text_of_value)))
         except Exception as err:
             WaitUtilities.log.error(
                 "Element {0} is not visible within the specified time. Exception: {1}".format(text_of_value,
                                                                                               err.__class__.__name__))
+
     @staticmethod
     def wait_for_element_by_index(index_value, timeout=10):
         """Waits for the visiblity of the element by index
@@ -113,6 +116,7 @@ class WaitUtilities:
             WaitUtilities.log.error(
                 "Element {0} is not visible within the specified time. Exception: {1}".format(locator,
                                                                                               err.__class__.__name__))
+
     @staticmethod
     def wait_for_element_to_be_clickable(locator, timeout=10):
         """Waits for element to be enabled.
