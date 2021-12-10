@@ -27,8 +27,8 @@ class SeleniumBase:
     driver = None
     url = None
     current_working_directory = os.path.dirname(os.getcwd())
-    configfile = current_working_directory + '\\Shell_FE_Behave_Tests\\config.ini'
-    __webdriver_executables = current_working_directory + '\\Shell_FE_Behave_Tests\\WebDriverExecutables\\'
+    configfile = current_working_directory + '/Shell_FE_Behave_Tests/config.ini'
+    __webdriver_executables = current_working_directory + '/Shell_FE_Behave_Tests/WebDriverExecutables/'
 
     # endregion
 

@@ -603,4 +603,17 @@ class SeleniumUtilities:
         SeleniumBase.driver.execute_script("window.scrollBy(0," + scroll_value + ")")
         SeleniumUtilities.log.info("Scrolled the window with the coordinates {0}.".format(scroll_value))
 
+    @staticmethod
+    def highlight_field(element):
+        """Helps to highlight the field before the any actions
+           :args:
+                -element - pass the element to get highlighted
+        """
+        if element is None:
+            SeleniumUtilities.log.error(
+                "Empty or invalid Web element passed as argument to the method: get_attribute(element,attribute)")
+            raise TypeError("Empty or invalid element passed!!")
+        SeleniumBase.driver.execute_script(
+            "arguments[0].setAttribute('style','background: yellow; brder: 1px solid red;')", element)
+
     # endregion

@@ -7,7 +7,7 @@ from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 
 
 class LoggingUtilities:
-    logFolder = os.path.dirname(os.getcwd()) + '\\Shell_FE_Behave_Tests\\TestResults\\Logs\\'
+    logFolder = os.path.dirname(os.getcwd()) + '/Shell_FE_Behave_Tests/TestResults/Logs/'
 
     def logger(self, filename="logfile"+str(time.strftime("%d_%m_%H_%S")).replace("_", "")+".log"):
         """Creates logger instance with predefined format for logs.

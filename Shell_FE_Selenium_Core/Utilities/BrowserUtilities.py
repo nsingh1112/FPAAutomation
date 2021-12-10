@@ -10,7 +10,7 @@ from Shell_FE_Selenium_Core.Utilities.LoggingUtilities import LoggingUtilities
 class BrowserUtilities:
     """BrowserUtilities class contains reusable methods for common browser related actions"""
     current_working_directory = os.path.dirname(os.getcwd())
-    screenshots = current_working_directory + "\\Shell_FE_Behave_Tests\\TestResults\\Screenshots\\"
+    screenshots = current_working_directory + "/Shell_FE_Behave_Tests/TestResults/Screenshots/"
     logobj = LoggingUtilities()
     log = logobj.logger()
 

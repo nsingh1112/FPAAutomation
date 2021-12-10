@@ -10,7 +10,6 @@ from Shell_FE_Selenium_Core.Utilities.BrowserUtilities import BrowserUtilities
 
 
 def before_all(context):
-    SeleniumBase.read_config()
     SeleniumBase.initialize_values()
     SeleniumBase.browser_initialization()
 

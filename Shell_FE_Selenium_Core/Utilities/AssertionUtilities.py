@@ -1,6 +1,3 @@
-from assertpy import assert_that, soft_assertions
-
-
 class AssertionUtilities:
     """AssertionUtilities class contains reusable methods for common assertions used."""
 
