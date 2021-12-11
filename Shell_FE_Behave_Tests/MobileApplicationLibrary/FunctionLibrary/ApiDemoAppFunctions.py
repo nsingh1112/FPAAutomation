@@ -16,9 +16,8 @@ class ShellApiDemos:
     def click_views(self):
         WaitUtilities.wait_element_to_be_visible(self.apiDemosControls.view_tab)
         text = AndroidUtilities.get_text(self.apiDemosControls.get_view_tab())
-        AssertUtilities.assert_equals(text, self.apiDemosControls.view_tab)
-        AndroidUtilities.tap_element(self.apiDemosControls.get_view_tab())
-        # AndroidUtilities.click_element(self.apiDemosControls.get_view_tab())
+        AssertUtilities.assert_equals(text, "Views")
+        AndroidUtilities.click_element(self.apiDemosControls.get_view_tab())
         AndroidUtilities.take_screenshot('Test_confirm')
         ShellApiDemos.log_file.info("Element clicked")
 

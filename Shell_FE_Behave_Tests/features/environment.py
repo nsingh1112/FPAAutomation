@@ -9,7 +9,7 @@ from Shell_FE_Appium_Core.Utilities.AndroidUtilities import AndroidUtilities
 
 
 def before_all(context):
-    AppiumBase.start_appium_server()
+    # AppiumBase.start_appium_server()
     # AppiumBase.is_App_installed()
     AppiumBase.read_config()
     AppiumBase.read_values('nativeApp')

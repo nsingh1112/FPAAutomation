@@ -12,6 +12,7 @@ class AndroidUtilities:
     logobj = LoggingUtilities()
     log = logobj.logger()
 
+
     @staticmethod
     def click_element(element):
         """Clicks the Element.
@@ -53,14 +54,24 @@ class AndroidUtilities:
         AndroidUtilities.log.info("Cleared the field")
 
     @staticmethod
-    def tap_element(element, count=1):
+    def tap_element(element):
         """Tap on the element
         :args:
              - element - Locator of the element to be tapped
-             -count:optional - number of times the element has to be tapped
+
         """
         actions = TouchAction(AppiumBase.driver)
-        actions.tap(element, count).perform()
+        actions.tap(element).perform()
+
+    @staticmethod
+    def long_press(element,duration=1000):
+        """Long press the element
+           :args:
+                -element - locator of the element to get long press
+                -duration (optional) - by default it will press 1000 milliseconds
+        """
+        actions = TouchAction(AppiumBase.driver)
+        actions.long_press(element, duration).perform()
 
     @staticmethod
     def is_element_displayed(element):

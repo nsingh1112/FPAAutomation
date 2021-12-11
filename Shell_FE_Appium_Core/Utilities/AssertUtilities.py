@@ -7,7 +7,7 @@ class AssertUtilities:
         """Asserts if the two values are equal."""
         if actual_value is None or expected_value is None:
             assert False, "Either {0} or {1} is None".format(actual_value, expected_value)
-        assert actual_value == expected_value, "{0}is not equals to the {1}".format(actual_value, expected_value)
+        assert actual_value == expected_value, "{0} is not equals to the {1}".format(actual_value, expected_value)
 
     @staticmethod
     def assert_not_equals(actual_value, expected_value):

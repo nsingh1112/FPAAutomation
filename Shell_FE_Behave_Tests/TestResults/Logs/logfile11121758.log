@@ -1,0 +1,12 @@
+2021-12-11 17:49:24,613 :INFO :AndroidUtilities :Took screenshot and saved as Test_light_theme_controls_in_views_11121723.png in screenshots folder.
+2021-12-11 17:49:35,859 :ERROR :WaitUtilities :Element ('accessibility id', '1. Light Theme') is not visible within the specified time. Exception: TimeoutException
+2021-12-11 17:49:46,004 :ERROR :WaitUtilities :Element ('accessibility id', 'Controls') is not visible within the specified time. Exception: TimeoutException
+2021-12-11 17:49:53,461 :INFO :AndroidUtilities :Took screenshot and saved as Test_Popups_11121752.png in screenshots folder.
+2021-12-11 17:50:05,571 :ERROR :WaitUtilities :Element ('accessibility id', '1. Light Theme') is not visible within the specified time. Exception: TimeoutException
+2021-12-11 17:50:16,989 :ERROR :WaitUtilities :Element ('accessibility id', 'Controls') is not visible within the specified time. Exception: TimeoutException
+2021-12-11 17:50:28,527 :ERROR :WaitUtilities :Element ('accessibility id', '1. Light Theme') is not visible within the specified time. Exception: TimeoutException
+2021-12-11 17:50:39,832 :ERROR :WaitUtilities :Element ('accessibility id', 'Controls') is not visible within the specified time. Exception: TimeoutException
+2021-12-11 17:50:51,253 :ERROR :WaitUtilities :Element ('accessibility id', '1. Light Theme') is not visible within the specified time. Exception: TimeoutException
+2021-12-11 17:51:02,748 :ERROR :WaitUtilities :Element ('accessibility id', 'Controls') is not visible within the specified time. Exception: TimeoutException
+2021-12-11 17:51:14,059 :ERROR :WaitUtilities :Element ('accessibility id', '1. Light Theme') is not visible within the specified time. Exception: TimeoutException
+2021-12-11 17:51:25,341 :ERROR :WaitUtilities :Element ('accessibility id', 'Controls') is not visible within the specified time. Exception: TimeoutException
