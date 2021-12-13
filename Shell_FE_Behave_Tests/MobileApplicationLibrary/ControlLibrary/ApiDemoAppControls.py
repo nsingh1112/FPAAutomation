@@ -14,6 +14,10 @@ class ApiDemoAppControls:
     popup_menu = (MobileBy.ACCESSIBILITY_ID, "Popup Menu")
     text_swictcher = (MobileBy.ACCESSIBILITY_ID, "TextSwitcher")
     next_btn = (MobileBy.ACCESSIBILITY_ID, "Next")
+    drag_and_drop = (MobileBy.ACCESSIBILITY_ID,"Drag and Drop")
+    source_element = (MobileBy.ID,"io.appium.android.apis:id/drag_dot_1")
+    target_element = (MobileBy.ID,"io.appium.android.apis:id/drag_dot_2")
+    result_text = (MobileBy.ID,"io.appium.android.apis:id/drag_result_text")
 
     def get_view_tab(self):
         return self.driver.find_element(*ApiDemoAppControls.view_tab)
@@ -38,3 +42,16 @@ class ApiDemoAppControls:
 
     def get_next_btn(self):
         return self.driver.find_element(*ApiDemoAppControls.next_btn)
+
+    def get_drag_and_drop_tab(self):
+        return self.driver.find_element(*ApiDemoAppControls.drag_and_drop)
+
+    def get_source_element(self):
+        return self.driver.find_element(*ApiDemoAppControls.source_element)
+
+    def get_target_element(self):
+        return self.driver.find_element(*ApiDemoAppControls.target_element)
+
+    def get_result_text(self):
+        return self.driver.find_element(*ApiDemoAppControls.result_text)
+

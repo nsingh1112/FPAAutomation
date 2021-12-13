@@ -25,6 +25,7 @@ def verify_back_btn(context):
 
 @then('I verify popups')
 def check_scroll_function(context):
+    #context.feature.api_Demos_functions.check_drag_and_drop()
     context.feature.api_Demos_functions.check_scroll()
     context.feature.api_Demos_functions.check_tap()
 

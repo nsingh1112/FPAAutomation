@@ -131,6 +131,16 @@ class AndroidUtilities:
             return False
 
     @staticmethod
+    def drag_and_drop(source_element, target_element_location,wait=1000):
+        """Drag the element from source and drop it in the target location
+           :args:
+                -source_element - locator of the source element
+                -target_element_location- locator of the target locatore
+        """
+        actions = TouchAction(AppiumBase.driver)
+        actions.long_press(source_element).wait(wait).move_to(target_element_location).perform().release()
+
+    @staticmethod
     def get_attribute(element, attribute):
         """Return the value of the attribute
            :Args:

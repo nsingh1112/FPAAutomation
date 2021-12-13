@@ -39,7 +39,17 @@ class ShellApiDemos:
         AndroidUtilities.click_back_button()
         WaitUtilities.wait_element_to_be_visible(self.apiDemosControls.control_tab)
 
+    def check_drag_and_drop(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.apiDemosControls.drag_and_drop)
+        AndroidUtilities.click_element(self.apiDemosControls.get_drag_and_drop_tab())
+        WaitUtilities.wait_element_to_be_visible(self.apiDemosControls.source_element)
+        AndroidUtilities.drag_and_drop(self.apiDemosControls.get_source_element(),self.apiDemosControls.get_target_element())
+        WaitUtilities.wait_element_to_be_visible(self.apiDemosControls.result_text)
+        print("############Result Text #####", AndroidUtilities.get_text(self.apiDemosControls.get_result_text()))
+
     def check_scroll(self):
+        #AndroidUtilities.click_back_button()
+        WaitUtilities.wait_element_to_be_visible(self.apiDemosControls.drag_and_drop)
         AndroidUtilities.scroll_to_text("TextSwitcher")
 
     def check_tap(self):
