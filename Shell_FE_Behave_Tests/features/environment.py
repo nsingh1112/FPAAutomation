@@ -12,7 +12,6 @@ sys.path.insert(0, os.path.dirname(os.getcwd()))
 
 def before_all(context):
     # For UI automation
-    SeleniumBase.read_config()
     SeleniumBase.initialize_values()
     # For Mobile automation
     AppiumBase.read_config()
