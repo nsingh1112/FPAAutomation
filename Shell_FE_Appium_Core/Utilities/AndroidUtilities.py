@@ -171,6 +171,11 @@ class AndroidUtilities:
         return element.text
 
     @staticmethod
+    def get_title():
+        """Returns the title of the current page"""
+        return AppiumBase.driver.title
+
+    @staticmethod
     def take_screenshot(screenshot_name):
         """Takes screenshot of the web page and saves it in the Screenshots folder under TestResults."""
         time_format = str(time.strftime("%d_%m_%H_%S")).replace("_", "")

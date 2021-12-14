@@ -1,0 +1,16 @@
+2021-12-13 17:48:02,158 :INFO :AndroidUtilities :Clicked on the element.
+2021-12-13 17:48:02,678 :INFO :AndroidUtilities :Took screenshot and saved as Test_confirm_13121702.png in screenshots folder.
+2021-12-13 17:48:02,678 :INFO :ShellApiDemos :Element clicked
+2021-12-13 17:48:03,103 :INFO :AndroidUtilities :Element displayed Successfully
+2021-12-13 17:48:04,441 :INFO :AndroidUtilities :Clicked on the element.
+2021-12-13 17:48:06,032 :INFO :AndroidUtilities :Clicked on the element.
+2021-12-13 17:48:06,109 :ERROR :WaitUtilities :Value Checkbox 1 not present in element ('accessibility id', 'Checkbox 1') within the expected time.
+2021-12-13 17:48:06,897 :INFO :AndroidUtilities :Clicked on the element.
+2021-12-13 17:48:29,255 :ERROR :WaitUtilities :Element ('accessibility id', '1. Light Theme') is not visible within the specified time. Exception: TimeoutException
+2021-12-13 17:48:39,987 :ERROR :WaitUtilities :Element ('accessibility id', 'Controls') is not visible within the specified time. Exception: TimeoutException
+2021-12-13 17:48:51,676 :ERROR :WaitUtilities :Element ('accessibility id', '1. Light Theme') is not visible within the specified time. Exception: TimeoutException
+2021-12-13 17:49:03,181 :ERROR :WaitUtilities :Element ('accessibility id', 'Controls') is not visible within the specified time. Exception: TimeoutException
+2021-12-13 17:49:14,270 :ERROR :WaitUtilities :Element ('accessibility id', '1. Light Theme') is not visible within the specified time. Exception: TimeoutException
+2021-12-13 17:49:25,835 :ERROR :WaitUtilities :Element ('accessibility id', 'Controls') is not visible within the specified time. Exception: TimeoutException
+2021-12-13 17:49:37,301 :ERROR :WaitUtilities :Element ('accessibility id', '1. Light Theme') is not visible within the specified time. Exception: TimeoutException
+2021-12-13 17:49:48,793 :ERROR :WaitUtilities :Element ('accessibility id', 'Controls') is not visible within the specified time. Exception: TimeoutException

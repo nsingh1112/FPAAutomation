@@ -10,11 +10,12 @@ class HybridAppFunctions:
         self.appFunctions = HybridAppControls(AppiumBase.driver)
 
     def open_chrome(self):
-        AndroidUtilities.click_element(self.appFunctions.get_accept_and_terms())
+        # AndroidUtilities.click_element(self.appFunctions.get_accept_and_terms())
         # WaitUtilities.wait_for_element(self.appFunctions.id, self.appFunctions.next_Btn)
         # AndroidUtlities.click(self.appFunctions.id,self.appFunctions.next_Btn)
-        WaitUtilities.wait_element_to_be_visible(self.appFunctions.by_positive_btn)
-        AndroidUtilities.click_element(self.appFunctions.get_finish_btn())
+        # WaitUtilities.wait_element_to_be_visible(self.appFunctions.by_positive_btn)
+        # AndroidUtilities.click_element(self.appFunctions.get_finish_btn())
+        pass
 
     def click_search_box(self):
         WaitUtilities.wait_for_element_to_be_clickable(self.appFunctions.search_box)

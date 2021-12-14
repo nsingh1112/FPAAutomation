@@ -17,6 +17,7 @@ class AppiumBase:
     __appActivity = None
     __remoteURL = None
     __browser_name = None
+    __application_type = None
     driver = None
     current_working_directory = os.path.dirname(os.getcwd())
     configfile = current_working_directory + '\\Shell_FE_Behave_Tests\\config.ini'
@@ -33,16 +34,26 @@ class AppiumBase:
         configuration.read(AppiumBase.configfile)
         return configuration
 
+    # region Appium server instance
     @staticmethod
     def start_appium_server():
         """Starts the Appium Server"""
         AppiumBase.appium_Service.start()
-        print("Status of APPIUM Server :", AppiumBase.appium_Service.is_running)
 
     @staticmethod
     def stop_appium_server():
         """Stops the current Appium server"""
         AppiumBase.appium_Service.stop()
+
+    @staticmethod
+    def appium_server_status():
+        """Checks the appium server status
+           :returns:
+                   True - if the appium server instance is running
+        """
+        return AppiumBase.appium_Service.is_running
+
+    # endregion
 
     @staticmethod
     def read_values(section_value):
@@ -58,22 +69,49 @@ class AppiumBase:
         AppiumBase.__appPackage = AppiumBase.__config[section_value]['appPackage']
         AppiumBase.__appActivity = AppiumBase.__config[section_value]['appActivity']
         AppiumBase.__remoteURL = AppiumBase.__config[section_value]['remoteURL']
-        #AppiumBase.__browser_name = AppiumBase.__config[section_value]['browsername']
+        AppiumBase.__application_type = AppiumBase.__config[section_value]['applicationType']
+        AppiumBase.__browser_name = AppiumBase.__config[section_value]['browserName']
+        # AppiumBase.__browser_name = AppiumBase.__config[section_value]['browsername']
+
+    # @staticmethod
+    # def launch_app():
+    #     """Launch the Application
+    #        Returns the driver instance
+    #     """
+    #
+    #     desired_caps = {'platformName': AppiumBase.__platformName, 'platformVersion': AppiumBase.__platformVersion,
+    #                     'deviceName': AppiumBase.__deviceName, 'app': AppiumBase.__app,
+    #                     'appPackage': AppiumBase.__appPackage, 'appActivity': AppiumBase.__appActivity,
+    #                     }
+    #
+    #     AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_caps)
+    #     return AppiumBase.driver
 
     @staticmethod
-    def launch_app():
-        """Launch the Application
+    def launch_application():
+        """Launches the Application
            Returns the driver instance
         """
-        # caps = DesiredCapabilities()
-        # caps.ANDROID.copy()
-        # caps['plat']
-        desired_caps = {'platformName': AppiumBase.__platformName, 'platformVersion': AppiumBase.__platformVersion,
-                        'deviceName': AppiumBase.__deviceName, 'app': AppiumBase.__app,
-                        'appPackage': AppiumBase.__appPackage, 'appActivity': AppiumBase.__appActivity,
-                        }
+        if AppiumBase.__application_type.lower() == "native":
+            desired_caps = {'platformName': AppiumBase.__platformName, 'platformVersion': AppiumBase.__platformVersion,
+                            'deviceName': AppiumBase.__deviceName, 'app': AppiumBase.__app,
+                            'appPackage': AppiumBase.__appPackage, 'appActivity': AppiumBase.__appActivity,
+                            }
+            AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_capabilities=desired_caps)
 
-        AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_caps)
+        elif AppiumBase.__application_type.lower() == "hybrid":
+            desired_caps = {'platformName': AppiumBase.__platformName, 'platformVersion': AppiumBase.__platformVersion,
+                            'deviceName': AppiumBase.__deviceName, 'app': AppiumBase.__app,
+                            'appPackage': AppiumBase.__appPackage, 'appActivity': AppiumBase.__appActivity,
+                            }
+            AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_capabilities=desired_caps)
+
+        elif AppiumBase.__application_type.lower() == "webbrowser":
+            desired_caps = {'platformName': AppiumBase.__platformName, 'platformVersion': AppiumBase.__platformVersion,
+                            'deviceName': AppiumBase.__deviceName, 'browserName': AppiumBase.__browser_name,
+                            }
+            AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_capabilities=desired_caps)
+
         return AppiumBase.driver
 
     @staticmethod

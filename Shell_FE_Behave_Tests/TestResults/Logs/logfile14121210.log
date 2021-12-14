@@ -1,0 +1,3 @@
+2021-12-14 12:02:27,701 :INFO :AndroidUtilities :Navigated to the URL: https://hub.shell.com.
+2021-12-14 12:02:27,751 :ERROR :WaitUtilities :Element ('name', 'loginfmt') is not clickable. Unable to click / find the element within the specified time. Exception: InvalidArgumentException
+2021-12-14 12:02:28,199 :INFO :AndroidUtilities :Took screenshot and saved as Test_the_web_browser_14121227.png in screenshots folder.
