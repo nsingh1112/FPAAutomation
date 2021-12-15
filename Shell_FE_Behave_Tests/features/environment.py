@@ -10,9 +10,8 @@ from Shell_FE_Appium_Core.Utilities.AndroidUtilities import AndroidUtilities
 
 def before_all(context):
     AppiumBase.start_appium_server()
-    AppiumBase.read_config()
     AppiumBase.read_values()
-    context.driver = AppiumBase.launch_application()
+    AppiumBase.launch_application()
 
 
 def after_step(context, step):
