@@ -104,7 +104,6 @@ class SeleniumBase:
         SeleniumBase.driver.maximize_window()
         SeleniumBase.driver.delete_all_cookies()
         SeleniumBase.driver.implicitly_wait(int(SeleniumBase.__implicitwait))
-        return SeleniumBase.driver
 
     @staticmethod
     def __chrome_initialization():
