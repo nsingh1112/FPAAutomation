@@ -12,6 +12,18 @@ class AndroidUtilities:
     logobj = LoggingUtilities()
     log = logobj.logger()
 
+    @staticmethod
+    def navigate_to_url(url):
+        """Navigates to the url specified.
+
+        :Args:
+            - url - The url to be navigated to.
+        """
+        if url is None:
+            AndroidUtilities.log.error("Invalid or empty URL!!")
+            raise Exception("Invalid or empty URL!!")
+        AppiumBase.driver.get(url)
+        AndroidUtilities.log.info("Navigated to the URL: {0}.".format(url))
 
     @staticmethod
     def click_element(element):
@@ -54,24 +66,52 @@ class AndroidUtilities:
         AndroidUtilities.log.info("Cleared the field")
 
     @staticmethod
-    def tap_element(element):
-        """Tap on the element
-        :args:
-             - element - Locator of the element to be tapped
-
+    def get_attribute(element, attribute):
+        """Return the value of the attribute
+           :Args:
+                -element - The element to get the value
+                -attribute - The attribute value to be retrieved from the element
         """
-        actions = TouchAction(AppiumBase.driver)
-        actions.tap(element).perform()
+        if element is None or attribute is None:
+            AndroidUtilities.log.error(
+                "Empty or invalid Web element passed as argument to the method: get_attribute(element,attribute)")
+            raise TypeError("Empty or invalid element passed!!")
+        if isinstance(attribute, str) is False:
+            AndroidUtilities.log.error(
+                "Attribute: {0} should be passed as a string value to the method: get_attribute(element, attribute)".format(
+                    attribute))
+            raise ValueError("Attribute should be a string value!!")
+        return element.get_attribute(attribute)
 
     @staticmethod
-    def long_press(element,duration=1000):
-        """Long press the element
-           :args:
-                -element - locator of the element to get long press
-                -duration (optional) - by default it will press 1000 milliseconds
+    def get_text(element):
+        """Return the value of the attribute
+           :Args:
+                -element - Value of the element to be retrieved
         """
-        actions = TouchAction(AppiumBase.driver)
-        actions.long_press(element, duration).perform()
+        if element is None:
+            AndroidUtilities.log.error(
+                "Empty or invalid Web element passed as argument to the method: get_attribute(element,attribute)")
+            raise TypeError("Empty or invalid element passed!!")
+        return element.text
+
+    @staticmethod
+    def get_title():
+        """Returns the title of the current page"""
+        return AppiumBase.driver.title
+
+    @staticmethod
+    def highlight_field(element):
+        """Helps to highlight the field before the any actions
+           :args:
+                -element - pass the element to get highlighted
+        """
+        if element is None:
+            AndroidUtilities.log.error(
+                "Empty or invalid Web element passed as argument to the method: get_attribute(element,attribute)")
+            raise TypeError("Empty or invalid element passed!!")
+        AppiumBase.driver.execute_script(
+            "arguments[0].setAttribute('style','background: yellow; border: 2px solid red;')", element)
 
     @staticmethod
     def is_element_displayed(element):
@@ -131,7 +171,37 @@ class AndroidUtilities:
             return False
 
     @staticmethod
-    def drag_and_drop(source_element, target_element_location,wait=1000):
+    def tap_element(element):
+        """Tap on the element
+        :args:
+             - element - Locator of the element to be tapped
+
+        """
+        actions = TouchAction(AppiumBase.driver)
+        actions.tap(element).perform()
+
+    @staticmethod
+    def tap_element_by_coordinate(x, y):
+        """Tap on the element using the cooridinates
+           :args:
+                 x : x coordinate to tap, relative to the top left corner of the element.
+                 y : y coordinate. If y is used, x must also be set, and vice versa
+        """
+        actions = TouchAction(AppiumBase.driver)
+        actions.tap(x, y).perform()
+
+    @staticmethod
+    def long_press(element, duration=1000):
+        """Long press the element
+           :args:
+                -element - locator of the element to get long press
+                -duration (optional) - by default it will press 1000 milliseconds
+        """
+        actions = TouchAction(AppiumBase.driver)
+        actions.long_press(element, duration).perform()
+
+    @staticmethod
+    def drag_and_drop(source_element, target_element_location, wait=1000):
         """Drag the element from source and drop it in the target location
            :args:
                 -source_element - locator of the source element
@@ -139,41 +209,6 @@ class AndroidUtilities:
         """
         actions = TouchAction(AppiumBase.driver)
         actions.long_press(source_element).wait(wait).move_to(target_element_location).perform().release()
-
-    @staticmethod
-    def get_attribute(element, attribute):
-        """Return the value of the attribute
-           :Args:
-                -element - The element to get the value
-                -attribute - The attribute value to be retrieved from the element
-        """
-        if element is None or attribute is None:
-            AndroidUtilities.log.error(
-                "Empty or invalid Web element passed as argument to the method: get_attribute(element,attribute)")
-            raise TypeError("Empty or invalid element passed!!")
-        if isinstance(attribute, str) is False:
-            AndroidUtilities.log.error(
-                "Attribute: {0} should be passed as a string value to the method: get_attribute(element, attribute)".format(
-                    attribute))
-            raise ValueError("Attribute should be a string value!!")
-        return element.get_attribute(attribute)
-
-    @staticmethod
-    def get_text(element):
-        """Return the value of the attribute
-           :Args:
-                -element - Value of the element to be retrieved
-        """
-        if element is None:
-            AndroidUtilities.log.error(
-                "Empty or invalid Web element passed as argument to the method: get_attribute(element,attribute)")
-            raise TypeError("Empty or invalid element passed!!")
-        return element.text
-
-    @staticmethod
-    def get_title():
-        """Returns the title of the current page"""
-        return AppiumBase.driver.title
 
     @staticmethod
     def take_screenshot(screenshot_name):
@@ -198,14 +233,12 @@ class AndroidUtilities:
         return contexts
 
     @staticmethod
-    def press_keycode(key_value):
-        """Press the mobile key for the corresponding value
-           :args:
-               -key_value - Pass the integer value to be pressed
+    def switch_context(switch_view):
+        """Switches the view of the app
+            :args:
+                 - switch_view- value of the app to be switched
         """
-        element = AppiumBase.driver.press_keycode(key_value)
-        AndroidUtilities.log.info("key has been pressed")
-        return element
+        AppiumBase.driver.switch_to.context(switch_view)
 
     @staticmethod
     def scroll_to_text(text_of_the_element):
@@ -230,32 +263,6 @@ class AndroidUtilities:
         AppiumBase.driver.swipe(start_x, start_y, end_x, end_y, duration)
 
     @staticmethod
-    def click_back_button():
-        """Press the mobile application back button"""
-        AppiumBase.driver.back()
-
-    @staticmethod
-    def switch_context(switch_view):
-        """Switches the view of the app
-            :args:
-                 - switch_view- value of the app to be switched
-        """
-        AppiumBase.driver.switch_to.context(switch_view)
-
-    @staticmethod
-    def highlight_field(element):
-        """Helps to highlight the field before the any actions
-           :args:
-                -element - pass the element to get highlighted
-        """
-        if element is None:
-            AndroidUtilities.log.error(
-                "Empty or invalid Web element passed as argument to the method: get_attribute(element,attribute)")
-            raise TypeError("Empty or invalid element passed!!")
-        AppiumBase.driver.execute_script(
-            "arguments[0].setAttribute('style','background: yellow; border: 2px solid red;')", element)
-
-    @staticmethod
     def get_window_size():
         """Returns the size of the window"""
         return AppiumBase.driver.get_window_size()
@@ -269,14 +276,18 @@ class AndroidUtilities:
         return AppiumBase.driver.get_window_size(current_window)
 
     @staticmethod
-    def navigate_to_url(url):
-        """Navigates to the url specified.
-
-        :Args:
-            - url - The url to be navigated to.
+    def press_keycode(key_value):
+        """Press the mobile key for the corresponding value
+           :args:
+               -key_value - Pass the integer value to be pressed
         """
-        if url is None:
-            AndroidUtilities.log.error("Invalid or empty URL!!")
-            raise Exception("Invalid or empty URL!!")
-        AppiumBase.driver.get(url)
-        AndroidUtilities.log.info("Navigated to the URL: {0}.".format(url))
+        element = AppiumBase.driver.press_keycode(key_value)
+        AndroidUtilities.log.info("key has been pressed")
+        return element
+
+    @staticmethod
+    def click_back_button():
+        """Press the mobile application back button"""
+        AppiumBase.driver.back()
+
+

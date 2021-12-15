@@ -24,15 +24,6 @@ class AppiumBase:
     appium_Service = AppiumService()
 
     # endregion
-    @staticmethod
-    def read_config():
-        """Reads Config.INI file present in Shell_FE_Behave_Tests folder.
-           Returns:
-                An instance of ConfigParser.
-        """
-        configuration = ConfigParser()
-        configuration.read(AppiumBase.configfile)
-        return configuration
 
     # region Appium server instance
     @staticmethod
@@ -55,38 +46,37 @@ class AppiumBase:
 
     # endregion
 
+    # region Reading values from configuration file
     @staticmethod
-    def read_values(section_value):
+    def read_config():
+        """Reads Config.INI file present in Shell_FE_Behave_Tests folder.
+           Returns:
+                An instance of ConfigParser.
+        """
+        configuration = ConfigParser()
+        configuration.read(AppiumBase.configfile)
+        return configuration
+
+    @staticmethod
+    def read_values():
         """"Read and Assigns respective values to class variables from Config.INI file.
             :args:
             -section_value - chooses the section from which value to be fetched
         """
         AppiumBase.__config = AppiumBase.read_config()
-        AppiumBase.__platformName = AppiumBase.__config[section_value]['platformName']
-        AppiumBase.__platformVersion = AppiumBase.__config[section_value]['platformVersion']
-        AppiumBase.__deviceName = AppiumBase.__config[section_value]['deviceName']
-        AppiumBase.__app = AppiumBase.__config[section_value]['appPath']
-        AppiumBase.__appPackage = AppiumBase.__config[section_value]['appPackage']
-        AppiumBase.__appActivity = AppiumBase.__config[section_value]['appActivity']
-        AppiumBase.__remoteURL = AppiumBase.__config[section_value]['remoteURL']
-        AppiumBase.__application_type = AppiumBase.__config[section_value]['applicationType']
-        AppiumBase.__browser_name = AppiumBase.__config[section_value]['browserName']
-        # AppiumBase.__browser_name = AppiumBase.__config[section_value]['browsername']
+        AppiumBase.__platformName = AppiumBase.__config['Android']['platformName']
+        AppiumBase.__platformVersion = AppiumBase.__config['Android']['platformVersion']
+        AppiumBase.__deviceName = AppiumBase.__config['Android']['deviceName']
+        AppiumBase.__app = AppiumBase.__config['Android']['appPath']
+        AppiumBase.__appPackage = AppiumBase.__config['Android']['appPackage']
+        AppiumBase.__appActivity = AppiumBase.__config['Android']['appActivity']
+        AppiumBase.__remoteURL = AppiumBase.__config['Android']['remoteURL']
+        AppiumBase.__application_type = AppiumBase.__config['Android']['applicationType']
+        AppiumBase.__browser_name = AppiumBase.__config['Android']['browserName']
 
-    # @staticmethod
-    # def launch_app():
-    #     """Launch the Application
-    #        Returns the driver instance
-    #     """
-    #
-    #     desired_caps = {'platformName': AppiumBase.__platformName, 'platformVersion': AppiumBase.__platformVersion,
-    #                     'deviceName': AppiumBase.__deviceName, 'app': AppiumBase.__app,
-    #                     'appPackage': AppiumBase.__appPackage, 'appActivity': AppiumBase.__appActivity,
-    #                     }
-    #
-    #     AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_caps)
-    #     return AppiumBase.driver
+    # endregion
 
+    # region Launch Application
     @staticmethod
     def launch_application():
         """Launches the Application
@@ -114,6 +104,7 @@ class AppiumBase:
 
         return AppiumBase.driver
 
+    # endregion
     @staticmethod
     def is_App_installed():
         """Checks the app is installed in the device
