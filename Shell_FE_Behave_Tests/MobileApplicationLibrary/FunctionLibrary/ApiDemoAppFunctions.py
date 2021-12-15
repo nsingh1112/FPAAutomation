@@ -14,7 +14,7 @@ class ShellApiDemos:
         self.apiDemosControls = ApiDemoAppControls(AppiumBase.driver)
 
     def click_views(self):
-        WaitUtilities.wait_element_to_be_visible(self.apiDemosControls.view_tab)
+        WaitUtilities.wait_for_element_to_be_clickable(self.apiDemosControls.view_tab)
         text = AndroidUtilities.get_text(self.apiDemosControls.get_view_tab())
         AssertUtilities.assert_equals(text, "Views")
         AndroidUtilities.click_element(self.apiDemosControls.get_view_tab())

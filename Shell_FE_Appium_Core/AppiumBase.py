@@ -102,8 +102,6 @@ class AppiumBase:
                             }
             AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_capabilities=desired_caps)
 
-        return AppiumBase.driver
-
     # endregion
     @staticmethod
     def is_App_installed():
