@@ -14,15 +14,15 @@ def before_all(context):
     # For UI automation
     SeleniumBase.initialize_values()
     # For Mobile automation
-    AppiumBase.read_config()
+    AppiumBase.start_appium_server()
+    AppiumBase.read_values()
 
 
 def before_feature(context, feature):
     if "web" in context.feature.tags:
         SeleniumBase.browser_initialization()
     elif "mobile" in context.feature.tags:
-        AppiumBase.read_values('nativeApp')
-        context.driver = AppiumBase.launch_app()
+        AppiumBase.launch_application()
 
 
 def after_step(context, step):
@@ -56,3 +56,5 @@ def after_feature(context, feature):
 def after_all(context):
     # For UI automation
     SeleniumBase.dispose()
+    # For mobile automation
+    AppiumBase.stop_appium_server()
