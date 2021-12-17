@@ -605,9 +605,9 @@ class SeleniumUtilities:
 
     @staticmethod
     def highlight_field(element):
-        """Helps to highlight the field before the any actions
+        """Highlights the element using Javascript executor.
            :args:
-                -element - pass the element to get highlighted
+                - element - The web element which needs to be highlighted
         """
         if element is None:
             SeleniumUtilities.log.error(
