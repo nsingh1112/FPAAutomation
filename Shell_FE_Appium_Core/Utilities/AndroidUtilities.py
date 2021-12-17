@@ -101,19 +101,6 @@ class AndroidUtilities:
         return AppiumBase.driver.title
 
     @staticmethod
-    def highlight_field(element):
-        """Helps to highlight the field before the any actions
-           :args:
-                -element - pass the element to get highlighted
-        """
-        if element is None:
-            AndroidUtilities.log.error(
-                "Empty or invalid Web element passed as argument to the method: get_attribute(element,attribute)")
-            raise TypeError("Empty or invalid element passed!!")
-        AppiumBase.driver.execute_script(
-            "arguments[0].setAttribute('style','background: yellow; border: 2px solid red;')", element)
-
-    @staticmethod
     def is_element_displayed(element):
         """Checks for the element is displayed
            :Args:
@@ -248,7 +235,7 @@ class AndroidUtilities:
         """
         AppiumBase.driver.find_element_by_android_uiautomator(
             'new UiScrollable(new UiSelector().instance(0)).scrollIntoView(text("{0}"))'.format(
-                text_of_the_element)).click()
+                text_of_the_element))
 
     @staticmethod
     def swipe(start_x, start_y, end_x, end_y, duration=None):
@@ -276,6 +263,20 @@ class AndroidUtilities:
         return AppiumBase.driver.get_window_size(current_window)
 
     @staticmethod
+    def set_device_orientation(orientation_type):
+        """It will set the orientation of the current device/browser
+           :args:
+                - orientation_type - orientation type of the device
+        """
+        device_orientation = orientation_type.upper()
+        AppiumBase.driver.orientation = device_orientation
+
+    @staticmethod
+    def get_device_orientation():
+        """Get the current device/browser orientation"""
+        return AppiumBase.driver.orientation
+
+    @staticmethod
     def press_keycode(key_value):
         """Press the mobile key for the corresponding value
            :args:
@@ -289,5 +290,3 @@ class AndroidUtilities:
     def click_back_button():
         """Press the mobile application back button"""
         AppiumBase.driver.back()
-
-
