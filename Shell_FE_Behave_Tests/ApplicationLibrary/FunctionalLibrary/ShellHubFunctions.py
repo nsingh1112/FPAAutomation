@@ -2,6 +2,7 @@ import time
 
 from Shell_FE_Behave_Tests.ApplicationLibrary.ControlLibrary.ShellHubControls import ShellHubControls
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
+from Shell_FE_Selenium_Core.Utilities.AccessibilityUtilities import AccessibilityUtilities
 from Shell_FE_Selenium_Core.Utilities.BrowserUtilities import BrowserUtilities
 from Shell_FE_Selenium_Core.Utilities.SeleniumUtilities import SeleniumUtilities
 from Shell_FE_Selenium_Core.Utilities.WaitUtilities import WaitUtilities
@@ -59,3 +60,7 @@ class ShellHubFunctions:
         WaitUtilities.wait_for_element_to_be_visible(self.shellHubControls.pick_account, 20)
         is_displayed = SeleniumUtilities.is_element_displayed(self.shellHubControls.get_pick_account())
         return is_displayed
+
+    def check_shell_hub_accessibility(self):
+        return AccessibilityUtilities.analyze_page()
+
