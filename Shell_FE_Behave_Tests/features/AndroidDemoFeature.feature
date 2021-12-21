@@ -1,4 +1,6 @@
+@NativeApp
 Feature: Android Demo
+  @TestScenario
   Scenario: Test light theme controls in views
     Given I have launched the apidemos app
     When  I test views

@@ -21,7 +21,7 @@ class AppiumBase:
     __automation_name = None
     driver = None
     current_working_directory = os.path.dirname(os.getcwd())
-    configfile = current_working_directory + '/Shell_FE_Behave_Tests/config.ini'
+    configfile = current_working_directory + '/Shell_FE_Behave_Tests/behave.ini'
     appium_Service = AppiumService()
 
     # endregion
@@ -50,7 +50,7 @@ class AppiumBase:
     # region Reading values from configuration file
     @staticmethod
     def read_config():
-        """Reads Config.INI file present in Shell_FE_Behave_Tests folder.
+        """Reads behave.INI file present in Shell_FE_Behave_Tests folder.
            Returns:
                 An instance of ConfigParser.
         """
@@ -60,7 +60,7 @@ class AppiumBase:
 
     @staticmethod
     def read_values():
-        """"Read and Assigns respective values to class variables from Config.INI file.
+        """"Read and Assigns respective values to class variables from behave.INI file.
             :args:
             -section_value - chooses the section from which value to be fetched
         """
@@ -137,6 +137,6 @@ class AppiumBase:
 
     @staticmethod
     def close_driver():
-        """v"""
+        """Closes the current driver session"""
         if AppiumBase.driver is not None:
             AppiumBase.driver.quit()
