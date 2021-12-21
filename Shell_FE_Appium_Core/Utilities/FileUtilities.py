@@ -10,7 +10,7 @@ class FileUtilities:
     """FileUtilities class contains reusable methods to read / write data into files (i.e.) Excel, Json etc."""
 
     current_working_directory = os.path.dirname(os.getcwd())
-    test_data = current_working_directory + "\\Shell_FE_Behave_Tests\\TestData\\"
+    test_data = current_working_directory + "/Shell_FE_Behave_Tests/TestData/"
     logobj = LoggingUtilities()
     log = logobj.logger()
 

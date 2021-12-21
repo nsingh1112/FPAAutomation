@@ -8,7 +8,7 @@ from Shell_FE_Appium_Core.Utilities.LoggingUtilities import LoggingUtilities
 class AndroidUtilities:
     """AndroidUtilities class contains reusable methods for common Android functions used."""
     current_working_directory = os.path.dirname(os.getcwd())
-    screenshots = current_working_directory + "\\Shell_FE_Behave_Tests\\TestResults\\Screenshots\\"
+    screenshots = current_working_directory + "/Shell_FE_Behave_Tests/TestResults/Screenshots/"
     logobj = LoggingUtilities()
     log = logobj.logger()
 
@@ -248,6 +248,32 @@ class AndroidUtilities:
                - duration - (optional) time to take the swipe, in ms.
         """
         AppiumBase.driver.swipe(start_x, start_y, end_x, end_y, duration)
+
+    @staticmethod
+    def open_pinch_gestures(element, percent):
+        """performs pinch-open gesture on the given element
+           :args:
+                - element_id : locator of the element need to zoom
+                - percent : How much percent to zoon
+        """
+        AppiumBase.driver.execute_script('mobile: pinchOpenGesture', {
+            'elementId': element.id,
+            'percent': percent
+        })
+
+    @staticmethod
+    def close_pinch_gestures(element,percent):
+        """performs pinch-close gesture on the given element
+           :args:
+                - element_id : locator of the element need to zoom
+                - percent : How much percent to zoom
+        """
+        AppiumBase.driver.execute_script('mobile: pinchCloseGesture', {
+           'elementId': element,
+            # 'x': x_coordinate,
+            # 'y': y_coordinate,
+            'percent': percent
+        })
 
     @staticmethod
     def get_window_size():

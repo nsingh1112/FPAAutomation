@@ -21,7 +21,7 @@ class AppiumBase:
     __automation_name = None
     driver = None
     current_working_directory = os.path.dirname(os.getcwd())
-    configfile = current_working_directory + '\\Shell_FE_Behave_Tests\\config.ini'
+    configfile = current_working_directory + '/Shell_FE_Behave_Tests/config.ini'
     appium_Service = AppiumService()
 
     # endregion
@@ -137,6 +137,6 @@ class AppiumBase:
 
     @staticmethod
     def close_driver():
-        """Closes the driver instance"""
+        """v"""
         if AppiumBase.driver is not None:
             AppiumBase.driver.quit()

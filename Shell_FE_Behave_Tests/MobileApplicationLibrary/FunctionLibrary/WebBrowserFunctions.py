@@ -16,9 +16,9 @@ class BrowserFunctions:
 
     def get_context(self):
         app_context = AndroidUtilities.get_app_contexts()
-        print("#########App context :" , app_context)
+        print("#########App context :", app_context)
 
-    def switch_context(self,view_switch):
+    def switch_context(self, view_switch):
         AndroidUtilities.switch_context(view_switch)
 
     def verify_title(self):
@@ -31,7 +31,7 @@ class BrowserFunctions:
         AndroidUtilities.click_element(self.BrowserControls.get_username())
 
     def pass_value(self):
-        AndroidUtilities.send_text_to_element(self.BrowserControls.get_username(),"saktivel.rajasekar@shell.com")
+        AndroidUtilities.send_text_to_element(self.BrowserControls.get_username(), "saktivel.rajasekar@shell.com")
         AndroidUtilities.click_element(self.BrowserControls.get_next_btn())
 
     def check_authentication(self):
