@@ -27,7 +27,7 @@ class SeleniumBase:
     driver = None
     url = None
     current_working_directory = os.path.dirname(os.getcwd())
-    configfile = current_working_directory + '/Shell_FE_Behave_Tests/config.ini'
+    configfile = current_working_directory + '/Shell_FE_Behave_Tests/behave.ini'
     __webdriver_executables = current_working_directory + '/Shell_FE_Behave_Tests/WebDriverExecutables/'
 
     # endregion
@@ -35,7 +35,7 @@ class SeleniumBase:
     # region Reading data from Configuration files and initializing values to Class variables
     @staticmethod
     def read_config():
-        """Reads Config.INI file present in Shell_FE_Behave_Tests folder.
+        """Reads behave.ini file present in Shell_FE_Behave_Tests folder.
 
         Returns:
                 An instance of ConfigParser.
@@ -46,7 +46,7 @@ class SeleniumBase:
 
     @staticmethod
     def initialize_values():
-        """Assigns respective values to class variables from Config.INI file.
+        """Assigns respective values to class variables from behave.ini file.
         """
         SeleniumBase.__config = SeleniumBase.read_config()
         SeleniumBase.__browser = SeleniumBase.__config['browser']['browser_name']
@@ -76,11 +76,11 @@ class SeleniumBase:
     # region WebDriver Initialization and dispose methods
     @staticmethod
     def browser_initialization():
-        """Initializes browser based on the value passed in Config.INI file and assigns the respective driver to
+        """Initializes browser based on the value passed in behave.ini file and assigns the respective driver to
         the class variable 'driver'.
 
         Raises:
-            An exception if an invalid browser name is provided in Config.INI file
+            An exception if an invalid browser name is provided in behave.ini file
 
         Returns:
             Class variable 'driver' present in SeleniumBase
@@ -107,7 +107,7 @@ class SeleniumBase:
 
     @staticmethod
     def __chrome_initialization():
-        """Initializes driver to ChromeDriver. Based on value in Config.INI file WebDriver Manager or
+        """Initializes driver to ChromeDriver. Based on value in behave.ini file WebDriver Manager or
         WebDriver binary would be used.
 
         Returns:
@@ -130,7 +130,7 @@ class SeleniumBase:
 
     @staticmethod
     def __firefox_initialization():
-        """Initializes driver to FirefoxDriver. Based on value in Config.INI file WebDriver Manager or
+        """Initializes driver to FirefoxDriver. Based on value in behave.ini file WebDriver Manager or
         WebDriver binary would be used.
 
             Returns:
@@ -152,7 +152,7 @@ class SeleniumBase:
 
     @staticmethod
     def __edge_initialization():
-        """Initializes driver to EdgeDriver. Based on value in Config.INI file WebDriver Manager or
+        """Initializes driver to EdgeDriver. Based on value in behave.ini file WebDriver Manager or
         WebDriver binary would be used.
 
             Returns:
