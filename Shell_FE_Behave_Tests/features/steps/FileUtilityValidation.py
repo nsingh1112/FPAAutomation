@@ -75,7 +75,24 @@ def step_impl(context):
     dicti = FileUtilities.read_csv_by_row_name("TestData41.csv", "Testcase_id", "Testcase3")
     print(dicti)
 
+
 # @When('user writes a dictionary into a csv file')
 # def step_impl(context):
 #     value_dict = {"Name": "Gina Gray", "Age": "20", "Phonenumber": 9932146123, "DOB": "28-09-2001"}
 #     FileUtilities.write_into_new_csv_file(value_dict, "TestData5.csv")
+
+@When("user reads the root element's values from xml")
+def step_impl(context):
+    dict_xml = FileUtilities.read_xml("TestData6.xml", "employee")
+    print("ROOT ELEMENT'S DICTIONARY REPRESENTATION IS: ")
+    print(dict_xml)
+
+
+@When("user reads the child element's values from xml")
+def step_impl(context):
+    dict_xml = FileUtilities.read_xml("TestData7.xml", "employees", "employee")
+    print("CHILD ELEMENT'S DICTIONARY REPRESENTATION IS: ")
+    print(dict_xml)
+    dict_xml2 = FileUtilities.read_xml("TestData5.xml", "employees", "employee", 1)
+    print("CHILD ELEMENT'S DICTIONARY REPRESENTATION IS: ")
+    print(dict_xml2)

@@ -11,3 +11,5 @@ Feature: File Utility methods validation
     When user writes into new excel sheet
     When user writes into excel by cellname
     When user reads the values available in csv by rowname
+    When user reads the root element's values from xml
+    When user reads the child element's values from xml

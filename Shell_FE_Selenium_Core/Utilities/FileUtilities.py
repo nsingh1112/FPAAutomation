@@ -1,9 +1,8 @@
 import csv
 import os
-
 import openpyxl
 import json
-
+import xmltodict
 from Shell_FE_Selenium_Core.Utilities.LoggingUtilities import LoggingUtilities
 
 
@@ -169,3 +168,34 @@ class FileUtilities:
             FileUtilities.log.error("Unable to locate CSV file {0}. Exception {1}".format(file_name, f_err))
         except Exception as err:
             FileUtilities.log.error("Unable to parse CSV file {0}. Exception {1}".format(file_name, err))
+
+    @staticmethod
+    def read_xml(file_name, root_tag, child_tag=None, child_tag_index=None):
+        """Reads the contents of a xml file and retrieves required values as dictionary.
+            :Args:
+                - file_name - The name of the XML file present in the TestData folder
+                - root_tag - The root tag of the XML document
+                - child_tag - The child tag whose values needs to be retrieved. It should
+                be the immediate child of the root tag. This carries a default value of None.
+                - child_tag_index - The index / position of the child tag (if the root tag contains
+                 more than one child tag with same name). This carries a default value of None.
+        """
+        dictionary_xml = dict()
+        try:
+            with open(FileUtilities.test_data + file_name, 'r', encoding='utf-8') as xml_file:
+                xml = xml_file.read()
+                ordered_dictionary = xmltodict.parse(xml)
+                if child_tag is None:
+                    dictionary_xml = dict(ordered_dictionary[root_tag])
+                else:
+                    if child_tag_index is not None:
+                        root_dict = dict(ordered_dictionary[root_tag])
+                        dictionary_xml = dict(root_dict[child_tag][child_tag_index])
+                    if child_tag_index is None:
+                        root_dict = dict(ordered_dictionary[root_tag])
+                        dictionary_xml = dict(root_dict[child_tag])
+                return dictionary_xml
+        except FileNotFoundError as f_err:
+            FileUtilities.log.error("Unable to locate XML file {0}. Exception {1}".format(file_name, f_err))
+        except Exception as err:
+            FileUtilities.log.error("Unable to parse XML file {0}. Exception {1}".format(file_name, err))

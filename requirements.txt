@@ -74,3 +74,4 @@ wcwidth==0.2.5
 webdriver-manager==3.4.2
 wrapt==1.12.1
 setuptools~=58.5.3
+xmltodict~=0.12.0
