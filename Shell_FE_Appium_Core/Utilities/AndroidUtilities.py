@@ -162,8 +162,11 @@ class AndroidUtilities:
         """Tap on the element
         :args:
              - element - Locator of the element to be tapped
-
         """
+        if element is None:
+            AndroidUtilities.log.error(
+                "Empty or invalid Web element passed as argument to the method: tap_element(element)")
+            raise TypeError("Empty or invalid element passed!!")
         actions = TouchAction(AppiumBase.driver)
         actions.tap(element).perform()
 
@@ -174,6 +177,10 @@ class AndroidUtilities:
                  x : x coordinate to tap, relative to the top left corner of the element.
                  y : y coordinate. If y is used, x must also be set, and vice versa
         """
+        if x is None or y is None:
+            AndroidUtilities.log.error(
+                "Empty or invalid Web element passed as argument to the method: tap_element_by_coordinate(x,y)")
+            raise TypeError("Empty or invalid element passed!!")
         actions = TouchAction(AppiumBase.driver)
         actions.tap(x, y).perform()
 
@@ -184,6 +191,10 @@ class AndroidUtilities:
                 -element - locator of the element to get long press
                 -duration (optional) - by default it will press 1000 milliseconds
         """
+        if element is None:
+            AndroidUtilities.log.error(
+                "Empty or invalid Web element passed as argument to the method: long_press(element)")
+            raise TypeError("Empty or invalid element passed!!")
         actions = TouchAction(AppiumBase.driver)
         actions.long_press(element, duration).perform()
 
@@ -194,6 +205,11 @@ class AndroidUtilities:
                 -source_element - locator of the source element
                 -target_element_location- locator of the target locatore
         """
+        if source_element is None or target_element_location is None:
+            AndroidUtilities.log.error(
+                "Empty or invalid Web element passed as argument to the method: drag_and_drop(source_element,"
+                "target_element_location)")
+            raise TypeError("Empty or invalid element passed!!")
         actions = TouchAction(AppiumBase.driver)
         actions.long_press(source_element).wait(wait).move_to(target_element_location).perform().release()
 
@@ -225,6 +241,10 @@ class AndroidUtilities:
             :args:
                  - switch_view- value of the app to be switched
         """
+        if switch_view is None:
+            AndroidUtilities.log.error(
+                "Empty or invalid Web element passed as argument to the method: switch_context(switch_view)")
+            raise TypeError("Empty or invalid element passed!!")
         AppiumBase.driver.switch_to.context(switch_view)
 
     @staticmethod
@@ -233,6 +253,10 @@ class AndroidUtilities:
            :args:
                 - text_of_the_element - text of the element to be scrolled
         """
+        if text_of_the_element is None:
+            AndroidUtilities.log.error(
+                "Empty or invalid Web element passed as argument to the method: scroll_to_text(text_of_the_element)")
+            raise TypeError("Empty or invalid element passed!!")
         AppiumBase.driver.find_element_by_android_uiautomator(
             'new UiScrollable(new UiSelector().instance(0)).scrollIntoView(text("{0}"))'.format(
                 text_of_the_element))
@@ -262,14 +286,14 @@ class AndroidUtilities:
         })
 
     @staticmethod
-    def close_pinch_gestures(element,percent):
+    def close_pinch_gestures(element, percent):
         """performs pinch-close gesture on the given element
            :args:
                 - element_id : locator of the element need to zoom
                 - percent : How much percent to zoom
         """
         AppiumBase.driver.execute_script('mobile: pinchCloseGesture', {
-           'elementId': element,
+            'elementId': element,
             # 'x': x_coordinate,
             # 'y': y_coordinate,
             'percent': percent
@@ -294,6 +318,11 @@ class AndroidUtilities:
            :args:
                 - orientation_type - orientation type of the device
         """
+        if orientation_type is None:
+            AndroidUtilities.log.error(
+                "Empty or invalid Web element passed as argument to the method: set_device_orientation("
+                "orientation_type)")
+            raise TypeError("Empty or invalid element passed!!")
         device_orientation = orientation_type.upper()
         AppiumBase.driver.orientation = device_orientation
 
@@ -308,9 +337,37 @@ class AndroidUtilities:
            :args:
                -key_value - Pass the integer value to be pressed
         """
+        if key_value is None:
+            AndroidUtilities.log.error(
+                "Empty or invalid Web element passed as argument to the method: press_keycode(key_value)")
+            raise TypeError("Empty or invalid element passed!!")
         element = AppiumBase.driver.press_keycode(key_value)
         AndroidUtilities.log.info("key has been pressed")
         return element
+
+    @staticmethod
+    def start_activity(package_name, activity_name):
+        """Start an Android activity
+           :args:
+                - package_name - provide the package name of the app
+                - activity_name - provide the activity name of the app
+        """
+        if package_name is None or activity_name is None:
+            AndroidUtilities.log.error(
+                "Empty or invalid Web element passed as argument to the method: start_activity(package_name,"
+                "activity_name)")
+            raise TypeError("Empty or invalid element passed!!")
+        AppiumBase.driver.start_activity(package_name, activity_name)
+
+    @staticmethod
+    def get_current_activity():
+        """Get the name of the current Android activity"""
+        return AppiumBase.driver.current_activity
+
+    @staticmethod
+    def get_current_package():
+        """Get the name of the current Android package"""
+        return AppiumBase.driver.current_package
 
     @staticmethod
     def click_back_button():
