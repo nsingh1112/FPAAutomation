@@ -6,8 +6,8 @@ from setuptools import find_packages
 #     long_description = f.read()
 
 setuptools.setup(
-    name="Shell_FE_Appium_Core",
-    version='1.0.0a11',
+    name="Shell-FE-Appium-Core",
+    version='1.0.0b1',
     author="Sakthivel Rajasekar",
     author_email="saktivel.rajasekar@shell.com",
     description="Appium Core package to be used along with the Shell FE Behave framework for Mobile automation.",

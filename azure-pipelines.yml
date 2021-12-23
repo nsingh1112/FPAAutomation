@@ -4,8 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 trigger:
-# - SeleniumCore_Stage
-- master
+ - appiumcore_master
+
 
 pool:
   vmImage: ubuntu-latest
@@ -25,7 +25,6 @@ steps:
 - script: |
     python -m pip install --upgrade pip
     python -m pip install --upgrade build setuptools wheel
-    pip install -r requirements.txt
   displayName: 'Install dependencies'
 
 - script: |
@@ -34,11 +33,11 @@ steps:
 
 - task: TwineAuthenticate@1
   inputs:
-    artifactFeed: TCoE Test Automation Offering/ShellFEAppiumPythonCore_Alpha
+    artifactFeed: TCoE Test Automation Offering/ShellFEAppiumPythonCore_Beta
 
 - script: |
     pip install twine
   displayName: 'Install Twine'
 
 - script: |
-    twine upload -r ShellFEAppiumPythonCore_Alpha --config-file $(PYPIRC_PATH) dist/*
+    twine upload -r ShellFEAppiumPythonCore_Beta --config-file $(PYPIRC_PATH) dist/*
