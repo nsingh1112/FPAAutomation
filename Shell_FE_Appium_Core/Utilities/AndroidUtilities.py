@@ -281,7 +281,7 @@ class AndroidUtilities:
                 - percent : How much percent to zoon
         """
         AppiumBase.driver.execute_script('mobile: pinchOpenGesture', {
-            'elementId': element.id,
+            'elementId': element,
             'percent': percent
         })
 
@@ -294,8 +294,6 @@ class AndroidUtilities:
         """
         AppiumBase.driver.execute_script('mobile: pinchCloseGesture', {
             'elementId': element,
-            # 'x': x_coordinate,
-            # 'y': y_coordinate,
             'percent': percent
         })
 
