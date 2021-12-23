@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<employees>
+    <employee>
+        <Name>John Adams</Name>
+        <DOJ>20-10-2000</DOJ>
+        <Department>Development</Department>
+    </employee>
+</employees>
