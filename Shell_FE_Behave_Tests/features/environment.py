@@ -2,12 +2,11 @@ import os
 import sys
 import allure
 from allure_commons.types import AttachmentType
+sys.path.insert(0, os.path.dirname(os.getcwd()))
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 from Shell_FE_Selenium_Core.Utilities.BrowserUtilities import BrowserUtilities
 from Shell_FE_Appium_Core.AppiumBase import AppiumBase
 from Shell_FE_Appium_Core.Utilities.AndroidUtilities import AndroidUtilities
-
-sys.path.insert(0, os.path.dirname(os.getcwd()))
 
 
 def before_all(context):
