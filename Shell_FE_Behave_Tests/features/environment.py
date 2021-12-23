@@ -54,6 +54,13 @@ def after_feature(context, feature):
 
 
 def after_all(context):
+    # region Copy history contents from Reports to AllureJson folder
+    src_directory = os.path.dirname(os.getcwd()) + "/Shell_FE_Behave_Tests/TestResults/Reports/history/"
+    dst_directory = os.path.dirname(os.getcwd()) + "/Shell_FE_Behave_Tests/TestResults/AllureJson/history/"
+    all_files = os.listdir(src_directory)
+    for file in all_files:
+        shutil.move(src_directory + file, dst_directory + file)
+    # endregion
     # For UI automation
     SeleniumBase.dispose()
     # For mobile automation
