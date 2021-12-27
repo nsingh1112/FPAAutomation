@@ -51,6 +51,7 @@ class ShellApiDemos:
         #AndroidUtilities.click_back_button()
         WaitUtilities.wait_element_to_be_visible(self.apiDemosControls.drag_and_drop)
         AndroidUtilities.scroll_to_text("TextSwitcher")
+        AndroidUtilities.click_element(self.apiDemosControls.get_text_switcher())
 
     def check_tap(self):
         WaitUtilities.wait_element_to_be_visible(self.apiDemosControls.next_btn)
