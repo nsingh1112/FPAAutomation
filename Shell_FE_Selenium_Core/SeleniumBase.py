@@ -115,8 +115,6 @@ class SeleniumBase:
             remote_environment = str(SeleniumBase.__remote_environment).upper()
             if remote_environment == "BROWSERSTACK":
                 SeleniumBase.driver = SeleniumBase.__browserstack_initialization()
-        # SeleniumBase.driver.maximize_window()
-        # SeleniumBase.driver.delete_all_cookies()
         SeleniumBase.driver.implicitly_wait(int(SeleniumBase.__implicitwait))
 
     @staticmethod
