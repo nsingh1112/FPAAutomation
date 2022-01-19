@@ -1,0 +1,15 @@
+{
+  "user": "praveenkumar_aNTBPL",
+  "key": "KYwBtXAtVsisxg7ZbFFZ",
+  "server": "hub.browserstack.com",
+  "environments": [
+    {
+      "browserName": "Android",
+      "device": "Samsung Galaxy S9 Plus",
+      "realMobile": "true",
+      "os_version": "9.0",
+      "name": "Mobile browser test_0119",
+      "build": "BStack-[Python] Sample Build_0119"
+    }
+  ]
+}
