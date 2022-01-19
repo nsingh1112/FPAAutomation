@@ -1,7 +1,8 @@
+import json
 import os
 from configparser import ConfigParser
 from selenium import webdriver
-from selenium.webdriver import DesiredCapabilities
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from msedge.selenium_tools import Edge, EdgeOptions
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
@@ -13,6 +14,9 @@ class SeleniumBase:
     # region Class Variable Declarations
     __config = None
     __browser = None
+    __webdrivermanager = None
+    __implicitwait = None
+    __opts = None
     __environment = None
     __headless = None
     __incognito = None
@@ -21,13 +25,13 @@ class SeleniumBase:
     __notifications = None
     __insecure_content = None
     __disable_popup = None
-    __webdrivermanager = None
-    __implicitwait = None
-    __opts = None
+    __remote_exe = None
+    __remote_environment = None
     driver = None
     url = None
     current_working_directory = os.path.dirname(os.getcwd())
     configfile = current_working_directory + '/Shell_FE_Behave_Tests/behave.ini'
+    browserstack_config = current_working_directory + '/Shell_FE_Behave_Tests/browserstack.json'
     __webdriver_executables = current_working_directory + '/Shell_FE_Behave_Tests/WebDriverExecutables/'
 
     # endregion
@@ -51,7 +55,9 @@ class SeleniumBase:
         SeleniumBase.__config = SeleniumBase.read_config()
         SeleniumBase.__browser = SeleniumBase.__config['browser']['browser_name']
         SeleniumBase.__webdrivermanager = SeleniumBase.__config.getboolean('browser', 'webdriver_manager')
+        SeleniumBase.__implicitwait = SeleniumBase.__config['timeout']['implicit_wait']
         environment = SeleniumBase.__config['application']['environment']
+        # region Application url initialization
         if environment == "dev":
             SeleniumBase.url = SeleniumBase.__config['application']['dev_url']
         elif environment == "qa":
@@ -62,6 +68,8 @@ class SeleniumBase:
             SeleniumBase.url = SeleniumBase.__config['application']['prod_url']
         else:
             print("Invalid environment name provided in INI file. Environment: {0}.".format(environment))
+        # endregion
+        # region Browser options initialization
         SeleniumBase.__headless = SeleniumBase.__config.getboolean('browser-options', 'headless')
         SeleniumBase.__incognito = SeleniumBase.__config.getboolean('browser-options', 'incognito')
         SeleniumBase.__acceptcerts = SeleniumBase.__config.getboolean('browser-options', 'accept_cert')
@@ -69,7 +77,10 @@ class SeleniumBase:
         SeleniumBase.__notifications = SeleniumBase.__config.getboolean('browser-options', 'disable_notifications')
         SeleniumBase.__insecure_content = SeleniumBase.__config.getboolean('browser-options', 'allow_insecure_content')
         SeleniumBase.__disable_popup = SeleniumBase.__config.getboolean('browser-options', 'disable_popup')
-        SeleniumBase.__implicitwait = SeleniumBase.__config['timeout']['implicit_wait']
+
+        SeleniumBase.__remote_exe = SeleniumBase.__config.getboolean('browser', 'remote')
+        SeleniumBase.__remote_environment = SeleniumBase.__config['browser']['remote_environment']
+        # endregion
 
     # endregion
 
@@ -86,23 +97,24 @@ class SeleniumBase:
             Class variable 'driver' present in SeleniumBase
         """
         browsername = str(SeleniumBase.__browser).upper()
-
-        if browsername == "CHROME":
-            SeleniumBase.driver = SeleniumBase.__chrome_initialization()
-        elif browsername == "FIREFOX":
-            SeleniumBase.driver = SeleniumBase.__firefox_initialization()
-        elif browsername == "IE":
-            SeleniumBase.driver = SeleniumBase.__ie_initialization()
-        elif browsername == "EDGE":
-            SeleniumBase.driver = SeleniumBase.__edge_initialization()
-        elif browsername == "SAFARI":
-            SeleniumBase.driver = SeleniumBase.__safari_initialization()
-        else:
-            print("Invalid browser!!")
-            raise Exception("Invalid Browser name passed. Aborting the UI tests!!")
-            # Include logging
-        SeleniumBase.driver.maximize_window()
-        SeleniumBase.driver.delete_all_cookies()
+        if SeleniumBase.__remote_exe is False:
+            if browsername == "CHROME":
+                SeleniumBase.driver = SeleniumBase.__chrome_initialization()
+            elif browsername == "FIREFOX":
+                SeleniumBase.driver = SeleniumBase.__firefox_initialization()
+            elif browsername == "IE":
+                SeleniumBase.driver = SeleniumBase.__ie_initialization()
+            elif browsername == "EDGE":
+                SeleniumBase.driver = SeleniumBase.__edge_initialization()
+            elif browsername == "SAFARI":
+                SeleniumBase.driver = SeleniumBase.__safari_initialization()
+            else:
+                print("Invalid browser!!")
+                raise Exception("Invalid Browser name passed. Aborting the UI tests!!")
+        elif SeleniumBase.__remote_exe is True:
+            remote_environment = str(SeleniumBase.__remote_environment).upper()
+            if remote_environment == "BROWSERSTACK":
+                SeleniumBase.driver = SeleniumBase.__browserstack_initialization()
         SeleniumBase.driver.implicitly_wait(int(SeleniumBase.__implicitwait))
 
     @staticmethod
@@ -123,10 +135,13 @@ class SeleniumBase:
         else:
             try:
                 chromedrivername = "chromedriver.exe"
-                driver = webdriver.Chrome(executable_path=SeleniumBase.__webdriver_executables + chromedrivername, options= SeleniumBase.__opts)
+                driver = webdriver.Chrome(executable_path=SeleniumBase.__webdriver_executables + chromedrivername,
+                                          options=SeleniumBase.__opts)
                 return driver
             except Exception as err:
-                raise Exception("Chrome driver binary with the name {0} is not present in the folder WebDriverExecutables.".format(chromedrivername))
+                raise Exception(
+                    "Chrome driver binary with the name {0} is not present in the folder WebDriverExecutables.".format(
+                        chromedrivername))
 
     @staticmethod
     def __firefox_initialization():
@@ -145,10 +160,13 @@ class SeleniumBase:
         else:
             try:
                 geckodrivername = "geckodriver.exe"
-                driver = webdriver.Firefox(executable_path=SeleniumBase.__webdriver_executables + geckodrivername, options=SeleniumBase.__opts)
+                driver = webdriver.Firefox(executable_path=SeleniumBase.__webdriver_executables + geckodrivername,
+                                           options=SeleniumBase.__opts)
                 return driver
             except Exception as err:
-                raise Exception("Gecko driver binary with the name {0} is not present in the folder WebDriverExecutables.".format(geckodrivername))
+                raise Exception(
+                    "Gecko driver binary with the name {0} is not present in the folder WebDriverExecutables.".format(
+                        geckodrivername))
 
     @staticmethod
     def __edge_initialization():
@@ -169,10 +187,13 @@ class SeleniumBase:
             try:
                 edgedrivername = "msedgedriver.exe"
                 # driver = webdriver.Edge(executable_path=SeleniumBase.__webdriver_executables + edgedrivername)
-                driver = Edge(executable_path=SeleniumBase.__webdriver_executables + edgedrivername, options=SeleniumBase.__opts)
+                driver = Edge(executable_path=SeleniumBase.__webdriver_executables + edgedrivername,
+                              options=SeleniumBase.__opts)
                 return driver
             except Exception as err:
-                raise Exception("Edge driver binary with the name {0} is not present in the folder WebDriverExecutables.".format(edgedrivername))
+                raise Exception(
+                    "Edge driver binary with the name {0} is not present in the folder WebDriverExecutables.".format(
+                        edgedrivername))
 
     @staticmethod
     def __safari_initialization():
@@ -207,6 +228,28 @@ class SeleniumBase:
             opts.add_argument("--ignore-certificate-errors")
         if SeleniumBase.__disable_popup:
             opts.add_argument("--disable-popup-blocking")
+
+    @staticmethod
+    def __browserstack_initialization():
+        """Initializes driver to remote webdriver with Browserstack based on the value provided in 'remote_environment'
+         in Behave.INI file.
+
+            Returns:
+                Remote webdriver instance with Browserstack.
+        """
+        capabilities = []
+
+        with open(SeleniumBase.browserstack_config) as config_file:
+            config = json.load(config_file)
+
+        username = config['user']
+        accesskey = config['key']
+        server = config['server']
+        capabilities.append(config['environments'][0])
+
+        driver = webdriver.Remote(command_executor='https://{0}:{1}@{2}/wd/hub'.format(username, accesskey, server),
+                                  desired_capabilities=capabilities[0])
+        return driver
 
     @staticmethod
     def dispose():

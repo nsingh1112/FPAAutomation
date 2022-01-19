@@ -54,6 +54,16 @@ class BrowserUtilities:
         return SeleniumBase.driver.title
 
     @staticmethod
+    def maximize_window():
+        """Maximizes the active browser window"""
+        SeleniumBase.driver.maximize_window()
+
+    @staticmethod
+    def delete_cookies():
+        """Deletes the cookies"""
+        SeleniumBase.driver.delete_all_cookies()
+
+    @staticmethod
     def switch_to_child_window():
         """Switches to the immediate child window."""
         child_window = SeleniumBase.driver.window_handles[1]
