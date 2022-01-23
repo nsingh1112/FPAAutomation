@@ -96,3 +96,7 @@ def step_impl(context):
     dict_xml2 = FileUtilities.read_xml("TestData5.xml", "employees", "employee", 1)
     print("CHILD ELEMENT'S DICTIONARY REPRESENTATION IS: ")
     print(dict_xml2)
+
+@When('user searched for a word from pdf')
+def step_impl(context):
+    FileUtilities.search_word_from_pdf("selenium-python.pdf", "SeleniumPytonBindings")

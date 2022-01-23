@@ -13,3 +13,4 @@ Feature: File Utility methods validation
     When user reads the values available in csv by rowname
     When user reads the root element's values from xml
     When user reads the child element's values from xml
+    When user searched for a word from pdf

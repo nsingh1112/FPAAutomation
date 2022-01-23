@@ -199,3 +199,40 @@ class FileUtilities:
             FileUtilities.log.error("Unable to locate XML file {0}. Exception {1}".format(file_name, f_err))
         except Exception as err:
             FileUtilities.log.error("Unable to parse XML file {0}. Exception {1}".format(file_name, err))
+
+    @staticmethod
+    def search_word_from_pdf(file_name, word, pagenum=0):
+        """Reads the pdf and seraches for word."""
+        try:
+            pdf_file = open(FileUtilities.test_data + file_name, "rb")
+            read_pdf = PyPDF2.PdfFileReader(pdf_file)
+            getpage = read_pdf.getPage(pagenum)
+            pdfData = getpage.extractText()
+            if word in pdfData:
+                FileUtilities.log.info("Word {0} found in file {1}".format(word, file_name))
+            else:
+                FileUtilities.log.error("Word {0} not found in file {1}".format(word, file_name))
+
+        # Unable to open the file
+        except IOError as ex:
+            FileUtilities.log.error('IOError thrown. Details: ' + ' %s' % ex)
+        # Any other exceptions
+        except Exception as ex:
+            FileUtilities.log.error('Unexpected error. Details:' + ' %s' % ex)
+
+    @staticmethod
+    def get_number_of_pages(file_name):
+        """Return the number of pages from pdf."""
+        try:
+            pdf_file = open(FileUtilities.test_data + file_name, "rb")
+            read_pdf = PyPDF2.PdfFileReader(pdf_file)
+            number_of_pages = read_pdf.getNumPages()
+            FileUtilities.log.info("Retunr the number of pages")
+            return number_of_pages
+
+        # Unable to open the file
+        except IOError as ex:
+            FileUtilities.log.error('IOError thrown. Details: ' + ' %s' % ex)
+        # Any other exceptions
+        except Exception as ex:
+            FileUtilities.log.error('Unexpected error. Details:' + ' %s' % ex)
