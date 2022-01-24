@@ -33,6 +33,7 @@ class SeleniumBase:
     configfile = current_working_directory + '/Shell_FE_Behave_Tests/behave.ini'
     browserstack_config = current_working_directory + '/Shell_FE_Behave_Tests/browserstack.json'
     __webdriver_executables = current_working_directory + '/Shell_FE_Behave_Tests/WebDriverExecutables/'
+    TASK_ID = int(os.environ['TASK_ID']) if 'TASK_ID' in os.environ else 0
 
     # endregion
 
@@ -77,10 +78,9 @@ class SeleniumBase:
         SeleniumBase.__notifications = SeleniumBase.__config.getboolean('browser-options', 'disable_notifications')
         SeleniumBase.__insecure_content = SeleniumBase.__config.getboolean('browser-options', 'allow_insecure_content')
         SeleniumBase.__disable_popup = SeleniumBase.__config.getboolean('browser-options', 'disable_popup')
-
+        # endregion
         SeleniumBase.__remote_exe = SeleniumBase.__config.getboolean('browser', 'remote')
         SeleniumBase.__remote_environment = SeleniumBase.__config['browser']['remote_environment']
-        # endregion
 
     # endregion
 
@@ -237,18 +237,16 @@ class SeleniumBase:
             Returns:
                 Remote webdriver instance with Browserstack.
         """
-        capabilities = []
-
         with open(SeleniumBase.browserstack_config) as config_file:
             config = json.load(config_file)
 
         username = config['user']
         accesskey = config['key']
         server = config['server']
-        capabilities.append(config['environments'][0])
 
+        capabilities = config['environments'][SeleniumBase.TASK_ID]
         driver = webdriver.Remote(command_executor='https://{0}:{1}@{2}/wd/hub'.format(username, accesskey, server),
-                                  desired_capabilities=capabilities[0])
+                                      desired_capabilities=capabilities)
         return driver
 
     @staticmethod
