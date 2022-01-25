@@ -19,6 +19,7 @@ class AppiumBase:
     __browser_name = None
     __application_type = None
     __automation_name = None
+    __devicePlatform = None
     driver = None
     current_working_directory = os.path.dirname(os.getcwd())
     configfile = current_working_directory + '/Shell_FE_Behave_Tests/behave.ini'
@@ -65,16 +66,21 @@ class AppiumBase:
             -section_value - chooses the section from which value to be fetched
         """
         AppiumBase.__config = AppiumBase.read_config()
-        AppiumBase.__platformName = AppiumBase.__config['Android']['platformName']
-        AppiumBase.__platformVersion = AppiumBase.__config['Android']['platformVersion']
-        AppiumBase.__deviceName = AppiumBase.__config['Android']['deviceName']
-        AppiumBase.__app = AppiumBase.__config['Android']['appPath']
-        AppiumBase.__appPackage = AppiumBase.__config['Android']['appPackage']
-        AppiumBase.__appActivity = AppiumBase.__config['Android']['appActivity']
-        AppiumBase.__remoteURL = AppiumBase.__config['Android']['remoteURL']
-        AppiumBase.__application_type = AppiumBase.__config['Android']['applicationType']
-        AppiumBase.__automation_name = AppiumBase.__config['Android']['automationName']
-        AppiumBase.__browser_name = AppiumBase.__config['Android']['browserName']
+        AppiumBase.__devicePlatform = AppiumBase.__config['automationplatform']['platformtype']
+        if AppiumBase.__devicePlatform.lower() == "android":
+            AppiumBase.__platformName = AppiumBase.__config['Android']['platformName']
+            AppiumBase.__platformVersion = AppiumBase.__config['Android']['platformVersion']
+            AppiumBase.__deviceName = AppiumBase.__config['Android']['deviceName']
+            AppiumBase.__app = AppiumBase.__config['Android']['appPath']
+            AppiumBase.__appPackage = AppiumBase.__config['Android']['appPackage']
+            AppiumBase.__appActivity = AppiumBase.__config['Android']['appActivity']
+            AppiumBase.__remoteURL = AppiumBase.__config['Android']['remoteURL']
+            AppiumBase.__application_type = AppiumBase.__config['Android']['applicationType']
+            AppiumBase.__automation_name = AppiumBase.__config['Android']['automationName']
+            AppiumBase.__browser_name = AppiumBase.__config['Android']['browserName']
+
+        elif AppiumBase.__devicePlatform.lower() == "ios":
+            AppiumBase.__platformName = None
 
     # endregion
 
@@ -86,15 +92,17 @@ class AppiumBase:
         """
         if AppiumBase.__application_type.lower() == "native":
             desired_caps = {'platformName': AppiumBase.__platformName, 'platformVersion': AppiumBase.__platformVersion,
-                            'deviceName': AppiumBase.__deviceName,'automationName': AppiumBase.__automation_name,
-                            'app': AppiumBase.__app,'appPackage': AppiumBase.__appPackage, 'appActivity': AppiumBase.__appActivity,
+                            'deviceName': AppiumBase.__deviceName, 'automationName': AppiumBase.__automation_name,
+                            'app': AppiumBase.__app, 'appPackage': AppiumBase.__appPackage,
+                            'appActivity': AppiumBase.__appActivity,
                             }
             AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_capabilities=desired_caps)
 
         elif AppiumBase.__application_type.lower() == "hybrid":
             desired_caps = {'platformName': AppiumBase.__platformName, 'platformVersion': AppiumBase.__platformVersion,
                             'deviceName': AppiumBase.__deviceName, 'automationName': AppiumBase.__automation_name,
-                            'app': AppiumBase.__app, 'appPackage': AppiumBase.__appPackage, 'appActivity': AppiumBase.__appActivity,
+                            'app': AppiumBase.__app, 'appPackage': AppiumBase.__appPackage,
+                            'appActivity': AppiumBase.__appActivity,
                             }
             AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_capabilities=desired_caps)
 
