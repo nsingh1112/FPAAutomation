@@ -209,7 +209,6 @@ class SeleniumBase:
         opts = browser_options
         opts.headless = SeleniumBase.__headless
         opts.set_capability("acceptInsecureCerts", SeleniumBase.__acceptcerts)
-        opts.set_capability("acceptSslCerts", True)
         if SeleniumBase.__incognito:
             if str(SeleniumBase.__browser).upper() == "CHROME":
                 opts.add_argument("--incognito")
@@ -217,8 +216,6 @@ class SeleniumBase:
                 opts.add_argument("-inprivate")
             if str(SeleniumBase.__browser).upper() == "FIREFOX":
                 opts.add_argument("-private")
-        # if SeleniumBase.__acceptcerts:
-        #     opts.add_argument("--ignore-certificate-errors")
         if SeleniumBase.__extensions:
             opts.add_argument("--disable-extensions")
         if SeleniumBase.__notifications:
