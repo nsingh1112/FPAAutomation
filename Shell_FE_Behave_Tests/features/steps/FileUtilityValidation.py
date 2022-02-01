@@ -97,6 +97,20 @@ def step_impl(context):
     print("CHILD ELEMENT'S DICTIONARY REPRESENTATION IS: ")
     print(dict_xml2)
 
-@When('user searched for a word from pdf')
-def step_impl(context):
-    FileUtilities.search_word_from_pdf("selenium-python.pdf", "SeleniumPytonBindings")
+@When(u'user searched for a keyword "{word}" from pdf')
+def step_impl(context, word):
+    name = FileUtilities.search_word_from_pdf("selenium-python.pdf", word, exact_match = False)
+    AssertionUtilities.assert_if_true(name)
+
+@When(u'user searched for a word "{word}" not aware of page number from pdf')
+def step_impl(context, word):
+
+    total_pages = FileUtilities.get_number_of_pages("selenium-python.pdf")
+    for i in range(total_pages):
+        name = FileUtilities.search_word_from_pdf("selenium-python.pdf", word, pagenum=i, exact_match = True)
+        if name == True:
+            FileUtilities.log.info("The word found on page number {0}".format(i))
+            break
+        else:
+            name = False
+    AssertionUtilities.assert_if_true(name)

@@ -14,3 +14,5 @@ Feature: File Utility methods validation
     When user reads the root element's values from xml
     When user reads the child element's values from xml
     When user searched for a word from pdf
+    When user searched for a keyword "SeleniumPythonBindings" from pdf
+    When user searched for a word "15" not aware of page number from pdf
