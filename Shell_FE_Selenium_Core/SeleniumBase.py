@@ -29,6 +29,7 @@ class SeleniumBase:
     __remote_environment = None
     driver = None
     url = None
+    diff_app = None
     current_working_directory = os.path.dirname(os.getcwd())
     configfile = current_working_directory + '/Shell_FE_Behave_Tests/behave.ini'
     browserstack_config = current_working_directory + '/Shell_FE_Behave_Tests/browserstack.json'
@@ -139,9 +140,7 @@ class SeleniumBase:
                                           options=SeleniumBase.__opts)
                 return driver
             except Exception as err:
-                raise Exception(
-                    "Chrome driver binary with the name {0} is not present in the folder WebDriverExecutables.".format(
-                        chromedrivername))
+                raise Exception(err)
 
     @staticmethod
     def __firefox_initialization():
@@ -164,9 +163,7 @@ class SeleniumBase:
                                            options=SeleniumBase.__opts)
                 return driver
             except Exception as err:
-                raise Exception(
-                    "Gecko driver binary with the name {0} is not present in the folder WebDriverExecutables.".format(
-                        geckodrivername))
+                raise Exception(err)
 
     @staticmethod
     def __edge_initialization():
@@ -191,9 +188,7 @@ class SeleniumBase:
                               options=SeleniumBase.__opts)
                 return driver
             except Exception as err:
-                raise Exception(
-                    "Edge driver binary with the name {0} is not present in the folder WebDriverExecutables.".format(
-                        edgedrivername))
+                raise Exception(err)
 
     @staticmethod
     def __safari_initialization():
