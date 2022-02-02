@@ -131,9 +131,10 @@ class AppiumBase:
 
         elif AppiumBase.__application_type.lower() == "native" and AppiumBase.__devicePlatform.lower() == "ios":
             desired_caps = {'platformName': AppiumBase.__platformName, 'platformVersion': AppiumBase.__platformVersion,
-                            'deviceName': AppiumBase.__deviceName, 'udid': AppiumBase.__udid, 'automationName' : AppiumBase.__automation_name,
-                             'app':AppiumBase.__app
-                            # 'bundleID': AppiumBase.__bundle_id
+                            'deviceName': AppiumBase.__deviceName, 'udid': AppiumBase.__udid,
+                            'automationName': AppiumBase.__automation_name,
+                            'app': AppiumBase.__app,
+                            'bundleID': AppiumBase.__bundle_id
                             }
             AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_capabilities=desired_caps)
 

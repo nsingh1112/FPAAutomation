@@ -2,6 +2,6 @@
 Feature: iOS Demo
   @TestScenario
   Scenario: Test IntegrationAPP
-    Given I have launched the Integration App
-#    When  I test views
-#    Then  I verify checkbox and radio buttons
+    Given I have launched the UI Catalog App
+    When  I test Alert Views
+    #Then  I verify checkbox and radio buttons
