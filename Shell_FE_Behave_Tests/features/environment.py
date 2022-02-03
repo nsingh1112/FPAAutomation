@@ -20,6 +20,19 @@ def after_step(context, step):
         BrowserUtilities.take_screenshot(screenshot_name)
 
 
+def after_feature(context, feature):
+    """The below code is used to mark the test results in Browserstack as passed or failed based on the assertions
+    validated. Can be commented out or removed if in case Browserstack execution is not performed"""
+    if context.failed is True:
+        SeleniumBase.driver.execute_script(
+            'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed", "reason": "At '
+            'least 1 assertion failed"}}')
+    if context.failed is not True:
+        SeleniumBase.driver.execute_script(
+            'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed", "reason": "All '
+            'assertions passed"}}')
+
+
 def after_scenario(context, scenario):
     if scenario.status == "failed":
         allure.attach(SeleniumBase.driver.get_screenshot_as_png(), name="screenshot",

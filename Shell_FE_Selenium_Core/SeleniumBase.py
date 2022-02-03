@@ -29,10 +29,12 @@ class SeleniumBase:
     __remote_environment = None
     driver = None
     url = None
+    diff_app = None
     current_working_directory = os.path.dirname(os.getcwd())
     configfile = current_working_directory + '/Shell_FE_Behave_Tests/behave.ini'
     browserstack_config = current_working_directory + '/Shell_FE_Behave_Tests/browserstack.json'
     __webdriver_executables = current_working_directory + '/Shell_FE_Behave_Tests/WebDriverExecutables/'
+    TASK_ID = int(os.environ['TASK_ID']) if 'TASK_ID' in os.environ else 0
 
     # endregion
 
@@ -77,10 +79,9 @@ class SeleniumBase:
         SeleniumBase.__notifications = SeleniumBase.__config.getboolean('browser-options', 'disable_notifications')
         SeleniumBase.__insecure_content = SeleniumBase.__config.getboolean('browser-options', 'allow_insecure_content')
         SeleniumBase.__disable_popup = SeleniumBase.__config.getboolean('browser-options', 'disable_popup')
-
+        # endregion
         SeleniumBase.__remote_exe = SeleniumBase.__config.getboolean('browser', 'remote')
         SeleniumBase.__remote_environment = SeleniumBase.__config['browser']['remote_environment']
-        # endregion
 
     # endregion
 
@@ -139,9 +140,7 @@ class SeleniumBase:
                                           options=SeleniumBase.__opts)
                 return driver
             except Exception as err:
-                raise Exception(
-                    "Chrome driver binary with the name {0} is not present in the folder WebDriverExecutables.".format(
-                        chromedrivername))
+                raise Exception(err)
 
     @staticmethod
     def __firefox_initialization():
@@ -164,9 +163,7 @@ class SeleniumBase:
                                            options=SeleniumBase.__opts)
                 return driver
             except Exception as err:
-                raise Exception(
-                    "Gecko driver binary with the name {0} is not present in the folder WebDriverExecutables.".format(
-                        geckodrivername))
+                raise Exception(err)
 
     @staticmethod
     def __edge_initialization():
@@ -191,9 +188,7 @@ class SeleniumBase:
                               options=SeleniumBase.__opts)
                 return driver
             except Exception as err:
-                raise Exception(
-                    "Edge driver binary with the name {0} is not present in the folder WebDriverExecutables.".format(
-                        edgedrivername))
+                raise Exception(err)
 
     @staticmethod
     def __safari_initialization():
@@ -209,7 +204,6 @@ class SeleniumBase:
         opts = browser_options
         opts.headless = SeleniumBase.__headless
         opts.set_capability("acceptInsecureCerts", SeleniumBase.__acceptcerts)
-        opts.set_capability("acceptSslCerts", True)
         if SeleniumBase.__incognito:
             if str(SeleniumBase.__browser).upper() == "CHROME":
                 opts.add_argument("--incognito")
@@ -217,8 +211,6 @@ class SeleniumBase:
                 opts.add_argument("-inprivate")
             if str(SeleniumBase.__browser).upper() == "FIREFOX":
                 opts.add_argument("-private")
-        # if SeleniumBase.__acceptcerts:
-        #     opts.add_argument("--ignore-certificate-errors")
         if SeleniumBase.__extensions:
             opts.add_argument("--disable-extensions")
         if SeleniumBase.__notifications:
@@ -237,18 +229,16 @@ class SeleniumBase:
             Returns:
                 Remote webdriver instance with Browserstack.
         """
-        capabilities = []
-
         with open(SeleniumBase.browserstack_config) as config_file:
             config = json.load(config_file)
 
         username = config['user']
         accesskey = config['key']
         server = config['server']
-        capabilities.append(config['environments'][0])
 
+        capabilities = config['environments'][SeleniumBase.TASK_ID]
         driver = webdriver.Remote(command_executor='https://{0}:{1}@{2}/wd/hub'.format(username, accesskey, server),
-                                  desired_capabilities=capabilities[0])
+                                      desired_capabilities=capabilities)
         return driver
 
     @staticmethod

@@ -4,12 +4,56 @@
   "server": "hub.browserstack.com",
   "environments": [
     {
+      "os_version": "10",
+      "resolution": "1920x1080",
+      "browser": "Edge",
+      "browser_version": "96.0",
+      "os": "Windows",
+      "name": "Windows browser test_Edge",
+      "build": "BStack-[Python] Parallel Build_0124"
+    },
+    {
+      "os_version": "10",
+      "resolution": "1920x1080",
+      "browser": "Chrome",
+      "browser_version": "96.0",
+      "os": "Windows",
+      "name": "Windows browser test_Chrome",
+      "build": "BStack-[Python] Parallel Build_0121"
+    },
+    {
+      "os_version": "Big Sur",
+      "resolution": "1920x1080",
+      "browser": "Safari",
+      "browser_version": "14.1",
+      "os": "OS X",
+      "name": "Mac browser test_Safari",
+      "build": "BStack-[Python] Parallel Build_0121"
+    },
+    {
+      "os_version": "Big Sur",
+      "resolution": "1920x1080",
+      "browser": "Firefox",
+      "browser_version": "latest",
+      "os": "OS X",
+      "name": "Mac browser test_Safari",
+      "build": "BStack-[Python] Parallel Build_0121"
+    },
+    {
       "browserName": "Android",
       "device": "Samsung Galaxy S9 Plus",
       "realMobile": "true",
       "os_version": "9.0",
-      "name": "Mobile browser test_0119",
-      "build": "BStack-[Python] Sample Build_0119"
+      "name": "Mobile browser test_Android",
+      "build": "BStack-[Python] Sample Build_0121"
+    },
+    {
+      "browserName": "iPhone",
+      "device": "iPhone 11",
+      "realMobile": "true",
+      "os_version": "14.0",
+      "name": "Mobile browser test_iOS",
+      "build": "BStack-[Python] Sample Build_0121"
     }
   ]
 }
