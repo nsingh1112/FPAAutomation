@@ -4,6 +4,8 @@ import openpyxl
 import json
 import xmltodict
 from Shell_FE_Selenium_Core.Utilities.LoggingUtilities import LoggingUtilities
+import PyPDF2
+import re
 
 
 class FileUtilities:
@@ -226,10 +228,8 @@ class FileUtilities:
                     if ResSearch is not None:
                         word_count = word_count+1
                 if word_count == 0:
-                    FileUtilities.log.error("Word {0} not found in file {1}".format(word, file_name))
                     return False
                 else:
-                    FileUtilities.log.info("Word {0} found in file {1}".format(word, file_name))
                     return True
 
             elif substring == True:
@@ -239,18 +239,14 @@ class FileUtilities:
                     if ResSearch is not None:
                         word_count = word_count+1
                 if word_count == 0:
-                    FileUtilities.log.error("Word {0} not found in file {1}".format(word, file_name))
                     return False
                 else:
-                    FileUtilities.log.info("Word {0} found in file {1}".format(word, file_name))
                     return True
             else:
                 ResSearch = re.match(word, pdfData)
                 if ResSearch is not None:
-                    FileUtilities.log.info("Word {0} found in file {1}".format(word, file_name))
                     return True
                 else:
-                    FileUtilities.log.error("Word {0} not found in file {1}".format(word, file_name))
                     return False
         # Unable to open the file
         except IOError as ex:
@@ -271,7 +267,7 @@ class FileUtilities:
             pdf_file = open(FileUtilities.test_data + file_name, "rb")
             read_pdf = PyPDF2.PdfFileReader(pdf_file)
             number_of_pages = read_pdf.getNumPages()
-            FileUtilities.log.info("Return the number of pages")
+            FileUtilities.log.info("Return the number of pages ")
             return number_of_pages
         # Unable to open the file
         except IOError as ex:

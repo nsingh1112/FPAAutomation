@@ -1,6 +1,7 @@
 from behave import Given, When, Then
 
 from Shell_FE_Selenium_Core.Utilities.FileUtilities import FileUtilities
+from Shell_FE_Selenium_Core.Utilities.AssertionUtilities import AssertionUtilities
 
 
 @When('user reads the values available in excel by cell value')
@@ -99,18 +100,23 @@ def step_impl(context):
 
 @When(u'user searched for a keyword "{word}" from pdf')
 def step_impl(context, word):
-    name = FileUtilities.search_word_from_pdf("selenium-python.pdf", word, exact_match = False)
+    file_name = "selenium-python.pdf"
+    name = FileUtilities.search_word_from_pdf(file_name, word, exact_match = False)
+    if name == True:
+        FileUtilities.log.info("Word {0} found in file {1}".format(word, file_name))
+    else:
+        FileUtilities.log.error("Word {0} not found in file {1}".format(word, file_name))
     AssertionUtilities.assert_if_true(name)
 
 @When(u'user searched for a word "{word}" not aware of page number from pdf')
 def step_impl(context, word):
-
-    total_pages = FileUtilities.get_number_of_pages("selenium-python.pdf")
+    file_name = "selenium-python.pdf"
+    total_pages = FileUtilities.get_number_of_pages(file_name)
     for i in range(total_pages):
         name = FileUtilities.search_word_from_pdf("selenium-python.pdf", word, pagenum=i, exact_match = True)
         if name == True:
             FileUtilities.log.info("The word found on page number {0}".format(i))
             break
-        else:
-            name = False
+    if name == False:
+        FileUtilities.log.error("Word {0} not found in file {1}".format(word, file_name))
     AssertionUtilities.assert_if_true(name)
