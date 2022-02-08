@@ -16,6 +16,19 @@ class IOSUtilities:
     log = logobj.logger()
 
     @staticmethod
+    def navigate_to_url(url):
+        """Navigates to the url specified.
+
+        :Args:
+            - url - The url to be navigated to.
+        """
+        if url is None:
+            IOSUtilities.log.error("Invalid or empty URL!!")
+            raise Exception("Invalid or empty URL!!")
+        AppiumBase.driver.get(url)
+        IOSUtilities.log.info("Navigated to the URL: {0}.".format(url))
+
+    @staticmethod
     def click_element(element):
         """Clicks the Element.
             :Args:
@@ -204,6 +217,23 @@ class IOSUtilities:
         actions.long_press(source_element).wait(wait).move_to(target_element_location).perform().release()
 
     @staticmethod
+    def move_to_element(start_x, start_y, end_x, end_y):
+        """It scrolls to the element based on the co-ordinates
+           :args:
+               - start_x - co-ordinate of starting x-axis
+               - start_y - co-ordinate of starting y-axis
+               - end_x   - co-ordinate of the end x-axis
+               - end_y    - co-ordinate of the end y-axis
+        """
+        if start_x is None or start_y is None or end_x is None or end_y is None:
+            IOSUtilities.log.error(
+                "Empty or invalid Web element passed as argument to the method: move_to_element(start_x,start_y,"
+                "end_x,end_y)")
+            raise TypeError("Empty or invalid element passed!!")
+        actions = TouchAction(AppiumBase.driver)
+        actions.press(start_x, start_y).wait(2000).move_to(end_x, end_y).perform()
+
+    @staticmethod
     def take_screenshot(screenshot_name):
         """Takes screenshot of the web page and saves it in the Screenshots folder under TestResults."""
         time_format = str(time.strftime("%d_%m_%H_%S")).replace("_", "")
@@ -238,28 +268,34 @@ class IOSUtilities:
         AppiumBase.driver.switch_to.context(switch_view)
 
     @staticmethod
-    def scroll_to_text(text_of_the_element):
+    def scroll_to_text(text_of_the_element,direction):
         """Scroll to the element using text
            :args:
                 - text_of_the_element - text of the element to be scrolled
+                - direction - Direction should be up or down
         """
-        if text_of_the_element is None:
+        if text_of_the_element is None or direction is None:
             IOSUtilities.log.error(
                 "Empty or invalid Web element passed as argument to the method: scroll_to_text(text_of_the_element)")
             raise TypeError("Empty or invalid element passed!!")
-        AppiumBase.driver.execute_script('mobile: scroll', {'name': text_of_the_element, 'direction': 'down'})
+        AppiumBase.driver.execute_script('mobile: scroll', {'name': text_of_the_element, 'direction': direction})
+
 
     @staticmethod
-    def scroll_up(text_of_the_element):
-        """Scroll to the element using text
+    def scroll_picker_wheel(element_id,movement_order, offset=None):
+        """Scroll the picker wheel
            :args:
-                - text_of_the_element - text of the element to be scrolled
+                - element_id - id of the element
+                - movement_oder - it should be either previous or next
+                - offset -The value in range [0.01, 0.5].It defines how far from picker wheel's center the click should happen
         """
-        if text_of_the_element is None:
+        if element_id is None or movement_order is None:
             IOSUtilities.log.error(
-                "Empty or invalid Web element passed as argument to the method: scroll_to_text(text_of_the_element)")
+                "Empty or invalid Web element passed as argument to the method: scroll_picker_wheel(element_id,"
+                "movement_order)")
             raise TypeError("Empty or invalid element passed!!")
-        AppiumBase.driver.execute_script('mobile: scroll', {'name':text_of_the_element, 'direction': 'up'})
+        AppiumBase.driver.execute_script('mobile: selectPickerWheelValue', {'elementId ': element_id, 'order': movement_order , 'offset': offset})
+
 
     @staticmethod
     def swipe(start_x, start_y, end_x, end_y, duration=None):
@@ -304,7 +340,7 @@ class IOSUtilities:
 
     @staticmethod
     def get_current_window_size(current_window):
-        """Returns the size of the specified window
+        """Returns the size of the specified window in the browser
            :args:
                 - current_window- pass the window name to get the widow_size
         """
@@ -330,25 +366,82 @@ class IOSUtilities:
         return AppiumBase.driver.orientation
 
     @staticmethod
-    def start_activity(package_name, activity_name):
+    def click_back_button():
+        """Press the mobile application back button"""
+        AppiumBase.driver.back()
+
+    @staticmethod
+    def activate_app(bundle_id):
         """Start an Android activity
            :args:
                 - package_name - provide the package name of the app
                 - activity_name - provide the activity name of the app
         """
-        if package_name is None or activity_name is None:
+        if bundle_id is None:
             IOSUtilities.log.error(
                 "Empty or invalid Web element passed as argument to the method: start_activity(package_name,"
                 "activity_name)")
             raise TypeError("Empty or invalid element passed!!")
-        AppiumBase.driver.start_activity(package_name, activity_name)
+        AppiumBase.driver.activate_app(bundle_id)
 
     @staticmethod
-    def get_current_activity():
-        """Get the name of the current Android activity"""
-        return AppiumBase.driver.current_activity
+    def run_app_in_background(duration=-1):
+        """Runs the apps in the background
+           :args:
+            - duration: It holds the app in background for teh specified duration.
+              By default duration is set to -1 which means app will be on background until we start the app
+        """
+        AppiumBase.driver.background_app(duration)
 
     @staticmethod
-    def click_back_button():
-        """Press the mobile application back button"""
-        AppiumBase.driver.back()
+    def app_status(bundle_id):
+        """Get the status of the app
+        :args:
+             - bundle_id - bundleId of the application needs to get the status
+        :returns:(number)
+              0 is not installed.
+              1 is not running.
+              2 is running in background or suspended.
+              3 is running in background.
+              4 is running in foreground.
+        """
+        return AppiumBase.driver.query_app_state(bundle_id)
+
+    @staticmethod
+    def shake():
+        """Performs Shake operation"""
+        AppiumBase.driver.shake()
+
+    @staticmethod
+    def lock_device(duration_in_seconds=None):
+        """It locks the device for the particular duration
+           :args:
+              - duration_in_seconds - duration of the device to be locked. By default lock duration is not set
+        """
+        AppiumBase.driver.lock(duration_in_seconds)
+
+    @staticmethod
+    def unlock_device():
+        """It unlocks the device"""
+        AppiumBase.driver.unlock()
+
+    @staticmethod
+    def check_lock_status():
+        """Used to check the device is locked or not
+           :Returns:
+              - True - If the device is locked
+              - Falese -If the device is not locked
+        """
+        return AppiumBase.driver.is_locked()
+
+    @staticmethod
+    def show_device_time():
+        """Returns the device time in String"""
+        return AppiumBase.driver.get_device_time()
+
+
+
+
+
+
+

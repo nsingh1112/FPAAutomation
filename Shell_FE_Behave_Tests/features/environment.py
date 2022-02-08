@@ -6,6 +6,7 @@ from Shell_FE_Appium_Core.AppiumBase import AppiumBase
 from allure_commons.types import AttachmentType
 import allure
 from Shell_FE_Appium_Core.Utilities.AndroidUtilities import AndroidUtilities
+from Shell_FE_Appium_Core.Utilities.iOSUtilities import IOSUtilities
 
 
 def before_all(context):
@@ -17,7 +18,7 @@ def before_all(context):
 def after_step(context, step):
     if step.status == "failed":
         screenshot_name = str(context.scenario.name).replace(" ", "_")
-        AndroidUtilities.take_screenshot(screenshot_name)
+        IOSUtilities.take_screenshot(screenshot_name)
 
 
 def after_scenario(context, scenario):

@@ -1,3 +1,5 @@
+import time
+
 from behave import *
 from Shell_FE_Behave_Tests.MobileApplicationLibrary.FunctionLibrary.iOSDemoAppFunctions import IOSDemoFunction
 
@@ -16,3 +18,6 @@ def checking_alert(context):
     context.feature.iOS_Demos_functions.text_entry_alert()
     context.feature.iOS_Demos_functions.confirm_cancel_alert()
     context.feature.iOS_Demos_functions.home_page()
+    context.feature.iOS_Demos_functions.check_orientation()
+
+

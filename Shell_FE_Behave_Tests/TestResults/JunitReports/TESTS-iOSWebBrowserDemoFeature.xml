@@ -1,0 +1,18 @@
+<testsuite name="iOSWebBrowserDemoFeature.Web Browser Demo" tests="1" errors="0" failures="0" skipped="0" time="12.54344"><testcase classname="iOSWebBrowserDemoFeature.Web Browser Demo" name="Test the web browser" status="passed" time="12.54344"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Test the web browser
+    Given I have launched the safari app ... passed in 0.000s
+    When I am passing the URL ... passed in 2.024s
+    Then I verify it landed on the corresponding URL ... passed in 0.012s
+    Then I am passing the username ... passed in 0.201s
+    Then I verify it is landed on the Authentication system page ... passed in 10.307s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+############ Title of the page is :Sign in to your account
+
+]]>
+</system-out></testcase></testsuite>

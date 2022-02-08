@@ -1,3 +1,5 @@
+import time
+
 from Shell_FE_Appium_Core.AppiumBase import AppiumBase
 from Shell_FE_Appium_Core.Utilities.LoggingUtilities import LoggingUtilities
 from Shell_FE_Behave_Tests.MobileApplicationLibrary.ControlLibrary.iOSDemoAppControls import IOSDemoControls
@@ -40,6 +42,7 @@ class IOSDemoFunction:
         WaitUtilities.wait_element_to_be_visible(self.iOSFunctions.text_field)
         IOSUtilities.send_text_to_element(self.iOSFunctions.get_text_field(),"FE Automation Team")
         IOSUtilities.clear_text(self.iOSFunctions.get_text_field())
+        time.sleep(2)
         IOSUtilities.tap_element(self.iOSFunctions.get_okay_btn())
 
     def confirm_cancel_alert(self):
@@ -51,6 +54,24 @@ class IOSDemoFunction:
     def home_page(self):
         IOSUtilities.click_back_button()
         WaitUtilities.wait_element_to_be_visible(self.iOSFunctions.alert_view)
+
+
+    def activate_app_in_foreground(self):
+        IOSUtilities.activate_app("com.example.apple-samplecode.UICatalogmyxcode2794oc")
+
+    def check_orientation(self):
+        print(IOSUtilities.get_device_orientation())
+        IOSUtilities.set_device_orientation("portrait")
+        print(IOSUtilities.get_device_orientation())
+        IOSUtilities.run_app_in_background()
+        IOSUtilities.shake()
+        IOSUtilities.lock_device()
+        IOSUtilities.unlock_device()
+        print(IOSUtilities.check_lock_status())
+        time.sleep(2)
+
+
+
 
 
 

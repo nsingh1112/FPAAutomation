@@ -32,6 +32,7 @@ class BrowserFunctions:
 
     def pass_value(self):
         AndroidUtilities.send_text_to_element(self.BrowserControls.get_username(), "saktivel.rajasekar@shell.com")
+        WaitUtilities.wait_for_element_to_be_clickable(self.BrowserControls.next_btn)
         AndroidUtilities.click_element(self.BrowserControls.get_next_btn())
 
     def check_authentication(self):

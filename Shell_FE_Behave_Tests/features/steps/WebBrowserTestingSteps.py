@@ -16,7 +16,6 @@ def launching_url(context):
 @then('I verify it landed on the corresponding URL')
 def verifying_title(context):
     context.webBrowser.verify_title()
-    # context.webBrowser.get_context()
     # context.webBrowser.switch_context("CHROMIUM")
 
 
