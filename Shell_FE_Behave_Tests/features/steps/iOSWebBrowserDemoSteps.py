@@ -2,42 +2,19 @@ import time
 
 from behave import *
 from Shell_FE_Appium_Core.AppiumBase import AppiumBase
-from Shell_FE_Appium_Core.Utilities.iOSUtilities import IOSUtilities
+from Shell_FE_Appium_Core.Utilities.FileUtilities import FileUtilities
 from Shell_FE_Behave_Tests.MobileApplicationLibrary.FunctionLibrary.WebBrowserFunctions import BrowserFunctions
 
-
-# @given('I have launched the safari app')
-# def step_impl(context):
-#     IOSUtilities.navigate_to_url("https://hub.shell.com")
-#     time.sleep(10)
-#     text = IOSUtilities.get_title()
-#     print(text)
-#     time.sleep(5)
 
 @given('I have launched the safari app')
 def launching_app(context):
     context.webBrowser = BrowserFunctions()
 
 
-# @when('I am passing the URL')
-# def launching_url(context):
-#     context.webBrowser.launch_web("https://hub.shell.com")
-#
-#
-# @then('I verify it landed on the corresponding URL')
-# def verifying_title(context):
-#     context.webBrowser.verify_title()
-#     # context.webBrowser.get_context()
-#     # context.webBrowser.switch_context("CHROMIUM")
-#
-#
-# @then('I am passing the username')
-# def send_username(context):
-#     context.webBrowser.click_username()
-#     context.webBrowser.pass_value()
-#
-#
-# @then('I verify it is landed on the Authentication system page')
-# def check_authentication(context):
-#     context.webBrowser.check_authentication()
-#
+@when('I am testing the background and foreground methods')
+def testing_background_foreground(context):
+    context.webBrowser.check_background()
+    context.webBrowser.foreground_app(AppiumBase.bundle_id)
+    context.webBrowser.check_background()
+    safari_bundleId = FileUtilities.read_json_file_as_dictionary("Appinfo.json")
+    context.webBrowser.foreground_app(safari_bundleId["bundleId"])

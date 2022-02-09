@@ -372,7 +372,7 @@ class IOSUtilities:
 
     @staticmethod
     def activate_app(bundle_id):
-        """Start an Android activity
+        """Start an iOS activity
            :args:
                 - package_name - provide the package name of the app
                 - activity_name - provide the activity name of the app

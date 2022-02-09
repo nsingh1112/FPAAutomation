@@ -70,6 +70,17 @@ class IOSDemoFunction:
         print(IOSUtilities.check_lock_status())
         time.sleep(2)
 
+    def check_background_app(self):
+        IOSUtilities.run_app_in_background()
+
+    def activate_my_app(self):
+        IOSUtilities.activate_app(AppiumBase.bundle_id)
+        time.sleep(5)
+
+    def re_launch_app(self):
+        AppiumBase.launch_application()
+        time.sleep(5)
+
 
 
 
