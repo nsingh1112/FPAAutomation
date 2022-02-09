@@ -83,7 +83,7 @@ class AppiumBase:
             AppiumBase.__application_type = AppiumBase.__config['Android']['applicationType']
             AppiumBase.__automation_name = AppiumBase.__config['Android']['automationName']
             AppiumBase.__browser_name = AppiumBase.__config['Android']['browserName']
-            AppiumBase.appPathFlag = AppiumBase.__config.getboolean('Android', 'appPathRequired')
+            AppiumBase.appPathFlag = AppiumBase.__config.getboolean('Android', 'runAppWithPath')
 
         elif AppiumBase.__devicePlatform.lower() == "ios":
             AppiumBase.__application_type = AppiumBase.__config['iOS']['applicationType']
@@ -97,8 +97,8 @@ class AppiumBase:
             AppiumBase.__automation_name = AppiumBase.__config['iOS']['automationName']
             AppiumBase.__browser_name = AppiumBase.__config['iOS']['browserName']
             AppiumBase.noRest = AppiumBase.__config.getboolean('iOS', 'noReset')
-            AppiumBase.appPathFlag = AppiumBase.__config.getboolean('iOS', 'appPathRequired')
-            AppiumBase.bundleIdPath = AppiumBase.__config.getboolean('iOS', 'bundleIdRequired')
+            AppiumBase.appPathFlag = AppiumBase.__config.getboolean('iOS', 'runAppWithPath')
+            AppiumBase.bundleIdPath = AppiumBase.__config.getboolean('iOS', 'runAppWithBundleId')
 
     # endregion
 
