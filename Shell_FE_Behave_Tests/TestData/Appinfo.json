@@ -1,3 +1,4 @@
 {
-  "bundleId" : "com.apple.mobilesafari"
+  "bundleId" : "com.apple.mobilesafari",
+  "UIKitCatalog": "com.example.apple-samplecode.UICatalogmyxcode2794"
 }
