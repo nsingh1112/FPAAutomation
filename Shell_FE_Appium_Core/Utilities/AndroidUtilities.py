@@ -171,18 +171,18 @@ class AndroidUtilities:
         actions.tap(element).perform()
 
     @staticmethod
-    def tap_element_by_coordinate(x, y):
+    def tap_element_by_coordinate(x_value, y_value):
         """Tap on the element using the cooridinates
            :args:
                  x : x coordinate to tap, relative to the top left corner of the element.
                  y : y coordinate. If y is used, x must also be set, and vice versa
         """
-        if x is None or y is None:
+        if x_value is None or y_value is None:
             AndroidUtilities.log.error(
                 "Empty or invalid Web element passed as argument to the method: tap_element_by_coordinate(x,y)")
             raise TypeError("Empty or invalid element passed!!")
         actions = TouchAction(AppiumBase.driver)
-        actions.tap(x, y).perform()
+        actions.tap(x=x_value, y=y_value).perform()
 
     @staticmethod
     def long_press(element, duration=1000):

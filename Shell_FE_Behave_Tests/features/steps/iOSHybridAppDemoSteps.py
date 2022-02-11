@@ -1,33 +1,29 @@
 import time
 
 from behave import *
-from Shell_FE_Appium_Core.AppiumBase import AppiumBase
-from Shell_FE_Appium_Core.Utilities.iOSUtilities import IOSUtilities
-from Shell_FE_Appium_Core.Utilities.WaitUtilities import WaitUtilities
-from appium.webdriver.common.mobileby import MobileBy
+
+from Shell_FE_Behave_Tests.MobileApplicationLibrary.FunctionalLibrary.iOSHybridDemoFunctions import HybridAppFunctions
+
 
 @given(u'I launched the mobile native Safari app')
 def step_impl(context):
-    # WaitUtilities.wait_for_element_to_be_clickable(AppiumBase.driver.find_element(MobileBy.IOS_CLASS_CHAIN,"**/XCUIElementTypeCell['name == 'com.apple.mobilesafari.framework-customization-sectionContent'']/XCUIElementTypeOther") )
-    print(IOSUtilities.get_app_contexts())
-    IOSUtilities.click_element(AppiumBase.driver.find_element(MobileBy.IOS_CLASS_CHAIN,"**/XCUIElementTypeCell[`name "
-                                                                                       "== "
-                                                                                       "'com.apple.mobilesafari"
-                                                                                       ".framework-customization"
-                                                                                       "-sectionContent"
-                                                                                       "'`]/XCUIElementTypeOther"))
+    context.feature.iOS_hybrid = HybridAppFunctions()
+    parent_context = context.feature.iOS_hybrid.current_contex()
+    print(parent_context)
+
+
+@when('I am testing the search functionality')
+def step_impl(context):
+    context.feature.iOS_hybrid.click_search()
+    context.feature.iOS_hybrid.pass_value_to_search_field("Python Automation Testing")
     time.sleep(10)
 
 
-
-@when(u'I am testing the search functionality')
+@when('I test the swicth context')
 def step_impl(context):
-    pass
-
-
-@when(u'I test the swicth context')
-def step_impl(context):
-    pass
+    app_views = context.feature.iOS_hybrid.get_context_of_app()
+    print("Total view of the app:",app_views)
+    time.sleep(5)
 
 
 @then(u'I am testing the web_view after switching')

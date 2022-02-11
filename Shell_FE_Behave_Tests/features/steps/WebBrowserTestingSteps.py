@@ -1,6 +1,6 @@
 from behave import *
 
-from Shell_FE_Behave_Tests.MobileApplicationLibrary.FunctionLibrary.WebBrowserFunctions import BrowserFunctions
+from Shell_FE_Behave_Tests.MobileApplicationLibrary.FunctionalLibrary.WebBrowserFunctions import BrowserFunctions
 
 
 @given('I have launched the chrome app')

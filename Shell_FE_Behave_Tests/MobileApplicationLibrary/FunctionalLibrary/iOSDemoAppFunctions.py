@@ -40,7 +40,7 @@ class IOSDemoFunction:
         WaitUtilities.wait_element_to_be_visible(self.iOSFunctions.text_entry_alert)
         IOSUtilities.click_element(self.iOSFunctions.get_text_entry())
         WaitUtilities.wait_element_to_be_visible(self.iOSFunctions.text_field)
-        IOSUtilities.send_text_to_element(self.iOSFunctions.get_text_field(),"FE Automation Team")
+        IOSUtilities.send_text_to_element(self.iOSFunctions.get_text_field(), "FE Automation Team")
         IOSUtilities.clear_text(self.iOSFunctions.get_text_field())
         time.sleep(2)
         IOSUtilities.tap_element(self.iOSFunctions.get_okay_btn())
@@ -54,10 +54,6 @@ class IOSDemoFunction:
     def home_page(self):
         IOSUtilities.click_back_button()
         WaitUtilities.wait_element_to_be_visible(self.iOSFunctions.alert_view)
-
-
-    def activate_app_in_foreground(self):
-        IOSUtilities.activate_app("com.example.apple-samplecode.UICatalogmyxcode2794oc")
 
     def check_orientation(self):
         print(IOSUtilities.get_device_orientation())
@@ -77,12 +73,14 @@ class IOSDemoFunction:
         IOSUtilities.activate_app(AppiumBase.bundle_id)
         time.sleep(5)
 
-    def re_launch_app(self):
-        AppiumBase.launch_application()
-        time.sleep(5)
+    def click_picker_wheel(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.iOSFunctions.picker_view_tab)
+        IOSUtilities.tap_element(self.iOSFunctions.get_picker_wheel_tab())
+        # current_time= IOSUtilities.get_attribute(self.iOSFunctions.get_current_time(),"accessibility id")
+        # print("Current Time : ", current_time)
+        IOSUtilities.tap_element_by_coordinate(253 , 334)
 
-
-
-
-
+    def move_picker_wheel(self,movement_order,offset):
+        WaitUtilities.wait_element_to_be_visible(self.iOSFunctions.time_scroll_wheel)
+        IOSUtilities.scroll_picker_wheel(self.iOSFunctions.time_scroll_wheel,movement_order,offset)
 

@@ -1,5 +1,7 @@
 from appium.webdriver.common.mobileby import MobileBy
 
+from Shell_FE_Appium_Core.AppiumBase import AppiumBase
+
 
 class IOSDemoControls:
     def __init__(self, driver):
@@ -48,6 +50,11 @@ class IOSDemoControls:
                                           '/XCUIElementTypeOther/XCUIElementTypeTable/XCUIElementTypeCell['
                                           '6]/XCUIElementTypeOther[2]/XCUIElementTypeOther')
     confirm_btn = (MobileBy.ACCESSIBILITY_ID, "Confirm")
+    picker_view_tab = (MobileBy.IOS_CLASS_CHAIN, "**/XCUIElementTypeWindow/XCUIElementTypeOther/XCUIElementTypeOther"
+                                                 "/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther"
+                                                 "/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable"
+                                                 "/XCUIElementTypeCell[4]/XCUIElementTypeOther[1]/XCUIElementTypeOther")
+    time_scroll_wheel = (MobileBy.IOS_CLASS_CHAIN, "**/XCUIElementTypePickerWheel[`value == 'PM'`]")
 
     def get_alert_view(self):
         return self.driver.find_element(*IOSDemoControls.alert_view)
@@ -78,3 +85,12 @@ class IOSDemoControls:
 
     def get_confirm_btn(self):
         return self.driver.find_element(*IOSDemoControls.confirm_btn)
+
+    def get_picker_wheel_tab(self):
+        return self.driver.find_element(*IOSDemoControls.picker_view_tab)
+
+    def get_scroll_wheel(self):
+        return self.driver.find_element(*IOSDemoControls.time_scroll_wheel)
+
+    # def get_current_time(self):
+    #     return self.driver.find_element(*IOSDemoControls.time_value)
