@@ -136,23 +136,6 @@ class AppiumBase:
 
         AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_capabilities=desired_caps)
 
-        # AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_capabilities=desired_caps)
-
-        # elif AppiumBase.__application_type.lower() == "hybrid":
-        #     desired_caps = {'platformName': AppiumBase.__platformName, 'platformVersion': AppiumBase.__platformVersion,
-        #                 'deviceName': AppiumBase.__deviceName, 'automationName': AppiumBase.__automation_name,
-        #                 'app': AppiumBase.app, 'appPackage': AppiumBase.appPackage,
-        #                 'appActivity': AppiumBase.appActivity,
-        #                 }
-        #     AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_capabilities=desired_caps)
-
-        # desired_caps = {'platformName': AppiumBase.__platformName,
-        #                 'platformVersion': AppiumBase.__platformVersion,
-        #                 'deviceName': AppiumBase.__deviceName, 'automationName': AppiumBase.__automation_name,
-        #                 'browserName': AppiumBase.__browser_name
-        #                 }
-        # AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_capabilities=desired_caps)
-
     # endregion
 
     @staticmethod
