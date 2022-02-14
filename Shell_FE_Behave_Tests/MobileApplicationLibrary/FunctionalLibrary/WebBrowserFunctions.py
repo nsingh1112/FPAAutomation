@@ -5,6 +5,7 @@ from Shell_FE_Behave_Tests.MobileApplicationLibrary.ControlLibrary.WebBrowserCon
 from Shell_FE_Appium_Core.Utilities.AndroidUtilities import AndroidUtilities
 from Shell_FE_Appium_Core.Utilities.WaitUtilities import WaitUtilities
 from Shell_FE_Appium_Core.Utilities.AssertUtilities import AssertUtilities
+from Shell_FE_Appium_Core.Utilities.iOSUtilities import IOSUtilities
 
 
 class BrowserFunctions:
@@ -32,7 +33,14 @@ class BrowserFunctions:
 
     def pass_value(self):
         AndroidUtilities.send_text_to_element(self.BrowserControls.get_username(), "saktivel.rajasekar@shell.com")
+        WaitUtilities.wait_for_element_to_be_clickable(self.BrowserControls.next_btn)
         AndroidUtilities.click_element(self.BrowserControls.get_next_btn())
 
     def check_authentication(self):
         WaitUtilities.wait_element_to_be_visible(self.BrowserControls.authentication_text)
+
+    def check_background(self):
+        IOSUtilities.run_app_in_background()
+
+    def foreground_app(self, bundleId):
+        IOSUtilities.activate_app(bundleId)

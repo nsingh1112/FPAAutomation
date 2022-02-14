@@ -19,6 +19,7 @@ class ApiDemoAppControls:
     target_element = (MobileBy.ID,"io.appium.android.apis:id/drag_dot_2")
     result_text = (MobileBy.ID,"io.appium.android.apis:id/drag_result_text")
 
+
     def get_view_tab(self):
         return self.driver.find_element(*ApiDemoAppControls.view_tab)
 

@@ -1,4 +1,4 @@
-@NativeApp
+@nativeApp @mobile
 Feature: Android Demo
   @TestScenario
   Scenario: Test light theme controls in views

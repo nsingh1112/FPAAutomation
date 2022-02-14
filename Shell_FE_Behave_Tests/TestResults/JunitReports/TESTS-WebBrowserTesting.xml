@@ -1,0 +1,14 @@
+<testsuite name="WebBrowserTesting.Web Browser Demo" tests="1" errors="0" failures="0" skipped="1" time="0.0"><testcase classname="WebBrowserTesting.Web Browser Demo" name="Test the web browser" status="skipped" time="0"><skipped /><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Test the web browser
+    Given I have launched the chrome app ... skipped in 0.000s
+    When I am passing the URL ... skipped in 0.000s
+    Then I verify it landed on the corresponding URL ... skipped in 0.000s
+    Then I am passing the username ... skipped in 0.000s
+    Then I verify it is landed on the Authentication system page ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
