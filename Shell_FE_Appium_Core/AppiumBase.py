@@ -26,6 +26,7 @@ class AppiumBase:
     noReset = None
     appPathFlag = None
     bundleIdPath = None
+    appPackageFlag = None
     current_working_directory = os.path.dirname(os.getcwd())
     configfile = current_working_directory + '/Shell_FE_Behave_Tests/behave.ini'
     appium_Service = AppiumService()
@@ -84,6 +85,7 @@ class AppiumBase:
             AppiumBase.__automation_name = AppiumBase.__config['Android']['automationName']
             AppiumBase.__browser_name = AppiumBase.__config['Android']['browserName']
             AppiumBase.appPathFlag = AppiumBase.__config.getboolean('Android', 'runAppWithPath')
+            AppiumBase.appPackageFlag = AppiumBase.__config.getboolean('Android','runAppWithPackage')
 
         elif AppiumBase.__devicePlatform.lower() == "ios":
             AppiumBase.__application_type = AppiumBase.__config['iOS']['applicationType']
@@ -115,8 +117,9 @@ class AppiumBase:
                         }
         if AppiumBase.__application_type.lower() == "native" or AppiumBase.__application_type.lower() == "hybrid":
             if AppiumBase.__devicePlatform.lower() == "android":
-                desired_caps['appPackage']: AppiumBase.appPackage
-                desired_caps['appActivity']: AppiumBase.appActivity
+                if AppiumBase.appPackageFlag is True:
+                    desired_caps['appPackage']: AppiumBase.appPackage
+                    desired_caps['appActivity']: AppiumBase.appActivity
 
                 if AppiumBase.appPathFlag is True:
                     desired_caps['app'] = AppiumBase.app
