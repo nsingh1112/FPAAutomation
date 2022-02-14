@@ -6,6 +6,7 @@
   Scenario: Test IntegrationAPP
     Given I have launched the UI Catalog App ... skipped in 0.000s
     When I test Alert Views ... skipped in 0.000s
+    When I do parallel App testing ... skipped in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------

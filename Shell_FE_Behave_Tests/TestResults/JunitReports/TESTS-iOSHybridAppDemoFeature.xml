@@ -1,0 +1,21 @@
+<testsuite name="iOSHybridAppDemoFeature.Hybrid App Demo" tests="2" errors="0" failures="0" skipped="2" time="0.0"><testcase classname="iOSHybridAppDemoFeature.Hybrid App Demo" name="Test the search box" status="skipped" time="0"><skipped /><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Test the search box
+    Given I launched the mobile native Safari app ... skipped in 0.000s
+    When I am testing the search functionality ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="iOSHybridAppDemoFeature.Hybrid App Demo" name="Switching views" status="skipped" time="0"><skipped /><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Switching views
+    When I test the swicth context ... skipped in 0.000s
+    Then I am testing the web_view after switching ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

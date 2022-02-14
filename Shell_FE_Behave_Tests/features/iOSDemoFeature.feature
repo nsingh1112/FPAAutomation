@@ -1,4 +1,4 @@
-@nativeApp @mobile @iOS
+@mobile @iOS @iOSNativeApp
 Feature: iOS Demo
   @TestScenario
   Scenario: Test IntegrationAPP

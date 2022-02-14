@@ -18,7 +18,7 @@ def before_all(context):
 def after_step(context, step):
     if step.status == "failed":
         screenshot_name = str(context.scenario.name).replace(" ", "_")
-        IOSUtilities.take_screenshot(screenshot_name)
+        AndroidUtilities.take_screenshot(screenshot_name)
 
 
 def after_scenario(context, scenario):

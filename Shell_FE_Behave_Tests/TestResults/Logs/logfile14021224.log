@@ -1,0 +1,8 @@
+2022-02-14 12:54:44,013 :ERROR :WaitUtilities :Element ('accessibility id', 'Views') is not clickable. Unable to click / find the element within the specified time. Exception: TimeoutException
+2022-02-14 12:54:46,622 :INFO :AndroidUtilities :Took screenshot and saved as Test_light_theme_controls_in_views_14021244.png in screenshots folder.
+2022-02-14 12:54:59,090 :ERROR :WaitUtilities :Element ('accessibility id', '1. Light Theme') is not visible within the specified time. Exception: TimeoutException
+2022-02-14 12:55:09,375 :ERROR :WaitUtilities :Element ('accessibility id', 'Controls') is not visible within the specified time. Exception: TimeoutException
+2022-02-14 12:55:19,632 :ERROR :WaitUtilities :Element ('accessibility id', 'Drag and Drop') is not visible within the specified time. Exception: TimeoutException
+2022-02-14 12:55:26,512 :INFO :AndroidUtilities :Took screenshot and saved as Test_Popups_14021226.png in screenshots folder.
+2022-02-14 12:55:37,129 :ERROR :WaitUtilities :Element ('xpath', "//XCUIElementTypeApplication[@name='UIKitCatalog']/XCUIElementTypeWindow/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther") is not clickable. Unable to click / find the element within the specified time. Exception: TimeoutException
+2022-02-14 12:55:37,663 :INFO :AndroidUtilities :Took screenshot and saved as Test_IntegrationAPP_14021237.png in screenshots folder.

@@ -85,7 +85,7 @@ class AppiumBase:
             AppiumBase.__automation_name = AppiumBase.__config['Android']['automationName']
             AppiumBase.__browser_name = AppiumBase.__config['Android']['browserName']
             AppiumBase.appPathFlag = AppiumBase.__config.getboolean('Android', 'runAppWithPath')
-            AppiumBase.appPackageFlag = AppiumBase.__config.getboolean('Android','runAppWithPackage')
+            AppiumBase.appPackageFlag = AppiumBase.__config.getboolean('Android', 'runAppWithPackage')
 
         elif AppiumBase.__devicePlatform.lower() == "ios":
             AppiumBase.__application_type = AppiumBase.__config['iOS']['applicationType']
@@ -118,8 +118,8 @@ class AppiumBase:
         if AppiumBase.__application_type.lower() == "native" or AppiumBase.__application_type.lower() == "hybrid":
             if AppiumBase.__devicePlatform.lower() == "android":
                 if AppiumBase.appPackageFlag is True:
-                    desired_caps['appPackage']: AppiumBase.appPackage
-                    desired_caps['appActivity']: AppiumBase.appActivity
+                    desired_caps['appPackage'] =AppiumBase.appPackage
+                    desired_caps['appActivity'] =AppiumBase.appActivity
 
                 if AppiumBase.appPathFlag is True:
                     desired_caps['app'] = AppiumBase.app
@@ -136,7 +136,7 @@ class AppiumBase:
 
         elif AppiumBase.__application_type.lower() == "webbrowser":
             desired_caps['browserName'] = AppiumBase.__browser_name
-
+        print("Desired capabilities are: ", desired_caps)
         AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_capabilities=desired_caps)
 
     # endregion

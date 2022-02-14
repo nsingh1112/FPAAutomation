@@ -1,0 +1,9 @@
+2022-02-14 13:13:29,763 :INFO :AndroidUtilities :Clicked on the element.
+2022-02-14 13:13:29,967 :INFO :AndroidUtilities :Took screenshot and saved as Test_confirm_14021329.png in screenshots folder.
+2022-02-14 13:13:29,967 :INFO :ShellApiDemos :Element clicked
+2022-02-14 13:13:30,057 :INFO :AndroidUtilities :Element displayed Successfully
+2022-02-14 13:13:30,789 :INFO :AndroidUtilities :Clicked on the element.
+2022-02-14 13:13:31,508 :INFO :AndroidUtilities :Clicked on the element.
+2022-02-14 13:13:31,557 :ERROR :WaitUtilities :Value Checkbox 1 not present in element ('accessibility id', 'Checkbox 1') within the expected time.
+2022-02-14 13:13:31,621 :INFO :AndroidUtilities :Clicked on the element.
+2022-02-14 13:13:39,847 :INFO :AndroidUtilities :Clicked on the element.
