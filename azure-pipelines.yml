@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 trigger:
- - appiumcore_master
+# - appiumcore_master
 
 
 pool:
@@ -33,11 +33,11 @@ steps:
 
 - task: TwineAuthenticate@1
   inputs:
-    artifactFeed: TCoE Test Automation Offering/ShellFEAppiumPythonCore_Beta
+    artifactFeed: TCoE Test Automation Offering/ShellFEAppiumPythonCore_Alpha
 
 - script: |
     pip install twine
   displayName: 'Install Twine'
 
 - script: |
-    twine upload -r ShellFEAppiumPythonCore_Beta --config-file $(PYPIRC_PATH) dist/*
+    twine upload -r ShellFEAppiumPythonCore_Alpha --config-file $(PYPIRC_PATH) dist/*
