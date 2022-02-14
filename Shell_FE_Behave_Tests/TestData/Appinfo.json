@@ -3,6 +3,9 @@
   "UIKitCatalog": "com.example.apple-samplecode.UICatalogmyxcode2794",
   "appPackage": "io.appium.android.apis",
   "appActivity" : "io.appium.android.apis.ApiDemos",
+  "ipadPro" :"E3727EF1-7A32-4A69-9E80-1948774353C1",
+  "iPhone8" : "358E29D1-8DEB-496E-B898-AF5507C6CAD9",
+
   "chrome" : {
     "appPackage" : "com.android.chrome",
     "appActivity": "com.google.android.apps.chrome.Main"
