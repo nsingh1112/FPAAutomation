@@ -13,11 +13,11 @@ def launching_app(context):
 
 @when('I am testing the background and foreground methods')
 def testing_background_foreground(context):
-    # context.webBrowser.check_background()
-    # ui_catalog_kit_app = FileUtilities.read_json_file_as_dictionary("Appinfo.json")
-    # context.webBrowser.foreground_app(ui_catalog_kit_app["UIKitCatalog"])
-    # time.sleep(5)
-    # context.webBrowser.check_background()
-    # context.webBrowser.foreground_app(AppiumBase.bundle_id)
+    context.webBrowser.check_background()
+    ui_catalog_kit_app = FileUtilities.read_json_file_as_dictionary("Appinfo.json")
+    context.webBrowser.foreground_app(ui_catalog_kit_app["UIKitCatalog"])
+    time.sleep(5)
+    context.webBrowser.check_background()
+    context.webBrowser.foreground_app(AppiumBase.bundle_id)
     pass
 
