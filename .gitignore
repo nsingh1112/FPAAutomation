@@ -1,5 +1,4 @@
 .idea
 venv
 *.pyc
-dist
-Shell_FE_Appium_Core.egg-info
+TestResults
