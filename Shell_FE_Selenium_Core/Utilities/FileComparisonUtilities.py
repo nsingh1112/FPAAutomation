@@ -30,7 +30,7 @@ class FileComparisonUtilities:
         :param svg: True or False
         :return:
         """
-        img_ele = SeleniumBase.driver.find_element_by_xpath(image)
+        img_ele = SeleniumBase.driver.find_element(*image)
         img_src= img_ele.get_attribute("src")
         FileComparisonUtilities.log.info("Image source {0}".format(img_src))
         if svg == True:

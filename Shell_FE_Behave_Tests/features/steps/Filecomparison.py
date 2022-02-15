@@ -10,7 +10,7 @@ from Shell_FE_Behave_Tests.ApplicationLibrary.ControlLibrary.ShellHubControls im
 def step_impl(context):
     context.shellhub_functions = ShellHubFunctions()
     context.shellhub_functions.access_shell_hub()
-    logo_img = ShellHubControls.logo_img[1]
+    logo_img = ShellHubControls.logo_img
     result = FileComparisonUtilities().compare_image(localimage = 'logo.svg', remoteimage = logo_img, svg=True)
     AssertionUtilities.assert_if_true(result)
 
