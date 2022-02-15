@@ -1,5 +1,7 @@
 from behave import Given, When, Then
 
+from Shell_FE_Selenium_Core.Utilities.AssertionUtilities import AssertionUtilities
+from Shell_FE_Selenium_Core.Utilities.FileComparisonUtilities import FileComparisonUtilities
 from Shell_FE_Selenium_Core.Utilities.FileUtilities import FileUtilities
 
 
@@ -96,3 +98,8 @@ def step_impl(context):
     dict_xml2 = FileUtilities.read_xml("TestData5.xml", "employees", "employee", 1)
     print("CHILD ELEMENT'S DICTIONARY REPRESENTATION IS: ")
     print(dict_xml2)
+
+@When('user compares the Excel files "{filename1}" and "{filename2}" for equality')
+def step_impl(context, filename1, filename2):
+    result = FileComparisonUtilities.compare_excel(filename1, filename2)
+    AssertionUtilities.assert_if_true(result)
