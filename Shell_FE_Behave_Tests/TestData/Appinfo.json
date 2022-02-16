@@ -1,9 +1,9 @@
 {
   "bundleId" : "com.apple.mobilesafari",
-  "UIKitCatalog": "com.example.apple-samplecode.UICatalogmyxcode2794",
+  "UIKitCatalog": "com.example.apple-samplecode.UIKitCatalog",
   "appPackage": "io.appium.android.apis",
   "appActivity" : "io.appium.android.apis.ApiDemos",
-  "ipadPro" :"E3727EF1-7A32-4A69-9E80-1948774353C1",
+  "iPad Pro (9.7-inch)" :"E3727EF1-7A32-4A69-9E80-1948774353C1",
   "iPhone8" : "358E29D1-8DEB-496E-B898-AF5507C6CAD9",
 
   "chrome" : {

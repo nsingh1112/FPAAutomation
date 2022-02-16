@@ -1,3 +1,5 @@
+import time
+
 from behave import *
 
 from Shell_FE_Behave_Tests.MobileApplicationLibrary.FunctionalLibrary.WebBrowserFunctions import BrowserFunctions
@@ -11,6 +13,7 @@ def launching_app(context):
 @when('I am passing the URL')
 def launching_url(context):
     context.webBrowser.launch_web("https://hub.shell.com")
+    time.sleep(2)
 
 
 @then('I verify it landed on the corresponding URL')

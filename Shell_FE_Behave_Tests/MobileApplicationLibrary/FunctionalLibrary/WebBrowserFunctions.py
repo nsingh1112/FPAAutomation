@@ -23,6 +23,7 @@ class BrowserFunctions:
         AndroidUtilities.switch_context(view_switch)
 
     def verify_title(self):
+        time.sleep(3)
         title = AndroidUtilities.get_title()
         print("############ Title of the page is :" + title)
         AssertUtilities.assert_equals(title, "Sign in to your account")

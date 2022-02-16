@@ -19,5 +19,6 @@ def testing_background_foreground(context):
     time.sleep(5)
     context.webBrowser.check_background()
     context.webBrowser.foreground_app(AppiumBase.bundle_id)
-    pass
+    time.sleep(2)
+
 
