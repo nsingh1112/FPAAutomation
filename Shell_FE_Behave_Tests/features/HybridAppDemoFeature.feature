@@ -1,4 +1,5 @@
-@hybridApp @mobile
+
+@AndroidHybridApp @mobile
 Feature: Hybrid App Demo
   Scenario: Test the search box
     Given I launched the mobile native chrome app

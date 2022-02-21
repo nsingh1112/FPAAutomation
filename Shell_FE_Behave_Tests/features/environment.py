@@ -2,12 +2,12 @@ import os
 import sys
 import allure
 from allure_commons.types import AttachmentType
+
+sys.path.insert(0, os.path.dirname(os.getcwd()))
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 from Shell_FE_Selenium_Core.Utilities.BrowserUtilities import BrowserUtilities
 from Shell_FE_Appium_Core.AppiumBase import AppiumBase
 from Shell_FE_Appium_Core.Utilities.AndroidUtilities import AndroidUtilities
-
-sys.path.insert(0, os.path.dirname(os.getcwd()))
 
 
 def before_all(context):
@@ -54,13 +54,6 @@ def after_feature(context, feature):
 
 
 def after_all(context):
-    # region Copy history contents from Reports to AllureJson folder
-    src_directory = os.path.dirname(os.getcwd()) + "/Shell_FE_Behave_Tests/TestResults/Reports/history/"
-    dst_directory = os.path.dirname(os.getcwd()) + "/Shell_FE_Behave_Tests/TestResults/AllureJson/history/"
-    all_files = os.listdir(src_directory)
-    for file in all_files:
-        shutil.move(src_directory + file, dst_directory + file)
-    # endregion
     # For UI automation
     SeleniumBase.dispose()
     # For mobile automation

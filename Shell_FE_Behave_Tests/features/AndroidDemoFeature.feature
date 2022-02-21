@@ -1,5 +1,7 @@
-@nativeApp @mobile
+@AndroidNativeApp @mobile
 Feature: Android Demo
+  @TestScenario
+
   Scenario: Test light theme controls in views
     Given I have launched the apidemos app
     When  I test views
@@ -8,3 +10,4 @@ Feature: Android Demo
   Scenario: Test Popups
 	When I Click on Views
 	Then I verify popups
+

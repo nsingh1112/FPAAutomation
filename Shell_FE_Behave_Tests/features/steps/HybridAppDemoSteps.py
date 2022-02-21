@@ -1,7 +1,7 @@
 import time
 
 from behave import *
-from Shell_FE_Behave_Tests.MobileApplicationLibrary.FunctionLibrary.HybridAppDemoFunctions import HybridAppFunctions
+from Shell_FE_Behave_Tests.MobileApplicationLibrary.FunctionalLibrary.HybridAppDemoFunctions import HybridAppFunctions
 
 
 @given('I launched the mobile native chrome app')
