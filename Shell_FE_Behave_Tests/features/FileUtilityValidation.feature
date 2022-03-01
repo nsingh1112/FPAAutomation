@@ -13,3 +13,7 @@ Feature: File Utility methods validation
     When user reads the values available in csv by rowname
     When user reads the root element's values from xml
     When user reads the child element's values from xml
+
+@ExcelComparison
+  Scenario: Validate Excel comparison
+    When user compares the Excel files "File1.xlsx" and "File2.xlsx" for equality

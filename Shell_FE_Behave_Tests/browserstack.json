@@ -1,8 +1,16 @@
 {
-  "user": "praveenkumar_aNTBPL",
-  "key": "KYwBtXAtVsisxg7ZbFFZ",
-  "server": "hub.browserstack.com",
-  "environments": [
+  "user": "kallappakannamuc_6mbGUQ",
+  "key": "sqtMtSFBdfnzydPxpoud",
+  "webServer": "hub.browserstack.com",
+  "appServer": "hub-cloud.browserstack.com",
+  "appCapabilities": {
+    "project": "First Behave Android Project",
+    "build": "",
+    "name": "first_test",
+    "browserstack.debug": true,
+    "app": "bs://c295e4d3dd3345749d13b9f1fa24103a58231499"
+  },
+  "webEnvironments": [
     {
       "os_version": "10",
       "resolution": "1920x1080",
@@ -54,6 +62,16 @@
       "os_version": "14.0",
       "name": "Mobile browser test_iOS",
       "build": "BStack-[Python] Sample Build_0121"
+    }
+  ],
+  "appEnvironments": [
+    {
+      "device": "Google Pixel 3",
+      "os_version": "9.0"
+    },
+    {
+      "device": "Samsung Galaxy S10e",
+      "os_version": "9.0"
     }
   ]
 }
