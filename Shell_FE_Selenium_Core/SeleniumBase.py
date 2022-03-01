@@ -135,7 +135,7 @@ class SeleniumBase:
             return driver
         else:
             try:
-                chromedrivername = "chromedriver.exe"
+                chromedrivername = "chromedriver"
                 driver = webdriver.Chrome(executable_path=SeleniumBase.__webdriver_executables + chromedrivername,
                                           options=SeleniumBase.__opts)
                 return driver
@@ -158,7 +158,7 @@ class SeleniumBase:
             return driver
         else:
             try:
-                geckodrivername = "geckodriver.exe"
+                geckodrivername = "geckodriver"
                 driver = webdriver.Firefox(executable_path=SeleniumBase.__webdriver_executables + geckodrivername,
                                            options=SeleniumBase.__opts)
                 return driver
@@ -182,7 +182,7 @@ class SeleniumBase:
             return driver
         else:
             try:
-                edgedrivername = "msedgedriver.exe"
+                edgedrivername = "msedgedriver"
                 # driver = webdriver.Edge(executable_path=SeleniumBase.__webdriver_executables + edgedrivername)
                 driver = Edge(executable_path=SeleniumBase.__webdriver_executables + edgedrivername,
                               options=SeleniumBase.__opts)
@@ -234,9 +234,9 @@ class SeleniumBase:
 
         username = config['user']
         accesskey = config['key']
-        server = config['server']
+        server = config['webServer']
 
-        capabilities = config['environments'][SeleniumBase.TASK_ID]
+        capabilities = config['webEnvironments'][SeleniumBase.TASK_ID]
         driver = webdriver.Remote(command_executor='https://{0}:{1}@{2}/wd/hub'.format(username, accesskey, server),
                                       desired_capabilities=capabilities)
         return driver
