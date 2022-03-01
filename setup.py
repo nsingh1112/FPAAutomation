@@ -6,11 +6,11 @@ from setuptools import find_packages
 #     long_description = f.read()
 
 setuptools.setup(
-    name="Shell_FE_Selenium_Core",
-    version='1.0.0a10',
-    author="Praveen Kumar Appusamy",
+    name="Shell_FE_Requests_Core",
+    version='1.0.0a1',
+    author="Functional Excellence Team",
     author_email="praveen.kumara@shell.com",
-    description="Selenium Core package to be used along with the Shell FE Behave framework for UI automation.",
+    description="Requests Core package to be used along with the Shell FE Behave framework for API automation.",
     # long_description=long_description,
     long_description_content_type='text/markdown',
     license="Proprietary",

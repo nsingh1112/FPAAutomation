@@ -3,5 +3,5 @@ venv
 *.pyc
 build
 dist
-Shell_FE_Selenium_Core.egg-info
+
 
