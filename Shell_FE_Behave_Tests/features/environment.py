@@ -11,8 +11,16 @@ from Shell_FE_Appium_Core.Utilities.iOSUtilities import IOSUtilities
 
 def before_all(context):
     AppiumBase.start_appium_server()
-    AppiumBase.read_values()
-    AppiumBase.launch_application()
+
+
+def before_feature(context, feature):
+    print(context.feature.tags)
+    if "iOS" in context.feature.tags:
+        AppiumBase.launch_application("ios")
+    elif "android" in context.feature.tags:
+        AppiumBase.launch_application("android")
+    else:
+        AppiumBase.launch_application()
 
 
 def after_step(context, step):

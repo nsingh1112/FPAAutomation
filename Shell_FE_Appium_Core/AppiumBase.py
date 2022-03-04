@@ -16,7 +16,7 @@ class AppiumBase:
     __browser_name = None
     __application_type = None
     __automation_name = None
-    __devicePlatform = None
+    devicePlatform = None
     app = None
     udid = None
     bundle_id = None
@@ -72,8 +72,8 @@ class AppiumBase:
             -section_value - chooses the section from which value to be fetched
         """
         AppiumBase.__config = AppiumBase.read_config()
-        AppiumBase.__devicePlatform = AppiumBase.__config['automationplatform']['platformtype']
-        if AppiumBase.__devicePlatform.lower() == "android":
+        # AppiumBase.devicePlatform = AppiumBase.__config['automationplatform']['platformtype']
+        if AppiumBase.devicePlatform.lower() == "android":
             AppiumBase.__platformName = AppiumBase.__config['Android']['platformName']
             AppiumBase.__platformVersion = AppiumBase.__config['Android']['platformVersion']
             AppiumBase.__deviceName = AppiumBase.__config['Android']['deviceName']
@@ -87,7 +87,7 @@ class AppiumBase:
             AppiumBase.appPathFlag = AppiumBase.__config.getboolean('Android', 'runAppWithPath')
             AppiumBase.appPackageFlag = AppiumBase.__config.getboolean('Android', 'runAppWithPackage')
 
-        elif AppiumBase.__devicePlatform.lower() == "ios":
+        elif AppiumBase.devicePlatform.lower() == "ios":
             AppiumBase.__application_type = AppiumBase.__config['iOS']['applicationType']
             AppiumBase.__platformName = AppiumBase.__config['iOS']['platformName']
             AppiumBase.__platformVersion = AppiumBase.__config['iOS']['platformVersion']
@@ -106,17 +106,28 @@ class AppiumBase:
 
     # region Launch Application
     @staticmethod
-    def launch_application():
+    def launch_application(device_type= None):
         """Launches the Application
            Returns the driver instance
         """
+        if device_type is None:
+            AppiumBase.__config = AppiumBase.read_config()
+            AppiumBase.devicePlatform = AppiumBase.__config['automationplatform']['platformtype']
+            AppiumBase.read_values()
+        elif device_type.lower() == "android":
+            AppiumBase.devicePlatform = "android"
+            AppiumBase.read_values()
+        elif device_type.lower() == "ios":
+            AppiumBase.devicePlatform = "ios"
+            AppiumBase.read_values()
+
         desired_caps = {'platformName': AppiumBase.__platformName,
                         'platformVersion': AppiumBase.__platformVersion,
                         'deviceName': AppiumBase.__deviceName,
                         'automationName': AppiumBase.__automation_name,
                         }
         if AppiumBase.__application_type.lower() == "native" or AppiumBase.__application_type.lower() == "hybrid":
-            if AppiumBase.__devicePlatform.lower() == "android":
+            if AppiumBase.devicePlatform.lower() == "android":
                 if AppiumBase.appPackageFlag is True:
                     desired_caps['appPackage'] = AppiumBase.appPackage
                     desired_caps['appActivity'] = AppiumBase.appActivity
@@ -124,7 +135,7 @@ class AppiumBase:
                 if AppiumBase.appPathFlag is True:
                     desired_caps['app'] = AppiumBase.app
 
-            elif AppiumBase.__devicePlatform.lower() == "ios":
+            elif AppiumBase.devicePlatform.lower() == "ios":
                 desired_caps['udid'] = AppiumBase.udid
 
                 if AppiumBase.bundleIdPath is True:
