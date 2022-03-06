@@ -3,7 +3,7 @@ import os
 import openpyxl
 import json
 import xmltodict
-from Shell_FE_Selenium_Core.Utilities.LoggingUtilities import LoggingUtilities
+from Shell_FE_Requests_Core.Utilities.LoggingUtilities import LoggingUtilities
 
 
 class FileUtilities:

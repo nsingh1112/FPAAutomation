@@ -3,8 +3,6 @@ import logging
 import os
 import time
 
-from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
-
 
 class LoggingUtilities:
     logFolder = os.path.dirname(os.getcwd()) + '/Shell_FE_Behave_Tests/TestResults/Logs/'

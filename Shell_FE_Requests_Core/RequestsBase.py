@@ -1,0 +1,191 @@
+import os
+from configparser import ConfigParser
+import requests
+
+
+class RequestsBase:
+    """RequestsBase class contains methods for reading values from INI file and performing basic HTTP actions."""
+    # region Class Variable Declarations
+    config = None
+    base_uri = None
+    endpoint_url = None
+    response = None
+    request = None
+    current_working_directory = os.path.dirname(os.getcwd())
+    configfile = current_working_directory + '/Shell_FE_Behave_Tests/behave.ini'
+
+    # endregion
+
+    @staticmethod
+    def read_config():
+        """Reads behave.ini file present in Shell_FE_Behave_Tests folder.
+
+        Returns:
+                An instance of ConfigParser.
+        """
+        configuration = ConfigParser()
+        configuration.read(RequestsBase.configfile)
+        RequestsBase.config = configuration
+
+    @staticmethod
+    def initialize_values():
+        """Assigns respective values to class variables from behave.ini file."""
+        RequestsBase.read_config()
+        environment = RequestsBase.config['api']['environment']
+        # region Base Uri initialization
+        if environment == "dev":
+            RequestsBase.base_uri = RequestsBase.config['api']['dev_endpoint']
+        elif environment == "qa":
+            RequestsBase.base_uri = RequestsBase.config['api']['qa_endpoint']
+        elif environment == "stage":
+            RequestsBase.base_uri = RequestsBase.config['api']['stage_endpoint']
+        elif environment == "prod":
+            RequestsBase.base_uri = RequestsBase.config['api']['prod_endpoint']
+        else:
+            print("Invalid environment name provided in INI file. Environment: {0}.".format(environment))
+        # endregion
+
+    @staticmethod
+    def set_endpoint(path_params=None):
+        """Builds the Endpoint by appending the BaseUri along with the resource passed as arguments to this method.
+        The value would be saved into the 'endpoint_url' variable available in RequestsBase."""
+        if path_params is not None:
+            RequestsBase.endpoint_url = RequestsBase.base_uri + path_params
+            print("The end point url is: " + RequestsBase.endpoint_url)
+        else:
+            RequestsBase.endpoint_url = RequestsBase.base_uri
+            print("The end point url is: " + RequestsBase.endpoint_url + ". No path parameters were passed.")
+
+    @staticmethod
+    def get_request(url=None, query_params=None, **opts):
+        """Makes a GET request to the URI.
+
+        :Args:
+            - url - It has a default parameter of None. If the user doesn't pass an endpoint url then the value
+        from endpoint_url in RequestsBase would be used else the user provided url value would be used.
+            - query_params - It has a default parameter of None. User can pass a dictionary or list of tuples into this
+            parameter which will be assigned as query parameters to the endpoint url.
+            - **opts - This is a placeholder for keyword arguments where the user can pass any valid arguments to the
+            GET request viz. data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream,
+            verify,cert or json. Please refer to the official documentation of Python Requests to learn more about these
+            parameters and the type of value to send.
+        """
+        if url is None:
+            RequestsBase.response = requests.get(RequestsBase.endpoint_url, params=query_params, **opts)
+            print("The GET request has been passed with the url: " + RequestsBase.response.request.url)
+        else:
+            RequestsBase.response = requests.get(url, params=query_params, **opts)
+            print("The GET request has been passed with the url: " + RequestsBase.response.request.url)
+
+    @staticmethod
+    def put_request(url=None, body_data=None, **opts):
+        """Makes a PUT request to the URI.
+
+        :Args:
+            - url - It has a default parameter of None. If the user doesn't pass an endpoint url then the value
+            from endpoint_url in RequestsBase would be used else the user provided url value would be used.
+            - body_data - It has a default parameter of None. User can pass a dictionary or list of tuples into this
+            parameter which will be passed as the Request payload / body.
+            - **opts - This is a placeholder for keyword arguments where the user can pass any valid arguments to the
+            PUT request viz. data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream,
+            verify,cert or json. Please refer to the official documentation of Python Requests to learn more about these
+            parameters and the type of value to send.
+        """
+        if url is None:
+            RequestsBase.response = requests.put(RequestsBase.endpoint_url, data=body_data, **opts)
+            print("The PUT request has been passed with the url: " + RequestsBase.response.request.url)
+        else:
+            RequestsBase.response = requests.put(url, data=body_data, **opts)
+            print("The PUT request has been passed with the url: " + RequestsBase.response.request.url)
+
+    @staticmethod
+    def post_request(url=None, body_data=None, body_json=None, **opts):
+        """Makes a POST request to the URI.
+
+        :Args:
+            - url - It has a default parameter of None. If the user doesn't pass an endpoint url then the value
+            from endpoint_url in RequestsBase would be used else the user provided url value would be used.
+            - body_data - It has a default parameter of None. User can pass a dictionary or list of tuples into this
+            parameter which will be passed as the Request payload / body.
+            - body_json - It has a default parameter of None. User can pass a json data into this parameter which will
+            be passed as the Request payload / body.
+            - **opts - This is a placeholder for keyword arguments where the user can pass any valid arguments to the
+            POST request viz. data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream,
+            verify,cert or json. Please refer to the official documentation of Python Requests to learn more about these
+            parameters and the type of value to send.
+        """
+        if url is None:
+            RequestsBase.response = requests.post(RequestsBase.endpoint_url, data=body_data, json=body_json, **opts)
+            print("The POST request has been passed with the url: " + RequestsBase.response.request.url)
+        else:
+            RequestsBase.response = requests.post(url, data=body_data, json=body_json, **opts)
+            print("The POST request has been passed with the url: " + RequestsBase.response.request.url)
+
+    @staticmethod
+    def delete_request(url=None, **opts):
+        """Makes a DELETE request.
+
+        :Args:
+            - url - It has a default parameter of None. If the user doesn't pass an endpoint url then the value
+            from endpoint_url in RequestsBase would be used else the user provided url value would be used.
+            - **opts - This is a placeholder for keyword arguments where the user can pass any valid arguments to the
+            DELETE request viz. data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream,
+            verify,cert or json. Please refer to the official documentation of Python Requests to learn more about these
+            parameters and the type of value to send.
+        """
+        if url is None:
+            RequestsBase.response = requests.delete(RequestsBase.endpoint_url, **opts)
+            print("The DELETE request has been passed with the url: " + RequestsBase.response.request.url)
+        else:
+            RequestsBase.response = requests.delete(url, **opts)
+            print("The DELETE request has been passed with the url: " + RequestsBase.response.request.url)
+
+    @staticmethod
+    def request_url(response=None):
+        """Returns the complete request url. The user needs to provide a valid Response object as a parameter. If no
+        parameter is passed then the Request Url of the Response object available in RequestsBase class would be
+        returned."""
+        if response is None:
+            return RequestsBase.response.request.url
+        else:
+            return response.request.url
+
+    @staticmethod
+    def request_header(response=None):
+        """Returns the header passed in the request. The user needs to provide a valid Response object as a parameter.
+        If no parameter is passed then the request headers of the Response object available in RequestsBase class would be
+        returned."""
+        if response is None:
+            return RequestsBase.response.request.headers
+        else:
+            return response.request.headers
+
+    @staticmethod
+    def response_status_code(response=None):
+        """Returns the status code of the response. The user needs to provide a valid Response object as a parameter.
+        If no parameter is passed then the status code of the Response object available in RequestsBase class would
+        be returned."""
+        if response is None:
+            return RequestsBase.response.status_code
+        else:
+            return response.status_code
+
+    @staticmethod
+    def response_headers(response=None):
+        """Returns the headers of the response. The user needs to provide a valid Response object as a parameter.
+        If no parameter is passed then the status code of the Response object available in RequestsBase class would
+        be returned."""
+        if response is None:
+            return RequestsBase.response.headers
+        else:
+            return response.headers
+
+    @staticmethod
+    def response_cookies(response=None):
+        """Returns the cookies of the response. The user needs to provide a valid Response object as a parameter.
+        If no parameter is passed then the status code of the Response object available in RequestsBase class would
+        be returned."""
+        if response is None:
+            return RequestsBase.response.cookies
+        else:
+            return response.cookies
