@@ -189,3 +189,33 @@ class RequestsBase:
             return RequestsBase.response.cookies
         else:
             return response.cookies
+
+    @staticmethod
+    def response_body_as_dictionary(response=None):
+        """Returns the body of the response as a Python dictionary object. The user needs to provide a valid Response object as a parameter.
+        If no parameter is passed then the status code of the Response object available in RequestsBase class would
+        be returned."""
+        if response is None:
+            return RequestsBase.response.json()
+        else:
+            return response.json()
+
+    @staticmethod
+    def response_body_as_string(response=None):
+        """Returns the body of the response as a String object. The user needs to provide a valid Response object as a parameter.
+        If no parameter is passed then the status code of the Response object available in RequestsBase class would
+        be returned."""
+        if response is None:
+            return RequestsBase.response.text
+        else:
+            return response.text
+
+    @staticmethod
+    def response_body_as_bytes(response=None):
+        """Returns the body of the response as Bytes. The user needs to provide a valid Response object as a parameter.
+        If no parameter is passed then the status code of the Response object available in RequestsBase class would
+        be returned."""
+        if response is None:
+            return RequestsBase.response.content
+        else:
+            return response.content
