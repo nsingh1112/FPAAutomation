@@ -1,6 +1,8 @@
 import os
-from configparser import ConfigParser
 import requests
+from configparser import ConfigParser
+
+from Shell_FE_Requests_Core.Utilities.LoggingUtilities import LoggingUtilities
 
 
 class RequestsBase:
@@ -13,6 +15,7 @@ class RequestsBase:
     request = None
     current_working_directory = os.path.dirname(os.getcwd())
     configfile = current_working_directory + '/Shell_FE_Behave_Tests/behave.ini'
+    log = LoggingUtilities().logger()
 
     # endregion
 
@@ -28,7 +31,7 @@ class RequestsBase:
             configuration.read(RequestsBase.configfile)
             RequestsBase.config = configuration
         except Exception as err:
-            print(err)
+            RequestsBase.log.error(err)
 
     @staticmethod
     def initialize_values():
@@ -46,10 +49,11 @@ class RequestsBase:
             elif environment == "prod":
                 RequestsBase.base_uri = RequestsBase.config['api']['prod_endpoint']
             else:
-                print("Invalid environment name provided in INI file. Environment: {0}.".format(environment))
+                RequestsBase.log.error(
+                    "Invalid environment name provided in INI file. Environment: {0}.".format(environment))
             # endregion
         except Exception as err:
-            print(err)
+            RequestsBase.log.error(err)
 
     @staticmethod
     def set_endpoint(path_params=None):
@@ -58,12 +62,13 @@ class RequestsBase:
         try:
             if path_params is not None:
                 RequestsBase.endpoint_url = RequestsBase.base_uri + path_params
-                print("The end point url is: " + RequestsBase.endpoint_url)
+                RequestsBase.log.info("The end point url is: " + RequestsBase.endpoint_url)
             else:
                 RequestsBase.endpoint_url = RequestsBase.base_uri
-                print("The end point url is: " + RequestsBase.endpoint_url + ". No path parameters were passed.")
+                RequestsBase.log.info(
+                    "The end point url is: " + RequestsBase.endpoint_url + ". No path parameters were passed.")
         except Exception as err:
-            print(err)
+            RequestsBase.log.error(err)
 
     @staticmethod
     def get_request(url=None, query_params=None, **opts):
@@ -82,12 +87,14 @@ class RequestsBase:
         try:
             if url is None:
                 RequestsBase.response = requests.get(RequestsBase.endpoint_url, params=query_params, **opts)
-                print("The GET request has been passed with the url: " + RequestsBase.response.request.url)
+                RequestsBase.log.info(
+                    "The GET request has been passed with the url: " + RequestsBase.response.request.url)
             else:
                 RequestsBase.response = requests.get(url, params=query_params, **opts)
-                print("The GET request has been passed with the url: " + RequestsBase.response.request.url)
+                RequestsBase.log.info(
+                    "The GET request has been passed with the url: " + RequestsBase.response.request.url)
         except Exception as err:
-            print(err)
+            RequestsBase.log.error(err)
 
     @staticmethod
     def put_request(url=None, body_data=None, **opts):
@@ -106,12 +113,14 @@ class RequestsBase:
         try:
             if url is None:
                 RequestsBase.response = requests.put(RequestsBase.endpoint_url, data=body_data, **opts)
-                print("The PUT request has been passed with the url: " + RequestsBase.response.request.url)
+                RequestsBase.log.info(
+                    "The PUT request has been passed with the url: " + RequestsBase.response.request.url)
             else:
                 RequestsBase.response = requests.put(url, data=body_data, **opts)
-                print("The PUT request has been passed with the url: " + RequestsBase.response.request.url)
+                RequestsBase.log.info(
+                    "The PUT request has been passed with the url: " + RequestsBase.response.request.url)
         except Exception as err:
-            print(err)
+            RequestsBase.log.error(err)
 
     @staticmethod
     def post_request(url=None, body_data=None, body_json=None, **opts):
@@ -132,12 +141,14 @@ class RequestsBase:
         try:
             if url is None:
                 RequestsBase.response = requests.post(RequestsBase.endpoint_url, data=body_data, json=body_json, **opts)
-                print("The POST request has been passed with the url: " + RequestsBase.response.request.url)
+                RequestsBase.log.info(
+                    "The POST request has been passed with the url: " + RequestsBase.response.request.url)
             else:
                 RequestsBase.response = requests.post(url, data=body_data, json=body_json, **opts)
-                print("The POST request has been passed with the url: " + RequestsBase.response.request.url)
+                RequestsBase.log.info(
+                    "The POST request has been passed with the url: " + RequestsBase.response.request.url)
         except Exception as err:
-            print(err)
+            RequestsBase.log.error(err)
 
     @staticmethod
     def delete_request(url=None, **opts):
@@ -154,12 +165,14 @@ class RequestsBase:
         try:
             if url is None:
                 RequestsBase.response = requests.delete(RequestsBase.endpoint_url, **opts)
-                print("The DELETE request has been passed with the url: " + RequestsBase.response.request.url)
+                RequestsBase.log.info(
+                    "The DELETE request has been passed with the url: " + RequestsBase.response.request.url)
             else:
                 RequestsBase.response = requests.delete(url, **opts)
-                print("The DELETE request has been passed with the url: " + RequestsBase.response.request.url)
+                RequestsBase.log.info(
+                    "The DELETE request has been passed with the url: " + RequestsBase.response.request.url)
         except Exception as err:
-            print(err)
+            RequestsBase.log.error(err)
 
     @staticmethod
     def request_url(response=None):
@@ -172,20 +185,20 @@ class RequestsBase:
             else:
                 return response.request.url
         except Exception as err:
-            print(err)
+            RequestsBase.log.error(err)
 
     @staticmethod
     def request_header(response=None):
         """Returns the header passed in the request. The user needs to provide a valid Response object as a parameter.
-        If no parameter is passed then the request headers of the Response object available in RequestsBase class would be
-        returned."""
+        If no parameter is passed then the request headers of the Response object available in RequestsBase class would
+        be returned."""
         try:
             if response is None:
                 return RequestsBase.response.request.headers
             else:
                 return response.request.headers
         except Exception as err:
-            print(err)
+            RequestsBase.log.error(err)
 
     @staticmethod
     def response_status_code(response=None):
@@ -198,7 +211,7 @@ class RequestsBase:
             else:
                 return response.status_code
         except Exception as err:
-            print(err)
+            RequestsBase.log.error(err)
 
     @staticmethod
     def response_headers(response=None):
@@ -211,7 +224,7 @@ class RequestsBase:
             else:
                 return response.headers
         except Exception as err:
-            print(err)
+            RequestsBase.log.error(err)
 
     @staticmethod
     def response_cookies(response=None):
@@ -224,33 +237,33 @@ class RequestsBase:
             else:
                 return response.cookies
         except Exception as err:
-            print(err)
+            RequestsBase.log.error(err)
 
     @staticmethod
     def response_body_as_dictionary(response=None):
-        """Returns the body of the response as a Python dictionary object. The user needs to provide a valid Response object as a parameter.
-        If no parameter is passed then the status code of the Response object available in RequestsBase class would
-        be returned."""
+        """Returns the body of the response as a Python dictionary object. The user needs to provide a valid Response
+        object as a parameter. If no parameter is passed then the status code of the Response object available in
+        RequestsBase class would be returned."""
         try:
             if response is None:
                 return RequestsBase.response.json()
             else:
                 return response.json()
         except Exception as err:
-            print(err)
+            RequestsBase.log.error(err)
 
     @staticmethod
     def response_body_as_string(response=None):
-        """Returns the body of the response as a String object. The user needs to provide a valid Response object as a parameter.
-        If no parameter is passed then the status code of the Response object available in RequestsBase class would
-        be returned."""
+        """Returns the body of the response as a String object. The user needs to provide a valid Response object as a
+        parameter. If no parameter is passed then the status code of the Response object available in RequestsBase class
+        would be returned."""
         try:
             if response is None:
                 return RequestsBase.response.text
             else:
                 return response.text
         except Exception as err:
-            print(err)
+            RequestsBase.log.error(err)
 
     @staticmethod
     def response_body_as_bytes(response=None):
@@ -263,4 +276,4 @@ class RequestsBase:
             else:
                 return response.content
         except Exception as err:
-            print(err)
+            RequestsBase.log.error(err)
