@@ -175,6 +175,32 @@ class RequestsBase:
             RequestsBase.log.error(err)
 
     @staticmethod
+    def patch_request(url=None, body_data=None, **opts):
+        """Makes a PATCH request to the URI.
+
+        :Args:
+            - url - It has a default parameter of None. If the user doesn't pass an endpoint url then the value
+            from endpoint_url in RequestsBase would be used else the user provided url value would be used.
+            - body_data - It has a default parameter of None. User can pass a dictionary or list of tuples into this
+            parameter which will be passed as the Request payload / body.
+            - **opts - This is a placeholder for keyword arguments where the user can pass any valid arguments to the
+            PATCH request viz. data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream,
+            verify,cert or json. Please refer to the official documentation of Python Requests to learn more about these
+            parameters and the type of value to send.
+        """
+        try:
+            if url is None:
+                RequestsBase.response = requests.patch(RequestsBase.endpoint_url, data=body_data, **opts)
+                RequestsBase.log.info(
+                    "The PATCH request has been passed with the url: " + RequestsBase.response.request.url)
+            else:
+                RequestsBase.response = requests.patch(url, data=body_data, **opts)
+                RequestsBase.log.info(
+                    "The PATCH request has been passed with the url: " + RequestsBase.response.request.url)
+        except Exception as err:
+            RequestsBase.log.error(err)
+
+    @staticmethod
     def request_url(response=None):
         """Returns the complete request url. The user needs to provide a valid Response object as a parameter. If no
         parameter is passed then the Request Url of the Response object available in RequestsBase class would be
