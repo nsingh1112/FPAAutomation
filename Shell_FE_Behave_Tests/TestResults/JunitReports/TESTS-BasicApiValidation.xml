@@ -1,0 +1,20 @@
+<testsuite name="BasicApiValidation.Validate API with Requests" tests="1" errors="0" failures="0" skipped="0" time="0.530556" timestamp="2022-03-08T13:41:08.065724" hostname="BNGECO-L-82728"><testcase classname="BasicApiValidation.Validate API with Requests" name="GET Request validation" status="passed" time="0.530556"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @getrequest
+  Scenario: GET Request validation
+    When user sends a GET request to retrieve user details ... passed in 0.531s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+Base Uri is: https://gorest.co.in/
+The end point url is: https://gorest.co.in/public/v2/users
+The GET request has been passed with the url: https://gorest.co.in/public/v2/users?page=1
+The status code is: 200
+The headers passed as part of the request is: {'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer d00d8b6c3dd817f05dd292acbadc6b12b38313c01910529be5426818353d3570'}
+
+]]>
+</system-out></testcase></testsuite>
