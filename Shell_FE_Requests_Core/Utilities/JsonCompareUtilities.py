@@ -1,12 +1,17 @@
 import json
-from collections import defaultdict
+import re
 import jsonpath
+import requests
 from nested_lookup import nested_lookup
+from deepdiff import DeepDiff
+from Shell_FE_Requests_Core.Utilities.LoggingUtilities import LoggingUtilities
 
 
 class JsonCompareUtils:
     keys = []
     values = []
+    log_obj = LoggingUtilities()
+    log = log_obj.logger()
 
     @staticmethod
     def ordered(obj):
@@ -35,9 +40,20 @@ class JsonCompareUtils:
         :Returns:
             boolean
         """
-        json1_data = json.loads(res1.text)
-        json2_data = json.loads(res2.text)
-        return JsonCompareUtils.ordered(json1_data) == JsonCompareUtils.ordered(json2_data)
+        if isinstance(res1, requests.models.Response) and isinstance(res2, requests.models.Response):
+            json1_data = json.loads(res1.text)
+            json2_data = json.loads(res2.text)
+            return JsonCompareUtils.ordered(json1_data) == JsonCompareUtils.ordered(json2_data)
+        elif isinstance(res1, (dict, list,str)) and isinstance(res2, requests.models.Response):
+            json2_data = json.loads(res2.text)
+            return JsonCompareUtils.ordered(res1) == JsonCompareUtils.ordered(json2_data)
+        elif isinstance(res1, requests.models.Response) and isinstance(res2, (dict, list, str)):
+            json1_data = json.loads(res1.text)
+            return JsonCompareUtils.ordered(json1_data) == JsonCompareUtils.ordered(res2)
+        elif isinstance(res1, (dict, list, str)) and isinstance(res2, (dict, list, str)):
+            return JsonCompareUtils.ordered(res1) == JsonCompareUtils.ordered(res2)
+        else:
+            return False
 
     # @staticmethod
     # def read_json(read_file):
@@ -46,7 +62,7 @@ class JsonCompareUtils:
     #     return json_data
 
     @staticmethod
-    def search_values_in_response(json_obj, user_key):
+    def search_values_in_response_with_key(json_obj, user_key):
         """
         This is the method to search the particular value based on the user provided key
         :Args:
@@ -55,10 +71,20 @@ class JsonCompareUtils:
         :Returns:
             List of values matched to user key
         """
-        return nested_lookup(user_key, json_obj)
+        if isinstance(json_obj, requests.models.Response):
+
+            data = json.loads(json_obj.text)
+            JsonCompareUtils.log.info("Following are the values matched with key  ' {} ' ".format(user_key))
+            JsonCompareUtils.log.info(nested_lookup(user_key, data)[0])
+            return nested_lookup(user_key, data)
+        else:
+            data = json.loads(json_obj)
+            JsonCompareUtils.log.info("Following are the values matched with key  ' {} ' ".format(user_key))
+            JsonCompareUtils.log.info(nested_lookup(user_key, data)[0])
+            return nested_lookup(user_key, data)
 
     @staticmethod
-    def get_single_node_value(res, key):
+    def get_node_value(res, key):
         """
         This method can be used to get a value for a particular key from json response.
 
@@ -68,15 +94,35 @@ class JsonCompareUtils:
         :Returns:
             List of Values for key provided
         """
-        json_response = json.loads(res.text)
-        if isinstance(json_response, list):
-            res = defaultdict(list)
-            for sub in json_response:
-                for key in sub:
-                    res[key].append(sub[key])
-            return jsonpath.jsonpath(res, key)
+
+        # json_response = json.loads(res.text)
+        # data = res.text
+        # parse_json = json.loads(data)
+        # jsonpath.jsonpath(parse_json, "['data'][0]['email']")
+        #
+        # JsonCompareUtils.log.info(res)
+        # if isinstance(res, list):
+        #     res = defaultdict(list)
+        #     for sub in res:
+        #         for key in sub:
+        #             res[key].append(sub[key])
+        #     JsonCompareUtils.log.info(jsonpath.jsonpath(res, key))
+        #     return jsonpath.jsonpath(res, key)
+        # else:
+        #     JsonCompareUtils.log.info(jsonpath.jsonpath(res, key))
+        #     return jsonpath.jsonpath(res, key)
+        if isinstance(res, requests.models.Response):
+            value = jsonpath.jsonpath(res.json(), key)
+            JsonCompareUtils.log.info(f"Node value: '{value[0]}' for jsonpath : '{key}'")
+            return value[0]
         else:
-            return jsonpath.jsonpath(json_response, key)
+            value = jsonpath.jsonpath(res, key)
+            JsonCompareUtils.log.info(f"Node value: '{value[0]}' for jsonpath : '{key}'")
+            return value[0]
+
+        # value = jsonpath.jsonpath(res, key)
+        # JsonCompareUtils.log.info(f"Node value: '{value[0]}' for jsonpath : '{key}'")
+        # return value[0]
 
     # @staticmethod
     # def search_key(json_file_path):
@@ -101,3 +147,20 @@ class JsonCompareUtils:
                     # values.append((js1[1], js2[1]))
                     JsonCompareUtils.values.append((js1[1], js2[1]))
         return JsonCompareUtils.keys, JsonCompareUtils.values
+
+    @staticmethod
+    def deep_difference(res1, res2):
+        json1_data = json.loads(res1.text)
+        json2_data = json.loads(res2.text)
+        deep_diff = DeepDiff(json1_data, json2_data, ignore_order=True)
+        JsonCompareUtils.log.info(f"Difference between the responses: {deep_diff} ")
+        return deep_diff
+
+    @staticmethod
+    def is_value_present_in_res(value, res):
+        res_str = res.text
+        JsonCompareUtils.log.info("Searching a {} value in {} res".format(value, res_str))
+        pattern = r'(^|[^\w]){}([^\w]|$)'.format(value)
+        pattern = re.compile(pattern, re.IGNORECASE)
+        matches = re.search(pattern, res_str)
+        return bool(matches)
