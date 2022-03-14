@@ -40,6 +40,7 @@ class JsonCompareUtils:
         :Returns:
             boolean
         """
+        JsonCompareUtils.log.info("Comparing the responses values")
         if isinstance(res1, requests.models.Response) and isinstance(res2, requests.models.Response):
             json1_data = json.loads(res1.text)
             json2_data = json.loads(res2.text)
@@ -167,5 +168,6 @@ class JsonCompareUtils:
 
     @staticmethod
     def compare_node_values(node_result1, node_result2):
+        JsonCompareUtils.log.info(f"Comparing 2 node results {node_result1} and {node_result2}")
         return node_result1.sort() == node_result2.sort()
 
