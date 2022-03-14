@@ -113,11 +113,11 @@ class JsonCompareUtils:
         #     return jsonpath.jsonpath(res, key)
         if isinstance(res, requests.models.Response):
             value = jsonpath.jsonpath(res.json(), key)
-            JsonCompareUtils.log.info(f"Node value: '{value[0]}' for jsonpath : '{key}'")
+            JsonCompareUtils.log.info(f"Node value: '{value}' for jsonpath : '{key}'")
             return value[0]
         else:
             value = jsonpath.jsonpath(res, key)
-            JsonCompareUtils.log.info(f"Node value: '{value[0]}' for jsonpath : '{key}'")
+            JsonCompareUtils.log.info(f"Node value: '{value}' for jsonpath : '{key}'")
             return value[0]
 
         # value = jsonpath.jsonpath(res, key)
@@ -164,3 +164,8 @@ class JsonCompareUtils:
         pattern = re.compile(pattern, re.IGNORECASE)
         matches = re.search(pattern, res_str)
         return bool(matches)
+
+    @staticmethod
+    def compare_node_values(node_result1, node_result2):
+        return node_result1.sort() == node_result2.sort()
+
