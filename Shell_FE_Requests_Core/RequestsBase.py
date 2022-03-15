@@ -2,6 +2,8 @@ import os
 from configparser import ConfigParser
 import requests
 
+from Shell_FE_Requests_Core.Utilities.LoggingUtilities import LoggingUtilities
+
 
 class RequestsBase:
     """RequestsBase class contains methods for reading values from INI file and performing basic HTTP actions."""
@@ -13,7 +15,8 @@ class RequestsBase:
     request = None
     current_working_directory = os.path.dirname(os.getcwd())
     configfile = current_working_directory + '/Shell_FE_Behave_Tests/behave.ini'
-
+    log_obj = LoggingUtilities()
+    log = log_obj.logger()
     # endregion
 
     @staticmethod
@@ -264,3 +267,8 @@ class RequestsBase:
                 return response.content
         except Exception as err:
             print(err)
+
+    @staticmethod
+    def get_response_time():
+        RequestsBase.log.info(f"The total time elapsed to get the response is {RequestsBase.response.elapsed.total_seconds()} Seconds")
+        return RequestsBase.response.elapsed.total_seconds()

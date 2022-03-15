@@ -8,3 +8,4 @@ Feature: Validate Json comparison Utility
     Then user gets the specific node value
     Then user finds the difference between json responses
     Then user checks values presence in the response text
+    Then user check for the response time should not be greater than 5 sec

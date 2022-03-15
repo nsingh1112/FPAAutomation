@@ -20,16 +20,24 @@ def step_impl(context):
 
 @Then(u'user checks values presence in the response text')
 def step_impl(context):
-    check = JsonCompareUtils.is_value_present_in_res("Sanya Patel", RequestsBase.response)
+    check = JsonCompareUtils.is_value_present_in_res("Amb. Mohana Shah", RequestsBase.response)
     AssertionUtilities.assert_if_true(check)
 
 
 @Then(u'user gets the specific node value')
 def step_impl(context):
     node_value = JsonCompareUtils.get_node_value(RequestsBase.response, "0.name")
-    AssertionUtilities.assert_equals(node_value, "Sanya Patel")
+    AssertionUtilities.assert_equals(node_value, "Amb. Mohana Shah")
 
 
 @Then(u'user finds the difference between json responses')
 def step_impl(context):
     JsonCompareUtils.deep_difference(RequestsBase.response, RequestsBase.response)
+
+
+@Then(u'user check for the response time should not be greater than 5 sec')
+def step_impl(context):
+    timer = RequestsBase.get_response_time()
+    AssertionUtilities.assert_less_or_equals(timer, 5)
+
+
