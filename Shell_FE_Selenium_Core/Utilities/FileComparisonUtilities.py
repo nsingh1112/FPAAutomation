@@ -15,7 +15,7 @@ class FileComparisonUtilities:
     """File Comparison Utilities contains the methods for file comparison related activities."""
 
     current_working_directory = os.path.dirname(os.getcwd())
-    comparison_data = current_working_directory + "/Shell_FE_Behave_Tests/TestData/FileComparisons/"
+    comparison_data = current_working_directory + "/Shell_FE_Behave_Tests/TestData/ExcelComparisons/"
     test_data = current_working_directory + "/Shell_FE_Behave_Tests/TestData/"
     test_img_data = current_working_directory + "\\Shell_FE_Behave_Tests\\TestData\\images\\"
     test_screenshot_data = current_working_directory + "\\Shell_FE_Behave_Tests\\TestData\\screenshots\\"
