@@ -52,7 +52,7 @@ class FileComparisonUtilities:
         FileComparisonUtilities.log.info("Images path {}".format(remoteimage))
         if comp_type == 'image':
             img_data = FileComparisonUtilities.test_img_data
-            FileComparisonUtilities.download_image(remoteimage, svg = False,)
+            FileComparisonUtilities.download_image(remoteimage, svg = svg)
             loc_img = "{}{}".format(FileComparisonUtilities.test_img_data, localimage)
         elif comp_type == 'screenshot':
             img_data = FileComparisonUtilities.test_screenshot_data

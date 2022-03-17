@@ -111,5 +111,6 @@ class EncryptionDecryption:
                 encyptpassword = dictionary_values[environment][position][1]
                 decrypted_password = EncryptionDecryption.decrypt_message(encyptpassword)
                 EncryptionDecryption.log.info(f"Decrypted Password {decrypted_password} ")
+                return decrypted_password
         except:
             EncryptionDecryption.log.info(f"Username not found")
