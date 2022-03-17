@@ -54,6 +54,16 @@ class BrowserUtilities:
         return SeleniumBase.driver.title
 
     @staticmethod
+    def maximize_window():
+        """Maximizes the active browser window"""
+        SeleniumBase.driver.maximize_window()
+
+    @staticmethod
+    def delete_cookies():
+        """Deletes the cookies"""
+        SeleniumBase.driver.delete_all_cookies()
+
+    @staticmethod
     def switch_to_child_window():
         """Switches to the immediate child window."""
         child_window = SeleniumBase.driver.window_handles[1]
@@ -112,6 +122,10 @@ class BrowserUtilities:
             BrowserUtilities.log.error("Empty or invalid argument passed in the method switch_to_iframe(rame_value).")
             raise TypeError("Empty or invalid argument passed!!")
         SeleniumBase.driver.switch_to.frame(frame_value)
+    @staticmethod
+    def exit_frame():
+        """Switches to the default content from a frame."""
+        SeleniumBase.driver.switch_to.parent_frame()
 
     @staticmethod
     def accept_alert():

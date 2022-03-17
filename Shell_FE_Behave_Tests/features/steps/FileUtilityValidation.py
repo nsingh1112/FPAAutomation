@@ -1,5 +1,7 @@
 from behave import Given, When, Then
 
+from Shell_FE_Selenium_Core.Utilities.AssertionUtilities import AssertionUtilities
+from Shell_FE_Selenium_Core.Utilities.FileComparisonUtilities import FileComparisonUtilities
 from Shell_FE_Selenium_Core.Utilities.FileUtilities import FileUtilities
 from Shell_FE_Selenium_Core.Utilities.AssertionUtilities import AssertionUtilities
 
@@ -120,3 +122,8 @@ def step_impl(context, word):
     if name == False:
         FileUtilities.log.error("Word {0} not found in file {1}".format(word, file_name))
     AssertionUtilities.assert_if_true(name)
+    
+@When('user compares the Excel files "{filename1}" and "{filename2}" for equality')
+def step_impl(context, filename1, filename2):
+    result = FileComparisonUtilities.compare_excel(filename1, filename2)
+    AssertionUtilities.assert_if_true(result)

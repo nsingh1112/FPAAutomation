@@ -15,3 +15,7 @@ Feature: File Utility methods validation
     When user reads the child element's values from xml
     When user searched for a keyword "SeleniumPythonBindings" from pdf
     When user searched for a word "Symbols" not aware of page number from pdf
+
+@ExcelComparison
+  Scenario: Validate Excel comparison
+    When user compares the Excel files "File1.xlsx" and "File2.xlsx" for equality

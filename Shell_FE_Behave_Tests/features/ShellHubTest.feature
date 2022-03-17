@@ -1,4 +1,4 @@
-@ShellHubTest
+@web @ShellHubTest
 Feature: ShellHubTest
 	In order to verify searching in ShellHub works fine, this test has been written
 
