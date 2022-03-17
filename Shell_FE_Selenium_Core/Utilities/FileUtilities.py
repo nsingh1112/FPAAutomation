@@ -4,6 +4,8 @@ import openpyxl
 import json
 import xmltodict
 from Shell_FE_Selenium_Core.Utilities.LoggingUtilities import LoggingUtilities
+import PyPDF2
+import re
 
 
 class FileUtilities:
@@ -199,3 +201,77 @@ class FileUtilities:
             FileUtilities.log.error("Unable to locate XML file {0}. Exception {1}".format(file_name, f_err))
         except Exception as err:
             FileUtilities.log.error("Unable to parse XML file {0}. Exception {1}".format(file_name, err))
+
+    @staticmethod
+    def search_word_from_pdf(file_name, word, pagenum=0, exact_match = False, substring = True):
+        """
+        Reads the pdf and seraches for word.
+        :param file_name: provide the file name
+        :param word: the word to be searched
+        :param pagenum: on which page the pdf needs to be searched
+        :param exact_match: if the exact word need to be find with case sensitivity
+        :param substring: to find the subtring in a string
+        :return: True or False if the word is found in pdf file based on exact match filter
+        The count feature of exact word can also be used if required
+        """
+        try:
+            pdf_file = open(FileUtilities.test_data + file_name, "rb")
+            read_pdf = PyPDF2.PdfFileReader(pdf_file)
+            getpage = read_pdf.getPage(pagenum)
+            pdfData = getpage.extractText()
+
+            pdfdatalist = pdfData.split()
+            if exact_match:
+                word_count = 0
+                for i in range(len(pdfdatalist)):
+                    ResSearch = re.fullmatch(word, pdfdatalist[i])
+                    if ResSearch is not None:
+                        word_count = word_count+1
+                if word_count == 0:
+                    return False
+                else:
+                    return True
+
+            elif substring == True:
+                word_count = 0
+                for i in range(len(pdfdatalist)):
+                    ResSearch = re.search(word, pdfData)
+                    if ResSearch is not None:
+                        word_count = word_count+1
+                if word_count == 0:
+                    return False
+                else:
+                    return True
+            else:
+                ResSearch = re.match(word, pdfData)
+                if ResSearch is not None:
+                    return True
+                else:
+                    return False
+        # Unable to open the file
+        except IOError as ex:
+            FileUtilities.log.error('IOError thrown. Details: ' + ' %s' % ex)
+            return False
+        # Any other exceptions
+        except Exception as ex:
+            FileUtilities.log.error('Unexpected error. Details:' + ' %s' % ex)
+            return False
+
+    @staticmethod
+    def get_number_of_pages(file_name):
+        """Return the number of pages from pdf.
+            This function can also be used in test cases and used to run
+            the loop for all the pages after getting the page count
+        """
+        try:
+            pdf_file = open(FileUtilities.test_data + file_name, "rb")
+            read_pdf = PyPDF2.PdfFileReader(pdf_file)
+            number_of_pages = read_pdf.getNumPages()
+            FileUtilities.log.info("Return the number of pages ")
+            return number_of_pages
+        # Unable to open the file
+        except IOError as ex:
+            FileUtilities.log.error('IOError thrown. Details: ' + ' %s' % ex)
+        # Any other exceptions
+        except Exception as ex:
+            FileUtilities.log.error('Unexpected error. Details:' + ' %s' % ex)

@@ -12,6 +12,7 @@ class ShellHubControls:
     log_out = (By.XPATH, "//button[text()='Log Out']")
     pick_account = (By.XPATH, "//div[text()='Pick an account']")
     search = (By.CSS_SELECTOR, "#search-button .icomoon-search2")
+    logo_img = (By.XPATH, '//*[@class="img-responsive"]')
 
     def get_search_box(self):
         return self.driver.find_element(*ShellHubControls.search_box)
