@@ -2,6 +2,7 @@ from Shell_FE_Selenium_Core.Utilities.AccessibilityUtilities import Accessibilit
 
 from Shell_FE_Behave_Tests.ApplicationLibrary.ControlLibrary.ShellHubControls import ShellHubControls
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
+from Shell_FE_Selenium_Core.Utilities.AccessibilityUtilities import AccessibilityUtilities
 from Shell_FE_Selenium_Core.Utilities.BrowserUtilities import BrowserUtilities
 from Shell_FE_Selenium_Core.Utilities.SeleniumUtilities import SeleniumUtilities
 from Shell_FE_Selenium_Core.Utilities.WaitUtilities import WaitUtilities
@@ -15,7 +16,11 @@ class ShellHubFunctions:
     def access_shell_hub(self):
         BrowserUtilities.navigate_to_url(SeleniumBase.url)
 
+    def navigate_to_url(self, url):
+        BrowserUtilities.navigate_to_url(url)
+
     def validate_url_equality(self, url):
+        BrowserUtilities.refresh_page()
         WaitUtilities.wait_for_url_to_match_value(url)
         return BrowserUtilities.get_current_url()
 

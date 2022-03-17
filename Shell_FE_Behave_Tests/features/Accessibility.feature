@@ -1,4 +1,4 @@
-@AccessibilityTest
+@web @AccessibilityTest
 Feature: Accessibility Test
 	This test is written to validate the accessibility tests
 
