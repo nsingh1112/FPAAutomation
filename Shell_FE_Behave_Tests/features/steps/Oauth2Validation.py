@@ -21,17 +21,14 @@ def step_impl(context):
     test_url = ""
     username = ""
     password = ""
+
     data =  {'grant_type': 'password','username': username, 'password': password, 'client_id': client_id, 'client_secret': client_secret}
     access_token = RequestsBase.get_access_token(url= token_url, data=data)
     if access_token.status_code == 200:
         access_token = access_token.json()["access_token"]
         api_call_headers = {'Authorization': 'Bearer ' + access_token}
-        api_call_response = RequestsBase.get_request(url = test_url, headers=api_call_headers)
-        response_text = api_call_response.text
-        if api_call_response.status_code == 200:
-            AssertionUtilities.assert_if_true(True)
-        else:
-            AssertionUtilities.assert_if_true(api_call_response)
+        RequestsBase.get_request(url=test_url, headers=api_call_headers)
+        AssertionUtilities.assert_equals('200', str(RequestsBase.response_status_code()))
     else:
         AssertionUtilities.assert_if_true(access_token)
 
