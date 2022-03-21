@@ -1,0 +1,24 @@
+<testsuite name="JsonUtilityValidation.Validate Json comparison Utility" tests="1" errors="0" failures="0" skipped="0" time="0.326814" timestamp="2022-03-15T14:11:59.287420" hostname="BNGECO-L-82728"><testcase classname="JsonUtilityValidation.Validate Json comparison Utility" name="Validating the Json Utility methods" status="passed" time="0.326814"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @getrequest
+  Scenario: Validating the Json Utility methods
+    When user sends a GET request to retrieve user details ... passed in 0.313s
+    Then user compare json response with expected data ... passed in 0.002s
+    Then user search value in response with key ... passed in 0.001s
+    Then user gets the specific node value ... passed in 0.007s
+    Then user finds the difference between json responses ... passed in 0.003s
+    Then user checks values presence in the response text ... passed in 0.000s
+    Then user check for the response time should not be greater than 5 sec ... passed in 0.001s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+The end point url is: https://gorest.co.in/public/v2/users
+The GET request has been passed with the url: https://gorest.co.in/public/v2/users?page=1
+Amb. Mohana Shah
+
+]]>
+</system-out></testcase></testsuite>
