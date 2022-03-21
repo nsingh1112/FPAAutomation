@@ -19,7 +19,7 @@ class LoggingUtilities:
         logger = logging.getLogger(inspect.stack()[1][3])
         logger.setLevel("DEBUG")
         filehandler = logging.FileHandler(LoggingUtilities.logFolder + filename, "a")
-        formatter = logging.Formatter("%(asctime)s :%(levelname)s :%(name)s :%(message)s")
+        formatter = logging.Formatter("%(asctime)s :%(levelname)s :%(name)s: %(funcName)s :%(message)s")
         # formatter = logging.Formatter("%(asctime)s :%(levelname)s :%(message)s")
         filehandler.setFormatter(formatter)
         logger.addHandler(filehandler)

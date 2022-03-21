@@ -1,7 +1,6 @@
 import os
 import requests
 from configparser import ConfigParser
-
 from Shell_FE_Requests_Core.Utilities.LoggingUtilities import LoggingUtilities
 
 
@@ -322,3 +321,9 @@ class RequestsBase:
         except Exception as err:
             RequestsBase.log.error(err)
             return False
+
+    @staticmethod
+    def get_response_time():
+        RequestsBase.log.info(f"The total time elapsed to get the response is {RequestsBase.response.elapsed.total_seconds()} Seconds")
+        return RequestsBase.response.elapsed.total_seconds()
+
