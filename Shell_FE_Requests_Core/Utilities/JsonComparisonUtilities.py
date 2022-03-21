@@ -7,7 +7,7 @@ from deepdiff import DeepDiff
 from Shell_FE_Requests_Core.Utilities.LoggingUtilities import LoggingUtilities
 
 
-class JsonCompareUtils:
+class JsonComparisonUtils:
     keys = []
     values = []
     log_obj = LoggingUtilities()
@@ -24,9 +24,9 @@ class JsonCompareUtils:
             Sorted json object
         """
         if isinstance(obj, dict):
-            return sorted((key, JsonCompareUtils.ordered(value)) for key, value in obj.items())
+            return sorted((key, JsonComparisonUtils.ordered(value)) for key, value in obj.items())
         if isinstance(obj, list):
-            return sorted(JsonCompareUtils.ordered(x) for x in obj)
+            return sorted(JsonComparisonUtils.ordered(x) for x in obj)
         else:
             return obj
 
@@ -40,27 +40,21 @@ class JsonCompareUtils:
         :Returns:
             boolean
         """
-        JsonCompareUtils.log.info("Comparing the responses values")
+        JsonComparisonUtils.log.info("Comparing the responses values")
         if isinstance(res1, requests.models.Response) and isinstance(res2, requests.models.Response):
             json1_data = json.loads(res1.text)
             json2_data = json.loads(res2.text)
-            return JsonCompareUtils.ordered(json1_data) == JsonCompareUtils.ordered(json2_data)
+            return JsonComparisonUtils.ordered(json1_data) == JsonComparisonUtils.ordered(json2_data)
         elif isinstance(res1, (dict, list,str)) and isinstance(res2, requests.models.Response):
             json2_data = json.loads(res2.text)
-            return JsonCompareUtils.ordered(res1) == JsonCompareUtils.ordered(json2_data)
+            return JsonComparisonUtils.ordered(res1) == JsonComparisonUtils.ordered(json2_data)
         elif isinstance(res1, requests.models.Response) and isinstance(res2, (dict, list, str)):
             json1_data = json.loads(res1.text)
-            return JsonCompareUtils.ordered(json1_data) == JsonCompareUtils.ordered(res2)
+            return JsonComparisonUtils.ordered(json1_data) == JsonComparisonUtils.ordered(res2)
         elif isinstance(res1, (dict, list, str)) and isinstance(res2, (dict, list, str)):
-            return JsonCompareUtils.ordered(res1) == JsonCompareUtils.ordered(res2)
+            return JsonComparisonUtils.ordered(res1) == JsonComparisonUtils.ordered(res2)
         else:
             return False
-
-    # @staticmethod
-    # def read_json(read_file):
-    #     with open(read_file) as file:
-    #         json_data = json.load(file)
-    #     return json_data
 
     @staticmethod
     def search_values_in_response_with_key(json_obj, user_key):
@@ -75,13 +69,13 @@ class JsonCompareUtils:
         if isinstance(json_obj, requests.models.Response):
 
             data = json.loads(json_obj.text)
-            JsonCompareUtils.log.info("Following are the values matched with key  ' {} ' ".format(user_key))
-            JsonCompareUtils.log.info(nested_lookup(user_key, data)[0])
+            JsonComparisonUtils.log.info("Following are the values matched with key  ' {} ' ".format(user_key))
+            JsonComparisonUtils.log.info(nested_lookup(user_key, data)[0])
             return nested_lookup(user_key, data)
         else:
             data = json.loads(json_obj)
-            JsonCompareUtils.log.info("Following are the values matched with key  ' {} ' ".format(user_key))
-            JsonCompareUtils.log.info(nested_lookup(user_key, data)[0])
+            JsonComparisonUtils.log.info("Following are the values matched with key  ' {} ' ".format(user_key))
+            JsonComparisonUtils.log.info(nested_lookup(user_key, data)[0])
             return nested_lookup(user_key, data)
 
     @staticmethod
@@ -95,72 +89,43 @@ class JsonCompareUtils:
         :Returns:
             List of Values for key provided
         """
-
-        # json_response = json.loads(res.text)
-        # data = res.text
-        # parse_json = json.loads(data)
-        # jsonpath.jsonpath(parse_json, "['data'][0]['email']")
-        #
-        # JsonCompareUtils.log.info(res)
-        # if isinstance(res, list):
-        #     res = defaultdict(list)
-        #     for sub in res:
-        #         for key in sub:
-        #             res[key].append(sub[key])
-        #     JsonCompareUtils.log.info(jsonpath.jsonpath(res, key))
-        #     return jsonpath.jsonpath(res, key)
-        # else:
-        #     JsonCompareUtils.log.info(jsonpath.jsonpath(res, key))
-        #     return jsonpath.jsonpath(res, key)
         if isinstance(res, requests.models.Response):
             value = jsonpath.jsonpath(res.json(), key)
-            JsonCompareUtils.log.info(f"Node value: '{value}' for jsonpath : '{key}'")
+            JsonComparisonUtils.log.info(f"Node value: '{value}' for jsonpath : '{key}'")
             return value[0]
         else:
             value = jsonpath.jsonpath(res, key)
-            JsonCompareUtils.log.info(f"Node value: '{value}' for jsonpath : '{key}'")
+            JsonComparisonUtils.log.info(f"Node value: '{value}' for jsonpath : '{key}'")
             return value[0]
-
-        # value = jsonpath.jsonpath(res, key)
-        # JsonCompareUtils.log.info(f"Node value: '{value[0]}' for jsonpath : '{key}'")
-        # return value[0]
-
-    # @staticmethod
-    # def search_key(json_file_path):
-    #     json_data = JsonCompareUtils.read_json(json_file_path)
-    #     return json_data
 
     @staticmethod
     def find_difference(res1, res2):
         json1_data = json.loads(res1.text)
         json2_data = json.loads(res2.text)
-        # keys = []
-        # values = []
-        # global JsonCompareUtils.keys
 
         if len(json1_data) != len(json2_data):
 
-            for js1, js2 in zip(JsonCompareUtils.ordered(json1_data), JsonCompareUtils.ordered(json2_data)):
+            for js1, js2 in zip(JsonComparisonUtils.ordered(json1_data), JsonComparisonUtils.ordered(json2_data)):
                 if js1[0] != js2[0]:
                     # keys.append((js1[0], js2[0]))
-                    JsonCompareUtils.keys.append((js1[0], js2[0]))
+                    JsonComparisonUtils.keys.append((js1[0], js2[0]))
                 if js1[1] != js2[1]:
                     # values.append((js1[1], js2[1]))
-                    JsonCompareUtils.values.append((js1[1], js2[1]))
-        return JsonCompareUtils.keys, JsonCompareUtils.values
+                    JsonComparisonUtils.values.append((js1[1], js2[1]))
+        return JsonComparisonUtils.keys, JsonComparisonUtils.values
 
     @staticmethod
     def deep_difference(res1, res2):
         json1_data = json.loads(res1.text)
         json2_data = json.loads(res2.text)
         deep_diff = DeepDiff(json1_data, json2_data, ignore_order=True)
-        JsonCompareUtils.log.info(f"Difference between the responses: {deep_diff} ")
+        JsonComparisonUtils.log.info(f"Difference between the responses: {deep_diff} ")
         return deep_diff
 
     @staticmethod
     def is_value_present_in_res(value, res):
         res_str = res.text
-        JsonCompareUtils.log.info("Searching a {} value in {} res".format(value, res_str))
+        JsonComparisonUtils.log.info("Searching a {} value in {} res".format(value, res_str))
         pattern = r'(^|[^\w]){}([^\w]|$)'.format(value)
         pattern = re.compile(pattern, re.IGNORECASE)
         matches = re.search(pattern, res_str)
@@ -168,6 +133,6 @@ class JsonCompareUtils:
 
     @staticmethod
     def compare_node_values(node_result1, node_result2):
-        JsonCompareUtils.log.info(f"Comparing 2 node results {node_result1} and {node_result2}")
+        JsonComparisonUtils.log.info(f"Comparing 2 node results {node_result1} and {node_result2}")
         return node_result1.sort() == node_result2.sort()
 
