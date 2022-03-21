@@ -95,7 +95,6 @@ class RequestsBase:
                         "The GET request has been passed with the url: " + RequestsBase.response.request.url)
         except Exception as err:
             RequestsBase.log.error(err)
-            return False
 
     @staticmethod
     def put_request(url=None, body_data=None, **opts):
