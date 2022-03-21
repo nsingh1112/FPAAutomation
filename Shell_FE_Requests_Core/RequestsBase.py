@@ -93,10 +93,8 @@ class RequestsBase:
                 RequestsBase.response = requests.get(url, params=query_params, **opts)
                 RequestsBase.log.info(
                         "The GET request has been passed with the url: " + RequestsBase.response.request.url)
-            return RequestsBase.response
         except Exception as err:
             RequestsBase.log.error(err)
-            return False
 
     @staticmethod
     def put_request(url=None, body_data=None, **opts):
@@ -149,7 +147,6 @@ class RequestsBase:
                 RequestsBase.response = requests.post(url, data=body_data, json=body_json, **opts)
                 RequestsBase.log.info(
                     "The POST request has been passed with the url not None: " + RequestsBase.response.request.url)
-            return RequestsBase.response
         except Exception as err:
             RequestsBase.log.error(err)
 
@@ -318,7 +315,8 @@ class RequestsBase:
         :return: access token or False
         """
         try:
-            access_token_response = RequestsBase.post_request(url=url, body_data=data, verify=verify, allow_redirects=allow_redirects)
+            RequestsBase.post_request(url=url, body_data=data, verify=verify, allow_redirects=allow_redirects)
+            access_token_response = RequestsBase.response
             RequestsBase.log.info(access_token_response)
             return access_token_response
         except Exception as err:
