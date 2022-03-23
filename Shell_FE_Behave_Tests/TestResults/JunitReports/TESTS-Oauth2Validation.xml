@@ -1,12 +1,12 @@
-<testsuite name="Oauth2Validation.Validate OATH2 API with Requests" tests="1" errors="0" failures="0" skipped="0" time="3.75599" timestamp="2022-03-23T12:21:40.311885" hostname="BNGECO-L-82875"><testcase classname="Oauth2Validation.Validate OATH2 API with Requests" name="OATH2 Request validation" status="passed" time="3.75599"><system-out>
+<testsuite name="Oauth2Validation.Validate OATH2 API with Requests" tests="1" errors="0" failures="0" skipped="0" time="2.655059" timestamp="2022-03-23T12:36:03.731497" hostname="BNGECO-L-82875"><testcase classname="Oauth2Validation.Validate OATH2 API with Requests" name="OATH2 Request validation" status="passed" time="2.655059"><system-out>
 <![CDATA[
 @scenario.begin
 
   @oathrequest
   Scenario: OATH2 Request validation
-    When user sends a POST request to retrieve access token ... passed in 2.221s
+    When user sends a POST request to retrieve access token ... passed in 2.106s
     Then user validates if the response status is "200" ... passed in 0.000s
-    Then user sends a GET request to access details ... passed in 1.535s
+    Then user sends a GET request to access details ... passed in 0.549s
 
 @scenario.end
 --------------------------------------------------------------------------------
