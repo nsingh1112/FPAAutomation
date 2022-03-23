@@ -1,0 +1,21 @@
+<testsuite name="Oauth2Validation.Validate OATH2 API with Requests" tests="1" errors="0" failures="0" skipped="0" time="3.75599" timestamp="2022-03-23T12:21:40.311885" hostname="BNGECO-L-82875"><testcase classname="Oauth2Validation.Validate OATH2 API with Requests" name="OATH2 Request validation" status="passed" time="3.75599"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @oathrequest
+  Scenario: OATH2 Request validation
+    When user sends a POST request to retrieve access token ... passed in 2.221s
+    Then user validates if the response status is "200" ... passed in 0.000s
+    Then user sends a GET request to access details ... passed in 1.535s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+C:\Users\chinmaya.mishra\Projects\Python_Automation%20Framework\venv\lib\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'shell-gc--staging.my.salesforce.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  warnings.warn(
+
+]]>
+</system-err></testcase></testsuite>
