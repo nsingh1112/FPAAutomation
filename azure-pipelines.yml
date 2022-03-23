@@ -33,11 +33,11 @@ steps:
 
 - task: TwineAuthenticate@1
   inputs:
-    artifactFeed: TCoE Test Automation Offering/ShellFESeleniumPythonCore_Alpha
+    artifactFeed: TCoE Test Automation Offering/ShellFERequestsPythonCore_Alpha
 
 - script: |
     pip install twine
   displayName: 'Install Twine'
 
 - script: |
-    twine upload -r ShellFESeleniumPythonCore_Alpha --config-file $(PYPIRC_PATH) dist/*
+    twine upload -r ShellFERequestsPythonCore_Alpha --config-file $(PYPIRC_PATH) dist/*
