@@ -6,6 +6,7 @@ from Shell_FE_Requests_Core.Utilities.FileUtilities import FileUtilities
 from Shell_FE_Requests_Core.Utilities.AssertionUtilities import AssertionUtilities
 import time
 
+
 @When('user sends a GET request to retrieve user details')
 def step_impl(context):
     context.feature.users_api = UsersApi()
