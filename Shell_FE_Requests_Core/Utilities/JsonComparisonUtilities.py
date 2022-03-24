@@ -40,7 +40,8 @@ class JsonComparisonUtils:
         :Returns:
             boolean
         """
-        JsonComparisonUtils.log.info("Comparing the responses values")
+
+        JsonComparisonUtils.log.info("Comparing response values")
         if isinstance(res1, requests.models.Response) and isinstance(res2, requests.models.Response):
             json1_data = json.loads(res1.text)
             json2_data = json.loads(res2.text)
