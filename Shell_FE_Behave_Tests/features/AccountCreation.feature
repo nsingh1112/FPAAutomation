@@ -4,4 +4,4 @@ Feature: Validate Account Creation
   Scenario: Account Request validation
    Given user logs into Salesforce application as "System Administrator" role
    When user creates the account
-#   And user fetches the account ID
+   And user fetches the account ID
