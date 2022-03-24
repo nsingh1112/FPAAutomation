@@ -1,6 +1,6 @@
 {
-  "expected_node_data" : "Lal Menon",
-  "expected_text" : "Lal Menon",
+  "expected_node_data" : "John Doe",
+  "expected_text" : "John Doe",
   "threshold": 5
 
 

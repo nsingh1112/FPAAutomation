@@ -100,6 +100,16 @@ class JsonComparisonUtils:
 
     @staticmethod
     def find_difference(res1, res2):
+        """
+        find_difference: Find Difference of dictionaries, iterables, strings and other objects. It will recursively look for
+        all the changes but it will not ignore the order of the nodes.
+
+        :Args:
+            res1: api response data 1
+            res2: api response data 2
+        :Returns:
+            The difference data in the form of dictionary
+        """
         json1_data = json.loads(res1.text)
         json2_data = json.loads(res2.text)
 
@@ -116,6 +126,16 @@ class JsonComparisonUtils:
 
     @staticmethod
     def deep_difference(res1, res2):
+        """
+        DeepDiff: Deep Difference of dictionaries, iterables, strings and other objects. It will recursively look for
+        all the changes.
+
+        :Args:
+            res1: api response data 1
+            res2: api response data 2
+        :Returns:
+            The difference data in the form of dictionary
+        """
         json1_data = json.loads(res1.text)
         json2_data = json.loads(res2.text)
         deep_diff = DeepDiff(json1_data, json2_data, ignore_order=True)
@@ -124,6 +144,15 @@ class JsonComparisonUtils:
 
     @staticmethod
     def is_value_present_in_res(value, res):
+        """
+        is_value_present_in_res: Which will search a user provided value in the response data
+
+        :Args:
+            value: Value to be searched
+            res2: api response data 2
+        :Returns:
+            Boolean
+        """
         res_str = res.text
         JsonComparisonUtils.log.info("Searching a {} value in {} res".format(value, res_str))
         pattern = r'(^|[^\w]){}([^\w]|$)'.format(value)
@@ -133,6 +162,15 @@ class JsonComparisonUtils:
 
     @staticmethod
     def compare_node_values(node_result1, node_result2):
+        """
+        compare_node_values: Which will compare two node values return true id both the node valued are same else returns false
+
+        :Args:
+            node_result1: Actual node data
+            node_result2: expected node data
+        :Returns:
+            Boolean
+        """
         JsonComparisonUtils.log.info(f"Comparing 2 node results {node_result1} and {node_result2}")
         return node_result1.sort() == node_result2.sort()
 

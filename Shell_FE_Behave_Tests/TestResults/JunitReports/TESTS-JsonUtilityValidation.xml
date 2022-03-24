@@ -1,22 +1,22 @@
-<testsuite name="JsonUtilityValidation.Validate Json comparison Utility" tests="1" errors="0" failures="0" skipped="0" time="0.385551" timestamp="2022-03-22T16:38:16.523527" hostname="BNGECO-L-82728"><testcase classname="JsonUtilityValidation.Validate Json comparison Utility" name="Validating the Json Utility methods" status="passed" time="0.385551"><system-out>
+<testsuite name="JsonUtilityValidation.Validate Json comparison Utility" tests="1" errors="0" failures="0" skipped="0" time="0.355656" timestamp="2022-03-23T16:44:36.769735" hostname="BNGECO-L-82728"><testcase classname="JsonUtilityValidation.Validate Json comparison Utility" name="Validating the Json Utility methods" status="passed" time="0.355656"><system-out>
 <![CDATA[
 @scenario.begin
 
   @getrequest
   Scenario: Validating the Json Utility methods
-    When user sends a GET request to retrieve user details ... passed in 0.384s
+    When user sends a GET request to retrieve user details ... passed in 0.333s
     Then user compare json response with expected data ... passed in 0.002s
-    Then user search value in response with key "name" ... passed in 0.000s
-    Then user gets the node "0.name" value ... passed in 0.000s
-    Then user finds the difference between json responses ... passed in 0.000s
-    Then user checks values presence in the response text ... passed in 0.000s
-    Then user check for the response time should not be greater than threshold ... passed in 0.000s
+    Then user search value in response with key "name" ... passed in 0.001s
+    Then user gets the node "0.name" value ... passed in 0.002s
+    Then user finds the difference between json responses ... passed in 0.011s
+    Then user checks values presence in the response text ... passed in 0.005s
+    Then user check for the response time should not be greater than threshold ... passed in 0.003s
 
 @scenario.end
 --------------------------------------------------------------------------------
 
 Captured stdout:
-Lal Menon
+John Doe
 
 ]]>
 </system-out></testcase></testsuite>
