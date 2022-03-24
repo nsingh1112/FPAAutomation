@@ -1,3 +1,0 @@
-2021-12-14 17:57:48,241 :INFO :AndroidUtilities :Navigated to the URL: https://hub.shell.com.
-2021-12-14 17:58:18,321 :ERROR :WaitUtilities :Element ('id', 'i0116') is not visible within the specified time. Exception: InvalidArgumentException
-2021-12-14 17:58:18,868 :INFO :AndroidUtilities :Took screenshot and saved as Test_the_web_browser_14121718.png in screenshots folder.

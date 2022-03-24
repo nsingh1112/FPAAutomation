@@ -1,3 +1,4 @@
+import json
 import os
 from appium.webdriver.appium_service import AppiumService
 from configparser import ConfigParser
@@ -16,6 +17,9 @@ class AppiumBase:
     __browser_name = None
     __application_type = None
     __automation_name = None
+    __remote_exe = None
+    __remote_environment = None
+    __implicitwait = None
     devicePlatform = None
     app = None
     udid = None
@@ -27,8 +31,11 @@ class AppiumBase:
     appPathFlag = None
     bundleIdPath = None
     appPackageFlag = None
+    __parallel = None
     current_working_directory = os.path.dirname(os.getcwd())
     configfile = current_working_directory + '/Shell_FE_Behave_Tests/behave.ini'
+    app_browserstack_config = current_working_directory + '/Shell_FE_Behave_Tests/browserstack.json'
+    TASK_ID = int(os.environ['TASK_ID']) if 'TASK_ID' in os.environ else 0
     appium_Service = AppiumService()
 
     # endregion
@@ -73,6 +80,7 @@ class AppiumBase:
         """
         AppiumBase.__config = AppiumBase.read_config()
         # AppiumBase.devicePlatform = AppiumBase.__config['automationplatform']['platformtype']
+
         if AppiumBase.devicePlatform.lower() == "android":
             AppiumBase.__platformName = AppiumBase.__config['Android']['platformName']
             AppiumBase.__platformVersion = AppiumBase.__config['Android']['platformVersion']
@@ -86,6 +94,10 @@ class AppiumBase:
             AppiumBase.__browser_name = AppiumBase.__config['Android']['browserName']
             AppiumBase.appPathFlag = AppiumBase.__config.getboolean('Android', 'runAppWithPath')
             AppiumBase.appPackageFlag = AppiumBase.__config.getboolean('Android', 'runAppWithPackage')
+            AppiumBase.__implicitwait = AppiumBase.__config['timeout']['implicit_wait']
+            # BrowserStack value initialization
+            AppiumBase.__remote_exe = AppiumBase.__config.getboolean('automationplatform', 'remote')
+            AppiumBase.__remote_environment = AppiumBase.__config['automationplatform']['remote_environment']
 
         elif AppiumBase.devicePlatform.lower() == "ios":
             AppiumBase.__application_type = AppiumBase.__config['iOS']['applicationType']
@@ -101,12 +113,19 @@ class AppiumBase:
             AppiumBase.noRest = AppiumBase.__config.getboolean('iOS', 'noReset')
             AppiumBase.appPathFlag = AppiumBase.__config.getboolean('iOS', 'runAppWithPath')
             AppiumBase.bundleIdPath = AppiumBase.__config.getboolean('iOS', 'runAppWithBundleId')
+            AppiumBase.__remote_exe = AppiumBase.__config.getboolean('automationplatform', 'remote')
+            AppiumBase.__remote_environment = AppiumBase.__config['remote_environment']['remote_environment']
+        # elif AppiumBase.devicePlatform.lower() == "browserstack":
+        #     # BrowserStack value initialization
+        #     AppiumBase.__remote_exe = AppiumBase.__config.getboolean('Android', 'remote')
+        #     AppiumBase.__remote_environment = AppiumBase.__config['Android']['remote_environment']
+        #     AppiumBase.__parallel = AppiumBase.__config.getboolean('automationplatform', 'parallel')
 
     # endregion
 
     # region Launch Application
     @staticmethod
-    def launch_application(device_type= None):
+    def launch_application(device_type=None):
         """Launches the Application
            Returns the driver instance
         """
@@ -114,6 +133,7 @@ class AppiumBase:
             AppiumBase.__config = AppiumBase.read_config()
             AppiumBase.devicePlatform = AppiumBase.__config['automationplatform']['platformtype']
             AppiumBase.read_values()
+
         elif device_type.lower() == "android":
             AppiumBase.devicePlatform = "android"
             AppiumBase.read_values()
@@ -126,28 +146,38 @@ class AppiumBase:
                         'deviceName': AppiumBase.__deviceName,
                         'automationName': AppiumBase.__automation_name,
                         }
-        if AppiumBase.__application_type.lower() == "native" or AppiumBase.__application_type.lower() == "hybrid":
-            if AppiumBase.devicePlatform.lower() == "android":
-                if AppiumBase.appPackageFlag is True:
-                    desired_caps['appPackage'] = AppiumBase.appPackage
-                    desired_caps['appActivity'] = AppiumBase.appActivity
 
-                if AppiumBase.appPathFlag is True:
-                    desired_caps['app'] = AppiumBase.app
+        if AppiumBase.__remote_exe is False:
 
-            elif AppiumBase.devicePlatform.lower() == "ios":
-                desired_caps['udid'] = AppiumBase.udid
+            if AppiumBase.__application_type.lower() == "native" or AppiumBase.__application_type.lower() == "hybrid":
+                if AppiumBase.devicePlatform.lower() == "android":
+                    if AppiumBase.appPackageFlag is True:
+                        desired_caps['appPackage'] = AppiumBase.appPackage
+                        desired_caps['appActivity'] = AppiumBase.appActivity
 
-                if AppiumBase.bundleIdPath is True:
-                    desired_caps['bundleId'] = AppiumBase.bundle_id
-                if AppiumBase.appPathFlag is True:
-                    desired_caps['app'] = AppiumBase.app
-                if AppiumBase.noReset is True:
-                    desired_caps['app'] = AppiumBase.app
+                    if AppiumBase.appPathFlag is True:
+                        desired_caps['app'] = AppiumBase.app
 
-        elif AppiumBase.__application_type.lower() == "webbrowser":
-            desired_caps['browserName'] = AppiumBase.__browser_name
-        AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_capabilities=desired_caps)
+                elif AppiumBase.devicePlatform.lower() == "ios":
+                    desired_caps['udid'] = AppiumBase.udid
+
+                    if AppiumBase.bundleIdPath is True:
+                        desired_caps['bundleId'] = AppiumBase.bundle_id
+                    if AppiumBase.appPathFlag is True:
+                        desired_caps['app'] = AppiumBase.app
+                    if AppiumBase.noReset is True:
+                        desired_caps['app'] = AppiumBase.app
+
+            elif AppiumBase.__application_type.lower() == "webbrowser":
+                desired_caps['browserName'] = AppiumBase.__browser_name
+
+            AppiumBase.driver = webdriver.Remote(AppiumBase.__remoteURL, desired_capabilities=desired_caps)
+        elif AppiumBase.__remote_exe is True:
+            remote_environment = str(AppiumBase.__remote_environment).upper()
+            if remote_environment == "BROWSERSTACK":
+                AppiumBase.driver = AppiumBase.__app_browserstack_initialization()
+        AppiumBase.driver.implicitly_wait(int(AppiumBase.__implicitwait))
+
 
     # endregion
 
@@ -184,3 +214,20 @@ class AppiumBase:
         """Closes the current driver session"""
         if AppiumBase.driver is not None:
             AppiumBase.driver.quit()
+
+    @staticmethod
+    def __app_browserstack_initialization():
+        with open(AppiumBase.app_browserstack_config) as config_file:
+            config = json.load(config_file)
+
+        username = config['user']
+        accesskey = config['key']
+
+        server = config['appServer']
+
+        capabilities = config['appCapabilities']
+        capabilities['device'] = config['appEnvironments'][AppiumBase.TASK_ID]['device']
+        driver = webdriver.Remote(
+            command_executor='http://{0}:{1}@{2}/wd/hub'.format(username, accesskey, server),
+            desired_capabilities=dict(capabilities))
+        return driver

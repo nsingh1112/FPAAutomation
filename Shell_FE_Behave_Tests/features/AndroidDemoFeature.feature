@@ -6,7 +6,4 @@ Feature: Android Demo
     When  I test views
     Then  I verify checkbox and radio buttons
 
-#  Scenario: Test Popups
-#	When I Click on Views
-#	Then I verify popups
 

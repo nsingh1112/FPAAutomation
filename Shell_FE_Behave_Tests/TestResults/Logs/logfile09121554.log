@@ -1,8 +1,0 @@
-2021-12-09 15:20:05,843 :INFO :AndroidUtilities :Clicked on the element.
-2021-12-09 15:20:10,132 :INFO :AndroidUtilities :Clicked on the element.
-2021-12-09 15:20:11,287 :INFO :AndroidUtilities :Clicked on the element.
-2021-12-09 15:20:14,483 :INFO :AndroidUtilities :Send text Python Automation Testing to the element.
-2021-12-09 15:20:16,053 :INFO :AndroidUtilities :key has been pressed
-2021-12-09 15:20:16,056 :INFO :AndroidUtilities :Current context of the is NATIVE_APP.
-2021-12-09 15:20:18,763 :INFO :AndroidUtilities :Current context of the is WEBVIEW_chrome.
-2021-12-09 15:20:26,778 :INFO :AndroidUtilities :Took screenshot and saved as Click_on_the_link_09121526.png in screenshots folder.
