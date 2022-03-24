@@ -40,13 +40,13 @@ class RequestsBase:
             environment = RequestsBase.config['api']['environment']
             # region Base Uri initialization
             if environment == "dev":
-                RequestsBase.base_uri = RequestsBase.config['api']['dev_endpoint']
+                RequestsBase.base_uri = RequestsBase.config['api']['dev_baseuri']
             elif environment == "qa":
-                RequestsBase.base_uri = RequestsBase.config['api']['qa_endpoint']
+                RequestsBase.base_uri = RequestsBase.config['api']['qa_baseuri']
             elif environment == "stage":
-                RequestsBase.base_uri = RequestsBase.config['api']['stage_endpoint']
+                RequestsBase.base_uri = RequestsBase.config['api']['stage_baseuri']
             elif environment == "prod":
-                RequestsBase.base_uri = RequestsBase.config['api']['prod_endpoint']
+                RequestsBase.base_uri = RequestsBase.config['api']['prod_baseuri']
             else:
                 RequestsBase.log.error(
                     "Invalid environment name provided in INI file. Environment: {0}.".format(environment))
@@ -55,17 +55,26 @@ class RequestsBase:
             RequestsBase.log.error(err)
 
     @staticmethod
-    def set_endpoint(path_params=None):
+    def set_endpoint(base_uri=None, path_params=None):
         """Builds the Endpoint by appending the BaseUri along with the resource passed as arguments to this method.
         The value would be saved into the 'endpoint_url' variable available in RequestsBase."""
         try:
-            if path_params is not None:
-                RequestsBase.endpoint_url = RequestsBase.base_uri + path_params
-                RequestsBase.log.info("The end point url is: " + RequestsBase.endpoint_url)
+            if base_uri is None:
+                if path_params is not None:
+                    RequestsBase.endpoint_url = RequestsBase.base_uri + path_params
+                    RequestsBase.log.info("The end point url is: " + RequestsBase.endpoint_url)
+                else:
+                    RequestsBase.endpoint_url = RequestsBase.base_uri
+                    RequestsBase.log.info(
+                        "The end point url is: " + RequestsBase.endpoint_url + ". No path parameters were passed.")
             else:
-                RequestsBase.endpoint_url = RequestsBase.base_uri
-                RequestsBase.log.info(
-                    "The end point url is: " + RequestsBase.endpoint_url + ". No path parameters were passed.")
+                if path_params is not None:
+                    RequestsBase.endpoint_url = base_uri + path_params
+                    RequestsBase.log.info("The end point url is: " + RequestsBase.endpoint_url)
+                else:
+                    RequestsBase.endpoint_url = base_uri
+                    RequestsBase.log.info(
+                        "The end point url is: " + RequestsBase.endpoint_url + ". No path parameters were passed.")
         except Exception as err:
             RequestsBase.log.error(err)
 

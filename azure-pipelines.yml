@@ -3,9 +3,8 @@
 # Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
-#trigger:
-## - SeleniumCore_Stage
-#- master
+trigger:
+- master1
 
 pool:
   vmImage: ubuntu-latest
@@ -25,20 +24,7 @@ steps:
 - script: |
     python -m pip install --upgrade pip
     python -m pip install --upgrade build setuptools wheel
-#    pip install -r requirements.txt
   displayName: 'Install dependencies'
-
-#- script: |
-#    cd Shell_FE_Behave_Tests
-#    behave --no-capture --junit --format pretty --junit-directory TestResults/XMLReports
-#  displayName: 'Run Behave Tests'
-
-#- task: PublishTestResults@2
-#  inputs:
-#    testResultsFormat: 'JUnit'
-#    testResultsFiles: '**/TESTS-*.xml'
-#    searchFolder: '$(System.DefaultWorkingDirectory)//XMLReports'
-#    testRunTitle: 'Behave tests'
 
 - script: |
     python -m build
@@ -46,11 +32,11 @@ steps:
 
 - task: TwineAuthenticate@1
   inputs:
-    artifactFeed: TCoE Test Automation Offering/ShellFESeleniumPythonCore_Alpha
+    artifactFeed: TCoE Test Automation Offering/ShellFERequestsPythonCore_Alpha
 
 - script: |
     pip install twine
   displayName: 'Install Twine'
 
 - script: |
-    twine upload -r ShellFESeleniumPythonCore_Alpha --config-file $(PYPIRC_PATH) dist/*
+    twine upload -r ShellFERequestsPythonCore_Alpha --config-file $(PYPIRC_PATH) dist/*
