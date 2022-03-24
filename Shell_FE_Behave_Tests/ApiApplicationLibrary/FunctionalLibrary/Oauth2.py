@@ -1,6 +1,7 @@
 from Shell_FE_Requests_Core.RequestsBase import RequestsBase
 from Shell_FE_Requests_Core.Utilities.LoggingUtilities import LoggingUtilities
-
+from Shell_FE_Requests_Core.Utilities.FileUtilities import FileUtilities
+from Shell_FE_Requests_Core.Utilities.EncryptionDecryption import EncryptionDecryption
 
 class Oauth2:
     log = LoggingUtilities().logger()
@@ -15,19 +16,16 @@ class Oauth2:
         client_secret = consumer secret of your connected app
         :return:
         """
-        # client_id = ""
-        # client_secret = ""
-        # token_url = ""
-        # username = ""
-        # password = ""
-
-        client_id = "3MVG90J3nJBMnqrSl_IljUnQrWdUnYWJ0zHjPfS32RsfN4rSroAQMpXmpp.BM4Nan6ZOz1SNXBussyS2gp5A6"
-        client_secret = "80E6E932427D5D4A2EE0D89002B278C7EBF07F0320DC34600D4AAB2649B42AAC"
-        token_url = "https://shell-gc--staging.my.salesforce.com/services/oauth2/token"
-        test_url = "https://shell-gc--staging.my.salesforce.com/services/data/v53.0"
         username = "insadl@shell.com.shell-gc.staging"
-        password = "Springiscoming51@"
-
+        environment = "UAT"
+        position = "System Administrator"
+        users_dict = FileUtilities.read_json_file_as_dictionary("SecretIds.json")
+        client_id = users_dict["client_id"]
+        client_secret = users_dict["client_secret"]
+        token_url = users_dict["token_url"]
+        password = EncryptionDecryption.decrypt_user_creds(environment=environment, position=position,
+                                                         name=username)
+        Oauth2.log.info("result: " + str(password))
         data =  {'grant_type': 'password','username': username, 'password': password, 'client_id': client_id, 'client_secret': client_secret}
         access_token = RequestsBase.get_access_token(url= token_url, data=data)
         Oauth2.log.info("The status code is: " + str(RequestsBase.response.status_code))
@@ -39,8 +37,8 @@ class Oauth2:
         test_url = instance URL you need to make a request
         :param access_token:
         """
-        # test_url = ""
-        test_url = "https://shell-gc--staging.my.salesforce.com/services/data/v53.0"
+        users_dict = FileUtilities.read_json_file_as_dictionary("SecretIds.json")
+        test_url = users_dict["test_url"]
         api_call_headers = {'Authorization': 'Bearer ' + access_token}
         RequestsBase.get_request(url=test_url, headers=api_call_headers)
         Oauth2.log.info("The status code is: " + str(RequestsBase.response.status_code))
