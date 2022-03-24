@@ -1,0 +1,11 @@
+{
+  "baseUri": "https://shell-gc--staging.my.salesforce.com/",
+  "resource": "services/data/v53.0/sobjects/account",
+  "headers": {
+      "Authorization": "Bearer ",
+      "Content-Type": "application/json"
+  },
+  "requestPayload": {
+      "Name": ""
+  }
+}

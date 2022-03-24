@@ -83,7 +83,7 @@ class AssertionUtilities:
             assert False, "{0} is True".format(value)
 
     @staticmethod
-    def assert_less_or_equals(value1, value2,):
+    def assert_less_or_equals(value1, value2):
         """ Assert if the values is greater than or equal to value2"""
         if (value1 or value2) is None:
             assert False

@@ -1,4 +1,6 @@
 from behave import Given, When, Then
+
+from Shell_FE_Behave_Tests.ApiApplicationLibrary.FunctionalLibrary.AccountApi import AccountApi
 from Shell_FE_Requests_Core.RequestsBase import RequestsBase
 from Shell_FE_Requests_Core.Utilities.AssertionUtilities import AssertionUtilities
 from Shell_FE_Requests_Core.Utilities.FileUtilities import FileUtilities
@@ -12,9 +14,12 @@ def step_impl(context, role):
     context.access_token = context.feature.oauth2.get_access_token(role)
     AssertionUtilities.assert_equals('200', str(RequestsBase.response_status_code()))
     access_token = context.access_token.json()["access_token"]
-    value_dict = dict(access_token = access_token)
+    value_dict = dict(access_token=access_token)
     FileUtilities.write_into_json(value_dict, "AccountCreation/AccessToken.json")
 
-@When(u'user fetches the account ID')
+
+@When("user creates the account")
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When user fetches the account ID')
+    context.feature.account = AccountApi()
+    context.feature.account.create_account()
+    AssertionUtilities.assert_equals("201", str(RequestsBase.response_status_code()))
