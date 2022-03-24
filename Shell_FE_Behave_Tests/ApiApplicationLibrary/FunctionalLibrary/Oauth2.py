@@ -1,12 +1,12 @@
 from Shell_FE_Requests_Core.RequestsBase import RequestsBase
 from Shell_FE_Requests_Core.Utilities.LoggingUtilities import LoggingUtilities
 from Shell_FE_Requests_Core.Utilities.FileUtilities import FileUtilities
-from Shell_FE_Requests_Core.Utilities.EncryptionDecryption import EncryptionDecryption
+from Shell_FE_Requests_Core.Utilities.EncryptionDecryptionUtilities import EncryptionDecryption
 
 class Oauth2:
     log = LoggingUtilities().logger()
 
-    def get_access_token(self):
+    def get_access_token(self, role = "System Administrator"):
         """
         User needs to provide mandatory details to retrieve access token and then use access token to raise another request
         token_url = Url from which toke  needs to be retrieved
@@ -18,7 +18,8 @@ class Oauth2:
         """
         username = "insadl@shell.com.shell-gc.staging"
         environment = "UAT"
-        position = "System Administrator"
+        position = role
+        Oauth2.log.info("The status code is: " + str(position))
         users_dict = FileUtilities.read_json_file_as_dictionary("SecretIds.json")
         client_id = users_dict["client_id"]
         client_secret = users_dict["client_secret"]

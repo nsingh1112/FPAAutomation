@@ -1,6 +1,6 @@
 from behave import *
 
-from Shell_FE_Requests_Core.Utilities.EncryptionDecryption import EncryptionDecryption
+from Shell_FE_Requests_Core.Utilities.EncryptionDecryptionUtilities import EncryptionDecryption
 from Shell_FE_Requests_Core.Utilities.AssertionUtilities import AssertionUtilities
 
 
