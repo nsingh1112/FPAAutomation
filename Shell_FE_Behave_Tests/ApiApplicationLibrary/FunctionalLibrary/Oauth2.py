@@ -25,7 +25,6 @@ class Oauth2:
         token_url = users_dict["token_url"]
         password = EncryptionDecryption.decrypt_user_creds(environment=environment, position=position,
                                                          name=username)
-        Oauth2.log.info("result: " + str(password))
         data =  {'grant_type': 'password','username': username, 'password': password, 'client_id': client_id, 'client_secret': client_secret}
         access_token = RequestsBase.get_access_token(url= token_url, data=data)
         Oauth2.log.info("The status code is: " + str(RequestsBase.response.status_code))
