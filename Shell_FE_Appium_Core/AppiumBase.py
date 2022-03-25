@@ -79,7 +79,10 @@ class AppiumBase:
             -section_value - chooses the section from which value to be fetched
         """
         AppiumBase.__config = AppiumBase.read_config()
-        # AppiumBase.devicePlatform = AppiumBase.__config['automationplatform']['platformtype']
+        AppiumBase.__implicitwait = AppiumBase.__config['timeout']['implicit_wait']
+        # BrowserStack value initialization
+        AppiumBase.__remote_exe = AppiumBase.__config.getboolean('MobilityCloudIntegration', 'remote')
+        AppiumBase.__remote_environment = AppiumBase.__config['MobilityCloudIntegration']['remote_environment']
 
         if AppiumBase.devicePlatform.lower() == "android":
             AppiumBase.__platformName = AppiumBase.__config['Android']['platformName']
@@ -94,10 +97,6 @@ class AppiumBase:
             AppiumBase.__browser_name = AppiumBase.__config['Android']['browserName']
             AppiumBase.appPathFlag = AppiumBase.__config.getboolean('Android', 'runAppWithPath')
             AppiumBase.appPackageFlag = AppiumBase.__config.getboolean('Android', 'runAppWithPackage')
-            AppiumBase.__implicitwait = AppiumBase.__config['timeout']['implicit_wait']
-            # BrowserStack value initialization
-            AppiumBase.__remote_exe = AppiumBase.__config.getboolean('automationplatform', 'remote')
-            AppiumBase.__remote_environment = AppiumBase.__config['automationplatform']['remote_environment']
 
         elif AppiumBase.devicePlatform.lower() == "ios":
             AppiumBase.__application_type = AppiumBase.__config['iOS']['applicationType']
@@ -113,13 +112,6 @@ class AppiumBase:
             AppiumBase.noRest = AppiumBase.__config.getboolean('iOS', 'noReset')
             AppiumBase.appPathFlag = AppiumBase.__config.getboolean('iOS', 'runAppWithPath')
             AppiumBase.bundleIdPath = AppiumBase.__config.getboolean('iOS', 'runAppWithBundleId')
-            AppiumBase.__remote_exe = AppiumBase.__config.getboolean('automationplatform', 'remote')
-            AppiumBase.__remote_environment = AppiumBase.__config['remote_environment']['remote_environment']
-        # elif AppiumBase.devicePlatform.lower() == "browserstack":
-        #     # BrowserStack value initialization
-        #     AppiumBase.__remote_exe = AppiumBase.__config.getboolean('Android', 'remote')
-        #     AppiumBase.__remote_environment = AppiumBase.__config['Android']['remote_environment']
-        #     AppiumBase.__parallel = AppiumBase.__config.getboolean('automationplatform', 'parallel')
 
     # endregion
 
@@ -177,7 +169,6 @@ class AppiumBase:
             if remote_environment == "BROWSERSTACK":
                 AppiumBase.driver = AppiumBase.__app_browserstack_initialization()
         AppiumBase.driver.implicitly_wait(int(AppiumBase.__implicitwait))
-
 
     # endregion
 
