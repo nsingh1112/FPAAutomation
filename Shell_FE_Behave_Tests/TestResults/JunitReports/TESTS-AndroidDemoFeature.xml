@@ -1,22 +1,10 @@
-<testsuite name="AndroidDemoFeature.Android Demo" tests="2" errors="0" failures="0" skipped="2" time="0.0"><testcase classname="AndroidDemoFeature.Android Demo" name="Test light theme controls in views" status="skipped" time="0"><skipped /><system-out>
+<testsuite name="AndroidDemoFeature.Android Demo" tests="1" errors="0" failures="0" skipped="0" time="4.164292"><testcase classname="AndroidDemoFeature.Android Demo" name="Test light theme controls in views" status="passed" time="4.164292"><system-out>
 <![CDATA[
 @scenario.begin
-
-  @TestScenario
   Scenario: Test light theme controls in views
-    Given I have launched the apidemos app ... skipped in 0.000s
-    When I test views ... skipped in 0.000s
-    Then I verify checkbox and radio buttons ... skipped in 0.000s
-
-@scenario.end
---------------------------------------------------------------------------------
-]]>
-</system-out></testcase><testcase classname="AndroidDemoFeature.Android Demo" name="Test Popups" status="skipped" time="0"><skipped /><system-out>
-<![CDATA[
-@scenario.begin
-  Scenario: Test Popups
-    When I Click on Views ... skipped in 0.000s
-    Then I verify popups ... skipped in 0.000s
+    Given I have launched the apidemos app ... passed in 1.771s
+    When I test views ... passed in 1.116s
+    Then I verify checkbox and radio buttons ... passed in 1.277s
 
 @scenario.end
 --------------------------------------------------------------------------------

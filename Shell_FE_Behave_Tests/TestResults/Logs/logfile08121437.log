@@ -1,6 +1,0 @@
-2021-12-08 14:21:53,518 :INFO :AndroidUtilities :Clicked on the element.
-2021-12-08 14:21:55,147 :INFO :AndroidUtilities :Clicked on the element.
-2021-12-08 14:21:55,752 :INFO :AndroidUtilities :Took screenshot and saved as Test_the_search_box_08121455.png in screenshots folder.
-2021-12-08 14:21:56,320 :INFO :AndroidUtilities :Current context of the is NATIVE_APP.
-2021-12-08 14:22:08,162 :INFO :AndroidUtilities :Current context of the is WEBVIEW_chrome.
-2021-12-08 14:22:09,726 :INFO :AndroidUtilities :Took screenshot and saved as Click_on_the_link_08121409.png in screenshots folder.

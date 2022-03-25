@@ -18,14 +18,14 @@ def verify_check_box(context):
     context.api_Demos_functions.click_checkbox()
 
 
-@when('I Click on Views')
-def verify_back_btn(context):
-    context.api_Demos_functions.check_back_button()
-
-
-@then('I verify popups')
-def check_scroll_function(context):
-    #context.feature.api_Demos_functions.check_drag_and_drop()
-    context.api_Demos_functions.check_scroll()
-    context.api_Demos_functions.check_tap()
+# @when('I Click on Views')
+# def verify_back_btn(context):
+#     context.api_Demos_functions.check_back_button()
+#
+#
+# @then('I verify popups')
+# def check_scroll_function(context):
+#     #context.feature.api_Demos_functions.check_drag_and_drop()
+#     context.api_Demos_functions.check_scroll()
+#     context.api_Demos_functions.check_tap()
 

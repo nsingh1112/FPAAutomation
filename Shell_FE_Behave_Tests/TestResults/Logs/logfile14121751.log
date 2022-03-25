@@ -1,3 +1,0 @@
-2021-12-14 17:46:08,270 :INFO :AndroidUtilities :Navigated to the URL: https://hub.shell.com.
-2021-12-14 17:46:08,332 :ERROR :WaitUtilities :Element ('name', 'loginfmt') is not visible within the specified time. Exception: InvalidArgumentException
-2021-12-14 17:46:08,829 :INFO :AndroidUtilities :Took screenshot and saved as Test_the_web_browser_14121708.png in screenshots folder.

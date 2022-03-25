@@ -1,8 +1,0 @@
-2021-12-08 13:54:07,842 :INFO :AndroidUtilities :Clicked on the element.
-2021-12-08 13:54:08,790 :INFO :AndroidUtilities :Took screenshot and saved as Test_confirm_08121307.png in screenshots folder.
-2021-12-08 13:54:08,790 :INFO :ShellApiDemos :Element clicked
-2021-12-08 13:54:08,930 :ERROR :WaitUtilities :Element ('accessibility id', 'Controls') is not visible within the specified time. Exception: InvalidArgumentException
-2021-12-08 13:54:08,996 :INFO :AndroidUtilities :Element displayed Successfully
-2021-12-08 13:54:10,093 :INFO :AndroidUtilities :Clicked on the element.
-2021-12-08 13:54:11,283 :INFO :AndroidUtilities :Clicked on the element.
-2021-12-08 13:54:11,395 :INFO :AndroidUtilities :Clicked on the element.
