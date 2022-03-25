@@ -8,6 +8,7 @@ from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 from Shell_FE_Selenium_Core.Utilities.BrowserUtilities import BrowserUtilities
 from Shell_FE_Appium_Core.AppiumBase import AppiumBase
 from Shell_FE_Appium_Core.Utilities.AndroidUtilities import AndroidUtilities
+from Shell_FE_Requests_Core.RequestsBase import RequestsBase
 
 
 def before_all(context):
@@ -16,6 +17,8 @@ def before_all(context):
     # For Mobile automation
     AppiumBase.start_appium_server()
     AppiumBase.read_values()
+    # For API automation
+    RequestsBase.initialize_values()
 
 
 def before_feature(context, feature):
@@ -70,3 +73,4 @@ def after_all(context):
     SeleniumBase.dispose()
     # For mobile automation
     AppiumBase.stop_appium_server()
+

@@ -1,0 +1,18 @@
+<testsuite name="BasicApiValidation.Validate API with Requests" tests="1" errors="0" failures="0" skipped="0" time="0.527233" timestamp="2022-03-11T13:22:19.010607" hostname="BNGECO-L-82728"><testcase classname="BasicApiValidation.Validate API with Requests" name="GET Request validation" status="passed" time="0.527233"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @getrequest
+  Scenario: GET Request validation
+    When user sends a GET request to retrieve user details ... passed in 0.527s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+The end point url is: https://gorest.co.in/public/v2/users
+The GET request has been passed with the url: https://gorest.co.in/public/v2/users?page=1
+['Devadatt Shukla', 'Krishna Gowda', 'Sen. Vasudha Khanna', 'Vidhur Nehru LLD', 'The Hon. Aadidev Achari', 'Vinay Panicker', 'Pres. Rohit Sethi', 'Swarnalata Malik Sr.', 'Chitrali Sharma', 'Shreya Adiga', 'Chandramohan Jain', 'Shantanu Varrier', 'Pres. Avantika Dubashi', 'Gov. Deenabandhu Naik', 'Akroor Ahluwalia', 'Gov. Lila Dhawan', 'Ms. Deveshwar Varrier', 'Sanya Patel', 'Suryakantam Sharma', 'Sen. Amrit Chattopadhyay']
+
+]]>
+</system-out></testcase></testsuite>

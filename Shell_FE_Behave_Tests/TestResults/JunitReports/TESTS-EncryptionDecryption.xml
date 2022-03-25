@@ -1,0 +1,11 @@
+<testsuite name="EncryptionDecryption.Encryption of user details" tests="1" errors="0" failures="0" skipped="0" time="0.059953" timestamp="2022-03-24T10:41:04.703557" hostname="BNGECO-L-82875"><testcase classname="EncryptionDecryption.Encryption of user details" name="Validation of encryption and decryption  utility" status="passed" time="0.059953"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Validation of encryption and decryption  utility
+    When user enter the details for password to be encrypted ... passed in 0.051s
+    When user enter the details for password to be decrypted ... passed in 0.009s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
