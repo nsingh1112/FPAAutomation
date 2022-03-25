@@ -1,6 +1,14 @@
 {
-    "name": "John Doe",
-    "gender": "male",
-    "email": "abdh@amail.com",
-    "status": "active"
+    "user1": {
+        "name": "John Doe",
+        "gender": "male",
+        "email": "gmail.com",
+        "status": "active"
+    },
+    "user2": {
+        "name": "Jane Doe",
+        "gender": "female",
+        "email": "yahoo.com",
+        "status": "active"
+    }
 }

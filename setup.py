@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="Shell_FE_Requests_Core",
-    version='1.0.0a1',
+    version='1.0.0a2',
     author="Functional Excellence Team",
     author_email="praveen.kumara@shell.com",
     description="Requests Core package to be used along with the Shell FE Behave framework for API automation.",
