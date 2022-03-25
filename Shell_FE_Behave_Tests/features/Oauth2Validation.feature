@@ -1,4 +1,4 @@
-@gorest
+@oauth2
 Feature: Validate OATH2 API with Requests
  @oathrequest
   Scenario: OATH2 Request validation

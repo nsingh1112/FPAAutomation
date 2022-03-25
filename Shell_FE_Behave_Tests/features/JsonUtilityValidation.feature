@@ -1,4 +1,4 @@
-@gorest
+@jsonvalidation
 Feature: Validate Json comparison Utility
  @getrequest
   Scenario: Validating the Json Utility methods
