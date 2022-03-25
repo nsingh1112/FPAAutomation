@@ -1,0 +1,24 @@
+2022-03-24 23:16:18,110 :INFO :Oauth2: get_access_token :The status code is: System Administrator
+2022-03-24 23:16:18,110 :INFO :FileUtilities: read_json_file_as_dictionary :The data from json file SecretIds.json has been converted into dictionary.
+2022-03-24 23:16:18,161 :INFO :EncryptionDecryption: decrypt_user_creds :Decrypted Password Springiscoming51@ 
+2022-03-24 23:16:19,038 :INFO :RequestsBase: post_request :The POST request has been passed with the url not None: https://shell-gc--staging.my.salesforce.com/services/oauth2/token
+2022-03-24 23:16:19,039 :INFO :RequestsBase: get_access_token :<Response [200]>
+2022-03-24 23:16:19,039 :INFO :Oauth2: get_access_token :The status code is: 200
+2022-03-24 23:16:19,039 :INFO :Oauth2: get_access_token :The headers passed as part of the request is: {'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '268', 'Content-Type': 'application/x-www-form-urlencoded'}
+2022-03-24 23:16:19,040 :INFO :FileUtilities: write_into_json :File created with contents. Filename: AccountCreation/AccessToken.json.
+2022-03-24 23:16:19,041 :INFO :FileUtilities: read_json_file_as_dictionary :The data from json file AccountCreation/CreateAccount.json has been converted into dictionary.
+2022-03-24 23:16:19,041 :INFO :AccountApi: create_account :Base Uri is: https://shell-gc--staging.my.salesforce.com/
+2022-03-24 23:16:19,041 :INFO :RequestsBase: set_endpoint :The end point url is: https://shell-gc--staging.my.salesforce.com/services/data/v53.0/sobjects/account
+2022-03-24 23:16:19,042 :INFO :FileUtilities: read_json_file_as_dictionary :The data from json file AccountCreation/AccessToken.json has been converted into dictionary.
+2022-03-24 23:16:19,042 :INFO :AccountApi: create_account :00D3O0000004pvJ!AQ0AQGP7NByvt6CODtCKwipr4kD1sQ22AI3CitZKEnV8mxs4v4idB0DbKIozFS.7CstAoJl7qm8C0NaXkfPjQQt5hWRCwMoM
+2022-03-24 23:16:19,043 :INFO :RandomTestDataGenerator: get_name :Random test data utility generated Full name is : David Cooper
+2022-03-24 23:16:19,043 :INFO :AccountApi: create_account :David Cooper
+2022-03-24 23:16:19,043 :INFO :AccountApi: create_account :{'Name': 'David Cooper'}
+2022-03-24 23:16:19,043 :INFO :AccountApi: create_account :{'Authorization': 'Bearer 00D3O0000004pvJ!AQ0AQGP7NByvt6CODtCKwipr4kD1sQ22AI3CitZKEnV8mxs4v4idB0DbKIozFS.7CstAoJl7qm8C0NaXkfPjQQt5hWRCwMoM', 'Content-Type': 'application/json'}
+2022-03-24 23:16:23,064 :INFO :RequestsBase: post_request :The POST request has been passed with the url: https://shell-gc--staging.my.salesforce.com/services/data/v53.0/sobjects/account
+2022-03-24 23:16:23,064 :INFO :AccountApi: create_account :The status code is: 201
+2022-03-24 23:16:23,064 :INFO :AccountApi: create_account :The headers passed as part of the request is: {'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer 00D3O0000004pvJ!AQ0AQGP7NByvt6CODtCKwipr4kD1sQ22AI3CitZKEnV8mxs4v4idB0DbKIozFS.7CstAoJl7qm8C0NaXkfPjQQt5hWRCwMoM', 'Content-Type': 'application/json', 'Content-Length': '24'}
+2022-03-24 23:16:23,064 :INFO :AccountApi: create_account :{'id': '0013O00000uM3cAQAS', 'success': True, 'errors': []}
+2022-03-24 23:16:23,065 :INFO :JsonComparisonUtils: search_values_in_response_with_key :Following are the values matched with key  ' id ' 
+2022-03-24 23:16:23,066 :INFO :JsonComparisonUtils: search_values_in_response_with_key :0013O00000uM3cAQAS
+2022-03-24 23:16:23,066 :INFO :FileUtilities: write_into_json :File created with contents. Filename: account_id.json.

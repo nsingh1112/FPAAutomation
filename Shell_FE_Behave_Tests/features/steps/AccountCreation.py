@@ -6,6 +6,7 @@ from Shell_FE_Requests_Core.Utilities.AssertionUtilities import AssertionUtiliti
 from Shell_FE_Requests_Core.Utilities.FileUtilities import FileUtilities
 from Shell_FE_Behave_Tests.ApiApplicationLibrary.FunctionalLibrary.Oauth2 import Oauth2
 from Shell_FE_Requests_Core.Utilities.LoggingUtilities import LoggingUtilities
+from Shell_FE_Requests_Core.Utilities.JsonComparisonUtilities import JsonComparisonUtils
 
 
 @Given(u'user logs into Salesforce application as "{role}" role')
@@ -23,3 +24,14 @@ def step_impl(context):
     context.feature.account = AccountApi()
     context.feature.account.create_account()
     AssertionUtilities.assert_equals("201", str(RequestsBase.response_status_code()))
+
+
+@When(u'user fetches the account ID')
+def step_impl(context):
+    id_value = JsonComparisonUtils.search_values_in_response_with_key(RequestsBase.response, 'id')
+    dict_a = dict(id=id_value[0])
+    FileUtilities.write_into_json(dict_a, "account_id.json")
+
+
+
+
