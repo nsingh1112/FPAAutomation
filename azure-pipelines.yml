@@ -3,8 +3,8 @@
 # Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
-#trigger:
-# - appiumcore_master
+trigger:
+- appiumcore_master1
 
 
 pool:
@@ -33,11 +33,11 @@ steps:
 
 - task: TwineAuthenticate@1
   inputs:
-    artifactFeed: TCoE Test Automation Offering/ShellFEAppiumPythonCore_Beta
+    artifactFeed: TCoE Test Automation Offering/ShellFEAutomationCore_Alpha
 
 - script: |
     pip install twine
   displayName: 'Install Twine'
 
 - script: |
-    twine upload -r ShellFEAppiumPythonCore_Beta --config-file $(PYPIRC_PATH) dist/*
+    twine upload -r ShellFEAutomationCore_Alpha --config-file $(PYPIRC_PATH) dist/*
