@@ -3,7 +3,6 @@
   "key": "sqtMtSFBdfnzydPxpoud",
   "webServer": "hub.browserstack.com",
   "appServer": "hub-cloud.browserstack.com",
-
   "appCapabilities": {
     "project": "Browser Stack Appium Parallel Execution_24Mar",
     "build": "Browser Stack Appium Parallel Execution_24Mar",

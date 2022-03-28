@@ -1,6 +1,12 @@
 COMMANDS FOR EXECUTION OF TESTS AND GENERATION OF REPORTS:
 ----------------------------------------------------------
 
+EXECUTE TESTS BASED ON TAGS SPECIFIED IN INI FILE:
+behave
+_________________________________________________________________________________________________________
+EXECUTE TESTS BASED ON TAGS SPECIFIED IN INI FILE AND GENERATE ALLURE JSON DATA:
+behave --no-capture -f allure_behave.formatter:AllureFormatter -o TestResults/AllureJson/
+---------------------------------------------------------------------------------------------------------
 EXECUTE ALL FEATURE FILES AND GENERATE ALlURE JSON DATA:
 behave --no-capture -f allure_behave.formatter:AllureFormatter -o TestResults/AllureJson/ features
 _________________________________________________________________________________________________________
