@@ -1,15 +1,26 @@
 {
-  "total" : 1,
+  "total" : 2,
   "items" : [ {
-    "uid" : "21150d70138314994cb90896c581374a",
-    "name" : "Android Demo",
+    "uid" : "5da7ed8b3e79031965e0e577897d52b7",
+    "name" : "Utilities validation tutorials point - Feature One",
+    "statistic" : {
+      "failed" : 1,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 1,
+      "unknown" : 0,
+      "total" : 2
+    }
+  }, {
+    "uid" : "851187d5d42b1fb3c79e1b6cf231d86d",
+    "name" : "Utilities validation Academy site- Feature Two",
     "statistic" : {
       "failed" : 0,
       "broken" : 0,
       "skipped" : 0,
-      "passed" : 7,
+      "passed" : 2,
       "unknown" : 0,
-      "total" : 7
+      "total" : 2
     }
   } ]
 }

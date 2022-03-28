@@ -1,3 +1,4 @@
+
 @AndroidHybridApp @mobile
 Feature: Hybrid App Demo
   Scenario: Test the search box

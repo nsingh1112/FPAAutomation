@@ -1,0 +1,208 @@
+{
+  "uid" : "f89617fbebe5e4fe",
+  "name" : "Validate the working of Browser Utilities",
+  "fullName" : "Utilities validation Academy site- Feature Two: Validate the working of Browser Utilities",
+  "historyId" : "6dd819924d484b7508298afbea85de23",
+  "time" : {
+    "start" : 1637230962297,
+    "stop" : 1637230981690,
+    "duration" : 19393
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given user navigates to Academy site",
+      "time" : {
+        "start" : 1637230962299,
+        "stop" : 1637230970458,
+        "duration" : 8159
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "When user navigates back",
+      "time" : {
+        "start" : 1637230970459,
+        "stop" : 1637230972123,
+        "duration" : 1664
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "Then user validates the title equality using Wait utilities",
+      "time" : {
+        "start" : 1637230972123,
+        "stop" : 1637230972158,
+        "duration" : 35
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "Then user validates if the title contains the expected value using Wait Utilities",
+      "time" : {
+        "start" : 1637230972159,
+        "stop" : 1637230972184,
+        "duration" : 25
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "Then user validates if the url contains the expected value using Wait Utilities",
+      "time" : {
+        "start" : 1637230972184,
+        "stop" : 1637230972212,
+        "duration" : 28
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "When user navigates forward",
+      "time" : {
+        "start" : 1637230972213,
+        "stop" : 1637230976830,
+        "duration" : 4617
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "When user refreshes the page",
+      "time" : {
+        "start" : 1637230976831,
+        "stop" : 1637230976843,
+        "duration" : 12
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "Then user waits for the text \"Practice Page\" to be present in the page",
+      "time" : {
+        "start" : 1637230976843,
+        "stop" : 1637230979770,
+        "duration" : 2927
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "When user refreshes the page",
+      "time" : {
+        "start" : 1637230979770,
+        "stop" : 1637230979788,
+        "duration" : 18
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "Then user waits for the value \"option1\" to be present in the page",
+      "time" : {
+        "start" : 1637230979789,
+        "stop" : 1637230981690,
+        "duration" : 1901
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 10,
+    "hasContent" : true,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "severity",
+    "value" : "normal"
+  }, {
+    "name" : "feature",
+    "value" : "Utilities validation Academy site- Feature Two"
+  }, {
+    "name" : "framework",
+    "value" : "behave"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "f89617fbebe5e4fe.json",
+  "parameterValues" : [ ]
+}

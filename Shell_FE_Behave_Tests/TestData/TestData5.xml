@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<employees>
+    <employee>
+        <Name>John Doe</Name>
+        <DOJ>20-10-2000</DOJ>
+        <Department>Development</Department>
+    </employee>
+    <employee>
+        <Name>Jane Doe</Name>
+        <DOJ>20-11-2010</DOJ>
+        <Department>Quality Assurance</Department>
+    </employee>
+</employees>
