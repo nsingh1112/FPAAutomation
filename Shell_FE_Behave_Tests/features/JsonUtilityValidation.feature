@@ -1,6 +1,5 @@
 @jsonvalidation
 Feature: Validate Json comparison Utility
- @getrequest
   Scenario: Validating the Json Utility methods
     When user sends a GET request to retrieve user details
     Then user compare json response with expected data

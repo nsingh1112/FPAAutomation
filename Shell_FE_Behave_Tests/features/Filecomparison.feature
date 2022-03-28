@@ -1,4 +1,4 @@
-@FileUtility
+@ImageComparison
 Feature: File Compare Utility methods validation
 Scenario: Validation of file comparison utility
     When user compare the shell logo
