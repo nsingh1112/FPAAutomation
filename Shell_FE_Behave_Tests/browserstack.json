@@ -4,11 +4,11 @@
   "webServer": "hub.browserstack.com",
   "appServer": "hub-cloud.browserstack.com",
   "appCapabilities": {
-    "project": "First Behave Android Project",
-    "build": "",
-    "name": "first_test",
+    "project": "Browser Stack Appium Parallel Execution_24Mar",
+    "build": "Browser Stack Appium Parallel Execution_24Mar",
+    "name": "API Demo app_24Mar",
     "browserstack.debug": true,
-    "app": "bs://c295e4d3dd3345749d13b9f1fa24103a58231499"
+    "app": "bs://69c8119d1eaca4f126599b7b757bf9c8bcd480a0"
   },
   "webEnvironments": [
     {
