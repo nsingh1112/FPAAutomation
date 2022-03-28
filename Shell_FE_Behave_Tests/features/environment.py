@@ -15,14 +15,32 @@ def before_all(context):
     SeleniumBase.initialize_values()
     # For Mobile automation
     AppiumBase.start_appium_server()
-    AppiumBase.read_values()
-
+    
 
 def before_feature(context, feature):
     if "web" in context.feature.tags:
         SeleniumBase.browser_initialization()
     elif "mobile" in context.feature.tags:
-        AppiumBase.launch_application()
+        if "iOS" in context.feature.tags:
+            AppiumBase.launch_application("ios")
+        elif "android" in context.feature.tags:
+            AppiumBase.launch_application("android")
+        else:
+            AppiumBase.launch_application()
+
+
+# def after_feature(context, feature):
+#     """The below code is used to mark the test results in Browserstack as passed or failed based on the assertions
+#     validated. This method should be commented out or removed if in case Browserstack execution is not performed"""
+#     if context.failed is True:
+#         AppiumBase.driver.execute_script(
+#             'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed", "reason": "At '
+#             'least 1 assertion failed"}}')
+#     if context.failed is not True:
+#         AppiumBase.driver.execute_script(
+#             'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed", "reason": "All '
+#             'assertions passed"}}')
+#
 
 
 def after_step(context, step):

@@ -27,8 +27,7 @@ def checking_alert(context):
 
 @when('I do parallel App testing')
 def step_impl(context):
-    # context.feature.iOS_Demos_functions.click_picker_wheel()
-    # context.feature.iOS_Demos_functions.move_picker_wheel("previous","0.02")
-    # time.sleep(5)
-    # context.feature.iOS_Demos_functions.move_picker_wheel("previous","0.02")
-    pass
+    context.feature.iOS_Demos_functions.click_picker_wheel()
+    context.feature.iOS_Demos_functions.move_picker_wheel("previous", "0.02")
+    time.sleep(5)
+    context.feature.iOS_Demos_functions.move_picker_wheel("previous", "0.02")
