@@ -1,6 +1,5 @@
 COMMANDS FOR EXECUTION OF TESTS AND GENERATION OF REPORTS:
 ----------------------------------------------------------
-
 EXECUTE TESTS BASED ON TAGS SPECIFIED IN INI FILE:
 behave
 _________________________________________________________________________________________________________

@@ -1,0 +1,12 @@
+<testsuite name="Oath2.Validate OATH2 API with Requests" tests="1" errors="0" failures="0" skipped="0" time="1.728193" timestamp="2022-03-08T12:56:18.973651" hostname="BNGECO-L-82875"><testcase classname="Oath2.Validate OATH2 API with Requests" name="OATH2 Request validation" status="passed" time="1.728193"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @oathrequest
+  Scenario: OATH2 Request validation
+    When user sends a POST request to retrieve details ... passed in 1.728s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

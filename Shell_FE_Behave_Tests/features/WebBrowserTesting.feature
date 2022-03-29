@@ -1,4 +1,4 @@
-@mobileWeb @mobile
+@mobileWeb @mobile @chrome
 Feature:Web Browser Demo
   Scenario: Test the web browser
     Given I have launched the chrome app
