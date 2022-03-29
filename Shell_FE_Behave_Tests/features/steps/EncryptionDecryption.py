@@ -14,4 +14,4 @@ def step_impl(context):
 @When('user enter the details for password to be decrypted')
 def step_impl(context):
     result = EncryptionDecryption.decrypt_user_creds(environment = "UAT", position = "System Administrato", name = "user1")
-    AssertionUtilities.assert_if_true(result)
+    AssertionUtilities.assert_not_none(result)
