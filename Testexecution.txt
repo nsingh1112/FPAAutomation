@@ -27,3 +27,9 @@ behave --no-capture --junit --format pretty --junit-directory TestResults/XMLRep
 EXECUTE ALL FEATURE FILES AND GENERATE JSON REPORT:
 behave --no-capture -f json.pretty -o TestResults/JSONReports/report.json
 ________________________________________________________________________________________________________
+EXECUTE WEB TESTS (BASED ON TAG NAME IN INI FILE) PARALLELY WITH MULTIPLE DEVICES IN BROWSERSTACK:
+paver browserstack_parallel_web
+________________________________________________________________________________________________________
+EXECUTE MOBILE APP TESTS (BASED ON TAG NAME IN INI FILE) PARALLELY WITH MULTIPLE DEVICES IN BROWSERSTACK:
+paver browserstack_parallel_app
+________________________________________________________________________________________________________
