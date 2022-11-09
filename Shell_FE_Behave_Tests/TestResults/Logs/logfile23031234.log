@@ -1,6 +1,0 @@
-2022-03-23 12:36:03,178 :INFO :RequestsBase: post_request :The POST request has been passed with the url not None: https://shell-gc--staging.my.salesforce.com/services/oauth2/token
-2022-03-23 12:36:03,179 :INFO :RequestsBase: get_access_token :<Response [200]>
-2022-03-23 12:36:03,179 :INFO :Oauth2: get_access_token :The status code is: 200
-2022-03-23 12:36:03,179 :INFO :Oauth2: get_access_token :The headers passed as part of the request is: {'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '268', 'Content-Type': 'application/x-www-form-urlencoded'}
-2022-03-23 12:36:03,730 :INFO :RequestsBase: get_request :The GET request has been passed with the url: https://shell-gc--staging.my.salesforce.com/services/data/v53.0
-2022-03-23 12:36:03,730 :INFO :Oauth2: oauth2_request :The status code is: 200
