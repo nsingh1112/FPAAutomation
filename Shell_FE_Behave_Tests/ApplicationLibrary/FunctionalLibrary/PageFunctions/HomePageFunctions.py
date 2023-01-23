@@ -1,11 +1,9 @@
 from Shell_FE_Behave_Tests.ApplicationLibrary.ControlLibrary.PageControls.HomePageControls import HomePageControls
+from Shell_FE_Behave_Tests.Utilities.FPASeleniumHelper import FPASeleniumHelper
+from Shell_FE_Behave_Tests.Utilities.FPAWaitHelper import FPAWaitHelper
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 from Shell_FE_Selenium_Core.Utilities.SeleniumUtilities import SeleniumUtilities
 from Shell_FE_Selenium_Core.Utilities.WaitUtilities import WaitUtilities
-
-from Shell_FE_Behave_Tests.Utilities.FPASeleniumHelper import FPASeleniumHelper
-from Shell_FE_Behave_Tests.Utilities.FPAWaitHelper import FPAWaitHelper
-
 
 class HomePageFunctions:
 

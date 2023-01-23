@@ -1,11 +1,9 @@
 import time
 
 from Shell_FE_Behave_Tests.ApplicationLibrary.ControlLibrary.PageControls.HomePageControls import HomePageControls
-from Shell_FE_Behave_Tests.ApplicationLibrary.ControlLibrary.PageControls.LoginControls import LoginControls
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 from Shell_FE_Selenium_Core.Utilities.BrowserUtilities import BrowserUtilities
 from Shell_FE_Selenium_Core.Utilities.SeleniumUtilities import SeleniumUtilities
-from Shell_FE_Selenium_Core.Utilities.WaitUtilities import WaitUtilities
 
 
 class LoginFunctions:
@@ -25,6 +23,7 @@ class LoginFunctions:
             break
 
     def access_shell_hub(self):
+        BrowserUtilities.maximize_window()
         BrowserUtilities.navigate_to_url(SeleniumBase.url)
         time.sleep(10)
         SeleniumUtilities.press_keyboard_key('enter')

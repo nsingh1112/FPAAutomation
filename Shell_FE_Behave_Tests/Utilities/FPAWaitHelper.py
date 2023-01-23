@@ -1,5 +1,6 @@
 import traceback
 
+from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 from selenium.common.exceptions import ElementNotVisibleException, ElementNotSelectableException, \
     StaleElementReferenceException, NoSuchFrameException
 from selenium.webdriver.support import expected_conditions as ec
@@ -26,7 +27,7 @@ class FPAWaitHelper:
             FPAWaitHelper.log.error("Empty or invalid locator passed to the method: wait_for_element_to_be_visible(by_locator, timeout=10).")
             raise TypeError("Empty or invalid locator passed!!")
         try:
-            WebDriverWait(DriverHelper.currentDriverInstance, timeout).until(ec.visibility_of_element_located(by_locator))
+            WebDriverWait(SeleniumBase.driver, timeout).until(ec.visibility_of_element_located(by_locator))
         except Exception as err:
             FPAWaitHelper.log.error(
                 "Element {0} is not visible within the specified time. Exception: {1}".format(by_locator, err.__class__.__name__))
@@ -44,7 +45,7 @@ class FPAWaitHelper:
                 "Empty or invalid locator passed to the method: wait_for_element_to_be_present(by_locator, timeout=10).")
             raise TypeError("Empty or invalid locator passed!!")
         try:
-            WebDriverWait(DriverHelper.currentDriverInstance, timeout).until(ec.presence_of_element_located(by_locator))
+            WebDriverWait(SeleniumBase.driver, timeout).until(ec.presence_of_element_located(by_locator))
         except Exception as err:
             FPAWaitHelper.log.error(
                 "Element {0} is not present. Unable to find the element within the specified time. Exception: {1}".format(
@@ -63,7 +64,7 @@ class FPAWaitHelper:
                 "Empty or invalid locator passed to the method: wait_for_element_to_be_clickable(by_locator, timeout=10).")
             raise TypeError("Empty or invalid locator passed!!")
         try:
-            WebDriverWait(DriverHelper.currentDriverInstance, timeout).until(ec.element_to_be_clickable(by_locator))
+            WebDriverWait(SeleniumBase.driver, timeout).until(ec.element_to_be_clickable(by_locator))
         except Exception as err:
             FPAWaitHelper.log.error(
                 "Element {0} is not clickable. Unable to click / find the element within the specified time. Exception: {1}".format(
@@ -82,7 +83,7 @@ class FPAWaitHelper:
                 "Empty or invalid locator passed to the method: wait_for_element_to_be_selected(by_locator, timeout=10).")
             raise TypeError("Empty or invalid locator passed!!")
         try:
-            WebDriverWait(DriverHelper.currentDriverInstance, timeout).until(ec.element_to_be_selected(web_element))
+            WebDriverWait(SeleniumBase.driver, timeout).until(ec.element_to_be_selected(web_element))
         except Exception as err:
             FPAWaitHelper.log.error(
                 "Element was not in selected state within the specified time. Exception: {0}".format(err.__class__.__name__))
@@ -100,7 +101,7 @@ class FPAWaitHelper:
                 "Empty or invalid locator passed to the method: wait_for_element_to_be_invisible(by_locator, timeout=10).")
             raise TypeError("Empty or invalid locator passed!!")
         try:
-            WebDriverWait(DriverHelper.currentDriverInstance, timeout).until(ec.invisibility_of_element_located(by_locator))
+            WebDriverWait(SeleniumBase.driver, timeout).until(ec.invisibility_of_element_located(by_locator))
         except Exception as err:
             FPAWaitHelper.log.error("Element {0} is visible. Exception: {1}".format(by_locator, err.__class__.__name__))
 
@@ -116,7 +117,7 @@ class FPAWaitHelper:
             FPAWaitHelper.log.error(
                 "Empty or invalid locator passed to the method: wait_for_element_to_be_stale(web_element, timeout=10).")
             raise TypeError("Empty or invalid locator passed!!")
-        if WebDriverWait(DriverHelper.currentDriverInstance, timeout).until(ec.staleness_of(web_element)):
+        if WebDriverWait(SeleniumBase.driver, timeout).until(ec.staleness_of(web_element)):
             return True
         else:
             FPAWaitHelper.log.error("Element {0} is attached to DOM. Element is not stale!!".format(web_element))
@@ -136,8 +137,8 @@ class FPAWaitHelper:
                 "Empty or invalid locator passed to the method: wait_for_element_to_be_stale_and_handle_it(web_element, timeout=10).")
             raise TypeError("Empty or invalid locator passed!!")
         try:
-            if WebDriverWait(DriverHelper.currentDriverInstance, timeout).until(ec.staleness_of(web_element)):
-                WebDriverWait(DriverHelper.currentDriverInstance, timeout).until(ec.visibility_of_element_located(by_locator))
+            if WebDriverWait(SeleniumBase.driver, timeout).until(ec.staleness_of(web_element)):
+                WebDriverWait(SeleniumBase.driver, timeout).until(ec.visibility_of_element_located(by_locator))
         except StaleElementReferenceException as err:
             FPAWaitHelper.log.error(
                 "Element {0} is not attached to DOM. Element is stale!! Exception: {1}".format(by_locator,
@@ -156,7 +157,7 @@ class FPAWaitHelper:
                 "Empty or invalid title passed as argument to the method: wait_for_title_to_contain_value(expected_value, timeout=10).")
             raise ValueError("Empty or invalid Title passed as argument!!")
         try:
-            WebDriverWait(DriverHelper.currentDriverInstance, timeout).until(ec.title_contains(expected_value))
+            WebDriverWait(SeleniumBase.driver, timeout).until(ec.title_contains(expected_value))
         except Exception as err:
             FPAWaitHelper.log.error(
                 "Title does not contain the value: {0} in the expected time.".format(expected_value))
@@ -174,7 +175,7 @@ class FPAWaitHelper:
                 "Empty or invalid title passed as argument to the method: wait_for_title_to_match_value(expected_value, timeout=10).")
             raise ValueError("Empty or invalid Title passed as argument!!")
         try:
-            WebDriverWait(DriverHelper.currentDriverInstance, timeout).until(ec.title_is(expected_value))
+            WebDriverWait(SeleniumBase.driver, timeout).until(ec.title_is(expected_value))
         except Exception as err:
             FPAWaitHelper.log.error(
                 "Title does not match the value: {0} within the specified time.".format(expected_value))
@@ -192,7 +193,7 @@ class FPAWaitHelper:
                 "Empty or invalid url passed as argument to the method: wait_for_url_to_contain_value(expected_value, timeout=10).")
             raise ValueError("Empty or invalid value passed as argument!!")
         try:
-            WebDriverWait(DriverHelper.currentDriverInstance, timeout).until(ec.url_contains(expected_value))
+            WebDriverWait(SeleniumBase.driver, timeout).until(ec.url_contains(expected_value))
         except Exception as err:
             FPAWaitHelper.log.error(
                 "Url does not contain the value: {0} in the expected time.".format(expected_value))
@@ -210,7 +211,7 @@ class FPAWaitHelper:
                 "Empty or invalid url passed as argument to the method: wait_for_url_to_match_value(expected_value, timeout=10).")
             raise ValueError("Empty or invalid Title passed as argument!!")
         try:
-            WebDriverWait(DriverHelper.currentDriverInstance, timeout).until(ec.url_to_be(expected_value))
+            WebDriverWait(SeleniumBase.driver, timeout).until(ec.url_to_be(expected_value))
         except Exception as err:
             FPAWaitHelper.log.error(
                 "Url does not match the value: {0} in the expected time.".format(expected_value))
@@ -229,7 +230,7 @@ class FPAWaitHelper:
                 "Empty or invalid value passed as argument to the method: wait_for_text_to_be_present(by_locator, expected_text, timeout=10).")
             raise TypeError("Empty or invalid argument passed!!")
         try:
-            WebDriverWait(DriverHelper.currentDriverInstance, timeout).until(
+            WebDriverWait(SeleniumBase.driver, timeout).until(
                 ec.text_to_be_present_in_element(by_locator, expected_text))
         except Exception as err:
             FPAWaitHelper.log.error(
@@ -249,7 +250,7 @@ class FPAWaitHelper:
                 "Empty or invalid value passed as argument to the method: wait_for_value_to_be_present(by_locator, expected_text, timeout=10).")
             raise TypeError("Empty or invalid argument passed!!")
         try:
-            WebDriverWait(DriverHelper.currentDriverInstance, timeout).until(
+            WebDriverWait(SeleniumBase.driver, timeout).until(
                 ec.text_to_be_present_in_element_value(by_locator, expected_text))
         except Exception as err:
             FPAWaitHelper.log.error(
@@ -272,7 +273,7 @@ class FPAWaitHelper:
                 "Invalid argument passed to the method: wait_for_number_of_windows_to_match(expected_value, timeout=10). Argument should be an int.")
             raise ValueError("Number of windows value should be a number")
         try:
-            WebDriverWait(DriverHelper.currentDriverInstance, timeout).until(ec.number_of_windows_to_be(expected_value))
+            WebDriverWait(SeleniumBase.driver, timeout).until(ec.number_of_windows_to_be(expected_value))
         except Exception as err:
             FPAWaitHelper.log.error(
                 "Number of windows available does not match the expected value: {0} within the expected time".format(
@@ -286,7 +287,7 @@ class FPAWaitHelper:
             - timeout - Time to wait for before throwing an exception. Has a default value of 10 seconds.
         """
         try:
-            WebDriverWait(DriverHelper.currentDriverInstance, timeout).until(ec.alert_is_present())
+            WebDriverWait(SeleniumBase.driver, timeout).until(ec.alert_is_present())
         except Exception as err:
             FPAWaitHelper.log.error("Alert is not displayed within the expected time!!")
 
@@ -303,6 +304,6 @@ class FPAWaitHelper:
                 "Empty or invalid locator passed as argument to the method: wait_for_frame_and_switch(by_locator, timeout=10).")
             raise TypeError("Empty or invalid locator passed!!")
         try:
-            WebDriverWait(DriverHelper.currentDriverInstance, timeout).until(ec.frame_to_be_available_and_switch_to_it(by_locator))
+            WebDriverWait(SeleniumBase.driver, timeout).until(ec.frame_to_be_available_and_switch_to_it(by_locator))
         except Exception as err:
             FPAWaitHelper.log.error("Frame {0} is not available within the specified time.".format(by_locator))

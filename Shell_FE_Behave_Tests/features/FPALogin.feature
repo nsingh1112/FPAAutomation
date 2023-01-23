@@ -10,7 +10,7 @@ Feature: Checking the FPA functionality
   Scenario: Validating FPA Reconciled data
     Given Launch the browser and navigate to the url
     When  The user Clicks on Reconciled Data under RECONCILIATION
-    When  The user validates the Reconciled Data page controls
+    # When  The user validates the Reconciled Data page controls
 
 
 

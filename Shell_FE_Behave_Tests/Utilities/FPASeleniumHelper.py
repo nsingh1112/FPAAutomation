@@ -1,5 +1,6 @@
 import time
 
+from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 from selenium.common.exceptions import NoSuchElementException
 from Shell_FE_Selenium_Core.Utilities.SeleniumUtilities import SeleniumUtilities
 from selenium.webdriver.common.action_chains import ActionChains
@@ -32,7 +33,7 @@ class FPASeleniumHelper:
         """
         if web_element is None:
             raise TypeError("Empty or invalid Web element passed!!")
-        DriverHelper.currentDriverInstance.execute_script("arguments[0].scrollIntoView(true);", web_element)
+        SeleniumBase.driver.execute_script("arguments[0].scrollIntoView(true);", web_element)
         """Adding sleep of a second for DOM refresh after scroll"""
         time.sleep(2)
 
@@ -45,7 +46,7 @@ class FPASeleniumHelper:
         """
         if scroll_value is None:
             raise TypeError("Empty or invalid argument passed!!")
-        DriverHelper.currentDriverInstance.execute_script("window.scrollBy(0," + scroll_value + ")")
+        SeleniumBase.driver.execute_script("window.scrollBy(0," + scroll_value + ")")
         time.sleep(1)
 
     @staticmethod
@@ -59,7 +60,7 @@ class FPASeleniumHelper:
             SeleniumUtilities.log.error(
                 "Empty or invalid Web element passed as argument to the method: move_focus_to_element(web_element)")
             raise TypeError("Empty or invalid Web element passed!!")
-        action = ActionChains(DriverHelper.currentDriverInstance)
+        action = ActionChains(SeleniumBase.driver)
         action.move_to_element(web_element).perform()
         SeleniumUtilities.log.info("Moved focus to element using Action chains.")
 
@@ -76,7 +77,7 @@ class FPASeleniumHelper:
                 "Empty or invalid Web element passed as argument to the method: send_text_using_javascript_executor(web_element, text)")
             raise TypeError("Empty or invalid argument passed!!")
         text_input = str(text)
-        DriverHelper.currentDriverInstance.execute_script("arguments[0].value=arguments[1];", web_element, text_input)
+        SeleniumBase.driver.execute_script("arguments[0].value=arguments[1];", web_element, text_input)
         # SeleniumBase.driver.execute_script("arguments[0].setAttribute('value', arguments[1]);", web_element, text_input)
         SeleniumUtilities.log.info("Sent values: {0} to the field using Javascript executor.".format(text))
 
@@ -92,7 +93,7 @@ class FPASeleniumHelper:
             SeleniumUtilities.log.error(
                 "Empty or invalid Web element passed as argument to the method: click_element_using_javascript_executor(web_element)")
             raise TypeError("Empty or invalid Web element passed!!")
-        DriverHelper.currentDriverInstance.execute_script("arguments[0].click();", web_element)
+        SeleniumBase.driver.execute_script("arguments[0].click();", web_element)
         SeleniumUtilities.log.info("Clicked on the element using Javascript executor.")
 
     @staticmethod
@@ -106,7 +107,7 @@ class FPASeleniumHelper:
             SeleniumUtilities.log.error(
                 "Empty or invalid Web element passed as argument to the method: send_text_by_actions(web_element, text)")
             raise TypeError("Empty or invalid Web element passed!!")
-        action = ActionChains(DriverHelper.currentDriverInstance)
+        action = ActionChains(SeleniumBase.driver)
         action.move_to_element(web_element).click(web_element).send_keys(str(text)).perform()
         SeleniumUtilities.log.info("Sent text {0} to the element using Action Chains.".format(text))
 
@@ -128,13 +129,13 @@ class FPASeleniumHelper:
     def take_screenshot(file_name="Screenshot"):
         """Takes screenshot of the web page and saves it in the Screenshots folder under TestResults."""
         filename = file_name + str(time.strftime("%d_%m_%H_%S")).replace("_", "") + ".png"
-        DriverHelper.currentDriverInstance.save_screenshot(BrowserUtilities.screenshots + filename)
+        SeleniumBase.driver.save_screenshot(BrowserUtilities.screenshots + filename)
         BrowserUtilities.log.info("Took screenshot and saved as {0} in Screenshots folder.".format(filename))
 
     @staticmethod
     def page_is_loading():
         while True:
-            x = DriverHelper.currentDriverInstance.execute_script("return document.readyState")
+            x = SeleniumBase.driver.execute_script("return document.readyState")
             if x == "complete":
                 return True
             else:

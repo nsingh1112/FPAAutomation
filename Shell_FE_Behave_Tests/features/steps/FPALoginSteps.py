@@ -12,7 +12,8 @@ from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.FP
 from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.LoginFunctions import LoginFunctions
 from Shell_FE_Selenium_Core.Utilities.AssertionUtilities import AssertionUtilities
 from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.HomePageFunctions import HomePageFunctions
-
+from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.UnprocessedRecordsPageFunctions import \
+    UnprocessedRecordsPageFunctions
 
 
 @given(u'Launch the browser and navigate to the url')
@@ -67,6 +68,14 @@ def step_impl(context):
     context.dashboardPage_functions.get_dashboardItems()
     context.dashboardPage_functions.validate_dashboardGraphicalRepresentation()
     context.dashboardPage_functions.validate_darkMode()
+
+@when('The user Clicks on Reconciled Data under RECONCILIATION')
+def step_impl(context):
+    context.homePage_functions = HomePageFunctions(SeleniumBase.driver)
+    context.homePage_functions.click_unprocessedRecord()
+    context.unprocessedRecordsPage_functions = UnprocessedRecordsPageFunctions(SeleniumBase.driver)
+    context.unprocessedRecordsPage_functions.validate_pageTitle()
+    context.unprocessedRecordsPage_functions.get_unprocessedRecordRowHeaders()
 
 
 def parallel_executor(context):
