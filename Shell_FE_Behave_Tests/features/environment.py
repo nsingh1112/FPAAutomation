@@ -6,7 +6,7 @@ from behave.contrib.scenario_autoretry import patch_scenario_with_autoretry
 
 sys.path.insert(0, os.path.dirname(os.getcwd()))
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
-from Shell_FE_Behave_Tests.Utilities import FPASeleniumHelper
+from Shell_FE_Behave_Tests.Utilities.FPASeleniumHelper import FPASeleniumHelper
 
 
 def before_all(context):
@@ -22,14 +22,12 @@ def before_feature(context, feature):
 
 
 def after_step(context, step):
-    if step.status == "failed":
-        screenshot_name = str(context.scenario.name).replace(" ", "_")
-        FPASeleniumHelper.take_screenshot(screenshot_name)
-        # For UI automation
-        if "web" in context.feature.tags:
-            allure.attach(SeleniumBase.driver.get_screenshot_as_png(), name="screenshot",
-                          attachment_type=AttachmentType.PNG)
-            allure.issue(SeleniumBase.driver.current_url)
+    screenshot_name = str(context.scenario.name).replace(" ", "_")
+    FPASeleniumHelper.take_screenshot(screenshot_name)
+    # For UI automation
+    if "web" in context.feature.tags:
+        allure.attach(SeleniumBase.driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
+        allure.issue(SeleniumBase.driver.current_url)
 
 
 def after_feature(context, feature):

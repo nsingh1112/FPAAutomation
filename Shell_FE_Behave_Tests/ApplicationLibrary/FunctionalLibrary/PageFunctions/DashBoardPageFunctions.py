@@ -2,11 +2,9 @@ import time
 
 from Shell_FE_Behave_Tests.ApplicationLibrary.ControlLibrary.PageControls.DashboardPageControls import \
     DashboardPageControls
-from Shell_FE_Behave_Tests.ApplicationLibrary.ControlLibrary.PageControls.HomePageControls import HomePageControls
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 from Shell_FE_Selenium_Core.Utilities.SeleniumUtilities import SeleniumUtilities
 from Shell_FE_Selenium_Core.Utilities.WaitUtilities import WaitUtilities
-
 from Shell_FE_Behave_Tests.Utilities.FPASeleniumHelper import FPASeleniumHelper
 
 
@@ -29,7 +27,7 @@ class DashBoardPageFunctions:
 
     def validate_dashboardItems(self, dashbrditem, subelementList):
         if(dashbrditem in subelementList):
-            SeleniumUtilities.log.info("Elements verified for Dashboard")
+            SeleniumUtilities.log.info("Elements verified for Dashboard. " +dashbrditem)
 
         else:
             SeleniumUtilities.log.error(
@@ -56,3 +54,5 @@ class DashBoardPageFunctions:
 
         else:
             SeleniumUtilities.log.error("Dark Mode Text is not Present")
+
+        FPASeleniumHelper.click_element(self.dashboardPageControls.get_btnDarkMode())

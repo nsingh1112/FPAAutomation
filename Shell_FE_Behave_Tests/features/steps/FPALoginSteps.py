@@ -7,11 +7,10 @@ from selenium import webdriver
 
 from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.DashBoardPageFunctions import \
     DashBoardPageFunctions
-from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.FPAHomePageFunctions import \
-    FPAHomePageFunctions
 from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.LoginFunctions import LoginFunctions
-from Shell_FE_Selenium_Core.Utilities.AssertionUtilities import AssertionUtilities
 from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.HomePageFunctions import HomePageFunctions
+from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.ReconciledDataPageFunctions import \
+    ReconciledDataPageFunctions
 from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.UnprocessedRecordsPageFunctions import \
     UnprocessedRecordsPageFunctions
 
@@ -69,12 +68,13 @@ def step_impl(context):
     context.dashboardPage_functions.validate_dashboardGraphicalRepresentation()
     context.dashboardPage_functions.validate_darkMode()
 
-@when('The user Clicks on Reconciled Data under RECONCILIATION')
+@when('The user Clicks on Unprocessed records under RECONCILIATION')
 def step_impl(context):
     context.homePage_functions = HomePageFunctions(SeleniumBase.driver)
     context.homePage_functions.click_unprocessedRecord()
     context.unprocessedRecordsPage_functions = UnprocessedRecordsPageFunctions(SeleniumBase.driver)
     context.unprocessedRecordsPage_functions.validate_pageTitle()
+    context.unprocessedRecordsPage_functions.get_totalUnprocessedRecord()
     context.unprocessedRecordsPage_functions.get_unprocessedRecordRowHeaders()
 
 

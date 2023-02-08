@@ -51,7 +51,7 @@ class HomePageFunctions:
             WaitUtilities.wait_for_element_to_be_visible(self.homePageControls.get_documentsMenuItems())
             options1 = self.homePageControls.get_actualProcessingMenuItems()
             elementList1 = self.get_leftSubListItems(options1)
-            subelementList = ['Create', 'Manage Actuals']
+            subelementList = ['Create', 'Manage Actuals', 'Actual Volumes']
 
         elif divName == "LOGS":
             WaitUtilities.wait_for_element_to_be_visible(self.homePageControls.get_logsMenuItems())
@@ -63,14 +63,18 @@ class HomePageFunctions:
 
     def validate_subList(self, divName, elementList1, subelementList):
         if(elementList1 == subelementList):
-            SeleniumUtilities.log.info("Elements verified for" +divName)
+            SeleniumUtilities.log.info("Elements verified for " +divName)
 
         else:
             SeleniumUtilities.log.error(
                 "Elements verified for" +divName+ "Expected Element is" +subelementList+ "Actual Element is" +elementList1)
-            raise TypeError("Element not matched for" +divName)
+            raise TypeError("Element not matched for " +divName)
 
     def click_unprocessedRecord(self):
         FPAWaitHelper.wait_for_element_to_be_clickable(self.homePageControls.get_linkUnprocessedRecord(), 600)
         FPASeleniumHelper.click_element(self.homePageControls.get_linkUnprocessedRecord())
+
+    def click_reconciledData(self):
+        FPAWaitHelper.wait_for_element_to_be_clickable(self.homePageControls.get_linkReconciledData(), 600)
+        FPASeleniumHelper.click_element(self.homePageControls.get_linkReconciledData())
 
