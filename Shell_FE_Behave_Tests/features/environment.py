@@ -31,18 +31,7 @@ def after_step(context, step):
 
 
 def after_feature(context, feature):
-    """The below code is used to mark the test results in Browserstack as passed or failed based on the assertions
-    validated. Can be commented out or removed if in case Browserstack execution is not performed"""
-    # if context.failed is True:
-    #     SeleniumBase.driver.execute_script(
-    #         'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed", "reason": "At '
-    #         'least 1 assertion failed"}}')
-    # if context.failed is not True:
-    #     SeleniumBase.driver.execute_script(
-    #         'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed", "reason": "All '
-    #         'assertions passed"}}')
-
-    SeleniumBase.driver.quit()
+    pass
 
 
 def after_scenario(context, scenario):
