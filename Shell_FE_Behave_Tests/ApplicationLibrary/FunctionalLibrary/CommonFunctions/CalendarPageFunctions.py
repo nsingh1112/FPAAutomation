@@ -2,12 +2,10 @@ import time
 
 from Shell_FE_Behave_Tests.ApplicationLibrary.ControlLibrary.CommonControls.CalendarPageControls import \
     CalendarPageControls
-from Shell_FE_Behave_Tests.ApplicationLibrary.ControlLibrary.PageControls.HomePageControls import HomePageControls
-from Shell_FE_Behave_Tests.Utilities.FPASeleniumHelper import FPASeleniumHelper
-from Shell_FE_Behave_Tests.Utilities.FPAWaitHelper import FPAWaitHelper
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 from Shell_FE_Selenium_Core.Utilities.SeleniumUtilities import SeleniumUtilities
 from Shell_FE_Selenium_Core.Utilities.WaitUtilities import WaitUtilities
+
 
 class CalendarPageFunctions:
 
@@ -15,17 +13,17 @@ class CalendarPageFunctions:
         self.driver = driver
         self.calendarPageControls = CalendarPageControls(SeleniumBase.driver)
 
-    def select_startDateyear(self,yearToSelect, selYear):
-        WaitUtilities.wait_for_element_to_be_visible(self.calendarPageControls.get_firstCalanderYear())
+    def get_startyeardiff(self, yearToSelect):
+        WaitUtilities.wait_for_element_to_be_visible(self.calendarPageControls.get_firstCalanderYear(),6000)
         x = self.calendarPageControls.get_firstCalanderYear().text
         yeardiff = int(yearToSelect) - int(x)
-        self.select_calanderYear(yearToSelect, yeardiff, selYear)
+        return yeardiff
 
-    def select_finishDateyear(self,yearToSelect,selYear):
-        WaitUtilities.wait_for_element_to_be_visible(self.calendarPageControls.get_secondCalanderYear())
+    def get_finishYearDiff(self, yearToSelect):
+        WaitUtilities.wait_for_element_to_be_visible(self.calendarPageControls.get_secondCalanderYear(),6000)
         x = self.calendarPageControls.get_secondCalanderYear().text
         yeardiff = int(yearToSelect) - int(x)
-        self.select_calanderYear(yearToSelect, yeardiff,selYear)
+        return yeardiff
 
     def select_calanderYear(self, yearToSelect, yeardiff, selYear):
         if (yeardiff != 0):
@@ -55,41 +53,42 @@ class CalendarPageFunctions:
                     year.click()
                     break
 
-    def select_month(self, monthToSelect):
-        month = "May"
-        if(monthToSelect == "startDateMonth"):
-            SeleniumUtilities.click_element(self.calendarPageControls.get_firstCalanderMonth())
-        #else:
-           # SeleniumUtilities.click_element(self.calendarPageControls.get_secondCalanderMonth())
+
+    def select_startMonth(self, startmonth, yeardiff):
+        SeleniumUtilities.click_element(self.calendarPageControls.get_firstCalanderMonth())
         month = self.driver.find_element_by_xpath(
-            "//div[@class='shell-date-picker-cell-inner' and text()='" + month + "']")
+            "//div[@class='shell-date-picker-cell-inner' and text()='" + startmonth + "']")
         SeleniumUtilities.click_element(month)
 
-    def select_date2(self):
-        dateToSelect = "11"
+    def select_finishMonth(self, finishmonth, yeardiff):
+        month = self.driver.find_element_by_xpath(
+            "//div[@class='shell-date-picker-cell-inner' and text()='" + finishmonth + "']")
+        SeleniumUtilities.click_element(month)
+
+    def select_finishdate(self, finishdate):
         date = self.driver.find_element_by_xpath(
-            "(//div[@class='shell-date-picker-cell-inner' and text()='" + dateToSelect + "'])[2]")
+            "(//div[@class='shell-date-picker-cell-inner' and text()='" + finishdate + "'])[2]")
         SeleniumUtilities.click_element(date)
 
-    def select_date(self):
-        dateToSelect = "11"
+    def select_startdate(self, startdate):
         date = self.driver.find_element_by_xpath(
-            "//div[@class='shell-date-picker-cell-inner' and text()='" + dateToSelect + "']")
+            "//div[@class='shell-date-picker-cell-inner' and text()='" + startdate + "']")
         SeleniumUtilities.click_element(date)
 
 
-    def click_calendarDate(self):
-        startDateYear = "2022"
-        monthToSelect = "May"
-        self.select_startDateyear(startDateYear, "startDate")
-        self.select_month("startDateMonth")
-        self.select_date()
+    def click_calendarDate(self, startDateWithYear, finishDateWithYear):
+        startDate = (startDateWithYear).split(' ')
+        yeardiff = self.get_startyeardiff(startDate[2])
+        self.select_calanderYear(startDate[2], yeardiff, "startDate")
+        self.select_startMonth(startDate[1], yeardiff)
+        self.select_startdate(startDate[0])
 
-        finishDateYear = "2023"
-        monthToSelect = "May"
-        self.select_finishDateyear(finishDateYear, "finishDate")
-        self.select_month("finishDateMonth")
-        self.select_date2()
+        finishDate = (finishDateWithYear).split(' ')
+        yeardiff = self.get_finishYearDiff(finishDate[2])
+        self.select_calanderYear(finishDate[2], yeardiff, "finishDate")
+        self.select_finishMonth(finishDate[1], yeardiff)
+        self.select_startdate(finishDate[0])
+
 
 
 

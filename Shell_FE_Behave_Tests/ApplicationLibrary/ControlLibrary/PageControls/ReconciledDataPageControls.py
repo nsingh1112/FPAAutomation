@@ -16,7 +16,7 @@ class ReconciledDataPageControls:
     searchByTextCriteriaLabel = (By.XPATH, "//*[local-name()='svg' and @class='sc-gsnTZi hDCash shell-icon']/following::span[text()='Order Id, Ref Id, Tank Id and License Plate']")
     searchByText= (By.XPATH, "//input[@placeholder='Search By Text']")
     searchButton = (By.XPATH, "//button[@class='sc-papXJ gDMjLE shell-button']/span[text()='Search']")
-    clearSearchButton = (By.XPATH, "//span[text()='Clear Search']")
+    clearSearchButton = (By.XPATH, "//a[@class='sc-jqUVSM hLItTL shell-button']")
 
 
     def get_reconciledDataPageTitle(self):

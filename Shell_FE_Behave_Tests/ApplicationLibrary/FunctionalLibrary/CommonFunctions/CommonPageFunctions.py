@@ -16,7 +16,7 @@ class CommonPageFunctions:
         self.commonPageControls = CommonPageControls(SeleniumBase.driver)
 
     def click_Homepage(self):
-        FPAWaitHelper.wait_for_element_to_be_clickable(self.commonPageControls.get_Homepage(), 600)
+        FPAWaitHelper.wait_for_element_to_be_clickable(self.commonPageControls.get_Homepage(), 6000)
         FPASeleniumHelper.click_element(self.commonPageControls.get_Homepage())
         time.sleep(7)
 
@@ -25,6 +25,5 @@ class CommonPageFunctions:
         FPASeleniumHelper.click_element(self.commonPageControls.get_statusInputBox())
         FPAWaitHelper.wait_for_element_to_be_clickable(self.commonPageControls.get_status(), 1000)
         FPASeleniumHelper.click_element(self.commonPageControls.get_status())
-        time.sleep(1000)
 
 

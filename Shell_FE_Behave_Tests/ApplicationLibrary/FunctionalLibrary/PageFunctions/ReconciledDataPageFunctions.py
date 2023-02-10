@@ -1,6 +1,7 @@
 import time
 
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
+from Shell_FE_Selenium_Core.Utilities.FileUtilities import FileUtilities
 from Shell_FE_Selenium_Core.Utilities.SeleniumUtilities import SeleniumUtilities
 from Shell_FE_Selenium_Core.Utilities.WaitUtilities import WaitUtilities
 
@@ -17,12 +18,14 @@ from Shell_FE_Behave_Tests.Utilities.FPAWaitHelper import FPAWaitHelper
 
 
 class ReconciledDataPageFunctions:
+    FOB_DES_TestData = None
 
     def __init__(self, driver):
         self.driver = driver
         self.reconciledDataPageControls = ReconciledDataPageControls(SeleniumBase.driver)
         self.calendarPageFunctions = CalendarPageFunctions(SeleniumBase.driver)
         self.commonPageFunctions = CommonPageFunctions(SeleniumBase.driver)
+        self.FOB_DES_TestData = FileUtilities.read_json_file_as_dictionary("FSPTestData.json")
 
     def validate_pageTitle(self):
         WaitUtilities.wait_for_element_to_be_visible(self.reconciledDataPageControls.get_reconciledDataPageTitle(),6000)
@@ -32,11 +35,16 @@ class ReconciledDataPageFunctions:
         else:
             SeleniumUtilities.log.error("Reconciled Data Page title is not correct")
 
-    def enter_receivedDate(self):
+    def enter_receivedDate(self, dashboardItems):
         FPAWaitHelper.wait_for_element_to_be_clickable(self.reconciledDataPageControls.get_startDateInputBox(), 6000)
         FPASeleniumHelper.click_element(self.reconciledDataPageControls.get_startDateInputBox())
-        time.sleep(10)
-        self.calendarPageFunctions.click_calendarDate()
+        if(dashboardItems == "Reconciliation"):
+           startDate = self.FOB_DES_TestData['ReconciledStartDate']
+           finishDate = self.FOB_DES_TestData['ReconciledFinishDate']
+        elif(dashboardItems == "Reprocessed"):
+            startDate = self.FOB_DES_TestData['ReprocessedStartDate']
+            finishDate = self.FOB_DES_TestData['ReprocessedFinishDate']
+        self.calendarPageFunctions.click_calendarDate(startDate, finishDate)
 
     def click_search(self):
         FPAWaitHelper.wait_for_element_to_be_clickable(self.reconciledDataPageControls.get_searchButton(), 6000)

@@ -32,10 +32,12 @@ def step_impl(context):
     context.reconciledDataPageFunctions.verify_reconciledDataFields()
 
 
-@then('The user enters received date and click on search button')
-def step_impl(context):
+@then('The user enters received date for "{dashboardItems}" and click on search button')
+def step_impl(context, dashboardItems = None):
     context.reconciledDataPageFunctions = ReconciledDataPageFunctions(SeleniumBase.driver)
-    context.reconciledDataPageFunctions.enter_receivedDate()
+    context.reconciledDataPageFunctions.enter_receivedDate(dashboardItems)
+    context.commonPage_functions = CommonPageFunctions(SeleniumBase.driver)
+    context.commonPage_functions.select_Status()
     context.reconciledDataPageFunctions.click_search()
 
 @then('The user Validates the Reconciled ReportPage Label')
@@ -53,7 +55,7 @@ def step_impl(context):
 @when('The user Clicks on Reprocessed')
 def step_impl(context):
     context.commonPage_functions = CommonPageFunctions(SeleniumBase.driver)
-    context.commonPage_functions.click_Homepage();
+    context.commonPage_functions.click_Homepage()
     context.reprocessedPageFunctions = ReprocessedPageFunctions(SeleniumBase.driver)
     context.reprocessedPageFunctions.click_reprocessed()
 
