@@ -1,0 +1,80 @@
+<testsuite name="FPAReconcilation.Checking the FPA Reconcilation functionality" tests="2" errors="1" failures="0" skipped="0" time="59.630183" timestamp="2023-02-13T14:14:37.820644" hostname="BNGECO-L-81690"><testcase classname="FPAReconcilation.Checking the FPA Reconcilation functionality" name="Validating FPA Reconciled data, Reprocessed -- @1.1 Dashboard Items" status="passed" time="43.904959"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario Outline: Validating FPA Reconciled data, Reprocessed -- @1.1 Dashboard Items
+    Given Launch the browser and navigate to the url ... passed in 19.056s
+    When The user Clicks on Reconciled Data under RECONCILIATION ... passed in 0.076s
+    Then The user validates Reconciled Data page title ... passed in 1.182s
+    And The user validates Reconciled Data Fields ... passed in 0.254s
+    And The user enters received date for "Reconciliation" and click on search button ... passed in 2.467s
+    And The user Validates the Reconciled ReportPage Label ... passed in 15.744s
+    Then The user enters received date and click on Clear button ... passed in 5.127s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="FPAReconcilation.Checking the FPA Reconcilation functionality" name="Validating FPA Reconciled data, Reprocessed -- @1.2 Dashboard Items" status="failed" time="15.725223"><error type="ValueError" message="invalid literal for int() with base 10: ''">
+<![CDATA[
+Failing step: And The user enters received date for "Reprocessed" and click on search button ... failed in 0.186s
+Location: features/FPAReconcilation.feature:10
+Traceback (most recent call last):
+  File "C:\Apps\SSO FE framework\FPAAutomation\venv\lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+  File "C:\Apps\SSO FE framework\FPAAutomation\venv\lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+  File "features\steps\FPAReconcilationSteps.py", line 38, in step_impl
+    context.reconciledDataPageFunctions.enter_receivedDate(dashboardItems)
+  File "C:\Apps\SSO FE framework\FPAAutomation\Shell_FE_Behave_Tests\ApplicationLibrary\FunctionalLibrary\PageFunctions\ReconciledDataPageFunctions.py", line 47, in enter_receivedDate
+    self.calendarPageFunctions.click_calendarDate(startDate, finishDate)
+  File "C:\Apps\SSO FE framework\FPAAutomation\Shell_FE_Behave_Tests\ApplicationLibrary\FunctionalLibrary\CommonFunctions\CalendarPageFunctions.py", line 81, in click_calendarDate
+    yeardiff = self.get_startyeardiff(startDate[2])
+  File "C:\Apps\SSO FE framework\FPAAutomation\Shell_FE_Behave_Tests\ApplicationLibrary\FunctionalLibrary\CommonFunctions\CalendarPageFunctions.py", line 19, in get_startyeardiff
+    yeardiff = int(yearToSelect) - int(x)
+ValueError: invalid literal for int() with base 10: ''
+
+Captured logging:
+INFO:BrowserUtilities:Navigated to the URL: https://fsp-ui-qat.azurewebsites.net/.
+INFO:SeleniumUtilities:Clicked keyboard enter.
+INFO:BrowserUtilities:Navigated to the URL: {0}. after loginhttps://fsp-ui-qat.azurewebsites.net/
+INFO:SeleniumUtilities:Clicked keyboard enter.
+INFO:BrowserUtilities:Took screenshot and saved as Validating_FPA_Reconciled_data,_Reprocessed_--_@1.2_Dashboard_Items13021435.png in Screenshots folder.
+ERROR:FPAWaitHelper:Element <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="5c975ed8-ac51-492e-ac79-262ce5d0c3fe")> is not clickable. Unable to click / find the element within the specified time. Exception: TypeError
+INFO:SeleniumUtilities:Clicked on the element.
+INFO:BrowserUtilities:Took screenshot and saved as Validating_FPA_Reconciled_data,_Reprocessed_--_@1.2_Dashboard_Items13021435.png in Screenshots folder.
+INFO:FileUtilities:The data from json file FSPTestData.json has been converted into dictionary.
+ERROR:WaitUtilities:Element <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="2088962f-2315-4635-940a-a2edc18aeda7")> is not visible within the specified time. Exception: TypeError
+INFO:SeleniumUtilities:Element is displayed.
+INFO:SeleniumUtilities:Reconciled Data Page title is correct
+INFO:BrowserUtilities:Took screenshot and saved as Validating_FPA_Reconciled_data,_Reprocessed_--_@1.2_Dashboard_Items13021436.png in Screenshots folder.
+INFO:FileUtilities:The data from json file FSPTestData.json has been converted into dictionary.
+ERROR:WaitUtilities:Element [<selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="f82e4685-ddad-47be-a32d-26d091f3888b")>, <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="919e8857-47ed-4a6a-abdf-d9cd9d3e76ae")>, <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="cf38a6b6-af0a-41a0-a8c6-cf06ab76012e")>, <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="7f1c2131-a7a2-48df-a942-f534540ac62c")>, <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="fbc52c0d-67b1-4560-b413-5818efdf50b1")>, <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="22d2f48b-23d2-4e9f-ab4c-5cefcaf13605")>, <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="44a3235c-8796-4f61-95b9-580b16be95b4")>, <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="c59e3f01-7bbe-44d7-8735-d5ce5ff7c819")>, <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="a3ca1602-ab29-432f-a2f3-1889b6debb66")>, <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="07aa045b-b607-4ea0-a28a-5c420fb8468a")>, <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="08da780f-d49c-463c-b35c-e1bd3fdfb18d")>, <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="0c0ba9b3-eabd-435c-92a1-df4ce028c0e3")>, <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="dfa12719-3b27-4f9f-8f6b-a655e638d027")>, <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="13a81001-1fd8-46ff-b965-0d0fcd01bf7d")>, <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="937679cb-f4e8-4ff5-b3ea-b72c5e8d6775")>, <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="9d355076-e6f9-4504-aab8-51236a3b435a")>] is not visible within the specified time. Exception: TypeError
+INFO:SeleniumUtilities:Element is displayed.
+INFO:SeleniumUtilities:Element is displayed.
+INFO:SeleniumUtilities:Element is displayed.
+INFO:SeleniumUtilities:Element is displayed.
+INFO:SeleniumUtilities:Element is displayed.
+INFO:SeleniumUtilities:Element is displayed.
+INFO:SeleniumUtilities:Element is displayed.
+INFO:SeleniumUtilities:Reconciled Data Fields Verified
+INFO:BrowserUtilities:Took screenshot and saved as Validating_FPA_Reconciled_data,_Reprocessed_--_@1.2_Dashboard_Items13021436.png in Screenshots folder.
+INFO:FileUtilities:The data from json file FSPTestData.json has been converted into dictionary.
+ERROR:FPAWaitHelper:Element <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="bd294847-84e6-4cc9-99bd-4a5573d5527f")> is not clickable. Unable to click / find the element within the specified time. Exception: TypeError
+INFO:SeleniumUtilities:Clicked on the element.
+ERROR:WaitUtilities:Element <selenium.webdriver.remote.webelement.WebElement (session="5afc6610b2fde00d10d4a0f264099a38", element="a656041c-579e-484c-99ff-f2a56fcfe2ce")> is not visible within the specified time. Exception: TypeError
+INFO:BrowserUtilities:Took screenshot and saved as Validating_FPA_Reconciled_data,_Reprocessed_--_@1.2_Dashboard_Items13021437.png in Screenshots folder.]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario Outline: Validating FPA Reconciled data, Reprocessed -- @1.2 Dashboard Items
+    Given Launch the browser and navigate to the url ... passed in 15.278s
+    When The user Clicks on Reconciled Data under RECONCILIATION ... passed in 0.058s
+    Then The user validates Reconciled Data page title ... passed in 0.037s
+    And The user validates Reconciled Data Fields ... passed in 0.167s
+    And The user enters received date for "Reprocessed" and click on search button ... failed in 0.186s
+    And The user Validates the Reconciled ReportPage Label ... skipped in 0.000s
+    Then The user enters received date and click on Clear button ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

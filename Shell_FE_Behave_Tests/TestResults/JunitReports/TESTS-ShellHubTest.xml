@@ -1,0 +1,19 @@
+<testsuite name="ShellHubTest.ShellHubTest" tests="1" errors="0" failures="0" skipped="1" time="0.0" timestamp="2023-02-10T20:14:15.228476" hostname="BNGECO-L-81690"><testcase classname="ShellHubTest.ShellHubTest" name="Test Shell Hub page" status="skipped" time="0"><skipped /><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Test Shell Hub page
+    Given user navigates to the Shell hub site ... skipped in 0.000s
+    When user searches for keyword "Functional Excellence Testing" from search-box ... skipped in 0.000s
+    Then user validates the title of the window "Search" ... skipped in 0.000s
+    When user navigates back to "https://hub.shell.com" ... skipped in 0.000s
+    And user clicks on Yammer link ... skipped in 0.000s
+    Then user verifies if totally "2" windows are displayed ... skipped in 0.000s
+    When user navigates to the child window using title "Yammer" ... skipped in 0.000s
+    And user closes the child window ... skipped in 0.000s
+    And user logs out of the application ... skipped in 0.000s
+    Then user validates the Select account screen ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
