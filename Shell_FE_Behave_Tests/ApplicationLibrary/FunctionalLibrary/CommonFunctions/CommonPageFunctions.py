@@ -16,14 +16,23 @@ class CommonPageFunctions:
         self.commonPageControls = CommonPageControls(SeleniumBase.driver)
 
     def click_Homepage(self):
-        FPAWaitHelper.wait_for_element_to_be_clickable(self.commonPageControls.get_Homepage(), 6000)
+        WaitUtilities.wait_for_element_to_be_clickable(self.commonPageControls.get_Homepage())
         FPASeleniumHelper.click_element(self.commonPageControls.get_Homepage())
         time.sleep(7)
 
     def select_Status(self):
-        FPAWaitHelper.wait_for_element_to_be_clickable(self.commonPageControls.get_statusInputBox(), 600)
+        WaitUtilities.wait_for_element_to_be_clickable(self.commonPageControls.get_statusInputBox())
         FPASeleniumHelper.click_element(self.commonPageControls.get_statusInputBox())
-        FPAWaitHelper.wait_for_element_to_be_clickable(self.commonPageControls.get_status(), 1000)
+        WaitUtilities.wait_for_element_to_be_clickable(self.commonPageControls.get_status())
         FPASeleniumHelper.click_element(self.commonPageControls.get_status())
+
+    def click_search(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.commonPageControls.get_searchButton())
+        FPASeleniumHelper.click_element(self.commonPageControls.get_searchButton())
+
+    def click_Clear(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.commonPageControls.get_clearSearchButton())
+        FPASeleniumHelper.click_element(self.commonPageControls.get_clearSearchButton())
+
 
 

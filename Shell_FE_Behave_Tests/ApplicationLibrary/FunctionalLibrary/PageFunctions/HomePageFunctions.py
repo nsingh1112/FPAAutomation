@@ -71,10 +71,26 @@ class HomePageFunctions:
             raise TypeError("Element not matched for " +divName)
 
     def click_unprocessedRecord(self):
-        FPAWaitHelper.wait_for_element_to_be_clickable(self.homePageControls.get_linkUnprocessedRecord(), 600)
+        WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_linkUnprocessedRecord())
         FPASeleniumHelper.click_element(self.homePageControls.get_linkUnprocessedRecord())
 
-    def click_reconciledData(self):
-        FPAWaitHelper.wait_for_element_to_be_clickable(self.homePageControls.get_linkReconciledData(), 600)
-        FPASeleniumHelper.click_element(self.homePageControls.get_linkReconciledData())
+    def click_reconciled(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_reconciled())
+        FPASeleniumHelper.click_element(self.homePageControls.get_reconciled())
+
+    def click_reprocessed(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_reprocessed())
+        FPASeleniumHelper.click_element(self.homePageControls.get_reprocessed())
+
+    def click_failedReconciliation(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_failedReconciliation())
+        FPASeleniumHelper.click_element(self.homePageControls.get_failedReconciliation())
+
+    def click_enteredInDEX(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_enteredInDEX())
+        FPASeleniumHelper.click_element(self.homePageControls.get_enteredInDEX())
+
+    def click_failedToEnterInDEX(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_failedToEnterInDEX())
+        FPASeleniumHelper.click_element(self.homePageControls.get_failedToEnterInDEX())
 

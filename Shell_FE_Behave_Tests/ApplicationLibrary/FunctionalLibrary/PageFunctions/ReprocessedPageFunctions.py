@@ -26,7 +26,7 @@ class ReprocessedPageFunctions:
 
 
     def click_reprocessed(self):
-        FPAWaitHelper.wait_for_element_to_be_clickable(self.reprocessedPageControls.get_reprocessedLink(), 6000)
+        WaitUtilities.wait_for_element_to_be_clickable(self.reprocessedPageControls.get_reprocessedLink())
         FPASeleniumHelper.click_element(self.reprocessedPageControls.get_reprocessedLink())
 
 

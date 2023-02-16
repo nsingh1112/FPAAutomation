@@ -8,6 +8,8 @@ class CommonPageControls:
     homepage = (By.XPATH, "//div[@class='shell-menu-item-content' and text()='Home']")
     statusInputBox = (By.XPATH, "//input[@class='shell-select-container-selection-search-input']")
     status = (By.XPATH, "//div[@class='shell-select-container-item shell-select-container-item-option' and @title='Aggregation Completed']")
+    searchButton = (By.XPATH, "//button[@class='sc-papXJ gDMjLE shell-button']/span[text()='Search']")
+    clearSearchButton = (By.XPATH, "//a[@class='sc-jqUVSM hLItTL shell-button']")
 
 
     def get_Homepage(self):
@@ -18,4 +20,10 @@ class CommonPageControls:
 
     def get_status(self):
         return self.driver.find_element(*CommonPageControls.status)
+
+    def get_searchButton(self):
+        return self.driver.find_element(*CommonPageControls.searchButton)
+
+    def get_clearSearchButton(self):
+        return self.driver.find_element(*CommonPageControls.clearSearchButton)
 

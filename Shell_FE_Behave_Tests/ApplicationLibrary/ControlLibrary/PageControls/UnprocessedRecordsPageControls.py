@@ -8,7 +8,7 @@ class UnprocessedRecordsPageControls:
 
     unprocessedRecordPageTitle = (By.XPATH, "//span[text()='Reconciliation']/../..//*[local-name()='svg' and @class='sc-gsnTZi hDCash shell-icon']/following::li/div/span[text()='Unprocessed Records']")
     unprocessedRecordRowHeader = (By.XPATH, "//div[@class='shell-table-header']/table/thead/tr/th")
-    totalUnprocessedRecord = (By.XPATH, "//strong/..")
+    totalUnprocessedRecord = (By.XPATH, "//p[@class='sc-bczRLJ hbSXPu shell-text-paragraph']/em")
 
 
     def get_unprocessedRecordPageTitle(self):

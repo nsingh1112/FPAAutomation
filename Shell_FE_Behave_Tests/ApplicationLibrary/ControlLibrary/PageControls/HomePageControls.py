@@ -12,7 +12,11 @@ class HomePageControls:
     logsMenuItems = (By.XPATH, "//div[@class='shell-menu-item-group-title' and text()='Logs']/../ul/li/div")
     MenuItems = (By.XPATH, "//div[@class='shell-menu-item-group-title']")
     linkUnprocessedRecord = (By.XPATH, "//div[@class='shell-menu-item-content' and text()='Unprocessed Records']")
-    linkReconciledData = (By.XPATH, "//div[@class='shell-menu-item-content' and text()='Reconciled Data']")
+    reconciled = (By.XPATH, "//div[@class='sc-jIAOiI hHlWKS' and text()='Reconciled']")
+    reprocessed = (By.XPATH, "//div[@class='sc-jIAOiI hHlWKS' and text()='Reprocessed']")
+    failedReconciliation = (By.XPATH, "//div[@class='sc-jIAOiI hHlWKS' and text()='Failed Reconciliation']")
+    enteredInDEX = (By.XPATH, "//div[@class='sc-jIAOiI hHlWKS' and text()='Entered in DEX']")
+    failedToEnterInDEX = (By.XPATH, "//div[@class='sc-jIAOiI hHlWKS' and text()='Failed to enter in DEX']")
 
     def get_documentsMenuItems(self):
         return self.driver.find_elements(*HomePageControls.documentsMenuItems)
@@ -34,6 +38,18 @@ class HomePageControls:
     def get_linkUnprocessedRecord(self):
         return self.driver.find_element(*HomePageControls.linkUnprocessedRecord)
 
-    def get_linkReconciledData(self):
-        return self.driver.find_element(*HomePageControls.linkReconciledData)
+    def get_reconciled(self):
+        return self.driver.find_element(*HomePageControls.reconciled)
+
+    def get_reprocessed(self):
+        return self.driver.find_element(*HomePageControls.reprocessed)
+
+    def get_failedReconciliation(self):
+        return self.driver.find_element(*HomePageControls.failedReconciliation)
+
+    def get_enteredInDEX(self):
+        return self.driver.find_element(*HomePageControls.enteredInDEX)
+
+    def get_failedToEnterInDEX(self):
+        return self.driver.find_element(*HomePageControls.failedToEnterInDEX)
     

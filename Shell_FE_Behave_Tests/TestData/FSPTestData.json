@@ -1,8 +1,10 @@
 {
- "ReconciledStartDate": "11 May 2020",
+  "ReconciledStartDate": "11 May 2020",
   "ReconciledFinishDate": "15 Aug 2024",
   "ReconciledStatus": "Aggregation Completed",
   "ReprocessedStartDate" : "21 May 2021",
   "ReprocessedFinishDate": "15 Sep 2025",
-  "ReprocessedStatus": "Aggregation Completed"
+  "ReprocessedStatus": "Aggregation Completed",
+  "FailedReconciliationStartDate": "21 May 2020",
+  "FailedReconciliationFinishDate": "25 Aug 2024"
 }

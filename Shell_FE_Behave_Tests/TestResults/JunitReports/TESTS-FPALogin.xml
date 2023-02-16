@@ -1,30 +1,19 @@
-<testsuite name="FPALogin.Checking the FPA functionality" tests="3" errors="0" failures="0" skipped="3" time="0.0" timestamp="2023-02-13T14:13:24.919568" hostname="BNGECO-L-81690"><testcase classname="FPALogin.Checking the FPA functionality" name="Validating FPA Left Menu and SubMenu" status="skipped" time="0"><skipped /><system-out>
+<testsuite name="FPALogin.Checking the FPA functionality" tests="2" errors="0" failures="0" skipped="2" time="0.0" timestamp="2023-02-16T16:30:09.282132" hostname="BNGECO-L-81690"><testcase classname="FPALogin.Checking the FPA functionality" name="Validating FPA Left Menu and SubMenu" status="untested" time="0"><skipped /><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Validating FPA Left Menu and SubMenu
-    Given Launch the browser and navigate to the url ... skipped in 0.000s
-    When The user validates the homepage ... skipped in 0.000s
-    When The user validates the dashboardItems ... skipped in 0.000s
+    Given Launch the browser and navigate to the url ... untested in 0.000s
+    When The user validates the homepage ... untested in 0.000s
+    When The user validates the dashboardItems ... untested in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="FPALogin.Checking the FPA functionality" name="Validating FPA Unprocessed Record data" status="skipped" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="FPALogin.Checking the FPA functionality" name="Validating FPA Unprocessed Record data" status="untested" time="0"><skipped /><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Validating FPA Unprocessed Record data
-    When The user Clicks on Unprocessed records under RECONCILIATION ... skipped in 0.000s
-
-@scenario.end
---------------------------------------------------------------------------------
-]]>
-</system-out></testcase><testcase classname="FPALogin.Checking the FPA functionality" name="Validating FPA Reconciled data" status="skipped" time="0"><skipped /><system-out>
-<![CDATA[
-@scenario.begin
-  Scenario: Validating FPA Reconciled data
-    When The user Clicks on Reconciled Data under RECONCILIATION ... skipped in 0.000s
-    When The user validates Reconciled Data page title ... skipped in 0.000s
-    Then The user enters received date and click on search button ... skipped in 0.000s
+    When The user Clicks on Unprocessed records under RECONCILIATION ... untested in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------

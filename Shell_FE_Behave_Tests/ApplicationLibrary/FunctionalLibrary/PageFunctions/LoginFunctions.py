@@ -26,9 +26,14 @@ class LoginFunctions:
         BrowserUtilities.maximize_window()
         BrowserUtilities.navigate_to_url(SeleniumBase.url)
         time.sleep(10)
+
+        browurl = BrowserUtilities.get_current_url()
+        BrowserUtilities.log.info("Navigated to the URL: {0}. after login" +browurl)
         SeleniumUtilities.press_keyboard_key('enter')
 
 
     def navigate_to_url(self, url):
         BrowserUtilities.navigate_to_url(url)
+
+
 

@@ -14,13 +14,13 @@ class CalendarPageFunctions:
         self.calendarPageControls = CalendarPageControls(SeleniumBase.driver)
 
     def get_startyeardiff(self, yearToSelect):
-        WaitUtilities.wait_for_element_to_be_visible(self.calendarPageControls.get_firstCalanderYear(),6000)
+        WaitUtilities.wait_for_element_to_be_visible(self.calendarPageControls.get_firstCalanderYear())
         x = self.calendarPageControls.get_firstCalanderYear().text
         yeardiff = int(yearToSelect) - int(x)
         return yeardiff
 
     def get_finishYearDiff(self, yearToSelect):
-        WaitUtilities.wait_for_element_to_be_visible(self.calendarPageControls.get_secondCalanderYear(),6000)
+        WaitUtilities.wait_for_element_to_be_visible(self.calendarPageControls.get_secondCalanderYear())
         x = self.calendarPageControls.get_secondCalanderYear().text
         yeardiff = int(yearToSelect) - int(x)
         return yeardiff
@@ -37,11 +37,13 @@ class CalendarPageFunctions:
             SelectionWindowLastYear = self.calendarPageControls.get_yearSelectionWindowLastYear().text
 
             if (int(SelectionWindowStartingYear) > int(yearToSelect)):
+                WaitUtilities.wait_for_element_to_be_visible(self.calendarPageControls.get_yearSelectionWindowPreviousButtons())
                 SeleniumUtilities.click_element(self.calendarPageControls.get_yearSelectionWindowPreviousButton())
                 WaitUtilities.wait_for_element_to_be_visible(
                     self.calendarPageControls.get_yearSelectionWindowFirstYear())
 
             elif (int(SelectionWindowLastYear) < int(yearToSelect)):
+                WaitUtilities.wait_for_element_to_be_clickable(self.calendarPageControls.get_yearSelectionWindowNextButton())
                 SeleniumUtilities.click_element(self.calendarPageControls.get_yearSelectionWindowNextButton())
                 WaitUtilities.wait_for_element_to_be_visible(
                     self.calendarPageControls.get_yearSelectionWindowFirstYear())
@@ -55,6 +57,7 @@ class CalendarPageFunctions:
 
 
     def select_startMonth(self, startmonth, yeardiff):
+        WaitUtilities.wait_for_element_to_be_clickable(self.calendarPageControls.get_firstCalanderMonth())
         SeleniumUtilities.click_element(self.calendarPageControls.get_firstCalanderMonth())
         month = self.driver.find_element_by_xpath(
             "//div[@class='shell-date-picker-cell-inner' and text()='" + startmonth + "']")

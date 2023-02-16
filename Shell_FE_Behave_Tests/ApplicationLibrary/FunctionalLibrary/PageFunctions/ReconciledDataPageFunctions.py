@@ -28,7 +28,7 @@ class ReconciledDataPageFunctions:
         self.FOB_DES_TestData = FileUtilities.read_json_file_as_dictionary("FSPTestData.json")
 
     def validate_pageTitle(self):
-        WaitUtilities.wait_for_element_to_be_visible(self.reconciledDataPageControls.get_reconciledDataPageTitle(),6000)
+        WaitUtilities.wait_for_element_to_be_visible(self.reconciledDataPageControls.get_reconciledDataPageTitle())
         if FPASeleniumHelper.check_element_exists_by_xpath( self.reconciledDataPageControls.get_reconciledDataPageTitle()):
             SeleniumUtilities.log.info("Reconciled Data Page title is correct")
 
@@ -36,7 +36,7 @@ class ReconciledDataPageFunctions:
             SeleniumUtilities.log.error("Reconciled Data Page title is not correct")
 
     def enter_receivedDate(self, dashboardItems):
-        FPAWaitHelper.wait_for_element_to_be_clickable(self.reconciledDataPageControls.get_startDateInputBox(), 6000)
+        WaitUtilities.wait_for_element_to_be_clickable(self.reconciledDataPageControls.get_startDateInputBox())
         FPASeleniumHelper.click_element(self.reconciledDataPageControls.get_startDateInputBox())
         if(dashboardItems == "Reconciliation"):
            startDate = self.FOB_DES_TestData['ReconciledStartDate']
@@ -44,14 +44,16 @@ class ReconciledDataPageFunctions:
         elif(dashboardItems == "Reprocessed"):
             startDate = self.FOB_DES_TestData['ReprocessedStartDate']
             finishDate = self.FOB_DES_TestData['ReprocessedFinishDate']
+        time.sleep(2)
         self.calendarPageFunctions.click_calendarDate(startDate, finishDate)
 
     def click_search(self):
-        FPAWaitHelper.wait_for_element_to_be_clickable(self.reconciledDataPageControls.get_searchButton(), 6000)
+        WaitUtilities.wait_for_element_to_be_clickable(self.reconciledDataPageControls.get_searchButton())
         FPASeleniumHelper.click_element(self.reconciledDataPageControls.get_searchButton())
 
     def click_Clear(self):
-        FPAWaitHelper.wait_for_element_to_be_clickable(self.reconciledDataPageControls.get_clearSearchButton(), 6000)
+        WaitUtilities.wait_for_element_to_be_clickable(self.reconciledDataPageControls.get_clearSearchButton())
+        #FPAWaitHelper.wait_for_element_to_be_clickable(self.reconciledDataPageControls.get_clearSearchButton(), 6000)
         FPASeleniumHelper.click_element(self.reconciledDataPageControls.get_clearSearchButton())
 
     def get_reconciledDataRowHeaders(self):
