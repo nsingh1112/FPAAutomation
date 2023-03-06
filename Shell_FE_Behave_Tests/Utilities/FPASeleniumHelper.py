@@ -140,3 +140,18 @@ class FPASeleniumHelper:
                 return True
             else:
                 return False
+
+    @staticmethod
+    def send_text(web_element, text):
+        """Passes the value to the text field.
+
+            Args:
+                - web_element - The web element where value needs to be passed.
+                - text - The value to be passed to text field. Value would be converted to string and passed.
+        """
+        if web_element is None:
+            SeleniumUtilities.log.error(
+                "Empty or invalid Web element passed as argument to the method: send_text(web_element, text)")
+            raise TypeError("Empty or invalid Web element passed!!")
+        web_element.send_keys(str(text))
+        SeleniumUtilities.log.info("Sent text {0} to the element.".format(text))

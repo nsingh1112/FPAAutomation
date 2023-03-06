@@ -40,7 +40,8 @@ def step_impl(context):
 @then('The user enters received date for "{dashboardItems}" and click on search button')
 def step_impl(context, dashboardItems = None):
     context.reconciledDataPageFunctions = ReconciledDataPageFunctions(SeleniumBase.driver)
-    context.reconciledDataPageFunctions.enter_receivedDate(dashboardItems)
+    startDate,endDate =context.reconciledDataPageFunctions.get_receivedStartEndDate()
+    context.reconciledDataPageFunctions.enter_receivedDate(dashboardItems,startDate,endDate)
     context.commonPage_functions = CommonPageFunctions(SeleniumBase.driver)
     context.commonPage_functions.select_Status()
     context.reconciledDataPageFunctions.click_search()
@@ -101,9 +102,12 @@ def step_impl(context):
 @then('The user enters received date for and click on search button')
 def step_impl(context):
     context.failedReconciliationPageFunctions = FailedReconciliationPageFunctions(SeleniumBase.driver)
-    context.failedReconciliationPageFunctions.enter_receivedDate()
+    startDate, endDate = context.failedReconciliationPageFunctions.get_receivedStartEndDate()
+    context.failedReconciliationPageFunctions.enter_receivedDate(startDate, endDate)
+    orderId = context.failedReconciliationPageFunctions.get_getAndEnterOrderID()
     context.reconciledDataPageFunctions = ReconciledDataPageFunctions(SeleniumBase.driver)
     context.reconciledDataPageFunctions.click_search()
+    context.failedReconciliationPageFunctions.get_validateOrderID(orderId)
 
 @then('The user Validates the Failed Reconciliation Label')
 def step_impl(context):

@@ -35,5 +35,8 @@ class LoginFunctions:
     def navigate_to_url(self, url):
         BrowserUtilities.navigate_to_url(url)
 
+    def access_shell_hub1(self):
+        SeleniumUtilities.press_keyboard_key('enter')
+
 
 

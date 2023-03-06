@@ -43,7 +43,7 @@ def handle_sso_certificate(context):
     """
     t1 = threading.Thread(
         name='run test parallel',
-        target=parallel_executor,
+        target=parallel_executor01,
         args=[context])
     t1.start()
     t2 = threading.Thread(
@@ -58,6 +58,7 @@ def handle_sso_certificate(context):
 @when('The user validates the homepage')
 def step_impl(context):
     context.homePage_functions = HomePageFunctions(SeleniumBase.driver)
+    context.homePage_functions.validate_applicationTitle()
     context.homePage_functions.validate_leftListItems()
 
 
@@ -87,3 +88,8 @@ def parallel_executor1(context):
     time.sleep(5)
     context.loginPage_functions = LoginFunctions(SeleniumBase.driver)
     context.loginPage_functions.press_enter_button()
+
+def parallel_executor01(context):
+    context.loginPage_functions = LoginFunctions(SeleniumBase.driver)
+
+    context.loginPage_functions.access_shell_hub1()

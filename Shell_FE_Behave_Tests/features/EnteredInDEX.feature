@@ -1,4 +1,4 @@
-@web @FPA @DEX
+@web @ @DEXFPA
 
 Feature: Checking the Entered In DEX functionality
 

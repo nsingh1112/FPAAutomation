@@ -15,7 +15,8 @@ class FailedReconciliationPageControls:
     searchByTextLabel = (By.XPATH, "//*[local-name()='svg' and @class='sc-gsnTZi hDCash shell-icon']/following::label[text()='Search By Text']")
     searchByTextCriteriaLabel = (By.XPATH, "//*[local-name()='svg' and @class='sc-gsnTZi hDCash shell-icon']/following::span[text()='Error Message, Ref Id, Contract Id']")
     searchInputText= (By.XPATH, "//input[@placeholder='Search By Text']")
-
+    receivedDate = (By.XPATH, "//tbody[@class='shell-table-tbody']/tr[@class='shell-table-row shell-table-row-level-0']/td[7]")
+    orderID = (By.XPATH, "//tbody[@class='shell-table-tbody']/tr[@class='shell-table-row shell-table-row-level-0']/td[1]")
 
     def get_failedReconciliationPageTitle(self):
         return self.driver.find_element(*FailedReconciliationPageControls.failedReconciliationPageTitle)
@@ -43,4 +44,10 @@ class FailedReconciliationPageControls:
 
     def get_searchInputText(self):
         return self.driver.find_element(*FailedReconciliationPageControls.searchInputText)
+
+    def get_receivedDate(self):
+        return self.driver.find_elements(*FailedReconciliationPageControls.receivedDate)
+
+    def get_orderID(self):
+        return self.driver.find_elements(*FailedReconciliationPageControls.orderID)
 

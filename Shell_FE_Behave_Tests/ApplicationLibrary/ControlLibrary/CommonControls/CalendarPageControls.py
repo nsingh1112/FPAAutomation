@@ -21,6 +21,9 @@ class CalendarPageControls:
     def get_firstCalanderYear(self):
         return self.driver.find_element(*CalendarPageControls.firstCalanderYear)
 
+    def get_firstCalanderMonthCount(self):
+        return self.driver.find_elements(*CalendarPageControls.firstCalanderMonth)
+
     def get_firstCalanderMonth(self):
         return self.driver.find_element(*CalendarPageControls.firstCalanderMonth)
 
@@ -29,6 +32,9 @@ class CalendarPageControls:
 
     def get_secondCalanderMonth(self):
         return self.driver.find_element(*CalendarPageControls.secondCalanderMonth)
+
+    def get_secondCalanderMonthCount(self):
+        return self.driver.find_elements(*CalendarPageControls.secondCalanderMonth)
 
     def get_previousButton(self):
         return self.driver.find_element(*CalendarPageControls.previousButton)

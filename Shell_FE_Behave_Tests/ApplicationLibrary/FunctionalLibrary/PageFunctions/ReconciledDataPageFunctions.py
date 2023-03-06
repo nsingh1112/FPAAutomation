@@ -35,17 +35,11 @@ class ReconciledDataPageFunctions:
         else:
             SeleniumUtilities.log.error("Reconciled Data Page title is not correct")
 
-    def enter_receivedDate(self, dashboardItems):
+    def enter_receivedDate(self, dashboardItems,startDate,endDate):
         WaitUtilities.wait_for_element_to_be_clickable(self.reconciledDataPageControls.get_startDateInputBox())
         FPASeleniumHelper.click_element(self.reconciledDataPageControls.get_startDateInputBox())
-        if(dashboardItems == "Reconciliation"):
-           startDate = self.FOB_DES_TestData['ReconciledStartDate']
-           finishDate = self.FOB_DES_TestData['ReconciledFinishDate']
-        elif(dashboardItems == "Reprocessed"):
-            startDate = self.FOB_DES_TestData['ReprocessedStartDate']
-            finishDate = self.FOB_DES_TestData['ReprocessedFinishDate']
         time.sleep(2)
-        self.calendarPageFunctions.click_calendarDate(startDate, finishDate)
+        self.calendarPageFunctions.click_calendarDate(startDate, endDate)
 
     def click_search(self):
         WaitUtilities.wait_for_element_to_be_clickable(self.reconciledDataPageControls.get_searchButton())
@@ -75,3 +69,19 @@ class ReconciledDataPageFunctions:
             SeleniumUtilities.log.info("Reconciled Data Fields Verified")
         else:
             SeleniumUtilities.log.error("Reconciled Data Fields not Verified")
+
+
+    def get_receivedStartEndDate(self):
+        elementList = []
+        WaitUtilities.wait_for_element_to_be_visible(
+            self.reconciledDataPageControls.get_receivedDate())
+        options1 = self.reconciledDataPageControls.get_receivedDate()
+        for option in options1:
+            x2 = option.text
+            if ((len(elementList) <= 1) and (x2 not in elementList)):
+                elementList.append(x2)
+
+        earliest_date = min(elementList)
+        lastest_date = max(elementList)
+
+        return earliest_date, lastest_date

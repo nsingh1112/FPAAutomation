@@ -56,11 +56,42 @@ class FailedReconciliationPageFunctions:
         else:
             SeleniumUtilities.log.error("Failed Reconciliation Data Fields not Verified")
 
-    def enter_receivedDate(self):
+    def enter_receivedDate(self,startDate, endDate):
         WaitUtilities.wait_for_element_to_be_clickable(self.failedReconciliationPageControls.get_startDateInputBox())
         time.sleep(2)
         FPASeleniumHelper.click_element(self.failedReconciliationPageControls.get_startDateInputBox())
-        startDate = self.FOB_DES_TestData['FailedReconciliationStartDate']
-        finishDate = self.FOB_DES_TestData['FailedReconciliationFinishDate']
         time.sleep(2)
-        self.calendarPageFunctions.click_calendarDate(startDate, finishDate)
+        self.calendarPageFunctions.click_calendarDate(startDate, endDate)
+
+
+    def get_receivedStartEndDate(self):
+        elementList = []
+        WaitUtilities.wait_for_element_to_be_visible(
+            self.failedReconciliationPageControls.get_receivedDate())
+        options1 = self.failedReconciliationPageControls.get_receivedDate()
+        for option in options1:
+            x2 = option.text
+            if ((len(elementList) <= 1) and (x2 not in elementList)):
+                elementList.append(x2)
+
+        earliest_date = min(elementList)
+        lastest_date = max(elementList)
+
+        return earliest_date, lastest_date
+
+    def get_validateOrderID(self,exporderID):
+        time.sleep(2)
+        WaitUtilities.wait_for_element_to_be_visible(self.failedReconciliationPageControls.get_orderID())
+        actOrderID = self.failedReconciliationPageControls.get_orderID().text
+        if(exporderID in actOrderID):
+            SeleniumUtilities.log.info("Order ID Verified")
+        else:
+            SeleniumUtilities.log.error("Order ID not Verified")
+
+    def get_getAndEnterOrderID(self):
+        WaitUtilities.wait_for_element_to_be_visible(self.failedReconciliationPageControls.get_orderID())
+        actOrderID = self.failedReconciliationPageControls.get_orderID().text
+        FPASeleniumHelper.send_text(self.failedReconciliationPageControls.get_searchInputText(), actOrderID)
+        return actOrderID
+
+

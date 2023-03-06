@@ -17,6 +17,7 @@ class ReconciledDataPageControls:
     searchByText= (By.XPATH, "//input[@placeholder='Search By Text']")
     searchButton = (By.XPATH, "//button[@class='sc-papXJ gDMjLE shell-button']/span[text()='Search']")
     clearSearchButton = (By.XPATH, "//a[@class='sc-jqUVSM hLItTL shell-button']")
+    receivedDate = (By.XPATH, "//tbody[@class='shell-table-tbody']/tr[@class='shell-table-row shell-table-row-level-0']/td[2]")
 
 
     def get_reconciledDataPageTitle(self):
@@ -45,4 +46,8 @@ class ReconciledDataPageControls:
 
     def get_clearSearchButton(self):
         return self.driver.find_element(*ReconciledDataPageControls.clearSearchButton)
+
+    def get_receivedDate(self):
+        return self.driver.find_elements(*ReconciledDataPageControls.receivedDate)
+
     

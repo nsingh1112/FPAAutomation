@@ -1,6 +1,5 @@
 from Shell_FE_Behave_Tests.ApplicationLibrary.ControlLibrary.PageControls.HomePageControls import HomePageControls
 from Shell_FE_Behave_Tests.Utilities.FPASeleniumHelper import FPASeleniumHelper
-from Shell_FE_Behave_Tests.Utilities.FPAWaitHelper import FPAWaitHelper
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 from Shell_FE_Selenium_Core.Utilities.SeleniumUtilities import SeleniumUtilities
 from Shell_FE_Selenium_Core.Utilities.WaitUtilities import WaitUtilities
@@ -10,6 +9,15 @@ class HomePageFunctions:
     def __init__(self, driver):
         self.driver = driver
         self.homePageControls = HomePageControls(SeleniumBase.driver)
+
+    def validate_applicationTitle(self):
+        WaitUtilities.wait_for_element_to_be_visible(self.homePageControls.get_applicationTitle())
+        if FPASeleniumHelper.check_element_exists_by_xpath(
+                self.homePageControls.get_applicationTitle()):
+            SeleniumUtilities.log.info("Home Page title is correct")
+
+        else:
+            SeleniumUtilities.log.error("Home Page title is not correct")
 
     def validate_leftListItems(self):
         WaitUtilities.wait_for_element_to_be_visible(self.homePageControls.get_MenuItems())
@@ -93,4 +101,49 @@ class HomePageFunctions:
     def click_failedToEnterInDEX(self):
         WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_failedToEnterInDEX())
         FPASeleniumHelper.click_element(self.homePageControls.get_failedToEnterInDEX())
+
+    def click_terminalReport(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_terminalReport())
+        FPASeleniumHelper.click_element(self.homePageControls.get_terminalReport())
+
+    def click_invoices(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_invoices())
+        FPASeleniumHelper.click_element(self.homePageControls.get_invoices())
+
+    def click_unprocessedRecord(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_unprocessedRecord())
+        FPASeleniumHelper.click_element(self.homePageControls.get_unprocessedRecord())
+
+    def click_reconciledData(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_reconciledData())
+        FPASeleniumHelper.click_element(self.homePageControls.get_reconciledData())
+
+    def click_create(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_create())
+        FPASeleniumHelper.click_element(self.homePageControls.get_create())
+
+
+    def click_manageActuals(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_manageActuals())
+        FPASeleniumHelper.click_element(self.homePageControls.get_manageActuals())
+
+    def click_actualVolumes(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_actualVolumes())
+        FPASeleniumHelper.click_element(self.homePageControls.get_actualVolumes())
+
+
+    def click_reconcilation(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_reconciliation())
+        FPASeleniumHelper.click_element(self.homePageControls.get_reconciliation())
+
+
+    def click_reconciliationErrors(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_reconciliationErrors())
+        FPASeleniumHelper.click_element(self.homePageControls.get_reconciliationErrors())
+
+    def click_actualErrors(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_actualErrors())
+        FPASeleniumHelper.click_element(self.homePageControls.get_actualErrors())
+
+
 

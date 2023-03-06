@@ -10,7 +10,9 @@ class CommonPageControls:
     status = (By.XPATH, "//div[@class='shell-select-container-item shell-select-container-item-option' and @title='Aggregation Completed']")
     searchButton = (By.XPATH, "//button[@class='sc-papXJ gDMjLE shell-button']/span[text()='Search']")
     clearSearchButton = (By.XPATH, "//a[@class='sc-jqUVSM hLItTL shell-button']")
-
+    documentInputBox = (By.XPATH, "//input[@class='shell-select-container-selection-search-input']")
+    document = (By.XPATH, "//div[@class='shell-select-container-item-option-content' and text()='XLSX']")
+    totalRecordsCount = (By.XPATH, "//p[@class='sc-bczRLJ hbSXPu shell-text-paragraph']/em")
 
     def get_Homepage(self):
         return self.driver.find_element(*CommonPageControls.homepage)
@@ -26,4 +28,13 @@ class CommonPageControls:
 
     def get_clearSearchButton(self):
         return self.driver.find_element(*CommonPageControls.clearSearchButton)
+
+    def get_getDocumentInputBox(self):
+        return self.driver.find_element(*CommonPageControls.documentInputBox)
+
+    def get_document(self):
+        return self.driver.find_element(*CommonPageControls.document)
+
+    def get_totalRecordsCount(self):
+        return self.driver.find_element(*CommonPageControls.totalRecordsCount)
 
