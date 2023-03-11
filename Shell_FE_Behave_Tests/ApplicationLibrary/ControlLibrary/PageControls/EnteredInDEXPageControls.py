@@ -14,7 +14,7 @@ class EnteredInDEXPageControls:
     searchByTextLabel = (By.XPATH, "//*[local-name()='svg' and @class='sc-gsnTZi hDCash shell-icon']/following::label[text()='Search By Text']")
     searchByTextCriteriaLabel = (By.XPATH, "//*[local-name()='svg' and @class='sc-gsnTZi hDCash shell-icon']/following::span[text()='Dex Parcel Id, Contract Id, BOL Date, Buyer, Seller']")
     searchInputText = (By.XPATH, "//input[@placeholder='Search By Text']")
-
+    bolDate = (By.XPATH, "//tbody[@class='shell-table-tbody']/tr[@class='shell-table-row shell-table-row-level-0']/td[8]")
 
     def get_enteredInDEXPageTitle(self):
         return self.driver.find_element(*EnteredInDEXPageControls.enteredInDEXPageTitle)
@@ -39,4 +39,7 @@ class EnteredInDEXPageControls:
 
     def get_searchInputText(self):
         return self.driver.find_element(*EnteredInDEXPageControls.searchInputText)
+
+    def get_bolDate(self):
+        return self.driver.find_elements(*EnteredInDEXPageControls.bolDate)
 

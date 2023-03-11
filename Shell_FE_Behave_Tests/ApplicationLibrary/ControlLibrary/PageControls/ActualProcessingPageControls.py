@@ -19,8 +19,12 @@ class ActualProcessingPageControls:
     createSearchByTextLabel = (By.XPATH, "//*[local-name()='svg' and @class='sc-gsnTZi hDCash shell-icon']/following::span[text()='Contract Id, Discharge Date']")
     manageActualsSearchByTextLabel = (By.XPATH, "//*[local-name()='svg' and @class='sc-gsnTZi hDCash shell-icon']/following::span[text()='Dex Parcel Id, Contract Id, BOL Date, Buyer, Seller']")
     actualVolumeSearchByTextLabel = (By.XPATH, "//*[local-name()='svg' and @class='sc-gsnTZi hDCash shell-icon']/following::span[text()='Dex Parcel Id']")
-
     searchInputText = (By.XPATH, "//input[@placeholder='Search By Text']")
+    createActualsButton = (By.XPATH, "//span[@class='sc-ksZaOG kwPwYx' and  text()='Create Actuals (All)']")
+    createActualsPopUpTitle = (By.XPATH, "//strong[text()='Create Actuals']")
+    createActualsPopUpBody = (By.XPATH, "//div[text()='Are you sure you want to create actuals for all aggregated data?']")
+    createActualsPopUpCancelBtn = (By.XPATH, "//button[@class='sc-papXJ iFkojq shell-button']/span[text()='Cancel']")
+    createActualsPopUpSubmitBtn = (By.XPATH, "//button[@class='sc-papXJ gfyoCe shell-button']/span[text()='Submit']")
 
     def get_createPageTitle(self):
         return self.driver.find_element(*ActualProcessingPageControls.createPageTitle)
@@ -63,6 +67,21 @@ class ActualProcessingPageControls:
 
     def get_searchInputText(self):
         return self.driver.find_element(*ActualProcessingPageControls.searchInputText)
+
+    def get_createActualsButton(self):
+        return self.driver.find_element(*ActualProcessingPageControls.createActualsButton)
+
+    def get_createActualsPopUpTitle(self):
+        return self.driver.find_element(*ActualProcessingPageControls.createActualsPopUpTitle)
+
+    def get_createActualsPopUpBody(self):
+        return self.driver.find_element(*ActualProcessingPageControls.createActualsPopUpBody)
+
+    def get_createActualsPopUpCancelBtn(self):
+        return self.driver.find_element(*ActualProcessingPageControls.createActualsPopUpCancelBtn)
+
+    def get_createActualsPopUpSubmitBtn(self):
+        return self.driver.find_element(*ActualProcessingPageControls.createActualsPopUpSubmitBtn)
 
 
 

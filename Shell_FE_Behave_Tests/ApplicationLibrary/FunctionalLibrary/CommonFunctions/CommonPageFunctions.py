@@ -16,9 +16,8 @@ class CommonPageFunctions:
         self.commonPageControls = CommonPageControls(SeleniumBase.driver)
 
     def click_Homepage(self):
-        WaitUtilities.wait_for_element_to_be_clickable(self.commonPageControls.get_Homepage())
+        WaitUtilities.wait_for_element_to_be_clickable(self.commonPageControls.get_Homepage(), 12000)
         FPASeleniumHelper.click_element(self.commonPageControls.get_Homepage())
-        time.sleep(7)
 
     def select_Status(self):
         WaitUtilities.wait_for_element_to_be_clickable(self.commonPageControls.get_statusInputBox())
@@ -34,19 +33,36 @@ class CommonPageFunctions:
         WaitUtilities.wait_for_element_to_be_clickable(self.commonPageControls.get_clearSearchButton())
         FPASeleniumHelper.click_element(self.commonPageControls.get_clearSearchButton())
 
-    def select_DocumentType(self):
+    def select_DocumentType(self, docType):
         WaitUtilities.wait_for_element_to_be_clickable(self.commonPageControls.get_getDocumentInputBox())
         FPASeleniumHelper.click_element(self.commonPageControls.get_getDocumentInputBox())
-        WaitUtilities.wait_for_element_to_be_clickable(self.commonPageControls.get_document())
-        FPASeleniumHelper.click_element(self.commonPageControls.get_document())
-        time.sleep(2)
-
+        #filetype = (fileName.split('.'))[1].upper()
+        documentType = self.driver.find_element_by_xpath(
+            "//div[@class='shell-select-container-item-option-content' and text()='" + str(docType) + "']")
+        WaitUtilities.wait_for_element_to_be_clickable(documentType)
+        FPASeleniumHelper.click_element(documentType)
 
     def get_totalNoOfRecords(self):
         time.sleep(2)
         WaitUtilities.wait_for_element_to_be_visible(self.commonPageControls.get_totalRecordsCount())
         totalRecordCount = int(((self.commonPageControls.get_totalRecordsCount().text).split(' '))[0])
         return totalRecordCount
+
+    def get_receivedStartDateEndDate(self, options1):
+        elementList = []
+        for option in options1:
+            x2 = option.text
+            if ((len(elementList) <= 1) and (x2 not in elementList)):
+                elementList.append(x2)
+
+        earliest_date = min(elementList)
+        lastest_date = max(elementList)
+
+        return earliest_date, lastest_date
+
+    def wait_forToastToDisable(self):
+        WaitUtilities.wait_for_element_to_be_invisible(self.commonPageControls.get_toastMessageDiv(),20000)
+
 
 
 

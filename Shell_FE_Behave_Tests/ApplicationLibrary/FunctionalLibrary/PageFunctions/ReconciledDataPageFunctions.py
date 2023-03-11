@@ -72,16 +72,11 @@ class ReconciledDataPageFunctions:
 
 
     def get_receivedStartEndDate(self):
-        elementList = []
         WaitUtilities.wait_for_element_to_be_visible(
             self.reconciledDataPageControls.get_receivedDate())
         options1 = self.reconciledDataPageControls.get_receivedDate()
-        for option in options1:
-            x2 = option.text
-            if ((len(elementList) <= 1) and (x2 not in elementList)):
-                elementList.append(x2)
+        startDate, endDate = self.commonPageFunctions.get_receivedStartDateEndDate(options1)
+        return startDate, endDate
 
-        earliest_date = min(elementList)
-        lastest_date = max(elementList)
 
-        return earliest_date, lastest_date
+

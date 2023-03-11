@@ -68,3 +68,21 @@ class FailedToEnteredInDEXPageFunctions:
         finishDate = self.FOB_DES_TestData['FailedReconciliationFinishDate']
         time.sleep(2)
         self.calendarPageFunctions.click_calendarDate(startDate, finishDate)
+
+
+    def get_validateContractID(self,expcontractID):
+        time.sleep(2)
+        WaitUtilities.wait_for_element_to_be_visible(self.failedToEnteredInDEXPageControls.get_contractID())
+        actcontractID = self.failedToEnteredInDEXPageControls.get_contractID().text
+        if(expcontractID in actcontractID):
+            SeleniumUtilities.log.info("Contract ID Verified")
+        else:
+            SeleniumUtilities.log.error("Contract ID not Verified")
+
+    def get_enterContractID(self):
+        WaitUtilities.wait_for_element_to_be_visible(self.failedToEnteredInDEXPageControls.get_contractID())
+        actcontractID = self.failedToEnteredInDEXPageControls.get_contractID().text
+        FPASeleniumHelper.click_element(self.failedToEnteredInDEXPageControls.get_searchInputText())
+        FPASeleniumHelper.send_text_by_actions(self.failedToEnteredInDEXPageControls.get_searchInputText(),actcontractID)
+        time.sleep(2)
+        return actcontractID

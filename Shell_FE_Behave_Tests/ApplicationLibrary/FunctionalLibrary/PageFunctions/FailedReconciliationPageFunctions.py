@@ -65,19 +65,11 @@ class FailedReconciliationPageFunctions:
 
 
     def get_receivedStartEndDate(self):
-        elementList = []
         WaitUtilities.wait_for_element_to_be_visible(
             self.failedReconciliationPageControls.get_receivedDate())
         options1 = self.failedReconciliationPageControls.get_receivedDate()
-        for option in options1:
-            x2 = option.text
-            if ((len(elementList) <= 1) and (x2 not in elementList)):
-                elementList.append(x2)
-
-        earliest_date = min(elementList)
-        lastest_date = max(elementList)
-
-        return earliest_date, lastest_date
+        startDate,endDate = self.commonPageFunctions.get_receivedStartDateEndDate(options1)
+        return startDate,endDate
 
     def get_validateOrderID(self,exporderID):
         time.sleep(2)
@@ -91,7 +83,8 @@ class FailedReconciliationPageFunctions:
     def get_getAndEnterOrderID(self):
         WaitUtilities.wait_for_element_to_be_visible(self.failedReconciliationPageControls.get_orderID())
         actOrderID = self.failedReconciliationPageControls.get_orderID().text
-        FPASeleniumHelper.send_text(self.failedReconciliationPageControls.get_searchInputText(), actOrderID)
+        FPASeleniumHelper.click_element(self.failedReconciliationPageControls.get_searchInputText())
+        FPASeleniumHelper.send_text_by_actions(self.failedReconciliationPageControls.get_searchInputText(),actOrderID)
         return actOrderID
 
 

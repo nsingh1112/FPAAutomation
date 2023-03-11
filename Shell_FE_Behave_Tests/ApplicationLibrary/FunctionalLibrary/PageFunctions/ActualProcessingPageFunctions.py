@@ -98,6 +98,25 @@ class ActualProcessingPageFunctions:
 
        time.sleep(1)
 
+    def verify_CreateActualsAllButton(self):
+        WaitUtilities.wait_for_element_to_be_visible(
+            self.actualProcessingPageControls.get_createActualsButton())
+        FPASeleniumHelper.click_element(self.actualProcessingPageControls.get_createActualsButton())
+        isTitle = FPASeleniumHelper.check_element_exists_by_xpath(
+            self.actualProcessingPageControls.get_createActualsPopUpTitle())
+        isBody = FPASeleniumHelper.check_element_exists_by_xpath(
+            self.actualProcessingPageControls.get_createActualsPopUpBody())
+        isCancelBtn = FPASeleniumHelper.check_element_exists_by_xpath(
+            self.actualProcessingPageControls.get_createActualsPopUpCancelBtn())
+        isSubmitBtn = FPASeleniumHelper.check_element_exists_by_xpath(
+            self.actualProcessingPageControls.get_createActualsPopUpSubmitBtn())
+
+        FPASeleniumHelper.click_element(self.actualProcessingPageControls.get_createActualsPopUpCancelBtn())
+        if (isTitle and isBody and isCancelBtn and isSubmitBtn):
+            SeleniumUtilities.log.info("Create Actuals All Button Fields Verified")
+        else:
+            SeleniumUtilities.log.error("Create Actuals All Button Fields not Verified")
+
 
 
 

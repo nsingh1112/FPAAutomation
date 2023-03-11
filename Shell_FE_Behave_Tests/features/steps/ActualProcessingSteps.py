@@ -7,8 +7,6 @@ from behave import *
 from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.ActualProcessingPageFunctions import \
     ActualProcessingPageFunctions
 from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.HomePageFunctions import HomePageFunctions
-from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.ReconcilationPageFunctions import \
-    ReconcilationPageFunctions
 
 
 @when('The user Clicks on Actual Processing "{actualProcessingItems}"')
@@ -36,9 +34,10 @@ def step_impl(context, actualProcessingItems = None ):
 @then('The user validates Actual Processing "{actualProcessingItems}" data Fields')
 def step_impl(context, actualProcessingItems = None ):
     context.actualProcessingPageFunctions = ActualProcessingPageFunctions(SeleniumBase.driver)
-    context.actualProcessingPageFunctions.verify_dataFields()
+    if (actualProcessingItems == "Create"):
+        context.actualProcessingPageFunctions.verify_CreateActualsAllButton()
     context.actualProcessingPageFunctions.verify_searchByTextCriteria(actualProcessingItems)
-
+    context.actualProcessingPageFunctions.verify_dataFields()
 
 @then('The user Validates Actual Processing Label')
 def step_impl(context):

@@ -110,5 +110,26 @@ class DocumentsPageFunctions:
         time.sleep(2)
         WaitUtilities.wait_for_element_to_be_clickable(self.documentsPageControls.get_fileName())
 
+    def enter_fileName(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.documentsPageControls.get_searchInputText())
+        filename = self.documentsPageControls.get_fileName().text
+        FPASeleniumHelper.send_text(self.documentsPageControls.get_searchInputText(), filename)
+        time.sleep(2)
+        WaitUtilities.wait_for_element_to_be_clickable(self.documentsPageControls.get_fileName())
+        return filename
+
+    def validate_fileName(self,expFileName):
+        WaitUtilities.wait_for_element_to_be_visible(self.documentsPageControls.get_fileName())
+        actFileName = self.documentsPageControls.get_fileName().text
+        if(expFileName in actFileName):
+            SeleniumUtilities.log.info("FileName Verified")
+        else:
+            SeleniumUtilities.log.error("FileName not Verified")
+
+    def get_documentType(self):
+        WaitUtilities.wait_for_element_to_be_visible(self.documentsPageControls.get_docType())
+        documentType = self.documentsPageControls.get_docType().text
+        return documentType
+
 
 

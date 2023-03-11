@@ -57,11 +57,15 @@ class EnteredInDEXPageFunctions:
         else:
             SeleniumUtilities.log.error("Entered In DEX Data Fields not Verified")
 
-    def enter_receivedDate(self):
+    def enter_bolDate(self,startDate,endDate):
         WaitUtilities.wait_for_element_to_be_clickable(self.enteredInDEXPageControls.get_startDateInputBox())
-        time.sleep(2)
         FPASeleniumHelper.click_element(self.enteredInDEXPageControls.get_startDateInputBox())
-        startDate = self.FOB_DES_TestData['FailedReconciliationStartDate']
-        finishDate = self.FOB_DES_TestData['FailedReconciliationFinishDate']
         time.sleep(2)
-        self.calendarPageFunctions.click_calendarDate(startDate, finishDate)
+        self.calendarPageFunctions.click_calendarDate(startDate, endDate)
+
+    def get_bolStartEndDate(self):
+        WaitUtilities.wait_for_element_to_be_visible(
+            self.enteredInDEXPageControls.get_bolDate())
+        options1 = self.enteredInDEXPageControls.get_bolDate()
+        startDate, endDate = self.commonPageFunctions.get_receivedStartDateEndDate(options1)
+        return startDate, endDate

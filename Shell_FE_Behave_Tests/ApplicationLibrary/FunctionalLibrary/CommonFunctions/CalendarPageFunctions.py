@@ -93,14 +93,14 @@ class CalendarPageFunctions:
         yeardiff = self.get_startyeardiff(startDate[0])
         self.select_calanderYear(startDate[0], yeardiff, "startDate")
         self.select_startMonth(startdateMon, yeardiff)
-        self.select_startdate(startDate[2])
+        self.select_startdate(startDate[2].lstrip('0'))
 
         finishDate = (finishDateWithYear).split('-')
         yeardiff = self.get_finishYearDiff(finishDate[0])
         finishdateMon = self.num_to_month(finishDate[1])
         self.select_calanderYear(finishDate[0], yeardiff, "finishDate")
         self.select_finishMonth(finishdateMon, yeardiff)
-        self.select_startdate(finishDate[2])
+        self.select_startdate(finishDate[2].lstrip('0'))
 
     def num_to_month(self, num):
         if int(num) <= 12 and int(num) > 0:

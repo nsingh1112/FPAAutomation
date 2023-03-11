@@ -6,5 +6,8 @@
   "ReprocessedFinishDate": "15 Sep 2025",
   "ReprocessedStatus": "Aggregation Completed",
   "FailedReconciliationStartDate": "21 May 2020",
-  "FailedReconciliationFinishDate": "25 Aug 2024"
+  "FailedReconciliationFinishDate": "25 Aug 2024",
+  "UnprocessedRecordLoadQty": "4001",
+  "UnprocessedRecordUnloadQty": "5001",
+  "UnprocessedRecordTerminalRefID": "ITEKFB-FEB-871"
 }

@@ -82,6 +82,10 @@ class HomePageFunctions:
         WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_linkUnprocessedRecord())
         FPASeleniumHelper.click_element(self.homePageControls.get_linkUnprocessedRecord())
 
+    def click_unprocessed(self):
+        WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_unprocessed())
+        FPASeleniumHelper.click_element(self.homePageControls.get_unprocessed())
+
     def click_reconciled(self):
         WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_reconciled())
         FPASeleniumHelper.click_element(self.homePageControls.get_reconciled())

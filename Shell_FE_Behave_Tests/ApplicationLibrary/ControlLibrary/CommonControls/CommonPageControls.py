@@ -13,6 +13,7 @@ class CommonPageControls:
     documentInputBox = (By.XPATH, "//input[@class='shell-select-container-selection-search-input']")
     document = (By.XPATH, "//div[@class='shell-select-container-item-option-content' and text()='XLSX']")
     totalRecordsCount = (By.XPATH, "//p[@class='sc-bczRLJ hbSXPu shell-text-paragraph']/em")
+    toastMsg = (By.XPATH, "//div[@class ='Toastify']/div")
 
     def get_Homepage(self):
         return self.driver.find_element(*CommonPageControls.homepage)
@@ -37,4 +38,7 @@ class CommonPageControls:
 
     def get_totalRecordsCount(self):
         return self.driver.find_element(*CommonPageControls.totalRecordsCount)
+
+    def get_toastMessageDiv(self):
+        return self.driver.find_element(*CommonPageControls.toastMsg)
 

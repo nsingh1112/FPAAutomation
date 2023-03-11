@@ -9,7 +9,8 @@ Feature: Checking the Documents functionality
     And  The user validates data Fields
     And  The user enters document type and search by text and click on search button
     And  The user Validates the Label
-    Then The user Clicks on file name and verify the file is opened in new tab
+    And The user Clicks on file name and verify the file is opened in new tab
+    Then The user click on Clear button
    # When handle the SSO using actions
     #Then The user validates FileName
   Examples: Documents Items

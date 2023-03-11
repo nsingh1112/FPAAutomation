@@ -23,6 +23,7 @@ class DocumentsPageControls:
     rowData = (By.XPATH, "//tr[@class='shell-table-row shell-table-row-level-0']/td[@class='shell-table-cell']")
     fileName = (By.XPATH, "//tr/td[@class='shell-table-cell']/a/span[@class='sc-ksZaOG kwPwYx']")
     receivedDate = (By.XPATH, "//tr/td[@class='shell-table-cell']/span[@class='sc-fctJkW buDZzM shell-text-label']")
+    docType = (By.XPATH, "(//tr[@class='shell-table-row shell-table-row-level-0']/td)[4]")
 
     def get_terminalReportPageTitle(self):
         return self.driver.find_element(*DocumentsPageControls.terminalReportPageTitle)
@@ -74,6 +75,9 @@ class DocumentsPageControls:
 
     def get_receivedDate(self):
         return self.driver.find_element(*DocumentsPageControls.receivedDate)
+
+    def get_docType(self):
+        return self.driver.find_element(*DocumentsPageControls.docType)
 
 
 

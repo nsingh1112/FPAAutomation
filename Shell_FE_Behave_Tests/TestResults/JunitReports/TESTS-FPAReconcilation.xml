@@ -1,45 +1,103 @@
-<testsuite name="FPAReconcilation.Checking the FPA Reconcilation functionality" tests="3" errors="0" failures="0" skipped="3" time="0.0" timestamp="2023-03-06T23:43:01.430846" hostname="BNGECO-L-81690"><testcase classname="FPAReconcilation.Checking the FPA Reconcilation functionality" name="Validating FPA Reconciled data, Reprocessed -- @1.1 Dashboard Items" status="untested" time="0"><skipped /><system-out>
+<testsuite name="FPAReconcilation.Checking the FPA Reconcilation functionality" tests="3" errors="1" failures="0" skipped="0" time="176.361475" timestamp="2023-03-07T01:20:16.196398" hostname="BNGECO-L-81690"><testcase classname="FPAReconcilation.Checking the FPA Reconcilation functionality" name="Validating FPA Reconciled data, Reprocessed -- @1.1 Dashboard Items" status="passed" time="46.433632"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Validating FPA Reconciled data, Reprocessed -- @1.1 Dashboard Items
-    Given Launch the browser and navigate to the url ... untested in 0.000s
-    When The user Clicks on "Reconciliation" ... untested in 0.000s
-    Then The user validates Reconciled Data page title ... untested in 0.000s
-    And The user validates Reconciled Data Fields ... untested in 0.000s
-    And The user enters received date for "Reconciliation" and click on search button ... untested in 0.000s
-    And The user Validates the Reconciled ReportPage Label ... untested in 0.000s
-    Then The user enters received date and click on Clear button ... untested in 0.000s
+    Given Launch the browser and navigate to the url ... passed in 18.178s
+    When The user Clicks on "Reconciliation" ... passed in 0.087s
+    Then The user validates Reconciled Data page title ... passed in 0.854s
+    And The user validates Reconciled Data Fields ... passed in 0.215s
+    And The user enters received date for "Reconciliation" and click on search button ... passed in 3.927s
+    And The user Validates the Reconciled ReportPage Label ... passed in 15.930s
+    Then The user enters received date and click on Clear button ... passed in 7.242s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="FPAReconcilation.Checking the FPA Reconcilation functionality" name="Validating FPA Reconciled data, Reprocessed -- @1.2 Dashboard Items" status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="FPAReconcilation.Checking the FPA Reconcilation functionality" name="Validating FPA Reconciled data, Reprocessed -- @1.2 Dashboard Items" status="passed" time="42.86253"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Validating FPA Reconciled data, Reprocessed -- @1.2 Dashboard Items
-    Given Launch the browser and navigate to the url ... untested in 0.000s
-    When The user Clicks on "Reprocessed" ... untested in 0.000s
-    Then The user validates Reconciled Data page title ... untested in 0.000s
-    And The user validates Reconciled Data Fields ... untested in 0.000s
-    And The user enters received date for "Reprocessed" and click on search button ... untested in 0.000s
-    And The user Validates the Reconciled ReportPage Label ... untested in 0.000s
-    Then The user enters received date and click on Clear button ... untested in 0.000s
+    Given Launch the browser and navigate to the url ... passed in 15.436s
+    When The user Clicks on "Reprocessed" ... passed in 0.083s
+    Then The user validates Reconciled Data page title ... passed in 0.057s
+    And The user validates Reconciled Data Fields ... passed in 0.250s
+    And The user enters received date for "Reprocessed" and click on search button ... passed in 3.781s
+    And The user Validates the Reconciled ReportPage Label ... passed in 16.020s
+    Then The user enters received date and click on Clear button ... passed in 7.235s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="FPAReconcilation.Checking the FPA Reconcilation functionality" name="Validating Failed Reconciliation" status="untested" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="FPAReconcilation.Checking the FPA Reconcilation functionality" name="Validating Failed Reconciliation" status="failed" time="87.065312"><error type="MaxRetryError" message="HTTPConnectionPool(host='127.0.0.1', port=58802): Max retries exceeded with url: /session/44a56621a9f24fe88e42b365ba6384aa/screenshot (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000015BE7973520&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))">
+<![CDATA[
+Failing step: And The user enters received date for and click on search button ... failed in 79.476s
+Location: features/FPAReconcilation.feature:23
+ABORTED: By user (KeyboardInterrupt).
+Captured stdout:
+HOOK-ERROR in after_step: MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=58802): Max retries exceeded with url: /session/44a56621a9f24fe88e42b365ba6384aa/screenshot (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000015BE7973520>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+Captured logging:
+ERROR:WaitUtilities:Element <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="0e7b400d-66c5-4b3c-b625-a6bd96304ce6")> is not clickable. Unable to click / find the element within the specified time. Exception: TypeError
+INFO:SeleniumUtilities:Clicked on the element.
+ERROR:WaitUtilities:Element <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="fbc0737a-e06a-443f-9436-452c8045822c")> is not clickable. Unable to click / find the element within the specified time. Exception: TypeError
+INFO:SeleniumUtilities:Clicked on the element.
+INFO:BrowserUtilities:Took screenshot and saved as Validating_Failed_Reconciliation07030141.png in Screenshots folder.
+INFO:FileUtilities:The data from json file FSPTestData.json has been converted into dictionary.
+ERROR:WaitUtilities:Element <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="d0e5330c-b32e-4234-8e9a-f4f6bd9385d1")> is not visible within the specified time. Exception: TypeError
+INFO:SeleniumUtilities:Element is displayed.
+INFO:SeleniumUtilities:Failed Reconciliation Page title is correct
+INFO:BrowserUtilities:Took screenshot and saved as Validating_Failed_Reconciliation07030141.png in Screenshots folder.
+INFO:FileUtilities:The data from json file FSPTestData.json has been converted into dictionary.
+ERROR:WaitUtilities:Element [<selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="d401c5db-e0aa-40ce-a4c2-b97703757459")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="e810632f-f121-4efa-a17e-76f71d0e291f")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="9abccbde-1f9f-4a2a-b719-e5c1259a38f5")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="12d44926-d93b-4034-8dd3-4fcf4da3aee7")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="feb65ab8-83f6-46d4-83df-9bf11dc73671")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="ec0279b1-a634-4677-8651-495786b52809")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="0f06872b-122e-486c-8a25-d98679359b8b")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="52983142-9aaa-4bf7-9054-604be9d4860f")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="dcb7855e-0c97-47c5-8081-a4bdc578f068")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="b45de79a-7300-4c92-949e-4ee90c6d6829")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="c5585c87-2289-4060-9eb1-389661c7c3a9")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="c822aebd-7cfb-44ba-8e08-cc951c9c11ff")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="7daabbed-ef49-4476-b221-d19923503a56")>] is not visible within the specified time. Exception: TypeError
+INFO:SeleniumUtilities:Element is displayed.
+INFO:SeleniumUtilities:Element is displayed.
+INFO:SeleniumUtilities:Element is displayed.
+INFO:SeleniumUtilities:Element is displayed.
+INFO:SeleniumUtilities:Element is displayed.
+INFO:SeleniumUtilities:Element is displayed.
+INFO:SeleniumUtilities:Failed Reconciliation Data Fields Verified
+INFO:BrowserUtilities:Took screenshot and saved as Validating_Failed_Reconciliation07030142.png in Screenshots folder.
+INFO:FileUtilities:The data from json file FSPTestData.json has been converted into dictionary.
+ERROR:WaitUtilities:Element [<selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="d6b2c16d-a6da-4069-9b29-c819a6e88958")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="4da4f046-c248-44df-902e-93eca8c53013")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="05435e0f-6797-4152-b286-f0aee9a71c4f")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="5eb86358-f3c3-4311-aab5-87689868843f")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="29228c88-2b4c-42cf-a1b7-6ec7720f110c")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="1b491c8a-162b-4335-bd0d-0ad7f99364f4")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="a98f99ed-43d2-4d0a-960c-c041799add96")>] is not visible within the specified time. Exception: TypeError
+ERROR:WaitUtilities:Element <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="9e200d5f-f070-4aa7-9f49-790b59ea5a5b")> is not clickable. Unable to click / find the element within the specified time. Exception: TypeError
+INFO:SeleniumUtilities:Clicked on the element.
+ERROR:WaitUtilities:Element <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="890d3004-56a3-49c5-8ed2-ae9e2126665f")> is not visible within the specified time. Exception: TypeError
+INFO:SeleniumUtilities:Clicked on the element.
+ERROR:WaitUtilities:Element [<selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="a22c1563-bda7-4719-a07d-5c8f8ce032c5")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="a3300bc0-0f54-42a0-8930-9f90ef96bbe2")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="b4af7853-242d-40ab-99f9-210c35cc0bee")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="0978c99e-cb12-4c33-8d0f-2915b81794a3")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="d9d5f2b2-9de9-4972-92f0-326f1def0c4e")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="2df44f15-c325-467d-872f-01f1c19ebd34")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="3cf39301-2877-43f6-844a-cb674e51bf5c")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="d933ea3f-b6f8-45e8-94c9-d986e7aa24eb")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="e3657cad-5838-4bd8-88db-2ed43f2c5dfe")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="120f42fc-2d90-456a-bab4-c192e04a28c1")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="aa4f12ed-c490-4e19-a704-66669223c697")>, <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="2bc392cd-b37f-4233-b49a-ce6f7232a451")>] is not visible within the specified time. Exception: TypeError
+ERROR:WaitUtilities:Element <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="85b02ad0-969a-46d0-b77d-b1b0b2a801e3")> is not clickable. Unable to click / find the element within the specified time. Exception: TypeError
+INFO:SeleniumUtilities:Clicked on the element.
+INFO:SeleniumUtilities:Clicked on the element.
+INFO:SeleniumUtilities:Clicked on the element.
+ERROR:WaitUtilities:Element <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="012abfda-be57-4c70-963d-4b4f1ce0b340")> is not visible within the specified time. Exception: TypeError
+ERROR:WaitUtilities:Element <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="d9b975ac-5d05-4267-a6ea-37f53ef86067")> is not clickable. Unable to click / find the element within the specified time. Exception: TypeError
+INFO:SeleniumUtilities:Clicked on the element.
+INFO:SeleniumUtilities:Clicked on the element.
+INFO:SeleniumUtilities:Clicked on the element.
+ERROR:WaitUtilities:Element <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="24f59236-e50c-4c42-89d7-4c4decabee86")> is not visible within the specified time. Exception: TypeError
+INFO:SeleniumUtilities:Clicked on the element.
+INFO:SeleniumUtilities:Sent values: IT7EQY to the field using Javascript executor.
+INFO:FileUtilities:The data from json file FSPTestData.json has been converted into dictionary.
+ERROR:WaitUtilities:Element <selenium.webdriver.remote.webelement.WebElement (session="44a56621a9f24fe88e42b365ba6384aa", element="addb30be-e7dd-4f8f-811d-05beae3df9a3")> is not clickable. Unable to click / find the element within the specified time. Exception: TypeError
+INFO:SeleniumUtilities:Clicked on the element.
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))': /session/44a56621a9f24fe88e42b365ba6384aa/screenshot
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000015BE7972D10>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/44a56621a9f24fe88e42b365ba6384aa/screenshot
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000015BE7970670>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/44a56621a9f24fe88e42b365ba6384aa/screenshot]]>
+</error><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Validating Failed Reconciliation
-    When The user Clicks on Failed Reconciliation Dashboard Items ... untested in 0.000s
-    Then The user validates Failed Reconciliation Page title ... untested in 0.000s
-    And The user validates Failed Reconciliation Data Fields ... untested in 0.000s
-    And The user enters received date for and click on search button ... untested in 0.000s
-    And The user Validates the Failed Reconciliation Label ... untested in 0.000s
-    Then The user enters received date and click on Clear button ... untested in 0.000s
+    When The user Clicks on Failed Reconciliation Dashboard Items ... passed in 7.161s
+    Then The user validates Failed Reconciliation Page title ... passed in 0.249s
+    And The user validates Failed Reconciliation Data Fields ... passed in 0.180s
+    And The user enters received date for and click on search button ... failed in 79.476s
+    And The user Validates the Failed Reconciliation Label ... skipped in 0.000s
+    Then The user enters received date and click on Clear button ... skipped in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+HOOK-ERROR in after_step: MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=58802): Max retries exceeded with url: /session/44a56621a9f24fe88e42b365ba6384aa/screenshot (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000015BE7973520>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
 ]]>
 </system-out></testcase></testsuite>

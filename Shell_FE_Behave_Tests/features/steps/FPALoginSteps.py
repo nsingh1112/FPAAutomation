@@ -55,30 +55,6 @@ def handle_sso_certificate(context):
     t1.join()
 
 
-@when('The user validates the homepage')
-def step_impl(context):
-    context.homePage_functions = HomePageFunctions(SeleniumBase.driver)
-    context.homePage_functions.validate_applicationTitle()
-    context.homePage_functions.validate_leftListItems()
-
-
-@when('The user validates the dashboardItems')
-def step_impl(context):
-    context.dashboardPage_functions = DashBoardPageFunctions(SeleniumBase.driver)
-    context.dashboardPage_functions.get_dashboardItems()
-    context.dashboardPage_functions.validate_dashboardGraphicalRepresentation()
-    context.dashboardPage_functions.validate_darkMode()
-
-@when('The user Clicks on Unprocessed records under RECONCILIATION')
-def step_impl(context):
-    context.homePage_functions = HomePageFunctions(SeleniumBase.driver)
-    context.homePage_functions.click_unprocessedRecord()
-    context.unprocessedRecordsPage_functions = UnprocessedRecordsPageFunctions(SeleniumBase.driver)
-    context.unprocessedRecordsPage_functions.validate_pageTitle()
-    context.unprocessedRecordsPage_functions.get_totalUnprocessedRecord()
-    context.unprocessedRecordsPage_functions.get_unprocessedRecordRowHeaders()
-
-
 def parallel_executor(context):
     context.loginPage_functions = LoginFunctions(SeleniumBase.driver)
     context.loginPage_functions.access_shell_hub()

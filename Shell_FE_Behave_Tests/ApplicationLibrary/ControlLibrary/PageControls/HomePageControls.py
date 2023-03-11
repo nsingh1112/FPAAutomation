@@ -13,6 +13,7 @@ class HomePageControls:
     logsMenuItems = (By.XPATH, "//div[@class='shell-menu-item-group-title' and text()='Logs']/../ul/li/div")
     MenuItems = (By.XPATH, "//div[@class='shell-menu-item-group-title']")
     linkUnprocessedRecord = (By.XPATH, "//div[@class='shell-menu-item-content' and text()='Unprocessed Records']")
+    unprocessed = (By.XPATH, "//div[@class='sc-jIAOiI hHlWKS' and text()='Unprocessed']")
     reconciled = (By.XPATH, "//div[@class='sc-jIAOiI hHlWKS' and text()='Reconciled']")
     reprocessed = (By.XPATH, "//div[@class='sc-jIAOiI hHlWKS' and text()='Reprocessed']")
     failedReconciliation = (By.XPATH, "//div[@class='sc-jIAOiI hHlWKS' and text()='Failed Reconciliation']")
@@ -49,6 +50,9 @@ class HomePageControls:
 
     def get_linkUnprocessedRecord(self):
         return self.driver.find_element(*HomePageControls.linkUnprocessedRecord)
+
+    def get_unprocessed(self):
+        return self.driver.find_element(*HomePageControls.unprocessed)
 
     def get_reconciled(self):
         return self.driver.find_element(*HomePageControls.reconciled)

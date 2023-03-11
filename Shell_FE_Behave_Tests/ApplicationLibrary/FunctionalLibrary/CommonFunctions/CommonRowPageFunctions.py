@@ -26,9 +26,8 @@ class CommonRowPageFunctions:
 
         for row in row_header_list:
             # will scroll until that element is not appeared on page
-            if (row != ""):
-                row_header = self.driver.find_elements_by_xpath(
-                    "//div[@class='shell-table-header']/table/thead/tr/th[text()='" + str(row) + "']")
+            if (row != "" and ("label class") not in row):
+                row_header = self.driver.find_elements_by_xpath("//div[@class='shell-table-header']/table/thead/tr/th[text()='" + str(row) + "']")
                 self.driver.execute_script("arguments[0].scrollIntoView(true);", row_header[0])
                 time.sleep(1)
                 current_row_header_list.append(row_header[0].text)

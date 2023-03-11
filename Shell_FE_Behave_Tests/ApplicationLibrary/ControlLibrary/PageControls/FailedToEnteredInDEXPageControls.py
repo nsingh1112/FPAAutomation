@@ -15,7 +15,7 @@ class FailedToEnteredInDEXPageControls:
     searchByTextLabel = (By.XPATH, "//*[local-name()='svg' and @class='sc-gsnTZi hDCash shell-icon']/following::label[text()='Search By Text']")
     searchByTextCriteriaLabel = (By.XPATH, "//*[local-name()='svg' and @class='sc-gsnTZi hDCash shell-icon']/following::span[text()='Error Message, Contract Id, BOL Date']")
     searchInputText = (By.XPATH, "//input[@placeholder='Search By Text']")
-
+    contractID = (By.XPATH, "//tbody[@class='shell-table-tbody']/tr[@class='shell-table-row shell-table-row-level-0']/td[5]")
 
     def get_failedToEnteredInDEXPageTitle(self):
         return self.driver.find_element(*FailedToEnteredInDEXPageControls.failedToEnteredInDEXPageTitle)
@@ -43,4 +43,7 @@ class FailedToEnteredInDEXPageControls:
 
     def get_searchInputText(self):
         return self.driver.find_element(*FailedToEnteredInDEXPageControls.searchInputText)
+
+    def get_contractID(self):
+        return self.driver.find_element(*FailedToEnteredInDEXPageControls.contractID)
 

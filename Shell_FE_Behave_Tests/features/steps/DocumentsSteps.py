@@ -2,22 +2,13 @@ import threading
 import time
 
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
-from Shell_FE_Selenium_Core.Utilities.DbUtilities import DbUtilities
 from behave import *
-from selenium import webdriver
 
 from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.CommonFunctions.CommonPageFunctions import \
     CommonPageFunctions
 from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.DocumentsPageFunctions import \
     DocumentsPageFunctions
-from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.FailedReconciliationPageFunctions import \
-    FailedReconciliationPageFunctions
 from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.HomePageFunctions import HomePageFunctions
-from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.ReconciledDataPageFunctions import \
-    ReconciledDataPageFunctions
-from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.PageFunctions.ReprocessedPageFunctions import \
-    ReprocessedPageFunctions
-
 
 @when('The user Clicks on Documents "{documentsItems}"')
 def step_impl(context, documentsItems = None):
@@ -43,9 +34,13 @@ def step_impl(context):
 @then('The user enters document type and search by text and click on search button')
 def step_impl(context):
     context.commonPage_functions = CommonPageFunctions(SeleniumBase.driver)
-    context.commonPage_functions.select_DocumentType()
+    context.documentsPageFunctions = DocumentsPageFunctions(SeleniumBase.driver)
+    #context.commonPage_functions.select_DocumentType()
+    docType = context.documentsPageFunctions.get_documentType()
+    fileName = context.documentsPageFunctions.enter_fileName()
+    context.commonPage_functions.select_DocumentType(docType)
     context.commonPage_functions.click_search()
-
+    context.documentsPageFunctions.validate_fileName(fileName)
 
 @then('The user Validates the Label')
 def step_impl(context):
@@ -57,5 +52,9 @@ def step_impl(context):
     context.documentsPageFunctions = DocumentsPageFunctions(SeleniumBase.driver)
     context.documentsPageFunctions.click_filename()
 
+@then('The user click on Clear button')
+def step_impl(context):
+    context.commonPage_functions = CommonPageFunctions(SeleniumBase.driver)
+    context.commonPage_functions.click_Clear()
 
 

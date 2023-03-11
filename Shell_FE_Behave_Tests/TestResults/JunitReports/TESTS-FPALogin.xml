@@ -1,19 +1,10 @@
-<testsuite name="FPALogin.Checking the FPA functionality" tests="2" errors="0" failures="0" skipped="2" time="0.0" timestamp="2023-03-06T23:42:38.667155" hostname="BNGECO-L-81690"><testcase classname="FPALogin.Checking the FPA functionality" name="Validating FPA Left Menu and SubMenu" status="skipped" time="0"><skipped /><system-out>
+<testsuite name="FPALogin.Checking the FPA functionality" tests="1" errors="0" failures="0" skipped="0" time="18.519773" timestamp="2023-03-10T11:29:20.801600" hostname="BNGECO-L-81690"><testcase classname="FPALogin.Checking the FPA functionality" name="Validating FPA Left Menu and SubMenu" status="passed" time="18.519773"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Validating FPA Left Menu and SubMenu
-    Given Launch the browser and navigate to the url ... skipped in 0.000s
-    When The user validates the homepage ... skipped in 0.000s
-    When The user validates the dashboardItems ... skipped in 0.000s
-
-@scenario.end
---------------------------------------------------------------------------------
-]]>
-</system-out></testcase><testcase classname="FPALogin.Checking the FPA functionality" name="Validating FPA Unprocessed Record data" status="skipped" time="0"><skipped /><system-out>
-<![CDATA[
-@scenario.begin
-  Scenario: Validating FPA Unprocessed Record data
-    When The user Clicks on Unprocessed records under RECONCILIATION ... skipped in 0.000s
+    Given Launch the browser and navigate to the url ... passed in 17.968s
+    When The user validates the homepage ... passed in 0.257s
+    When The user validates the dashboardItems ... passed in 0.295s
 
 @scenario.end
 --------------------------------------------------------------------------------
