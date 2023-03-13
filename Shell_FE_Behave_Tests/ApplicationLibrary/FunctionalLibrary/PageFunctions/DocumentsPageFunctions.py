@@ -11,6 +11,7 @@ from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.CommonFunctions.
 from Shell_FE_Behave_Tests.ApplicationLibrary.FunctionalLibrary.CommonFunctions.CommonRowPageFunctions import \
     CommonRowPageFunctions
 from Shell_FE_Behave_Tests.Utilities.FPASeleniumHelper import FPASeleniumHelper
+from Shell_FE_Selenium_Core.Utilities.BrowserUtilities import BrowserUtilities
 
 
 class DocumentsPageFunctions:
@@ -21,6 +22,8 @@ class DocumentsPageFunctions:
         self.commonPageFunctions = CommonPageFunctions(SeleniumBase.driver)
 
     def validate_terminalReportPageTitle(self):
+        BrowserUtilities.log.info("Validating terminal report title ")
+        time.sleep(2)
         WaitUtilities.wait_for_element_to_be_visible(self.documentsPageControls.get_terminalReportPageTitle(), 10000)
         if FPASeleniumHelper.check_element_exists_by_xpath( self.documentsPageControls.get_terminalReportPageTitle()):
             SeleniumUtilities.log.info("Terminal Report Page title is correct")

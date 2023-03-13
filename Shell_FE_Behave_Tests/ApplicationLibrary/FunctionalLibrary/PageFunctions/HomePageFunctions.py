@@ -1,3 +1,5 @@
+import time
+
 from Shell_FE_Behave_Tests.ApplicationLibrary.ControlLibrary.PageControls.HomePageControls import HomePageControls
 from Shell_FE_Behave_Tests.Utilities.FPASeleniumHelper import FPASeleniumHelper
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
@@ -109,6 +111,7 @@ class HomePageFunctions:
     def click_terminalReport(self):
         WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_terminalReport())
         FPASeleniumHelper.click_element(self.homePageControls.get_terminalReport())
+        time.sleep(4)
 
     def click_invoices(self):
         WaitUtilities.wait_for_element_to_be_clickable(self.homePageControls.get_invoices())
