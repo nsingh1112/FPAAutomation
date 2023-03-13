@@ -20,6 +20,7 @@ class LoginFunctions:
 
 
     def press_enter_button(self):
+
         config = SeleniumBase.read_config()
         browser_name = config['browser']['browser_name']
         if browser_name == 'edge':
@@ -68,8 +69,7 @@ class LoginFunctions:
         BrowserUtilities.log.info("Navigated to the URL: {0}. after Ping ID MFA " + browserurl)
         textbody = self.loginControls.get_bodyText().text
         BrowserUtilities.log.info("Body Text " + textbody)
-        r = requests.get(browserurl)
-        BrowserUtilities.log.info("status code " + r.status_code)
+
 
 
 
