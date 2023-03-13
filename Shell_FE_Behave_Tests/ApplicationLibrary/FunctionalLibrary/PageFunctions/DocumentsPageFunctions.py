@@ -26,7 +26,7 @@ class DocumentsPageFunctions:
         time.sleep(2)
         WaitUtilities.wait_for_element_to_be_visible(self.documentsPageControls.get_terminalReportPageTitle(), 10000)
         BrowserUtilities.log.info("terminal report is visible ")
-        if SeleniumUtilities.check_element_exists_by_xpath( self.documentsPageControls.get_terminalReportPageTitle()):
+        if (FPASeleniumHelper.check_element_exists_by_xpath( self.documentsPageControls.get_terminalReportPageTitle())):
             SeleniumUtilities.log.info("Terminal Report Page title is correct")
 
         else:
@@ -39,6 +39,7 @@ class DocumentsPageFunctions:
         CommonRowPageFunctions.validate_rowHeader(self, options1)
 
     def verify_terminalreportDataFields(self):
+        BrowserUtilities.log.info("entered verify_terminalreportDataFields ")
         WaitUtilities.wait_for_element_to_be_visible(self.documentsPageControls.get_terminalReportRowHeader())
         isreceivedDateLabel = FPASeleniumHelper.check_element_exists_by_xpath(self.documentsPageControls.get_receivedDateLabel())
         isfinishDateInputBox = FPASeleniumHelper.check_element_exists_by_xpath(self.documentsPageControls.get_finishDateInputBox())
