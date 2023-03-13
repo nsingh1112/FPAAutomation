@@ -64,6 +64,7 @@ def parallel_executor1(context):
     time.sleep(5)
     context.loginPage_functions = LoginFunctions(SeleniumBase.driver)
     context.loginPage_functions.press_enter_button()
+    context.loginPage_functions.click_pingIdMFA()
 
 def parallel_executor01(context):
     context.loginPage_functions = LoginFunctions(SeleniumBase.driver)
