@@ -1,5 +1,7 @@
 import time
 
+import requests
+
 from Shell_FE_Behave_Tests.ApplicationLibrary.ControlLibrary.PageControls.HomePageControls import HomePageControls
 from Shell_FE_Selenium_Core.SeleniumBase import SeleniumBase
 from Shell_FE_Selenium_Core.Utilities.BrowserUtilities import BrowserUtilities
@@ -12,6 +14,7 @@ from Shell_FE_Behave_Tests.ApplicationLibrary.ControlLibrary.PageControls.LoginC
 class LoginFunctions:
 
     def __init__(self, driver):
+        self.driver = driver
         self.homePageControls = HomePageControls(SeleniumBase.driver)
         self.loginControls = LoginControls(SeleniumBase.driver)
 
@@ -63,6 +66,12 @@ class LoginFunctions:
         time.sleep(15)
         browserurl = BrowserUtilities.get_current_url()
         BrowserUtilities.log.info("Navigated to the URL: {0}. after Ping ID MFA " + browserurl)
+        textbody = self.loginControls.get_bodyText().text
+        BrowserUtilities.log.info("Body Text " + textbody)
+        r = requests.get(browserurl)
+        BrowserUtilities.log.info("status code " + r.status_code)
+
+
 
 
 

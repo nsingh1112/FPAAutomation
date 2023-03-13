@@ -12,7 +12,7 @@ class LoginControls:
     pingIdMFAPwd = (By.XPATH, "//input[@name='pf.pass']")
     pingIdMFASignOn = (By.XPATH, "//input[@class='submit-button submit-margin']")
     pingIdMFAAppName = (By.XPATH, "//div[@class='app-name']")
-
+    bodyText = (By.TAG_NAME, "title")
 
 
     def get_accept_button(self):
@@ -32,6 +32,9 @@ class LoginControls:
 
     def get_pingIdMFAAppName(self):
         return self.driver.find_element(*LoginControls.pingIdMFAAppName)
+
+    def get_bodyText(self):
+        return self.driver.find_element(*LoginControls.bodyText)
 
 
     
