@@ -22,10 +22,11 @@ class DocumentsPageFunctions:
         self.commonPageFunctions = CommonPageFunctions(SeleniumBase.driver)
 
     def validate_terminalReportPageTitle(self):
-        BrowserUtilities.log.info("Validating terminal report title ")
+        BrowserUtilities.log.info("terminal report clicked Successfully ")
         time.sleep(2)
         WaitUtilities.wait_for_element_to_be_visible(self.documentsPageControls.get_terminalReportPageTitle(), 10000)
-        if FPASeleniumHelper.check_element_exists_by_xpath( self.documentsPageControls.get_terminalReportPageTitle()):
+        BrowserUtilities.log.info("terminal report is visible ")
+        if SeleniumUtilities.check_element_exists_by_xpath( self.documentsPageControls.get_terminalReportPageTitle()):
             SeleniumUtilities.log.info("Terminal Report Page title is correct")
 
         else:
